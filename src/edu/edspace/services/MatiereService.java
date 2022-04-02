@@ -36,25 +36,9 @@ public class MatiereService {
         }
     }
 
-    public List<Matiere> listeMatieres() {
-        List<Matiere> myList = new ArrayList<>();
-        try {
-            String req = "select * from matiere"; //requete select from db
-            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
-            ResultSet rs = st.executeQuery(req); //resultat de la requete
-
-            //tant que rs has next get matiere and add it to the list
-            while (rs.next()) {
-                Matiere m = new Matiere();
-                m.setId(rs.getString(1)); //set id from req result
-                m.setId(rs.getString("id")); //set nom from req result
-                m.setNiveau(rs.getString("niveau_id")); //matiere id from req result
-                myList.add(m); //ajout de la matiere a la liste
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return myList;
+    public List<Matiere> listMatieres() {
+        String req = "select * from matiere"; //requete select from db
+        return getMatieresList(req);
     }
 
     public void modifierMatiere(Matiere matiere,String oldId) {
@@ -62,7 +46,6 @@ public class MatiereService {
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
             pst.setString(1, matiere.getId());
-            System.out.println(matiere.getNiveau());
             pst.setString(2, matiere.getNiveau());
             pst.setString(3, oldId);
             pst.executeUpdate();
@@ -84,4 +67,28 @@ public class MatiereService {
         }
     }
 
+    public List<Matiere> filterByNiveau(String niveau) {
+        String req = "select * from matiere where niveau_id='"+niveau+"'"; //requete select from db
+        return getMatieresList(req);
+    }
+    
+    public List<Matiere> getMatieresList(String req) {
+        List<Matiere> myList = new ArrayList<>();
+        try {
+            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                Matiere m = new Matiere();
+                m.setId(rs.getString(1)); //set id from req result
+                m.setId(rs.getString("id")); //set nom from req result
+                m.setNiveau(rs.getString("niveau_id")); //matiere id from req result
+                myList.add(m); //ajout de la matiere a la liste
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return myList;
+    }
 }
