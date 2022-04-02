@@ -8,11 +8,13 @@ import edu.edspace.entities.Document;
 import edu.edspace.entities.Matiere;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
+import edu.edspace.services.ThreadService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import edu.edspace.entities.Thread;
 
 /**
  *
@@ -22,9 +24,22 @@ public class MainClass {
 
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
-        
+        gestionThread();
+        //gestionMatiere();
     }
-
+    
+    public static void gestionThread(){
+        ThreadService  ThreadService = new  ThreadService();
+        System.out.println("Test Thread add");
+        Thread t = new Thread("How to FXJ",1,1);
+        System.out.println("=>Threads:\n" + ThreadService.listThreads());
+        System.out.println("///////////////////////////////////////////////////////////////");
+        String oldId = t.getQuestion();
+        t.setQuestion("Updated");
+        ThreadService.modifierThread(t,oldId);
+        ThreadService.deleteThread(t);
+        //ThreadService.addThread(t);
+    }
     public static void gestionMatiere() {
         System.out.println("******************TEST CRUD MATIERE******************");
         MatiereService ms = new MatiereService(); //instanciation du service MatiereService
