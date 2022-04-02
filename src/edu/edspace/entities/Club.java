@@ -10,13 +10,13 @@ package edu.edspace.entities;
  */
 public class Club {
 
-    String clubId, clubName, clubPic, clubDesc, clubRespo, clubCategorie;
-
+    String clubId, clubName, clubPic, clubDesc;
+    int clubRespo, clubCategorie;
     public Club() {
 
     }
 
-    public Club( String clubName, String clubPic, String clubDesc, String clubRespo, String clubCategorie) {
+    public Club( String clubName, String clubPic, String clubDesc, int clubRespo, int clubCategorie) {
         this.clubName = clubName;
         this.clubPic = clubPic;
         this.clubDesc = clubDesc;
@@ -24,7 +24,7 @@ public class Club {
         this.clubCategorie = clubCategorie;
     }
 
-    public Club(String clubId, String clubName, String clubPic, String clubDesc, String clubRespo, String clubCategorie) {
+    public Club(String clubId, String clubName, String clubPic, String clubDesc, int clubRespo, int clubCategorie) {
         this.clubId = clubId;
         this.clubName = clubName;
         this.clubPic = clubPic;
@@ -65,20 +65,25 @@ public class Club {
         this.clubDesc = clubDesc;
     }
 
-    public String getClubRespo() {
+    public int getClubRespo() {
         return clubRespo;
     }
 
-    public void setClubRespo(String clubRespo) {
+    public void setClubRespo(int clubRespo) {
         this.clubRespo = clubRespo;
     }
 
-    public String getClubCategorie() {
+    public int getClubCategorie() {
         return clubCategorie;
     }
 
-    public void setClubCategorie(String clubCategorie) {
+    public void setClubCategorie(int clubCategorie) {
         this.clubCategorie = clubCategorie;
+    }
+
+    @Override
+    public String toString() {
+        return "Club{" + "clubId=" + clubId + ", clubName=" + clubName + ", clubPic=" + clubPic + ", clubDesc=" + clubDesc + ", clubRespo=" + clubRespo + ", clubCategorie=" + clubCategorie + "}\n";
     }
 
 }
