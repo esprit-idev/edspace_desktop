@@ -20,7 +20,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -171,9 +188,75 @@ public class DocumentService {
         return myList;
     }
 
-    public void convertUrlToPdf(String filename) throws InterruptedException, IOException{
+    public void sendDocViaEmail(Document doc) {
+        // Get a Properties object
+        Properties props = System.getProperties();
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "465");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.ssl.required", "true");
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        String to = "meriamesprittest@gmail.com"; //to_change with destination email
+        String from = "meriamesprittest@gmail.com"; //to_change with current user email
+        String password = "meriamesprittest221199*#"; //to_change with current user email pwd
+        try {
+            Session session = Session.getDefaultInstance(props,
+                    new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(from, password);
+                }
+            });
+
+            //compose message     
+       
+            File file = doc.getFichier();
+            Multipart multipart = new MimeMultipart();
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("this is the subject"); //to_change with email subject
+            //create MimeBodyPart object and set your message text     
+            BodyPart messageBodyPart1 = new MimeBodyPart();
+            if (file != null) {
+                messageBodyPart1.setText("This is the body\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*change with current username*/); //to_change with email body
+            } else {
+                messageBodyPart1.setText("This is the body\n" + doc.getUrl() + "\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*change with current username*/); //to_change with email body
+            }
+
+            //create new MimeBodyPart object and set DataHandler object to this object      
+            MimeBodyPart messageBodyPart2 = new MimeBodyPart();
+
+            if (file != null) {
+                String filepath = doc.getFichier().getPath();//change accordingly  
+                DataSource source = new FileDataSource(filepath);
+                messageBodyPart2.setDataHandler(new DataHandler(source));
+                messageBodyPart2.setFileName(filepath);
+                //create Multipart object and add MimeBodyPart objects to this object      
+
+                if (file != null) {
+                    multipart.addBodyPart(messageBodyPart2);
+                }
+            }
+            multipart.addBodyPart(messageBodyPart1);
+
+            //set the multiplart object to the message object  
+            message.setContent(multipart);
+
+            //7) send message  
+            Transport.send(message);
+
+            System.out.println("email sent!");
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void convertUrlToPdf(String filename) throws InterruptedException, IOException {
         Process wkhtml; // Create uninitialized process
-        String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/"+filename+".pdf"; // Desired command
+        String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; // Desired command
         //to_change
         wkhtml = Runtime.getRuntime().exec(command); // Start process
         IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
@@ -181,67 +264,6 @@ public class DocumentService {
         wkhtml.waitFor(); // Allow process to run
 
     }
-    /*java.net.URL url = null;
-        try {
-            url = new java.net.URL("https://apireference.aspose.com/pdf/net/aspose.pdf/htmlloadoptions");
-        } catch (MalformedURLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        InputStream is = null;
-        try {
-            is = url.openConnection().getInputStream();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(is));
-
-        String line = null;
-
-        try {
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                reader.close();
-            }
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        // Instantiate HtmlFragment with HTML contents
-        com.aspose.pdf.HtmlFragment contents = new com.aspose.pdf.HtmlFragment(line);
-
-        System.out.println(contents);
-
-        com.aspose.pdf.Document doc = new com.aspose.pdf.Document();
-
-        doc.getPages().add();
-
-        doc.getPages().get_Item(1).getParagraphs().add(contents);
-
-        doc.save("C:/Users/MeriamBI/Desktop/testpdfhtml/URLContents.pdf");
-
-        System.out.println("Done");*/
-    /*
-    Pdf pdf = new Pdf();
-
-        pdf.addPageFromString("<html><head><meta charset=\"utf-8\"></head><h1>Müller</h1></html>");
-        pdf.addPageFromUrl("http://www.google.com");
-
-// Add a Table of Contents
-        pdf.addToc();
-
-// The `wkhtmltopdf` shell command accepts different types of options such as global, page, headers and footers, and toc. Please see `wkhtmltopdf -H` for a full explanation.
-// All options are passed as array, for example:
-        pdf.addParam(new Param("--no-footer-line"), new Param("--header-html", "file:///header.html"));
-        pdf.addParam(new Param("--enable-javascript"));
-
-// Add styling for Table of Contents
-        pdf.addTocParam(new Param("--xsl-style-sheet", "my_toc.xsl"));
-
-// Save the PDF
-        pdf.saveAs("C:/Users/MeriamBI/Desktop/testpdfhtml/URLContents.pdf");
-    */
 
     public File convertBlobToFile(Blob blob, Document d) {
         InputStream blobStream = null;

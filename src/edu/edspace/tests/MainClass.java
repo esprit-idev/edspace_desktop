@@ -35,7 +35,7 @@ public class MainClass {
 
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
-        
+
     }
 
     public static void ClubPub() {
@@ -109,8 +109,8 @@ public class MainClass {
 
     }
 
-    /*
-    public static void gestionMatiere() {
+    
+    /*public static void gestionMatiere() {
         System.out.println("******************TEST CRUD MATIERE******************");
         MatiereService ms = new MatiereService(); //instanciation du service MatiereService
         //TEST AFFICHAGE LISTE DES MATIERES
@@ -189,5 +189,9 @@ public class MainClass {
         } catch (InterruptedException | IOException ex) {
             System.out.println(ex.getMessage());
         }
+        
+        //TEST SEND DOC VIA EMAIL
+        ds.sendDocViaEmail(url);
+        ds.sendDocViaEmail(doc);
     }*/
 }
