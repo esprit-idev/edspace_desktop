@@ -28,7 +28,6 @@ import org.apache.commons.io.FileUtils;
  * @author MeriamBI
  */
 public class DocumentService {
-//int signalements, String nom, String date_insert, String prop, String url, String base64, String niveau, String matiere, String type, FileOutputStream fichier
 
     public void ajouterDocument(Document document) {
         try {
@@ -40,17 +39,24 @@ public class DocumentService {
             pst.setString(3, document.getDate_insert());
             pst.setString(4, document.getProp());
             pst.setString(5, document.getUrl());
-            pst.setString(6, convertFileToBase64(Statics.myDocs + document.getNom()));
             pst.setString(7, document.getNiveau());
             pst.setString(8, document.getMatiere());
-            pst.setString(9, URLConnection.guessContentTypeFromName(document.getNom()));
+            
             File fichier = document.getFichier();
             FileInputStream inputStream = null;
-            try {
-                inputStream = new FileInputStream(fichier);
-            } catch (FileNotFoundException ex) {
-                System.out.println(ex.getMessage());
+            String mimeType="url";
+            String base64=null;
+            if (fichier != null) {
+                base64=convertFileToBase64(Statics.myDocs + document.getNom());
+                mimeType=URLConnection.guessContentTypeFromName(document.getNom());
+                try {
+                    inputStream = new FileInputStream(fichier);
+                } catch (FileNotFoundException ex) {
+                    System.out.println(ex.getMessage());
+                }
             }
+            pst.setString(6, base64);
+            pst.setString(9, mimeType);
             pst.setBlob(10, inputStream);
             pst.executeUpdate();
             System.out.println("Document ajouté");
@@ -62,37 +68,10 @@ public class DocumentService {
             System.out.println(ex.getMessage());
         }
     }
-
-    public List<Document> listeDocuments() {
-        List<Document> myList = new ArrayList<>();
-        try {
-            String req = "select * from document"; //requete select from db
-            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
-            ResultSet rs = st.executeQuery(req); //resultat de la requete
-
-            while (rs.next()) {
-                Document d = new Document();
-                d.setId(rs.getInt("id"));
-                d.setMatiere(rs.getString("matiere_id"));
-                d.setNiveau(rs.getString("niveau_id"));
-                d.setNom(rs.getString("nom"));
-                d.setDate_insert(rs.getString("date_insert"));
-                d.setProp(rs.getString("proprietaire"));
-                //d.setFichier(rs.getBlob("fichier"));
-                d.setType(rs.getString("type"));
-                d.setSignalements(rs.getInt("signalements"));
-                d.setUrl(rs.getString("url"));
-                d.setBase64(rs.getString("base64"));
-
-                File fichier = convertBlobToFile(rs.getBlob("fichier"), d);
-                d.setFichier(fichier);
-
-                myList.add(d);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return myList;
+    
+    public List<Document> listDocs() {
+        String req = "select * from document"; //requete select from db
+        return getDocumentsList(req);
     }
 
     public void modifierDocument(Document document) {
@@ -108,7 +87,7 @@ public class DocumentService {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public void supprimerDocument(Document document) {
         String req = "delete from document where id = ?";
         try {
@@ -119,6 +98,76 @@ public class DocumentService {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public List<Document> filterByOwner(String owner) {
+        String req = "select * from document where proprietaire='"+owner+"'"; //requete select from db
+        return getDocumentsList(req);
+    }
+    
+    public List<Document> filterByNiveauMatiere(String niveau,String matiere) {
+        String req = "select * from document where niveau_id='"+niveau+"' and matiere_id='"+matiere+"'"; //requete select from db
+        return getDocumentsList(req);
+    }
+    
+     public void signalerDocument(Document document) {
+        String req = "update document set signalements=? WHERE id=?";
+        try {
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+            pst.setInt(1, document.getSignalements()+1);
+            pst.setInt(2, document.getId());
+            pst.executeUpdate();
+            System.out.println("document signalé");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+     
+     public void ignorerSignalDocument(Document document) {
+        String req = "update document set signalements=? WHERE id=?";
+        try {
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+            pst.setInt(1, 0);
+            pst.setInt(2, document.getId());
+            pst.executeUpdate();
+            System.out.println("document signalé");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //common method called when getting a list of docs
+    public List<Document> getDocumentsList(String req){
+        List<Document> myList = new ArrayList<>();
+        try {
+            Statement st = MyConnection.getInstance().getCnx().createStatement();
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+            while (rs.next()) {
+                Document d = new Document();
+                d.setId(rs.getInt("id"));
+                d.setMatiere(rs.getString("matiere_id"));
+                d.setNiveau(rs.getString("niveau_id"));
+                d.setNom(rs.getString("nom"));
+                d.setDate_insert(rs.getString("date_insert"));
+                d.setProp(rs.getString("proprietaire"));
+                //d.setFichier(rs.getBlob("fichier"));
+                d.setType(rs.getString("type"));
+                d.setSignalements(rs.getInt("signalements"));
+                d.setUrl(rs.getString("url"));
+                d.setBase64(rs.getString("base64"));
+                if (rs.getString("url") == null) {
+                    File fichier = convertBlobToFile(rs.getBlob("fichier"), d);
+                    d.setFichier(fichier);
+                } else {
+                    d.setFichier(null);
+                }
+
+                myList.add(d);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return myList;
     }
 
     public File convertBlobToFile(Blob blob, Document d) {
