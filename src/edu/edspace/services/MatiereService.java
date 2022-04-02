@@ -62,7 +62,6 @@ public class MatiereService {
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
             pst.setString(1, matiere.getId());
-            System.out.println(matiere.getNiveau());
             pst.setString(2, matiere.getNiveau());
             pst.setString(3, oldId);
             pst.executeUpdate();
