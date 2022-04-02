@@ -5,16 +5,14 @@
 package edu.edspace.entities;
 
 public class DocumentFavoris {
-    private int id;
-    private User user;
-    private Document doc;
+    private int id,user_id,document_id;
 
     public DocumentFavoris() {
     }
 
-    public DocumentFavoris(User user, Document doc) {
-        this.user = user;
-        this.doc = doc;
+    public DocumentFavoris(int user_id, int document_id) {
+        this.user_id = user_id;
+        this.document_id = document_id;
     }
     
     public int getId() {
@@ -25,26 +23,25 @@ public class DocumentFavoris {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public int getDocument_id() {
+        return document_id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-  
-
-    public Document getDoc() {
-        return doc;
+    public void setDocument_id(int document_id) {
+        this.document_id = document_id;
     }
 
-    public void setDoc(Document doc) {
-        this.doc = doc;
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     @Override
     public String toString() {
-        return "DocumentFavoris{" + "id=" + id + ", user=" + user + ", doc=" + doc + '}';
+        return "DocumentFavoris{" + "id=" + id + ", user_id=" + user_id + ", document_id=" + document_id + '}';
     }
     
 }

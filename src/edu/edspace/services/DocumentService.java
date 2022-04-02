@@ -28,7 +28,6 @@ import org.apache.commons.io.FileUtils;
  * @author MeriamBI
  */
 public class DocumentService {
-//int signalements, String nom, String date_insert, String prop, String url, String base64, String niveau, String matiere, String type, FileOutputStream fichier
 
     public void ajouterDocument(Document document) {
         try {
@@ -116,6 +115,19 @@ public class DocumentService {
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
             pst.setInt(1, document.getSignalements()+1);
+            pst.setInt(2, document.getId());
+            pst.executeUpdate();
+            System.out.println("document signalé");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+     
+     public void ignorerSignalDocument(Document document) {
+        String req = "update document set signalements=? WHERE id=?";
+        try {
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+            pst.setInt(1, 0);
             pst.setInt(2, document.getId());
             pst.executeUpdate();
             System.out.println("document signalé");

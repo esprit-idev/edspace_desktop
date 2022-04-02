@@ -5,7 +5,9 @@
 package edu.edspace.tests;
 
 import edu.edspace.entities.Document;
+import edu.edspace.entities.DocumentFavoris;
 import edu.edspace.entities.Matiere;
+import edu.edspace.services.DocumentFavorisService;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
 import edu.edspace.utils.MyConnection;
@@ -54,11 +56,13 @@ public class MainClass {
     public static void gestionDocument() {
         System.out.println("\n******************TEST CRUD DOCUMENT******************");
         DocumentService ds = new DocumentService(); //instanciation du service DocumentService
+        DocumentFavorisService dfs = new DocumentFavorisService(); //instanciation du service DocumentFavorisService
         //TEST AFFICHAGE LISTE DES DOCUMENTS
         System.out.println("=> La liste des documents:\n" + ds.listDocs());
 
         //TEST AJOUT DOCUMENT
         String owner = "Anas Houissa"; //to_change
+        int user_id=5; //to_change
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime currentDate = LocalDateTime.now();
         File fichier = new File(Statics.myDocs + "logo.png"); //to_change
@@ -83,7 +87,17 @@ public class MainClass {
         //TEST LIST DOCUMENTS FILTERED BY NIVEAU AND MATIERE
         System.out.println("=> La liste des documents filtrée par niveau et matière:\n" + ds.filterByNiveauMatiere("3A","PiDev"));
         
-        //SIGNALER DOCUMENT
+        //TEST SIGNALER DOCUMENT
         ds.signalerDocument(url);
+        
+        //TEST PIN DOCUMENT
+        DocumentFavoris fave=new DocumentFavoris(user_id, url.getId());
+        dfs.pinDocument(fave);
+        
+        //TEST UNPIN DOCUMENT
+        //dfs.unpinDocument(fave);
+        
+        //TEST LIST FAVE DOCS
+        System.out.println("=> La liste des documents favoris:\n" + dfs.listFaves(user_id));
     }
 }
