@@ -12,29 +12,38 @@ import java.util.Date;
  */
 public class ClubPub {
 
-    String id,pubDesc, pubImage, pubFile, pubDate, Club;
+    String id, pubDesc, pubImage, pubFile, pubDate;
+    int Club, is_posted;
 
     public ClubPub() {
     }
 
-    public ClubPub(String id, String pubDesc, String pubImage, String pubFile, String pubDate, String Club) {
-        this.id = id;
+    public ClubPub( String pubDesc, String pubImage, String pubFile, String pubDate, int Club, int is_posted) {
+        
         this.pubDesc = pubDesc;
         this.pubImage = pubImage;
         this.pubFile = pubFile;
         this.pubDate = pubDate;
         this.Club = Club;
+        this.is_posted = is_posted;
+
     }
 
     public String getId() {
         return id;
     }
 
+    public int getIs_posted() {
+        return is_posted;
+    }
+
+    public void setIs_posted(int is_posted) {
+        this.is_posted = is_posted;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
-
-    
 
     public String getPubDesc() {
         return pubDesc;
@@ -68,13 +77,17 @@ public class ClubPub {
         this.pubDate = pubDate;
     }
 
-    public String getClub() {
+    public int getClub() {
         return Club;
     }
 
-    public void setClub(String Club) {
+    public void setClub(int Club) {
         this.Club = Club;
     }
-    
+
+    @Override
+    public String toString() {
+        return "ClubPub{" + "id=" + id + ", pubDesc=" + pubDesc + ", pubImage=" + pubImage + ", pubFile=" + pubFile + ", pubDate=" + pubDate + ", Club=" + Club + "}\n";
+    }
 
 }
