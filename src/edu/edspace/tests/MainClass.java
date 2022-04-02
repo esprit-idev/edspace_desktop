@@ -13,6 +13,7 @@ import edu.edspace.services.MatiereService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -24,7 +25,7 @@ public class MainClass {
 
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
-
+        
     }
 
     public static void gestionMatiere() {
@@ -95,9 +96,16 @@ public class MainClass {
         dfs.pinDocument(fave);
         
         //TEST UNPIN DOCUMENT
-        //dfs.unpinDocument(fave);
+        dfs.unpinDocument(fave);
         
         //TEST LIST FAVE DOCS
         System.out.println("=> La liste des documents favoris:\n" + dfs.listFaves(user_id));
+        
+        //TEST URL TO PDF
+        try {
+            ds.convertUrlToPdf("testt");
+        } catch (InterruptedException | IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

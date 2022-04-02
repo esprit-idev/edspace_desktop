@@ -22,6 +22,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -41,14 +42,14 @@ public class DocumentService {
             pst.setString(5, document.getUrl());
             pst.setString(7, document.getNiveau());
             pst.setString(8, document.getMatiere());
-            
+
             File fichier = document.getFichier();
             FileInputStream inputStream = null;
-            String mimeType="url";
-            String base64=null;
+            String mimeType = "url";
+            String base64 = null;
             if (fichier != null) {
-                base64=convertFileToBase64(Statics.myDocs + document.getNom());
-                mimeType=URLConnection.guessContentTypeFromName(document.getNom());
+                base64 = convertFileToBase64(Statics.myDocs + document.getNom());
+                mimeType = URLConnection.guessContentTypeFromName(document.getNom());
                 try {
                     inputStream = new FileInputStream(fichier);
                 } catch (FileNotFoundException ex) {
@@ -68,7 +69,7 @@ public class DocumentService {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public List<Document> listDocs() {
         String req = "select * from document"; //requete select from db
         return getDocumentsList(req);
@@ -101,20 +102,20 @@ public class DocumentService {
     }
 
     public List<Document> filterByOwner(String owner) {
-        String req = "select * from document where proprietaire='"+owner+"'"; //requete select from db
+        String req = "select * from document where proprietaire='" + owner + "'"; //requete select from db
         return getDocumentsList(req);
     }
-    
-    public List<Document> filterByNiveauMatiere(String niveau,String matiere) {
-        String req = "select * from document where niveau_id='"+niveau+"' and matiere_id='"+matiere+"'"; //requete select from db
+
+    public List<Document> filterByNiveauMatiere(String niveau, String matiere) {
+        String req = "select * from document where niveau_id='" + niveau + "' and matiere_id='" + matiere + "'"; //requete select from db
         return getDocumentsList(req);
     }
-    
-     public void signalerDocument(Document document) {
+
+    public void signalerDocument(Document document) {
         String req = "update document set signalements=? WHERE id=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-            pst.setInt(1, document.getSignalements()+1);
+            pst.setInt(1, document.getSignalements() + 1);
             pst.setInt(2, document.getId());
             pst.executeUpdate();
             System.out.println("document signalé");
@@ -122,8 +123,8 @@ public class DocumentService {
             System.out.println(ex.getMessage());
         }
     }
-     
-     public void ignorerSignalDocument(Document document) {
+
+    public void ignorerSignalDocument(Document document) {
         String req = "update document set signalements=? WHERE id=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
@@ -135,9 +136,9 @@ public class DocumentService {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //common method called when getting a list of docs
-    public List<Document> getDocumentsList(String req){
+    public List<Document> getDocumentsList(String req) {
         List<Document> myList = new ArrayList<>();
         try {
             Statement st = MyConnection.getInstance().getCnx().createStatement();
@@ -169,6 +170,78 @@ public class DocumentService {
         }
         return myList;
     }
+
+    public void convertUrlToPdf(String filename) throws InterruptedException, IOException{
+        Process wkhtml; // Create uninitialized process
+        String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/"+filename+".pdf"; // Desired command
+        //to_change
+        wkhtml = Runtime.getRuntime().exec(command); // Start process
+        IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
+
+        wkhtml.waitFor(); // Allow process to run
+
+    }
+    /*java.net.URL url = null;
+        try {
+            url = new java.net.URL("https://apireference.aspose.com/pdf/net/aspose.pdf/htmlloadoptions");
+        } catch (MalformedURLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        InputStream is = null;
+        try {
+            is = url.openConnection().getInputStream();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(is));
+
+        String line = null;
+
+        try {
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                reader.close();
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        // Instantiate HtmlFragment with HTML contents
+        com.aspose.pdf.HtmlFragment contents = new com.aspose.pdf.HtmlFragment(line);
+
+        System.out.println(contents);
+
+        com.aspose.pdf.Document doc = new com.aspose.pdf.Document();
+
+        doc.getPages().add();
+
+        doc.getPages().get_Item(1).getParagraphs().add(contents);
+
+        doc.save("C:/Users/MeriamBI/Desktop/testpdfhtml/URLContents.pdf");
+
+        System.out.println("Done");*/
+    /*
+    Pdf pdf = new Pdf();
+
+        pdf.addPageFromString("<html><head><meta charset=\"utf-8\"></head><h1>Müller</h1></html>");
+        pdf.addPageFromUrl("http://www.google.com");
+
+// Add a Table of Contents
+        pdf.addToc();
+
+// The `wkhtmltopdf` shell command accepts different types of options such as global, page, headers and footers, and toc. Please see `wkhtmltopdf -H` for a full explanation.
+// All options are passed as array, for example:
+        pdf.addParam(new Param("--no-footer-line"), new Param("--header-html", "file:///header.html"));
+        pdf.addParam(new Param("--enable-javascript"));
+
+// Add styling for Table of Contents
+        pdf.addTocParam(new Param("--xsl-style-sheet", "my_toc.xsl"));
+
+// Save the PDF
+        pdf.saveAs("C:/Users/MeriamBI/Desktop/testpdfhtml/URLContents.pdf");
+    */
 
     public File convertBlobToFile(Blob blob, Document d) {
         InputStream blobStream = null;
