@@ -35,7 +35,6 @@ public class MainClass {
 
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
-
     }
 
     public static void ClubPub() {
@@ -108,9 +107,8 @@ public class MainClass {
         //ThreadService.addThread(t);
 
     }
-
-    
-    /*public static void gestionMatiere() {
+/*
+    public static void gestionMatiere() {
         System.out.println("******************TEST CRUD MATIERE******************");
         MatiereService ms = new MatiereService(); //instanciation du service MatiereService
         //TEST AFFICHAGE LISTE DES MATIERES
@@ -177,21 +175,27 @@ public class MainClass {
         DocumentFavoris fave = new DocumentFavoris(user_id, url.getId());
         dfs.pinDocument(fave);
 
-        //TEST UNPIN DOCUMENT
-        dfs.unpinDocument(fave);
-
         //TEST LIST FAVE DOCS
         System.out.println("=> La liste des documents favoris:\n" + dfs.listFaves(user_id));
         
+        //TEST UNPIN DOCUMENT
+        dfs.unpinDocument(fave);
+
+        
+
         //TEST URL TO PDF
         try {
             ds.convertUrlToPdf("testt");
         } catch (InterruptedException | IOException ex) {
             System.out.println(ex.getMessage());
         }
-        
+
         //TEST SEND DOC VIA EMAIL
         ds.sendDocViaEmail(url);
         ds.sendDocViaEmail(doc);
+
+        //TEST LIST REPORTED DOCS
+        //TEST LIST FAVE DOCS
+        System.out.println("=> La liste des documents signalés:\n" + ds.listReportedDocs());
     }*/
 }

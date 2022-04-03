@@ -20,7 +20,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import javax.activation.DataHandler;
@@ -125,6 +124,11 @@ public class DocumentService {
 
     public List<Document> filterByNiveauMatiere(String niveau, String matiere) {
         String req = "select * from document where niveau_id='" + niveau + "' and matiere_id='" + matiere + "'"; //requete select from db
+        return getDocumentsList(req);
+    }
+    
+    public List<Document> listReportedDocs() {
+        String req = "select * from document where signalements>0"; //requete select from db
         return getDocumentsList(req);
     }
 
