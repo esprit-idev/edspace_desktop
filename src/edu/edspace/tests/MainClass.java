@@ -4,7 +4,6 @@
  */
 package edu.edspace.tests;
 
-<<<<<<< Updated upstream
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import edu.edspace.entities.Club;
@@ -13,19 +12,14 @@ import edu.edspace.entities.ClubPub;
 import edu.edspace.services.ClubCategService;
 import edu.edspace.services.ClubPubService;
 import edu.edspace.services.ClubService;
-=======
 import edu.edspace.entities.Classe;
->>>>>>> Stashed changes
 import edu.edspace.entities.Document;
 import edu.edspace.entities.DocumentFavoris;
 import edu.edspace.entities.Matiere;
-<<<<<<< Updated upstream
 import edu.edspace.entities.Reponse;
 import edu.edspace.services.DocumentFavorisService;
-=======
 import edu.edspace.entities.Niveau;
 import edu.edspace.services.ClasseService;
->>>>>>> Stashed changes
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
 import edu.edspace.services.ThreadService;
@@ -45,13 +39,9 @@ import edu.edspace.services.ReponseService;
 public class MainClass {
 
     public static void main(String[] args) {
-<<<<<<< Updated upstream
         MyConnection.getInstance().getCnx();
-=======
-       // MyConnection.getInstance().getCnx();
         gestionClasse();
         
->>>>>>> Stashed changes
     }
 
     public static void ClubPub() {
@@ -190,7 +180,6 @@ public class MainClass {
         System.out.println("=> La liste des documents après modification:\n" + ds.listDocs());
         //TEST SUPPRIMER DOCUMENT
         ds.supprimerDocument(doc);
-<<<<<<< Updated upstream
         System.out.println("=> La liste des documents après suppression:\n" + ds.listDocs());
 
         //TEST LIST DOCUMENTS FILTERED BY OWNER
@@ -229,9 +218,7 @@ public class MainClass {
         //TEST LIST FAVE DOCS
         System.out.println("=> La liste des documents signalés:\n" + ds.listReportedDocs());
     }*/
-=======
-        System.out.println("=> La liste des documents après suppression:\n" + ds.listeDocuments());
-    }
+ 
     
     
     
@@ -249,5 +236,4 @@ public class MainClass {
     }
     
     
->>>>>>> Stashed changes
 }
