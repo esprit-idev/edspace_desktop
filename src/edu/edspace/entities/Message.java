@@ -5,6 +5,8 @@
  */
 package edu.edspace.entities;
 
+import java.util.Date;
+
 /**
  *
  * @author aa
@@ -13,10 +15,10 @@ public class Message {
       
     private int id;
     private String content;
-    private String postDate;
+    private Date postDate;
 
-    private int classe;
-    private int user;
+    private Classe classe;
+    private User user;
     
  
     public Message() {
@@ -31,15 +33,15 @@ public class Message {
         this.content = content;
     }
 
-    public void setPostDate(String postDate) {
+    public void setPostDate(Date postDate) {
         this.postDate = postDate;
     }
 
-    public void setUser(int user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public void setClasse(int classe) {
+    public void setClasse(Classe classe) {
         this.classe = classe;
     }
 
@@ -51,15 +53,30 @@ public class Message {
         return content;
     }
 
-    public String getPostDate() {
+    public Date getPostDate() {
         return postDate;
     }
 
-    public int getClasse() {
+    public Classe getClasse() {
         return classe;
     }
 
-    public int getUser() {
+	public Message(int id, String content, Date postDate, Classe classe, User user) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.postDate = postDate;
+		this.classe = classe;
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", content=" + content + ", postDate=" + postDate + ", classe=" + classe
+				+ ", user=" + user + "]";
+	}
+
+	public User getUser() {
         return user;
     }
 
