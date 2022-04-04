@@ -27,7 +27,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import edu.edspace.entities.Thread;
+import edu.edspace.entities.ThreadType;
 import edu.edspace.services.ReponseService;
+import edu.edspace.services.TopicService;
 
 /**
  *
@@ -37,8 +39,10 @@ public class MainClass {
 
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
+        gestionTopics();
     }
-
+    
+    
     public static void ClubPub() {
         ClubPubService clubPubService = new ClubPubService();
         System.out.println(clubPubService.displayClubPubs(5));
@@ -94,6 +98,16 @@ public class MainClass {
         System.out.println(clubService.displayClub());
          */
 
+    }
+    public static void gestionTopics(){
+        TopicService TopicService = new TopicService();
+        ThreadType t = new ThreadType("test FX",false);
+        TopicService.addTopic(t);
+        System.out.println("////////////////////////////////");
+        System.out.println(TopicService.listTopics());
+        ThreadType t1 = TopicService.getTopic(2);
+        TopicService.deleteTopic(t1);
+        System.out.println(TopicService.getThreadsByTopic(t1));
     }
     
     public static void gestionReponses(){
