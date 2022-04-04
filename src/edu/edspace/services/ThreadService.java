@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -18,6 +20,8 @@ import java.util.List;
  */
 public class ThreadService {
     public boolean addThread(Thread T){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+        LocalDateTime now = LocalDateTime.now(); 
         try {
             String query = "Insert into thread values"+"(?,?,?,?,?,?,?,?)";
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query);
@@ -26,12 +30,11 @@ public class ThreadService {
             pst.setInt(3, T.getUser());
             pst.setString(4,T.getQuestion());
             pst.setString(5, null);
-            pst.setString(6, T.getPostDate());
+            pst.setString(6, dtf.format(now));
             pst.setString(7, "0");
             pst.setString(8, "0");
-            pst.executeUpdate(); //pour exécuter la requete
+            pst.executeUpdate();
             System.out.println("Thread ajoutée");
-            
         }
         catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -78,7 +81,7 @@ public class ThreadService {
         }
     }
     public void deleteThread(Thread t) {
-        String req = "delete from thread where question = ?";
+        String req = "update thread set display=1 WHERE question=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
             pst.setString(1,t.getQuestion());
@@ -87,5 +90,30 @@ public class ThreadService {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+    public Thread getThread(int id){
+        Thread t = new Thread();
+        try {
+            String req = "select * from thread where id ="+id;
+            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+            
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                
+                t.setId(rs.getString("id"));
+                t.setThreadType(rs.getInt("thread_type_id"));
+                t.setUser(rs.getInt("user_id"));
+                t.setQuestion(rs.getString("question"));
+                t.setPostDate(rs.getString("post_date"));
+                t.setDisplay(rs.getBoolean("display"));
+                t.setVerified(rs.getString("verified"));
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            
+        }
+        return t;
     }
 }
