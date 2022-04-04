@@ -116,4 +116,16 @@ public class ThreadService {
         }
         return t;
     }
+    public void setVerified(Thread t){
+        String req = "update thread set verified=1 WHERE id = "+t.getId();
+        try {
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+            
+            pst.executeUpdate();
+            System.out.println("Thread verified");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
 }

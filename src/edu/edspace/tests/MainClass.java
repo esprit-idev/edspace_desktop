@@ -43,7 +43,7 @@ public class MainClass {
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
 
-        gestionClasse();
+        gestionThread();
         
 
     }
@@ -130,16 +130,19 @@ public class MainClass {
     
     public static void gestionThread() {
         ThreadService ThreadService = new ThreadService();
-        System.out.println("Test Thread add");
+        //System.out.println("Test Thread add");
         Thread t = new Thread("How to FXJ", 1, 1);
-        System.out.println("=>Threads:\n" + ThreadService.listThreads());
-        System.out.println("///////////////////////////////////////////////////////////////");
-        String oldId = t.getQuestion();
-        t.setQuestion("Updated");
-        ThreadService.modifierThread(t, oldId);
-        ThreadService.deleteThread(t);
-        System.out.println(ThreadService.getThread(1));
+        //System.out.println("=>Threads:\n" + ThreadService.listThreads());
+        //System.out.println("///////////////////////////////////////////////////////////////");
+        //String oldId = t.getQuestion();
+        //t.setQuestion("Updated");
+        //ThreadService.modifierThread(t, oldId);
+        //ThreadService.deleteThread(t);
+        //System.out.println(ThreadService.getThread(1));
         //ThreadService.addThread(t);
+        Thread t2 = ThreadService.getThread(2);
+        ThreadService.setVerified(t2);
+       System.out.println(ThreadService.getThread(2));
 
     }
 /*
