@@ -12,11 +12,14 @@ import edu.edspace.entities.ClubPub;
 import edu.edspace.services.ClubCategService;
 import edu.edspace.services.ClubPubService;
 import edu.edspace.services.ClubService;
+import edu.edspace.entities.Classe;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.DocumentFavoris;
 import edu.edspace.entities.Matiere;
 import edu.edspace.entities.Reponse;
 import edu.edspace.services.DocumentFavorisService;
+import edu.edspace.entities.Niveau;
+import edu.edspace.services.ClasseService;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
 import edu.edspace.services.ThreadService;
@@ -39,7 +42,10 @@ public class MainClass {
 
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
-        gestionTopics();
+
+        gestionClasse();
+        
+
     }
     
     
@@ -227,4 +233,22 @@ public class MainClass {
         //TEST LIST FAVE DOCS
         System.out.println("=> La liste des documents signalés:\n" + ds.listReportedDocs());
     }*/
+ 
+    
+    
+    
+    
+    public static void gestionClasse() {
+        System.out.println("\n******************TEST CRUD DOCUMENT******************");
+       ClasseService cs =new ClasseService();
+       Niveau n=new Niveau("3A");
+       Classe cc=new Classe();
+       cc.setClasse("22");
+       cc.setNiveau(n);
+       cs.ajouterClasse(cc);
+       System.out.println(cs.getOneById(14));
+       
+    }
+    
+    
 }

@@ -10,11 +10,11 @@ package edu.edspace.entities;
  * @author aa
  */
 public class Classe {
-    private String id;
-    private String niveau;
+    private int id;
+    private Niveau niveau;
     private String classe;
 
-    public Classe(String id, String niveau, String classe) {
+    public Classe(int id, Niveau niveau, String classe) {
         this.id = id;
         this.niveau = niveau;
         this.classe = classe;
@@ -23,11 +23,18 @@ public class Classe {
     
     
     
-    public String getId() {
+    public Classe() {
+		
+	}
+
+
+
+
+	public int getId() {
         return id;
     }
 
-    public String getNiveau() {
+    public Niveau getNiveau() {
         return niveau;
     }
 
@@ -35,15 +42,23 @@ public class Classe {
         return classe;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public void setNiveau(String niveau) {
+    public void setNiveau(Niveau niveau) {
         this.niveau = niveau;
     }
 
-    public void setClasse(String classe) {
+    @Override
+	public String toString() {
+		return "Classe [id=" + id + ", niveau=" + niveau + ", classe=" + classe + "]";
+	}
+
+
+
+
+	public void setClasse(String classe) {
         this.classe = classe;
     }
     
