@@ -16,12 +16,14 @@ import edu.edspace.entities.Classe;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.DocumentFavoris;
 import edu.edspace.entities.Matiere;
+import edu.edspace.entities.Message;
 import edu.edspace.entities.Reponse;
 import edu.edspace.services.DocumentFavorisService;
 import edu.edspace.entities.Niveau;
 import edu.edspace.services.ClasseService;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
+import edu.edspace.services.MessageService;
 import edu.edspace.services.ThreadService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
@@ -31,6 +33,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import edu.edspace.entities.Thread;
 import edu.edspace.entities.ThreadType;
+import edu.edspace.entities.User;
 import edu.edspace.services.ReponseService;
 import edu.edspace.services.TopicService;
 
@@ -43,7 +46,7 @@ public class MainClass {
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
 
-        gestionThread();
+        gestionClasse();
         
 
     }
@@ -242,14 +245,37 @@ public class MainClass {
     
     
     public static void gestionClasse() {
-        System.out.println("\n******************TEST CRUD DOCUMENT******************");
+        System.out.println("\n******************TEST CRUD CLASSE******************");
        ClasseService cs =new ClasseService();
        Niveau n=new Niveau("3A");
        Classe cc=new Classe();
+       cc.setId(14);
        cc.setClasse("22");
        cc.setNiveau(n);
-       cs.ajouterClasse(cc);
+       cs.supprimerClasse(cc);
        System.out.println(cs.getOneById(14));
+       
+    }
+    public static void gestionMessage() {
+        System.out.println("\n******************TEST CRUD MESSAGE******************");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+        Date date = new Date();
+        System.out.println(formatter.format(date)); 
+        User u = new User();
+        u.setId(1);
+        Classe c =new Classe();
+        c.setId(14);
+        Message m = new Message();
+        m.setUser(u);
+        m.setContent("esdfs");
+        m.setClasse(c);
+        //java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        //m.setPostDate(sqlDate); 
+        
+        MessageService cs =new MessageService();
+        cs.ajouterMessage(m);
+        
+        
        
     }
     

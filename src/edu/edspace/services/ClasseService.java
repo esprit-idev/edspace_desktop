@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import edu.edspace.entities.Classe;
 import edu.edspace.entities.Niveau;
+import edu.edspace.entities.User;
 import edu.edspace.utils.MyConnection;
 
 public class ClasseService {
@@ -83,7 +84,11 @@ public class ClasseService {
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
             pst.setInt(1, classe.getId());
+            
+            modifClasse(listUserClasse(classe.getId()));
+            
             pst.executeUpdate();
+            
             System.out.println("Classe supprimé");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -129,6 +134,69 @@ public class ClasseService {
 		 
 		 return i;
 	 }
+	 
+		public List<Classe> listeClassesByNiveau(String id){
+			List<Classe> list=new ArrayList<>();
+			
+			try {
+				String req = "select * from classe where niveau_id=?"; 
+				 PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+				 pst.setString(1,id);
+		            ResultSet rs = pst.executeQuery();
+	            NiveauService ns=new NiveauService();
+	            while (rs.next()) {
+	            	Classe c=new Classe();
+	            	c.setId(rs.getInt("id"));
+	            	c.setClasse(rs.getString("classe"));
+	            	c.setNiveau(ns.getOneById(rs.getString("niveau_id")));
+	            	list.add(c);
+	            }
+			}catch (SQLException ex) {
+	            System.out.println(ex.getMessage());
+	        }
+			
+			return list;
+		}
+		
+		
+		
+		public List<User> listUserClasse(int id){
+List<User> list=new ArrayList<>();
+			
+			try {
+				String req = "select * from user where classe_id=?"; 
+				 PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+				 pst.setInt(1,id);
+		            ResultSet rs = pst.executeQuery();
+	            while (rs.next()) {
+	            	User c=new User();
+	            	c.setId(rs.getInt("id"));
+	            	list.add(c);
+	            }
+			}catch (SQLException ex) {
+	            System.out.println(ex.getMessage());
+	        }
+			
+			return list;
+			
+		}
+		
+		public void modifClasse(List<User> l) {
+			
+			for (User temp : l) {
+			 String req = "update classe set classe_id=? WHERE id=?";
+				try {
+					NiveauService ns=new NiveauService();
+					PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+					pst.setInt(1,);
+			         pst.executeUpdate();
+			            System.out.println("User modifié");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
 	
 
 }

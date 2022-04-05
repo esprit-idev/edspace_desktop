@@ -33,8 +33,8 @@ public class Message {
         this.content = content;
     }
 
-    public void setPostDate(Date postDate) {
-        this.postDate = postDate;
+    public void setPostDate(Date string) {
+        this.postDate = string;
     }
 
     public void setUser(User user) {

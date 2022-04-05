@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.edspace.entities.Classe;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.Niveau;
 import edu.edspace.utils.MyConnection;
@@ -66,7 +67,12 @@ public class NiveauService {
 	        try {
 	            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
 	            pst.setString(1, niveau.getId());
+	            ClasseService cs=new ClasseService();
+	            for (Classe temp : cs.listeClassesByNiveau(niveau.getId())) {
+	                cs.supprimerClasse(temp);
+	            }
 	            pst.executeUpdate();
+	            
 	            System.out.println("niveau supprimé");
 	        } catch (SQLException ex) {
 	            System.out.println(ex.getMessage());
