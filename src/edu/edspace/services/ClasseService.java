@@ -188,7 +188,7 @@ List<User> list=new ArrayList<>();
 				try {
 					NiveauService ns=new NiveauService();
 					PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-					pst.setInt(1,);
+					pst.setInt(1, 1);
 			         pst.executeUpdate();
 			            System.out.println("User modifié");
 				} catch (SQLException e) {

@@ -45,19 +45,18 @@ import edu.edspace.entities.ThreadType;
 import edu.edspace.entities.User;
 import edu.edspace.services.ReponseService;
 import edu.edspace.services.TopicService;
+import edu.edspace.services.statics;
 
 /**
  *
  * @author MeriamBI
  */
 public class MainClass {
-
+    
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
-
-        gestionClasse();
-        
-
+       // gestionClasse();
+        statics();
     }
     
     
@@ -255,11 +254,11 @@ public class MainClass {
         News p = new News("TestDelete2", "Test", "Test", "1","2021/03/1", "yo.png");
         pubs.addNews(p);
         System.out.print("added successfully");
-        pubs.updateNews(p);
-        System.out.println(pubs.AllNews());
-        System.out.println(p.getId());
-        pubs.deleteNews(26);
-        System.out.println(pubs.AllNews());
+        // pubs.updateNews(p);
+        // System.out.println(pubs.AllNews());
+        // System.out.println(p.getId());
+        // pubs.deleteNews(26);
+        // System.out.println(pubs.AllNews());
 
     }
     public static void emplois(){
@@ -275,31 +274,26 @@ public class MainClass {
     //System.out.println(emps.AllEmplois());
     }
     public static void newsCategory(){
-        NewsCategoryService nCat = new NewsCategoryService();
-        System.out.println(nCat.AllCats());
-        CategoryNews c = new CategoryNews("Important");
-        nCat.addCat(c);
-        System.out.println(nCat.AllCats());
-        nCat.updateCat(c);
-        nCat.deleteCat(2);
-        System.out.println(nCat.AllCats());
+        // NewsCategoryService nCat = new NewsCategoryService();
+        // System.out.println(nCat.AllCats());
+        // CategoryNews c = new CategoryNews("Important");
+        // nCat.addCat(c);
+        // System.out.println(nCat.AllCats());
+        // nCat.updateCat(c);
+        // nCat.deleteCat(2);
+        // System.out.println(nCat.AllCats());
     }
     public static void emploisCategory(){
-        EmploiCategoryService nCat = new EmploiCategoryService();
-        System.out.println(nCat.AllCats());
-        CategoryEmploi c = new CategoryEmploi();
-        nCat.addCat(c);
-        System.out.println(nCat.AllCats());
-        nCat.updateCat(c);
-        nCat.deleteCat(2);
-        System.out.println(nCat.AllCats());
+        // EmploiCategoryService nCat = new EmploiCategoryService();
+        // System.out.println(nCat.AllCats());
+        // CategoryEmploi c = new CategoryEmploi();
+        // nCat.addCat(c);
+        // System.out.println(nCat.AllCats());
+        // nCat.updateCat(c);
+        // nCat.deleteCat(2);
+        // System.out.println(nCat.AllCats());
     }
 
- 
-    
-    
-    
-    
     public static void gestionClasse() {
         System.out.println("\n******************TEST CRUD CLASSE******************");
        ClasseService cs =new ClasseService();
@@ -330,9 +324,17 @@ public class MainClass {
         
         MessageService cs =new MessageService();
         cs.ajouterMessage(m);
-        
-        
-       
+
+    }
+
+    public static void statics(){
+        //"[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"
+        statics sc = new statics();
+        //  System.out.println(sc.numberOfPubsByCategory(5));
+        //role : "[\"ROLE_ADMIN\"]"
+      //  System.out.println(sc.numberOfStudents("[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"));
+        // System.out.println(sc.numberOfOffreEmploi());
+      //  System.out.println(sc.numberOfLikes(27));
     }
     
     
