@@ -5,6 +5,8 @@
  */
 package edu.edspace.entities;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -17,9 +19,14 @@ public class Thread {
     int nb_likes;
     String postDate;
     boolean display;
-    String threadType;
+    int threadType;
     int user;
     String verified;
+
+    @Override
+    public String toString() {
+        return "Thread{" + "id=" + id + ", question=" + question + ", postDate=" + postDate + ", display=" + display + ", threadType=" + threadType + ", user=" + user + ", verified=" + verified + '}';
+    }
 
     public String getVerified() {
         return verified;
@@ -49,7 +56,7 @@ public class Thread {
         
     }
     
-    public Thread(String id,String question, int nb_likes, String postDate, String threadType) {
+    public Thread(String id,String question, int nb_likes, String postDate, int threadType) {
         this.id = id;
         this.question = question;
         this.nb_likes = nb_likes;
@@ -58,7 +65,20 @@ public class Thread {
         
     }
     
+    
+    public Thread(String question, int threadType, int userId){
+        this.question = question;
+        this.threadType = threadType;
+        this.user = userId;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+        LocalDateTime now = LocalDateTime.now(); 
+        this.postDate = dtf.format(now);
+    }
 
+    
+    
+    
+    
     public String getQuestion() {
         return question;
     }
@@ -83,11 +103,11 @@ public class Thread {
         this.postDate = postDate;
     }
 
-    public String getThreadType() {
+    public int getThreadType() {
         return threadType;
     }
 
-    public void setThreadType(String threadType) {
+    public void setThreadType(int threadType) {
         this.threadType = threadType;
     }
 

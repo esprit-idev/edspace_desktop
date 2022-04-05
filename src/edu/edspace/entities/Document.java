@@ -4,26 +4,43 @@
  */
 package edu.edspace.entities;
 
+import java.io.File;
+
 public class Document {
     private int id,signalements;
-    private String nom,date_insert,prop,url,base64;
-    private Niveau niveau;
-    private Matiere matiere;
-
+    private String nom,date_insert,prop,url,base64,niveau,matiere,type;
+    private File fichier;
+    
     public Document() {
     }
 
-    public Document(int signalements, String nom, String date_insert, String prop, String url, String base64, Niveau niveau, Matiere matiere) {
+    public Document(int signalements, String nom, String date_insert, String prop, String url, String base64, String niveau, String matiere, String type, File fichier) {
         this.signalements = signalements;
         this.nom = nom;
         this.date_insert = date_insert;
         this.prop = prop;
         this.url = url;
-        this.base64 = base64;
         this.niveau = niveau;
         this.matiere = matiere;
+        this.type = type;
+        this.fichier = fichier;
     }
-    
+
+    public File getFichier() {
+        return fichier;
+    }
+
+    public void setFichier(File fichier) {
+        this.fichier = fichier;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getId() {
         return id;
@@ -57,19 +74,19 @@ public class Document {
         this.prop = prop;
     }
 
-    public Matiere getMatiere() {
+    public String getMatiere() {
         return matiere;
     }
 
-    public void setMatiere(Matiere matiere) {
+    public void setMatiere(String matiere) {
         this.matiere = matiere;
     }
 
-    public Niveau getNiveau() {
+    public String getNiveau() {
         return niveau;
     }
 
-    public void setNiveau(Niveau niveau) {
+    public void setNiveau(String niveau) {
         this.niveau = niveau;
     }
 
@@ -100,7 +117,50 @@ public class Document {
 
     @Override
     public String toString() {
-        return "Document{" + "id=" + id + ", signalements=" + signalements + ", nom=" + nom + ", date_insert=" + date_insert + ", prop=" + prop + ", url=" + url + ", base64=" + base64 + ", niveau=" + niveau + ", matiere=" + matiere + '}';
+        return "Document{" + "id=" + id + ", signalements=" + signalements + ", nom=" + nom + ", date_insert=" + date_insert + ", prop=" + prop + ", url=" + url + ", niveau=" + niveau + ", matiere=" + matiere + ", type=" + type + ", fichier=" + fichier + '}';
     }
+    
+    /* blob to file
+    Blob blob = rs.getBlob("BLOB_COLUMN_NAME");        
+    InputStream blobStream = blob.getBinaryStream();
+
+    //e.g. save blob to a file
+    FileOutputStream out = new FileOutputStream("file.txt");
+    byte[] buffer = new byte[1024];
+    int n = 0;  
+    while( (n = blobStream.read(buffer)) != -1 ) {
+        out.write(buffer, 0, n);
+    }
+    out.flush();
+    out.close();
+    blobStream.close();
+    */
+    
+    
+    /*file to blob
+    public static byte[] convertFileContentToBlob(String filePath) throws IOException {
+   // create file object
+   File file = new File(filePath);
+   // initialize a byte array of size of the file
+   byte[] fileContent = new byte[(int) file.length()];
+   FileInputStream inputStream = null;
+   try {
+	// create an input stream pointing to the file
+	inputStream = new FileInputStream(file);
+	// read the contents of file into byte array
+	inputStream.read(fileContent);
+   } catch (IOException e) {
+	throw new IOException("Unable to convert file to byte array. " + 
+              e.getMessage());
+   } finally {
+	// close input stream
+	if (inputStream != null) {
+           inputStream.close();
+	}
+   }
+   return fileContent;
+}
+    */
+    
     
 }

@@ -11,18 +11,18 @@ package edu.edspace.entities;
  */
 public class CategoryEmploi {
     private int id;
-    private String catgeoryName;
+    private String categoryName;
 
     public CategoryEmploi() {
     }
 
     public CategoryEmploi(int id, String catgeoryName) {
         this.id = id;
-        this.catgeoryName = catgeoryName;
+        this.categoryName = catgeoryName;
     }
 
     public CategoryEmploi(String catgeoryName) {
-        this.catgeoryName = catgeoryName;
+        this.categoryName = catgeoryName;
     }
 
     public int getId() {
@@ -34,11 +34,14 @@ public class CategoryEmploi {
     }
 
     public String getCatgeoryName() {
-        return catgeoryName;
+        return categoryName;
     }
 
     public void setCatgeoryName(String catgeoryName) {
-        this.catgeoryName = catgeoryName;
+        this.categoryName = catgeoryName;
     }
-    
+    @Override
+    public String toString(){
+        return "Category_emploi{" + "id=" + id + "categoryName=" + categoryName +  '}' + "\n";
+    }
 }

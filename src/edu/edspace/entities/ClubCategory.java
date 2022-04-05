@@ -14,9 +14,9 @@ public class ClubCategory {
     public ClubCategory() {
     }
 
-    public ClubCategory(String categorie, String id) {
+    public ClubCategory(String categorie) {
         this.categorie = categorie;
-        this.id = id;
+       
     }
 
     public String getId() {
@@ -35,6 +35,11 @@ public class ClubCategory {
 
     public void setCategorie(String categorie) {
         this.categorie = categorie;
+    }
+
+    @Override
+    public String toString() {
+        return "\nClubCategory{ " + "categorie=" + categorie + ", id=" + id + "}";
     }
 
     
