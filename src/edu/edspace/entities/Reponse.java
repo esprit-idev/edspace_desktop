@@ -12,8 +12,24 @@ public class Reponse {
     String id;
     String reply;
     String replyDate;
-    Thread thread;
+    int thread_id;
     boolean display;
+    int user_id;
+
+    public int getUser() {
+        return user_id;
+    }
+
+    public void setUser(int user_id) {
+        this.user_id = user_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Reponse{" + "id=" + id + ", reply=" + reply + ", replyDate=" + replyDate + ", thread_id=" + thread_id + ", display=" + display + ", user_id=" + user_id + '}';
+    }
+
+    
     
 
     public boolean isDisplay() {
@@ -54,19 +70,20 @@ public class Reponse {
         this.replyDate = replyDate;
     }
 
-    public Thread getThread() {
-        return thread;
+    public int getThread() {
+        return thread_id;
     }
 
-    public void setThread(Thread thread) {
-        this.thread = thread;
+    public void setThread(int thread) {
+        this.thread_id = thread;
     }
 
-    public Reponse(String id, String reply, String replyDate, Thread thread) {
-        this.id = id;
+    public Reponse(String reply,int thread,int user_id) {
+        
         this.reply = reply;
-        this.replyDate = replyDate;
-        this.thread = thread;
+        
+        this.thread_id = thread;
+        this.user_id = user_id;
     }
    
 }

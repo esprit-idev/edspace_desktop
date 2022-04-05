@@ -70,9 +70,6 @@ public class Thread {
         this.question = question;
         this.threadType = threadType;
         this.user = userId;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
-        LocalDateTime now = LocalDateTime.now(); 
-        this.postDate = dtf.format(now);
     }
 
     
