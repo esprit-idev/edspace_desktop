@@ -11,8 +11,23 @@ public class User {
          private int id ;
     private String username,prenom,email,password , image , roles;
     private boolean isBanned ;
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", prenom=" + prenom + ", email=" + email + ", isBanned=" + isBanned + '}';
+    }
     
     public User(int id,String username ,String prenom , String email ,String password , boolean isBanned , String image , String roles){
+        this.id=id ;
+        this.username=username ;
+        this.prenom=prenom ;
+        this.email=email;
+        this.password=password;
+        this.isBanned=isBanned;
+        this.image=image ;
+        this.roles=roles ;
+    }
+    public User(int id,String username ,String prenom , String email ,String password){
         this.id=id ;
         this.username=username ;
         this.prenom=prenom ;

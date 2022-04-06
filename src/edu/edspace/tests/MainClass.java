@@ -26,6 +26,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import edu.edspace.entities.Thread;
+import edu.edspace.entities.User;
+import edu.edspace.services.AdminService;
+import edu.edspace.services.StudentService;
+import edu.edspace.services.UserService;
 
 /**
  *
@@ -35,6 +39,8 @@ public class MainClass {
 
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
+        
+        Student();
         
     }
 
@@ -190,4 +196,22 @@ public class MainClass {
             System.out.println(ex.getMessage());
         }
     }*/
+    
+    public static void Student() {
+        User stu = new User("malek3","chatti","malek3@gmail.com","malek3") ;
+        User stu2 = new User("malek2","zzz","malek2@gmail.com","123456789") ;
+       // stu.setIsBanned(false);
+        StudentService  SS = new StudentService();
+        UserService US = new UserService();
+       // US.login("malek225", "123456789");
+        SS.ajouterStudent(stu);
+       // System.out.println(SS.listStudent());
+       
+      // User stu1 =SS.getStudent(33);
+      // SS.updateStudent(stu, "33");
+      //delete
+      // SS.supprimerPersonne(stu1);
+        
+    }
+    
 }
