@@ -6,6 +6,8 @@ package edu.edspace.tests;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import edu.edspace.entities.Classe;
 import edu.edspace.entities.Club;
 import edu.edspace.entities.ClubCategory;
 import edu.edspace.entities.ClubPub;
@@ -15,9 +17,13 @@ import edu.edspace.services.ClubService;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.DocumentFavoris;
 import edu.edspace.entities.Matiere;
+import edu.edspace.entities.Message;
+import edu.edspace.entities.Niveau;
 import edu.edspace.services.DocumentFavorisService;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
+import edu.edspace.services.MessageService;
+import edu.edspace.services.NiveauService;
 import edu.edspace.services.ThreadService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
@@ -28,6 +34,7 @@ import java.time.format.DateTimeFormatter;
 import edu.edspace.entities.Thread;
 import edu.edspace.entities.User;
 import edu.edspace.services.AdminService;
+import edu.edspace.services.ClasseService;
 import edu.edspace.services.StudentService;
 import edu.edspace.services.UserService;
 
@@ -39,8 +46,9 @@ public class MainClass {
 
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
+        c();
+
         
-        Student();
         
     }
 
@@ -221,5 +229,17 @@ public class MainClass {
     public static void Admin(){
     User admin = new User();
     }
+    public static void c(){
+        Niveau x=new Niveau();
+        x.setId("3A");
+        NiveauService cs=new NiveauService();
+        MessageService y=new MessageService();
+        Message m=new Message();
+        m.setContent("aaa aa bbb cc tt xx");
+        
+       y.switcher(m);
+          
+       }
+       
     
 }
