@@ -4,6 +4,14 @@
         "c:\\Users\\eslem\\Downloads\\mysql-connector-java-5.1.23-bin.jar",
         "c:\\Users\\eslem\\Downloads\\desktop tools-20220403T204344Z-001\\desktop tools\\mail.jar",
         "c:\\Users\\eslem\\Downloads\\desktop tools-20220403T204344Z-001\\desktop tools\\activation.jar",
-        "c:\\Users\\eslem\\Downloads\\desktop tools-20220403T204344Z-001\\desktop tools\\commons-io-2.4.jar"
+        "c:\\Users\\eslem\\Downloads\\desktop tools-20220403T204344Z-001\\desktop tools\\commons-io-2.4.jar",
+        "c:\\Users\\eslem\\Downloads\\openjfx-18_windows-x86_bin-sdk\\javafx-sdk-18\\lib\\javafx.base.jar",
+        "c:\\Users\\eslem\\Downloads\\openjfx-18_windows-x86_bin-sdk\\javafx-sdk-18\\lib\\javafx.controls.jar",
+        "c:\\Users\\eslem\\Downloads\\openjfx-18_windows-x86_bin-sdk\\javafx-sdk-18\\lib\\javafx.fxml.jar",
+        "c:\\Users\\eslem\\Downloads\\openjfx-18_windows-x86_bin-sdk\\javafx-sdk-18\\lib\\javafx.graphics.jar",
+        "c:\\Users\\eslem\\Downloads\\openjfx-18_windows-x86_bin-sdk\\javafx-sdk-18\\lib\\javafx.media.jar",
+        "c:\\Users\\eslem\\Downloads\\openjfx-18_windows-x86_bin-sdk\\javafx-sdk-18\\lib\\javafx.swing.jar",
+        "c:\\Users\\eslem\\Downloads\\openjfx-18_windows-x86_bin-sdk\\javafx-sdk-18\\lib\\javafx.web.jar",
+        "c:\\Users\\eslem\\Downloads\\openjfx-18_windows-x86_bin-sdk\\javafx-sdk-18\\lib\\javafx-swt.jar"
     ]
 }

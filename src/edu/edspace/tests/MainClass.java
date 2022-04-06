@@ -56,7 +56,7 @@ public class MainClass {
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
        // gestionClasse();
-        statics();
+       // statics();
     }
     
     
