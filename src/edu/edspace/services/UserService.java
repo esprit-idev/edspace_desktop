@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.activation.DataSource;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -50,8 +49,11 @@ public class UserService {
                 Session.setRoles(rs.getString("roles"));
                 System.out.println("login");
             }
+            else{ 
+                System.out.println("Verifier votre mot de passe et votre adresse mail");
+            }
         }
-        System.out.println("Verifier votre mot de passe et votre adresse mail");
+       
     
          } catch (SQLException ex) {
             System.out.println(ex.getMessage());
