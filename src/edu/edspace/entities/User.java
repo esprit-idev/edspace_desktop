@@ -27,6 +27,16 @@ public class User {
         this.image=image ;
         this.roles=roles ;
     }
+    public User(int id,String username ,String prenom , String email ,String password){
+        this.id=id ;
+        this.username=username ;
+        this.prenom=prenom ;
+        this.email=email;
+        this.password=password;
+        this.isBanned=isBanned;
+        this.image=image ;
+        this.roles=roles ;
+    }
     public User(String username ,String prenom , String email ,String password ){
       ;
         this.username=username ;
