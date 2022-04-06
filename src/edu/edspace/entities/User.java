@@ -8,6 +8,11 @@ package edu.edspace.entities;
  */
 
 public class User {
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", prenom=" + prenom + ", email=" + email + ", password=" + password + ", image=" + image + ", roles=" + roles + ", isBanned=" + isBanned + '}';
+    }
          private int id ;
     private String username,prenom,email,password , image , roles;
     private boolean isBanned ;
