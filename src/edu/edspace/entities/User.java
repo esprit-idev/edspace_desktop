@@ -16,6 +16,8 @@ public class User {
          private int id ;
     private String username,prenom,email,password , image , roles;
     private boolean isBanned ;
+
+    
     
     public User(int id,String username ,String prenom , String email ,String password , boolean isBanned , String image , String roles){
         this.id=id ;

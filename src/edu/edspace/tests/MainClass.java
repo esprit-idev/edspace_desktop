@@ -202,8 +202,9 @@ public class MainClass {
         User stu2 = new User("malek2","zzz","malek2@gmail.com","123456789") ;
        // stu.setIsBanned(false);
         StudentService  SS = new StudentService();
-       
-        SS.ajouterStudent(stu);
+       UserService US = new UserService();
+        US.login("malek3", "malek3");
+       // SS.ajouterStudent(stu);
        // System.out.println(SS.listStudent());
        //update
       // User stu1 =SS.getStudent(33);
