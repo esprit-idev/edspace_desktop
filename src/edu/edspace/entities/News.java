@@ -10,13 +10,13 @@ package edu.edspace.entities;
  *
  * @author Eslem Nabitt
  */
-public class PublicationNews {
+public class News {
     private int id, views, likes;
     private String title, owner, content, comments, categoryName, date, image;
-    public PublicationNews() {
+    public News() {
     }
 
-    public PublicationNews(int id, int views, int likes, String title, String owner, String content, String comments, String categoryName, String date,String image) {
+    public News(int id, int views, int likes, String title, String owner, String content, String comments, String categoryName, String date,String image) {
         this.id = id;
         this.views = views;
         this.likes = likes;
@@ -29,7 +29,7 @@ public class PublicationNews {
         this.image = image;
     }
 
-    public PublicationNews(int views, int likes, String title, String owner, String content, String comments, String categoryName, String date) {
+    public News(int views, int likes, String title, String owner, String content, String comments, String categoryName, String date) {
         this.views = views;
         this.likes = likes;
         this.title = title;
@@ -40,7 +40,7 @@ public class PublicationNews {
         this.date = date;
     }
 
-    public PublicationNews(String title, String owner, String content, String categoryName, String date, String image) {
+    public News(String title, String owner, String content, String categoryName, String date, String image) {
         this.title = title;
         this.owner = owner;
         this.content = content;
@@ -48,7 +48,13 @@ public class PublicationNews {
         this.date = date;
         this.image = image;
     }
-
+    public News(String title, String owner, String content,String date, String image) {
+        this.title = title;
+        this.owner = owner;
+        this.content = content;
+        this.date = date;
+        this.image = image;
+    }
     public int getId() {
         return id;
     }
@@ -127,6 +133,10 @@ public class PublicationNews {
 
     public void setImage(String image) {
         this.image = image;
+    }
+    @Override
+    public String toString() {
+        return "Publication News{" + "id=" + id + ", Title=" + title + ", owner=" + owner + ", date=" + date+ ", content=" + content +"\n" + "categoryName=" + categoryName + ", image=" + image + '}' + "\n";
     }
     
 }

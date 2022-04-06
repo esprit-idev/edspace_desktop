@@ -202,16 +202,23 @@ public class MainClass {
         User stu2 = new User("malek2","zzz","malek2@gmail.com","123456789") ;
        // stu.setIsBanned(false);
         StudentService  SS = new StudentService();
-        UserService US = new UserService();
-       // US.login("malek225", "123456789");
+       
         SS.ajouterStudent(stu);
        // System.out.println(SS.listStudent());
-       
+       //update
       // User stu1 =SS.getStudent(33);
       // SS.updateStudent(stu, "33");
       //delete
       // SS.supprimerPersonne(stu1);
         
+    }
+    public static void User(){
+     UserService US = new UserService();
+       // US.login("malek", "123456789");
+    }
+    
+    public static void Admin(){
+    User admin = new User();
     }
     
 }

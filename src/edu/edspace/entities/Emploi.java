@@ -33,7 +33,12 @@ public class Emploi {
         this.date = date;
         this.image = image;
     }
-
+    public Emploi(String title, String content,String date, String image) {
+        this.title = title;
+        this.content = content;
+        this.date = date;
+        this.image = image;
+    }
     public int getId() {
         return id;
     }
@@ -81,5 +86,8 @@ public class Emploi {
     public void setImage(String image) {
         this.image = image;
     }
-    
+    @Override
+    public String toString() {
+        return "Emploi{" + "id=" + id + ", Title=" + title + ", date=" + date+ ", content=" + content +"\n" + "categoryName=" + categoryName + ", image=" + image + '}' + "\n";
+    }
 }
