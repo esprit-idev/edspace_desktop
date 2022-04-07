@@ -7,32 +7,23 @@ package edu.edspace.tests;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import edu.edspace.entities.CategoryEmploi;
-import edu.edspace.entities.CategoryNews;
+import edu.edspace.entities.Classe;
 import edu.edspace.entities.Club;
 import edu.edspace.entities.ClubCategory;
 import edu.edspace.entities.ClubPub;
 import edu.edspace.services.ClubCategService;
 import edu.edspace.services.ClubPubService;
 import edu.edspace.services.ClubService;
-import edu.edspace.entities.Classe;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.DocumentFavoris;
-import edu.edspace.entities.Emploi;
 import edu.edspace.entities.Matiere;
-import edu.edspace.entities.News;
 import edu.edspace.entities.Message;
-import edu.edspace.entities.Reponse;
-import edu.edspace.services.DocumentFavorisService;
 import edu.edspace.entities.Niveau;
-import edu.edspace.services.ClasseService;
+import edu.edspace.services.DocumentFavorisService;
 import edu.edspace.services.DocumentService;
-import edu.edspace.services.EmploiCategoryService;
-import edu.edspace.services.EmploiService;
 import edu.edspace.services.MatiereService;
-import edu.edspace.services.NewsCategoryService;
-import edu.edspace.services.NewsService;
 import edu.edspace.services.MessageService;
+import edu.edspace.services.NiveauService;
 import edu.edspace.services.ThreadService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
@@ -41,25 +32,28 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import edu.edspace.entities.Thread;
-import edu.edspace.entities.ThreadType;
 import edu.edspace.entities.User;
-import edu.edspace.services.ReponseService;
-import edu.edspace.services.TopicService;
-import edu.edspace.services.statics;
+import edu.edspace.services.AdminService;
+import edu.edspace.services.ClasseService;
+import edu.edspace.services.StudentService;
+import edu.edspace.services.UserService;
 
 /**
  *
  * @author MeriamBI
  */
 public class MainClass {
-    
+
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
        // gestionClasse();
        // statics();
+        c();
+
+        
+        
     }
-    
-    
+
     public static void ClubPub() {
         ClubPubService clubPubService = new ClubPubService();
         System.out.println(clubPubService.displayClubPubs(5));
@@ -116,47 +110,22 @@ public class MainClass {
          */
 
     }
-    public static void gestionTopics(){
-        TopicService TopicService = new TopicService();
-        ThreadType t = new ThreadType("test FX",false);
-        TopicService.addTopic(t);
-        System.out.println("////////////////////////////////");
-        System.out.println(TopicService.listTopics());
-        ThreadType t1 = TopicService.getTopic(2);
-        TopicService.deleteTopic(t1);
-        System.out.println(TopicService.getThreadsByTopic(t1));
-    }
-    
-    public static void gestionReponses(){
-        ReponseService ReponseService = new ReponseService();
-        Reponse r = new Reponse("Testing reponses",4,1);
-        ReponseService.addReponse(r);
-        System.out.println("////////////////////////////////");
-        System.out.println(ReponseService.listReponses());
-        System.out.println(ReponseService.getReponsesByThread(3));
-        Reponse r1 = ReponseService.getReponse(19);
-        ReponseService.deleteReponse(r1);
-    }
-    
-    
+
     public static void gestionThread() {
         ThreadService ThreadService = new ThreadService();
-        //System.out.println("Test Thread add");
+        System.out.println("Test Thread add");
         Thread t = new Thread("How to FXJ", 1, 1);
-        //System.out.println("=>Threads:\n" + ThreadService.listThreads());
-        //System.out.println("///////////////////////////////////////////////////////////////");
-        //String oldId = t.getQuestion();
-        //t.setQuestion("Updated");
-        //ThreadService.modifierThread(t, oldId);
-        //ThreadService.deleteThread(t);
-        //System.out.println(ThreadService.getThread(1));
+        System.out.println("=>Threads:\n" + ThreadService.listThreads());
+        System.out.println("///////////////////////////////////////////////////////////////");
+        String oldId = t.getQuestion();
+        t.setQuestion("Updated");
+        ThreadService.modifierThread(t, oldId);
+        ThreadService.deleteThread(t);
         //ThreadService.addThread(t);
-        Thread t2 = ThreadService.getThread(2);
-        ThreadService.setVerified(t2);
-       System.out.println(ThreadService.getThread(2));
 
     }
-/*
+
+    /*
     public static void gestionMatiere() {
         System.out.println("******************TEST CRUD MATIERE******************");
         MatiereService ms = new MatiereService(); //instanciation du service MatiereService
@@ -224,118 +193,55 @@ public class MainClass {
         DocumentFavoris fave = new DocumentFavoris(user_id, url.getId());
         dfs.pinDocument(fave);
 
-        //TEST LIST FAVE DOCS
-        System.out.println("=> La liste des documents favoris:\n" + dfs.listFaves(user_id));
-        
         //TEST UNPIN DOCUMENT
         dfs.unpinDocument(fave);
 
+        //TEST LIST FAVE DOCS
+        System.out.println("=> La liste des documents favoris:\n" + dfs.listFaves(user_id));
         
-
         //TEST URL TO PDF
         try {
             ds.convertUrlToPdf("testt");
         } catch (InterruptedException | IOException ex) {
             System.out.println(ex.getMessage());
         }
-
-        //TEST SEND DOC VIA EMAIL
-        ds.sendDocViaEmail(url);
-        ds.sendDocViaEmail(doc);
-
-        //TEST LIST REPORTED DOCS
-        //TEST LIST FAVE DOCS
-        System.out.println("=> La liste des documents signalés:\n" + ds.listReportedDocs());
     }*/
-
-    public static void news(){
-        NewsService pubs = new NewsService();
-        System.out.println(pubs.AllNews());
-        News p = new News("TestDelete2", "Test", "Test", "1","2021/03/1", "yo.png");
-        pubs.addNews(p);
-        System.out.print("added successfully");
-        // pubs.updateNews(p);
-        // System.out.println(pubs.AllNews());
-        // System.out.println(p.getId());
-        // pubs.deleteNews(26);
-        // System.out.println(pubs.AllNews());
-
-    }
-    public static void emplois(){
-        EmploiService emps = new EmploiService();
-        System.out.println(emps.AllEmplois());
-    //    Emploi e = new Emploi("T", "Test","1", "2021/03/1", "yooo.png");
-    //     emps.addEmploi(e);
-    //     System.out.println("update an offer");
-    //   emps.updateEmploi(e);
-    //   System.out.println(emps.AllEmplois());
-   // emps.deleteOffer(54);
-    //System.out.println("delete offer");
-    //System.out.println(emps.AllEmplois());
-    }
-    public static void newsCategory(){
-        // NewsCategoryService nCat = new NewsCategoryService();
-        // System.out.println(nCat.AllCats());
-        // CategoryNews c = new CategoryNews("Important");
-        // nCat.addCat(c);
-        // System.out.println(nCat.AllCats());
-        // nCat.updateCat(c);
-        // nCat.deleteCat(2);
-        // System.out.println(nCat.AllCats());
-    }
-    public static void emploisCategory(){
-        // EmploiCategoryService nCat = new EmploiCategoryService();
-        // System.out.println(nCat.AllCats());
-        // CategoryEmploi c = new CategoryEmploi();
-        // nCat.addCat(c);
-        // System.out.println(nCat.AllCats());
-        // nCat.updateCat(c);
-        // nCat.deleteCat(2);
-        // System.out.println(nCat.AllCats());
-    }
-
-    public static void gestionClasse() {
-        System.out.println("\n******************TEST CRUD CLASSE******************");
-       ClasseService cs =new ClasseService();
-       Niveau n=new Niveau("3A");
-       Classe cc=new Classe();
-       cc.setId(14);
-       cc.setClasse("22");
-       cc.setNiveau(n);
-       cs.supprimerClasse(cc);
-       System.out.println(cs.getOneById(14));
-       
-    }
-    public static void gestionMessage() {
-        System.out.println("\n******************TEST CRUD MESSAGE******************");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
-        Date date = new Date();
-        System.out.println(formatter.format(date)); 
-        User u = new User();
-        u.setId(1);
-        Classe c =new Classe();
-        c.setId(14);
-        Message m = new Message();
-        m.setUser(u);
-        m.setContent("esdfs");
-        m.setClasse(c);
-        //java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        //m.setPostDate(sqlDate); 
+    
+    public static void Student() {
+        User stu = new User("malek3","chatti","malek3@gmail.com","malek3") ;
+        User stu2 = new User("malek2","zzz","malek2@gmail.com","123456789") ;
+       // stu.setIsBanned(false);
+        StudentService  SS = new StudentService();
+       UserService US = new UserService();
+        US.login("malek3", "malek3");
+       // SS.ajouterStudent(stu);
+       // System.out.println(SS.listStudent());
+       //update
+      // User stu1 =SS.getStudent(33);
+      // SS.updateStudent(stu, "33");
+      //delete
+      // SS.supprimerPersonne(stu1);
         
-        MessageService cs =new MessageService();
-        cs.ajouterMessage(m);
-
     }
-
-    public static void statics(){
-        //"[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"
-        statics sc = new statics();
-        //  System.out.println(sc.numberOfPubsByCategory(5));
-        //role : "[\"ROLE_ADMIN\"]"
-      //  System.out.println(sc.numberOfStudents("[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"));
-        // System.out.println(sc.numberOfOffreEmploi());
-      //  System.out.println(sc.numberOfLikes(27));
+    public static void User(){
+     UserService US = new UserService();
+       // US.login("malek", "123456789");
     }
     
+    public static void Admin(){
+    User admin = new User();
+    }
+    public static void c(){
+        Niveau x=new Niveau();
+        x.setId("3A");
+        NiveauService cs=new NiveauService();
+        MessageService y=new MessageService();
+        Message m=new Message();
+        m.setContent("aaa aa bbb cc tt xx");
+        
+       y.switcher(m);
+          
+       }
+       
     
 }

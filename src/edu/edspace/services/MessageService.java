@@ -142,4 +142,66 @@ public class MessageService {
         }
 		return i;
 	}
+	
+	
+	
+	public String[] mots(){
+		String[] l = null;
+		String req = "select * from message where id= ?";
+		 PreparedStatement pst;
+		try {
+			
+			pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+			 pst.setInt(1,41);
+			 
+			 
+				String str;
+	           ResultSet rs = pst.executeQuery();
+	           while (rs.next()) {
+	        	   str=rs.getString("content");
+	        	   l=str.split(" ");
+	        	  //System.out.println(l[1]+" "+l[2]);
+	        	   
+	           }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return l;
+		
+	}
+	
+	
+	public boolean detector(String s1,String s2) {
+		if(s1.equals(s2)) {
+	
+			return true;
+		}
+		
+		return false;
+
+	}
+	
+	public Message switcher(Message m) {
+		String[] tokens=m.getContent().split(" ");
+		String text = "";
+		for(String s:tokens) {
+			
+			String[] mot=mots();
+			String test=s;
+			for(String ss:mot) {
+			if(detector(s,ss)) {
+				
+				test="****";
+			}
+			}
+			text=text+" "+test;
+		}
+		
+		m.setContent(text);
+		System.out.println(text);
+		return m;
+	}
+	
+	
 }

@@ -4,9 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import edu.edspace.entities.Classe;
+import edu.edspace.entities.Message;
 import edu.edspace.entities.Niveau;
 import edu.edspace.entities.User;
 import edu.edspace.utils.MyConnection;
@@ -86,6 +88,8 @@ public class ClasseService {
             pst.setInt(1, classe.getId());
             
             modifClasse(listUserClasse(classe.getId()));
+        	MessageService ms=new MessageService();
+            modifMessage(ms.listeMessageClasse(classe.getId()));
             
             pst.executeUpdate();
             
@@ -184,17 +188,36 @@ List<User> list=new ArrayList<>();
 		public void modifClasse(List<User> l) {
 			
 			for (User temp : l) {
-			 String req = "update classe set classe_id=? WHERE id=?";
+			 String req = "update user set classe_id=? WHERE id=?";
 				try {
-					NiveauService ns=new NiveauService();
 					PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-					pst.setInt(1, 1);
+					pst.setNull(1, Types.INTEGER);
+					pst.setInt(2, temp.getId());
 			         pst.executeUpdate();
 			            System.out.println("User modifié");
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
+		
+				
+			
+			
+		}
+		
+		public void modifMessage(List<Message> l) {
+			for (Message temp : l) {
+				 String req = "update message set classe_id=? WHERE id=?";
+					try {
+						PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+						pst.setNull(1, Types.INTEGER);
+						pst.setInt(2, temp.getId());
+				         pst.executeUpdate();
+				            System.out.println("Message modifié");
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			
 		}
 	
