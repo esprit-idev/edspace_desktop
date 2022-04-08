@@ -29,8 +29,8 @@ public class Home implements Initializable{
        // MyConnection.getInstance().getCnx();
         File file = new File("images/logo1.png");
         Image logo = new Image(file.toURI().toString());
-        System.out.println(logo);
-        logoImageView.setImage(logo);
+        // System.out.println(logo);
+        // logoImageView.setImage(logo);
     }
     
 }

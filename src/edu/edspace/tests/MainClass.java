@@ -6,6 +6,8 @@ package edu.edspace.tests;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import edu.edspace.entities.Classe;
 import edu.edspace.entities.Club;
@@ -27,6 +29,14 @@ import edu.edspace.services.NiveauService;
 import edu.edspace.services.ThreadService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -42,15 +52,15 @@ import edu.edspace.services.UserService;
  *
  * @author MeriamBI
  */
-public class MainClass {
+public class MainClass extends Application{
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         MyConnection.getInstance().getCnx();
        // gestionClasse();
        // statics();
-        c();
+       // c();
 
-        
+        launch(args);
         
     }
 
@@ -242,6 +252,20 @@ public class MainClass {
        y.switcher(m);
           
        }
-       
-    
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/home.fxml"));
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            primaryStage.setScene(scene);
+            primaryStage.initStyle(StageStyle.TRANSPARENT);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
 }
