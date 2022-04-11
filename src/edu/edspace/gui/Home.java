@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.edspace.services;
+package edu.edspace.gui;
 
 import java.io.File;
 import java.net.URL;
@@ -22,15 +22,14 @@ import javafx.scene.image.ImageView;
 public class Home implements Initializable{
 
     @FXML 
-    private ImageView logoImageView;
+    public ImageView logoImageView;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       // MyConnection.getInstance().getCnx();
+        MyConnection.getInstance().getCnx();
         File file = new File("images/logo1.png");
         Image logo = new Image(file.toURI().toString());
-        // System.out.println(logo);
-        // logoImageView.setImage(logo);
+        logoImageView.setImage(logo);
     }
     
 }

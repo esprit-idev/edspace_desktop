@@ -57,7 +57,7 @@ public class EmploiCategoryService {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, pub.getCatgeoryName());
             preparedStatement.setInt(2, pub.getId());
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
             System.out.println("updated");
         } catch (SQLException ex) {
             ex.getStackTrace();
