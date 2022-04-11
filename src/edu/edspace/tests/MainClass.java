@@ -15,6 +15,7 @@ import edu.edspace.services.ClubService;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.DocumentFavoris;
 import edu.edspace.entities.Matiere;
+import edu.edspace.entities.Reponse;
 import edu.edspace.services.DocumentFavorisService;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
@@ -26,9 +27,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import edu.edspace.entities.Thread;
+import edu.edspace.entities.ThreadType;
 import edu.edspace.entities.User;
 import edu.edspace.services.AdminService;
+import edu.edspace.services.ReponseService;
 import edu.edspace.services.StudentService;
+import edu.edspace.services.TopicService;
 import edu.edspace.services.UserService;
 
 /**
@@ -40,10 +44,32 @@ public class MainClass {
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
         
-        Student();
+        gestionReponse();
         
     }
-
+    public static void gestionReponse(){
+        ReponseService r = new ReponseService();
+        Reponse r1 = new Reponse();
+        r1.setReply("Testing 1");
+        r1.setThread(7);
+        r1.setUser(1);
+        r1.setDisplay(false);
+        //r.addReponse(r1);
+        Reponse r2 = r.getReponse(1);
+        r.deleteReponse(r2);
+        System.out.println(r.listReponses());
+    }
+     public static void Topic(){
+         ThreadType t = new ThreadType();
+         t.setContent("Testing FX");
+         t.setDisplay(false);
+         TopicService TopicService = new TopicService();
+         TopicService.addTopic(t);
+         TopicService.listTopics();
+         TopicService.getThreadsByTopic(t);
+         
+         ThreadType t1 = new ThreadType();
+     }
     public static void ClubPub() {
         ClubPubService clubPubService = new ClubPubService();
         System.out.println(clubPubService.displayClubPubs(5));
@@ -109,8 +135,8 @@ public class MainClass {
         System.out.println("///////////////////////////////////////////////////////////////");
         String oldId = t.getQuestion();
         t.setQuestion("Updated");
-        ThreadService.modifierThread(t, oldId);
-        ThreadService.deleteThread(t);
+        //ThreadService.modifierThread(t, oldId);
+        //ThreadService.deleteThread(t);
         //ThreadService.addThread(t);
 
     }
