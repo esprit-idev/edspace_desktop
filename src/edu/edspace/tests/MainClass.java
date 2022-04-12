@@ -28,6 +28,7 @@ import java.time.format.DateTimeFormatter;
 import edu.edspace.entities.Thread;
 import edu.edspace.entities.User;
 import edu.edspace.services.AdminService;
+import edu.edspace.services.MailService;
 import edu.edspace.services.StudentService;
 import edu.edspace.services.UserService;
 
@@ -40,7 +41,8 @@ public class MainClass {
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
         
-        Student();
+       // Student();
+       User();
         
     }
 
@@ -200,9 +202,13 @@ public class MainClass {
     public static void Student() {
         User stu = new User("malek3","chatti","malek3@gmail.com","malek3") ;
         User stu2 = new User("malek2","zzz","malek2@gmail.com","123456789") ;
+         User stu3 = new User("alpaca","zc","alpaca@gmail.com","123456789") ;
        // stu.setIsBanned(false);
         StudentService  SS = new StudentService();
+        AdminService AS = new AdminService();
+       // AS.ajouterAdmin(stu3);
        UserService US = new UserService();
+      // US.Exist("alpaca", "39");
         US.login("malek3", "malek3");
        // SS.ajouterStudent(stu);
        // System.out.println(SS.listStudent());
@@ -216,6 +222,11 @@ public class MainClass {
     public static void User(){
      UserService US = new UserService();
        // US.login("malek", "123456789");
+       MailService MS = new MailService();
+       MS.send("votre mot de passe", "malekzommit99@gmail.com");
+   //MS.sendm("malekzommit99@gmail.com", "malek1999", "malekzommit99@gmail.com", "titre ta3 email", "ichnwa t7eb tab3th");
+
+      // MS.sendmail();
     }
     
     public static void Admin(){

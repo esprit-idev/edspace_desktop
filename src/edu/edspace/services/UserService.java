@@ -12,8 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -47,11 +49,12 @@ public class UserService {
                 Session.setUsername(rs.getString("username"));
                 Session.setEmail(rs.getString("email"));
                 Session.setRoles(rs.getString("roles"));
-                System.out.println("login");
+                System.out.println("login ");
             }
             else{ 
                 System.out.println("Verifier votre mot de passe et votre adresse mail");
             }
+            System.out.println( Session.getUsername() + Session.getEmail());
         }
        
     
@@ -60,4 +63,32 @@ public class UserService {
         }
     
 }
+    
+    public void Exist(String username, String id){
+        try {
+        String req = "SELECT * FROM user WHERE username=? and id=?";
+        PreparedStatement pre = cnx.prepareStatement(req);
+        pre.setString(1, username);
+       // pre.setBoolean(2, true);
+        pre.setString(2, id);
+        ResultSet rs = pre.executeQuery();
+        while (rs.next()) {
+            System.out.println("Exist" + rs.getString("id"));
+            System.out.println("deconnecter");
+
+        }
+        System.out.println("erreur");
+    
+}catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    
 }
+
+    
+    
+
+   
+
+
+    }
