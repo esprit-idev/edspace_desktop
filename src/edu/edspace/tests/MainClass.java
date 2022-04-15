@@ -67,15 +67,7 @@ public class MainClass extends Application{
 
     public static void main(String[] args){
         MyConnection.getInstance().getCnx();
-       // news();
-       // emplois();
-        // newsCategory();
-       // gestionClasse();
-       // statics();
-       // c();
        launch(args);
-        
-
     }
 
     public static void ClubPub() {
@@ -188,9 +180,8 @@ public class MainClass extends Application{
         int user_id = 5; //to_change
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime currentDate = LocalDateTime.now();
-        File fichier = new File(Statics.myDocs + "logo.png"); //to_change
-        Document doc = new Document(0, "logo.png", formatter.format(currentDate), owner, null, "", "3A", "matiereA", "", fichier);
-        Document url = new Document(0, "urltest", formatter.format(currentDate), owner, "https://github.com/KnpLabs/snappy", null, "3B", "matiereB", "url", null);
+        Document doc = new Document(0, "logo.png", formatter.format(currentDate), owner, null, "3A", "matiereA", "");
+        Document url = new Document(0, "urltest", formatter.format(currentDate), owner, "https://github.com/KnpLabs/snappy", "3B", "matiereB", "url");
         ds.ajouterDocument(doc);
         ds.ajouterDocument(url);
         System.out.println("=> La liste des documents après ajout:\n" + ds.listDocs());
@@ -225,10 +216,22 @@ public class MainClass extends Application{
         
         //TEST URL TO PDF
         try {
-            ds.convertUrlToPdf("testt");
+            ds.convertUrlToPdf(url.getNom());
         } catch (InterruptedException | IOException ex) {
             System.out.println(ex.getMessage());
         }
+
+        //TEST SEND DOC VIA EMAIL
+        ds.sendDocViaEmail(url);
+        ds.sendDocViaEmail(doc);
+
+        //TEST LIST REPORTED DOCS
+        System.out.println("=> La liste des documents signalés:\n" + ds.listReportedDocs());
+        
+        //TEST APERCU DOCUMENT
+        ds.apercuDocument(doc);
+        ds.apercuDocument(url);
+    }
     }*/
     
     public static void Student() {
@@ -333,7 +336,7 @@ public class MainClass extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/home.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
             Scene scene = new Scene(parent);
            // scene.setFill(Color.TRANSPARENT);
             primaryStage.setScene(scene);
@@ -344,5 +347,4 @@ public class MainClass extends Application{
         }
         
     }
-
 }
