@@ -25,6 +25,8 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import edu.edspace.entities.Thread;
+import java.awt.AWTException;
+
 
 /**
  *
@@ -34,12 +36,11 @@ public class MainClass {
 
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
-
     }
 
     public static void ClubPub() {
         ClubPubService clubPubService = new ClubPubService();
-        System.out.println(clubPubService.displayClubPubs(5));
+        System.out.println(clubPubService.displayPostedClubPubs(5));
         //add
         /*  ClubPub cpa = new ClubPub("test", "test", null, new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()), 5, 0);
         clubPubService.ajouterPubClub(cpa);
