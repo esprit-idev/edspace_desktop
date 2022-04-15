@@ -3,7 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,10 +16,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1349.0" styleClass="parent" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.AllNewsController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1349.0" styleClass="parent" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.updateNewsController">
    <children>
       <Pane prefHeight="750.0" prefWidth="210.0" styleClass="sidebar" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -25,17 +29,14 @@
                   <Image url="@../../../../images/logo1.png" />
                </image>
             </ImageView>
-            <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="92.0" prefHeight="74.0" prefWidth="210.0" styleClass="active_nav" stylesheets="@../css/styles.css">
+            <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="92.0" prefHeight="56.0" prefWidth="229.0">
                <children>
                   <Button fx:id="newsNavBtn" mnemonicParsing="false" stylesheets="@../css/styles.css">
                      <graphic>
-                        <Label blendMode="DIFFERENCE" contentDisplay="CENTER" text="News" textFill="#dde2ff">
+                        <Label contentDisplay="CENTER" text="News" textFill="#dde2ff">
                            <font>
                               <Font name="Segoe UI" size="18.0" />
                            </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
                         </Label>
                      </graphic>
                      <HBox.margin>
@@ -50,7 +51,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutY="156.0" prefHeight="74.0" prefWidth="210.0">
+            <HBox alignment="CENTER_LEFT" layoutY="156.0" prefHeight="56.0" prefWidth="229.0">
                <children>
                   <Button mnemonicParsing="false" stylesheets="@../css/styles.css">
                      <graphic>
@@ -72,7 +73,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutY="215.0" prefHeight="74.0" prefWidth="210.0">
+            <HBox alignment="CENTER_LEFT" layoutY="215.0" prefHeight="56.0" prefWidth="229.0">
                <children>
                   <Button mnemonicParsing="false" stylesheets="@../css/styles.css">
                      <graphic>
@@ -94,7 +95,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutY="276.0" prefHeight="74.0" prefWidth="210.0">
+            <HBox alignment="CENTER_LEFT" layoutY="276.0" prefHeight="56.0" prefWidth="229.0">
                <children>
                   <Button mnemonicParsing="false" stylesheets="@../css/styles.css">
                      <graphic>
@@ -147,7 +148,7 @@
                   <Label text="LOG OUT" />
                </graphic>
             </Button>
-            <Label prefHeight="27.0" prefWidth="99.0" styleClass="home" stylesheets="@../css/styles.css" text="All News" textFill="#252733" GridPane.rowIndex="1">
+            <Label prefHeight="27.0" prefWidth="141.0" styleClass="home" stylesheets="@../css/styles.css" text="Add News" textFill="#252733" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
@@ -177,15 +178,63 @@
             </Label>
          </children>
       </FlowPane>
-      <Button fx:id="btnAddNews" layoutX="1096.0" layoutY="103.0" mnemonicParsing="false" onMouseClicked="#addNews" styleClass="add_btn" text="Ajouter Une publication" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <AnchorPane layoutX="223.0" layoutY="156.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="1109.0">
+      <Pane layoutX="495.0" layoutY="87.0" prefHeight="522.0" prefWidth="580.0" style="-fx-background-radius: 8; -fx-background-color: #FFFFFF;">
          <children>
-            <TilePane fx:id="hboxId" alignment="CENTER_LEFT" hgap="5.0" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefColumns="1" prefHeight="200.0" prefRows="3" prefWidth="648.0" vgap="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="228.0" layoutY="16.0" style="-fx-alignment: &quot;CENTER&quot;;" text="Update your publication" />
+            <VBox layoutX="14.0" layoutY="79.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="56.0" />
+                  <TextField fx:id="titleField" prefHeight="25.0" prefWidth="546.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="11.0" layoutY="150.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="75.0" />
+                  <TextField fx:id="descriptionField" prefHeight="25.0" prefWidth="546.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="11.0" layoutY="207.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author" wrappingWidth="75.0" />
+                  <TextField fx:id="authorField" prefHeight="25.0" prefWidth="546.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="11.0" layoutY="271.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image" wrappingWidth="75.0" />
+                  <ImageView fx:id="imageField" fitHeight="20.0" fitWidth="546.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+            <VBox layoutX="11.0" layoutY="309.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="75.0" />
+                  <DatePicker fx:id="dateField" prefHeight="25.0" prefWidth="549.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="14.0" layoutY="367.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category Name" wrappingWidth="113.0" />
+                  <ComboBox fx:id="categoryNameField" prefHeight="25.0" prefWidth="546.0" />
+               </children>
+            </VBox>
+            <HBox layoutX="107.0" layoutY="427.0" prefHeight="64.0" prefWidth="360.0">
+               <children>
+                  <Button fx:id="update" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#save" prefHeight="35.0" prefWidth="122.0" style="-fx-font-weight: 900;" styleClass="add_btn" text="Update" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="122.0" styleClass="cancel_btn" text="Cancel" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="50.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children>
-      </AnchorPane>
+      </Pane>
    </children>
 </AnchorPane>

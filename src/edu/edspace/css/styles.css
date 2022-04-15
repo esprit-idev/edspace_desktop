@@ -23,3 +23,12 @@
     -fx-border-color:#DFE0EB;
     -fx-border-radius: 8px;
 }
+.active_nav{
+    -fx-background-color:#9FA2B4;
+}
+.add_btn{
+    -fx-background-color:#4d94fa;
+}
+.cancel_btn{
+    -fx-background-color:#5a885d;
+}
