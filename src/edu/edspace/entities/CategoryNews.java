@@ -40,5 +40,9 @@ public class CategoryNews {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+    @Override
+    public String toString(){
+        return "Category_News{" + "id=" + id + "categoryName=" + categoryName +  '}' + "\n";
+    }
     
 }

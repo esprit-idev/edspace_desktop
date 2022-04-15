@@ -21,7 +21,24 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-//import org.apache.commons.io.FileUtils;
+import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -41,14 +58,14 @@ public class DocumentService {
             pst.setString(5, document.getUrl());
             pst.setString(7, document.getNiveau());
             pst.setString(8, document.getMatiere());
-            
+
             File fichier = document.getFichier();
             FileInputStream inputStream = null;
-            String mimeType="url";
-            String base64=null;
+            String mimeType = "url";
+            String base64 = null;
             if (fichier != null) {
-                base64=convertFileToBase64(Statics.myDocs + document.getNom());
-                mimeType=URLConnection.guessContentTypeFromName(document.getNom());
+                base64 = convertFileToBase64(Statics.myDocs + document.getNom());
+                mimeType = URLConnection.guessContentTypeFromName(document.getNom());
                 try {
                     inputStream = new FileInputStream(fichier);
                 } catch (FileNotFoundException ex) {
@@ -68,7 +85,7 @@ public class DocumentService {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public List<Document> listDocs() {
         String req = "select * from document"; //requete select from db
         return getDocumentsList(req);
@@ -101,20 +118,25 @@ public class DocumentService {
     }
 
     public List<Document> filterByOwner(String owner) {
-        String req = "select * from document where proprietaire='"+owner+"'"; //requete select from db
+        String req = "select * from document where proprietaire='" + owner + "'"; //requete select from db
+        return getDocumentsList(req);
+    }
+
+    public List<Document> filterByNiveauMatiere(String niveau, String matiere) {
+        String req = "select * from document where niveau_id='" + niveau + "' and matiere_id='" + matiere + "'"; //requete select from db
         return getDocumentsList(req);
     }
     
-    public List<Document> filterByNiveauMatiere(String niveau,String matiere) {
-        String req = "select * from document where niveau_id='"+niveau+"' and matiere_id='"+matiere+"'"; //requete select from db
+    public List<Document> listReportedDocs() {
+        String req = "select * from document where signalements>0"; //requete select from db
         return getDocumentsList(req);
     }
-    
-     public void signalerDocument(Document document) {
+
+    public void signalerDocument(Document document) {
         String req = "update document set signalements=? WHERE id=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-            pst.setInt(1, document.getSignalements()+1);
+            pst.setInt(1, document.getSignalements() + 1);
             pst.setInt(2, document.getId());
             pst.executeUpdate();
             System.out.println("document signalé");
@@ -122,8 +144,8 @@ public class DocumentService {
             System.out.println(ex.getMessage());
         }
     }
-     
-     public void ignorerSignalDocument(Document document) {
+
+    public void ignorerSignalDocument(Document document) {
         String req = "update document set signalements=? WHERE id=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
@@ -135,9 +157,9 @@ public class DocumentService {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //common method called when getting a list of docs
-    public List<Document> getDocumentsList(String req){
+    public List<Document> getDocumentsList(String req) {
         List<Document> myList = new ArrayList<>();
         try {
             Statement st = MyConnection.getInstance().getCnx().createStatement();
@@ -168,6 +190,83 @@ public class DocumentService {
             System.out.println(ex.getMessage());
         }
         return myList;
+    }
+
+    public void sendDocViaEmail(Document doc) {
+        // Get a Properties object
+        Properties props = System.getProperties();
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "465");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.ssl.required", "true");
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        String to = "meriamesprittest@gmail.com"; //to_change with destination email
+        String from = "meriamesprittest@gmail.com"; //to_change with current user email
+        String password = "meriamesprittest221199*#"; //to_change with current user email pwd
+        try {
+            Session session = Session.getDefaultInstance(props,
+                    new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(from, password);
+                }
+            });
+
+            //compose message     
+       
+            File file = doc.getFichier();
+            Multipart multipart = new MimeMultipart();
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("this is the subject"); //to_change with email subject
+            //create MimeBodyPart object and set your message text     
+            BodyPart messageBodyPart1 = new MimeBodyPart();
+            if (file != null) {
+                messageBodyPart1.setText("This is the body\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*change with current username*/); //to_change with email body
+            } else {
+                messageBodyPart1.setText("This is the body\n" + doc.getUrl() + "\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*change with current username*/); //to_change with email body
+            }
+
+            //create new MimeBodyPart object and set DataHandler object to this object      
+            MimeBodyPart messageBodyPart2 = new MimeBodyPart();
+
+            if (file != null) {
+                String filepath = doc.getFichier().getPath();//change accordingly  
+                DataSource source = new FileDataSource(filepath);
+                messageBodyPart2.setDataHandler(new DataHandler(source));
+                messageBodyPart2.setFileName(filepath);
+                //create Multipart object and add MimeBodyPart objects to this object      
+
+                if (file != null) {
+                    multipart.addBodyPart(messageBodyPart2);
+                }
+            }
+            multipart.addBodyPart(messageBodyPart1);
+
+            //set the multiplart object to the message object  
+            message.setContent(multipart);
+
+            //7) send message  
+            Transport.send(message);
+
+            System.out.println("email sent!");
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void convertUrlToPdf(String filename) throws InterruptedException, IOException {
+        Process wkhtml; // Create uninitialized process
+        String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; // Desired command
+        //to_change
+        wkhtml = Runtime.getRuntime().exec(command); // Start process
+        IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
+
+        wkhtml.waitFor(); // Allow process to run
+
     }
 
     public File convertBlobToFile(Blob blob, Document d) {
@@ -214,12 +313,11 @@ public class DocumentService {
 
     public String convertFileToBase64(String filepath) {
         byte[] fileContent = null;
-    /*    try {
+        try {
             fileContent = FileUtils.readFileToByteArray(new File(filepath));
-        } 
-        catch (IOException ex) {
+        } catch (IOException ex) {
             System.out.println(ex.getMessage());
-        }*/
+        }
         String myBase64 = java.util.Base64.getEncoder().encodeToString(fileContent);
         return myBase64;
     }
