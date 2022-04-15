@@ -9,8 +9,14 @@ import edu.edspace.entities.Thread;
  * @author 21656
  */
 public class ThreadType {
-    String id,content,display;
-    Thread thread;
+
+    @Override
+    public String toString() {
+        return "ThreadType{" + "id=" + id + ", content=" + content + ", display=" + display  + "; \n";
+    }
+    String id,content;
+    boolean display;
+    
 
     public ThreadType() {
        
@@ -32,25 +38,19 @@ public class ThreadType {
         this.content = content;
     }
 
-    public String getDisplay() {
+    public boolean getDisplay() {
         return display;
     }
 
-    public void setDisplay(String display) {
+    public void setDisplay(boolean display) {
         this.display = display;
     }
 
-    public ThreadType(String content, String display,Thread t) {
+    public ThreadType(String content, boolean display) {
         this.content = content;
         this.display = display;
-        this.thread = t;
+        
     }
 
-    public Thread getThread() {
-        return thread;
-    }
-
-    public void setThread(Thread thread) {
-        this.thread = thread;
-    }
+    
 }

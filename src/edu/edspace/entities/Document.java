@@ -4,8 +4,6 @@
  */
 package edu.edspace.entities;
 
-import java.io.File;
-
 public class Document {
     private int id,signalements;
     private String nom,date_insert,prop,url,niveau,matiere,type;

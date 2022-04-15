@@ -4,8 +4,15 @@
  */
 package edu.edspace.tests;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import edu.edspace.entities.CategoryEmploi;
+import edu.edspace.entities.CategoryNews;
+import edu.edspace.entities.Classe;
 import edu.edspace.entities.Club;
 import edu.edspace.entities.ClubCategory;
 import edu.edspace.entities.ClubPub;
@@ -14,33 +21,58 @@ import edu.edspace.services.ClubPubService;
 import edu.edspace.services.ClubService;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.DocumentFavoris;
+import edu.edspace.entities.Emploi;
 import edu.edspace.entities.Matiere;
+import edu.edspace.entities.Message;
+import edu.edspace.entities.News;
+import edu.edspace.entities.Niveau;
 import edu.edspace.services.DocumentFavorisService;
 import edu.edspace.services.DocumentService;
+import edu.edspace.services.EmploiCategoryService;
+import edu.edspace.services.EmploiService;
 import edu.edspace.services.MatiereService;
+import edu.edspace.services.MessageService;
+import edu.edspace.services.NewsCategoryService;
+import edu.edspace.services.NewsService;
+import edu.edspace.services.NiveauService;
 import edu.edspace.services.ThreadService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import edu.edspace.entities.Thread;
+import java.awt.AWTException;
+import edu.edspace.entities.User;
+import edu.edspace.services.AdminService;
+import edu.edspace.services.ClasseService;
+import edu.edspace.services.StudentService;
+import edu.edspace.services.UserService;
+import edu.edspace.services.statics;
+
 
 /**
  *
  * @author MeriamBI
  */
-public class MainClass {
+public class MainClass extends Application{
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         MyConnection.getInstance().getCnx();
-        //gestionDocument();
+       launch(args);
     }
 
     public static void ClubPub() {
         ClubPubService clubPubService = new ClubPubService();
-        System.out.println(clubPubService.displayClubPubs(5));
+        System.out.println(clubPubService.displayPostedClubPubs(5));
         //add
         /*  ClubPub cpa = new ClubPub("test", "test", null, new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()), 5, 0);
         clubPubService.ajouterPubClub(cpa);
@@ -109,6 +141,7 @@ public class MainClass {
 
     }
 
+    /*
     public static void gestionMatiere() {
         System.out.println("******************TEST CRUD MATIERE******************");
         MatiereService ms = new MatiereService(); //instanciation du service MatiereService
@@ -175,14 +208,12 @@ public class MainClass {
         DocumentFavoris fave = new DocumentFavoris(user_id, url.getId());
         dfs.pinDocument(fave);
 
-        //TEST LIST FAVE DOCS
-        System.out.println("=> La liste des documents favoris:\n" + dfs.listFaves(user_id));
-        
         //TEST UNPIN DOCUMENT
         dfs.unpinDocument(fave);
 
+        //TEST LIST FAVE DOCS
+        System.out.println("=> La liste des documents favoris:\n" + dfs.listFaves(user_id));
         
-
         //TEST URL TO PDF
         try {
             ds.convertUrlToPdf(url.getNom());
@@ -200,5 +231,120 @@ public class MainClass {
         //TEST APERCU DOCUMENT
         ds.apercuDocument(doc);
         ds.apercuDocument(url);
+    }
+    }*/
+    
+    public static void Student() {
+        User stu = new User("malek3","chatti","malek3@gmail.com","malek3") ;
+        User stu2 = new User("malek2","zzz","malek2@gmail.com","123456789") ;
+       // stu.setIsBanned(false);
+        StudentService  SS = new StudentService();
+       UserService US = new UserService();
+        US.login("malek3", "malek3");
+       // SS.ajouterStudent(stu);
+       // System.out.println(SS.listStudent());
+       //update
+      // User stu1 =SS.getStudent(33);
+      // SS.updateStudent(stu, "33");
+      //delete
+      // SS.supprimerPersonne(stu1);
+        
+    }
+    public static void User(){
+     UserService US = new UserService();
+       // US.login("malek", "123456789");
+    }
+    
+    public static void Admin(){
+    User admin = new User();
+    }
+    public static void c(){
+        Niveau x=new Niveau();
+        x.setId("3A");
+        NiveauService cs=new NiveauService();
+        MessageService y=new MessageService();
+        Message m=new Message();
+        m.setContent("aaa aa bbb cc tt xx");
+        
+       y.switcher(m);
+          
+       }
+    public static void news(){
+        NewsService pubs = new NewsService();
+       // DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+       // String date = df.format(new Date());
+        News p = new News("Esprit test 2", "T", "Tt", "1","2021/04/08", "yo.png");
+        pubs.addNews(p);
+        System.out.print("added successfully");
+        pubs.updateNews(p);
+        System.out.println(pubs.AllNews());
+        System.out.println(p.getId());
+        pubs.deleteNews(26);
+        System.out.println(pubs.AllNews());
+        // pubs.updateNews(p);
+        // System.out.println(pubs.AllNews());
+        // System.out.println(p.getId());
+        // pubs.deleteNews(26);
+        // System.out.println(pubs.AllNews());
+    }
+    public static void emplois(){
+            EmploiService emp = new EmploiService();
+            Emploi em = new Emploi();
+            emp.addEmploi(em);
+            System.out.println(emp.AllEmplois());
+    }
+    public static void newsCategory(){
+                NewsCategoryService nCat = new NewsCategoryService();
+                System.out.println(nCat.AllCats());
+                CategoryNews c = new CategoryNews("Important");
+                nCat.addCat(c);
+                System.out.println(nCat.AllCats());
+                nCat.updateCat(c);
+                nCat.deleteCat(2);
+                System.out.println(nCat.AllCats());
+                // NewsCategoryService nCat = new NewsCategoryService();
+                // System.out.println(nCat.AllCats());
+                // CategoryNews c = new CategoryNews("Important");
+                // nCat.addCat(c);
+                // System.out.println(nCat.AllCats());
+                // nCat.updateCat(c);
+                // nCat.deleteCat(2);
+                // System.out.println(nCat.AllCats());
+            }
+    public static void emploisCategory(){
+                EmploiCategoryService nCat = new EmploiCategoryService();
+                System.out.println(nCat.AllCats());
+                CategoryEmploi c = new CategoryEmploi();
+                nCat.addCat(c);
+                System.out.println(nCat.AllCats());
+                nCat.updateCat(c);
+                nCat.deleteCat(2);
+                System.out.println(nCat.AllCats());
+                //EmploiCategoryService nCat = new EmploiCategoryService();
+                
+            }
+    public static void statics(){
+                //"[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"
+                statics sc = new statics();
+                 System.out.println(sc.numberOfPubsByCategory(1));
+                //role : "[\"ROLE_ADMIN\"]"
+             //  System.out.println(sc.numberOfStudents("[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"));
+               //  System.out.println(sc.numberOfOffreEmploi());
+              //System.out.println(sc.numberOfLikes(27));
+            }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+            Scene scene = new Scene(parent);
+           // scene.setFill(Color.TRANSPARENT);
+            primaryStage.setScene(scene);
+            //primaryStage.initStyle(StageStyle.TRANSPARENT);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }
