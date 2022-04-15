@@ -35,6 +35,7 @@ public class MainClass {
 
     public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
+        //gestionDocument();
     }
 
     public static void ClubPub() {
@@ -107,7 +108,7 @@ public class MainClass {
         //ThreadService.addThread(t);
 
     }
-/*
+
     public static void gestionMatiere() {
         System.out.println("******************TEST CRUD MATIERE******************");
         MatiereService ms = new MatiereService(); //instanciation du service MatiereService
@@ -146,9 +147,8 @@ public class MainClass {
         int user_id = 5; //to_change
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime currentDate = LocalDateTime.now();
-        File fichier = new File(Statics.myDocs + "logo.png"); //to_change
-        Document doc = new Document(0, "logo.png", formatter.format(currentDate), owner, null, "", "3A", "matiereA", "", fichier);
-        Document url = new Document(0, "urltest", formatter.format(currentDate), owner, "https://github.com/KnpLabs/snappy", null, "3B", "matiereB", "url", null);
+        Document doc = new Document(0, "logo.png", formatter.format(currentDate), owner, null, "3A", "matiereA", "");
+        Document url = new Document(0, "urltest", formatter.format(currentDate), owner, "https://github.com/KnpLabs/snappy", "3B", "matiereB", "url");
         ds.ajouterDocument(doc);
         ds.ajouterDocument(url);
         System.out.println("=> La liste des documents après ajout:\n" + ds.listDocs());
@@ -185,7 +185,7 @@ public class MainClass {
 
         //TEST URL TO PDF
         try {
-            ds.convertUrlToPdf("testt");
+            ds.convertUrlToPdf(url.getNom());
         } catch (InterruptedException | IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -195,7 +195,10 @@ public class MainClass {
         ds.sendDocViaEmail(doc);
 
         //TEST LIST REPORTED DOCS
-        //TEST LIST FAVE DOCS
         System.out.println("=> La liste des documents signalés:\n" + ds.listReportedDocs());
-    }*/
+        
+        //TEST APERCU DOCUMENT
+        ds.apercuDocument(doc);
+        ds.apercuDocument(url);
+    }
 }
