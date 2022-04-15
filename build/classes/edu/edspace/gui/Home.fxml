@@ -115,7 +115,7 @@
             </HBox>
             <HBox layoutY="338.0" prefHeight="56.0" prefWidth="229.0">
                <children>
-                  <Button mnemonicParsing="false" stylesheets="@../css/styles.css">
+                  <Button fx:id="btn_Club" mnemonicParsing="false" onAction="#displayClubs" stylesheets="@../css/styles.css">
                      <graphic>
                         <Label contentDisplay="CENTER" prefHeight="23.0" prefWidth="145.0" text="Clubs" textFill="#dde2ff">
                            <font>
