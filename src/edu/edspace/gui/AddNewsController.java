@@ -29,25 +29,24 @@ import java.sql.SQLException;
 public class AddNewsController implements Initializable{
     @FXML
 	private TextField titleField;
-
 	@FXML
 	private TextField descriptionField;
-
 	@FXML
 	private DatePicker dateField;
-
 	@FXML
 	private TextField authorField;
-
 	@FXML
 	private ComboBox<String> categoryNameField;
-
     @FXML
     private ImageView imageField;
-    
     @FXML 
     private ImageView logoImageView;
-
+    @FXML
+    private Button btnEmploi;
+    @FXML
+    private Button btnNews;
+    @FXML
+    private Button btnCatNews;
     @FXML 
     private Button save;
 

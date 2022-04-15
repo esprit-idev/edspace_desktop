@@ -1,34 +1,20 @@
-.parent{
-    -fx-background-color : #F7F8FC;
+.button
+{
+-fx-background-color :  #1C2424;
+-fx-text-fill : #e7e5e5;
 }
-.sidebar{
-    -fx-background-color :  #363740;
+.button:hover{
+-fx-background-color : #1C2424;
 }
-.topbar {
-    -fx-background-color : #f5f5f5;
+.button:pressed
+{
+-fx-background-color : #1C2424;
 }
-.glyph-icon{ 
-    -fx-font-size : 39px;
-}
-.home{
-    -fx-font-size: 18px;
-}
-.gridContainer{
 
-}
-.chart{
-    -fx-border-color:#DFE0EB;
-    -fx-border-radius: 8px;
-}
-.active_nav{
-    -fx-background-color:#9FA2B4;
-}
-.add_btn{
-    -fx-background-color:#4d94fa;
-}
-.cancel_btn{
-    -fx-background-color:#5a885d;
-}
+
+
+
+
 .scroll-pane {
     -fx-background-color: #02030A;
 }
