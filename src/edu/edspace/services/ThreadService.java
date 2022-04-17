@@ -4,8 +4,13 @@
  */
 package edu.edspace.services;
 
+import edu.edspace.entities.Reponse;
 import edu.edspace.entities.Thread;
 import edu.edspace.utils.MyConnection;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +19,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author 21656
@@ -51,7 +58,7 @@ public class ThreadService {
             //tant que rs has next get matiere and add it to the list
             while (rs.next()) {
                 Thread t = new Thread();
-                t.setId(rs.getString("id"));
+                t.setId(rs.getInt("id"));
                 t.setThreadType(rs.getInt("thread_type_id"));
                 t.setUser(rs.getInt("user_id"));
                 t.setQuestion(rs.getString("question"));
@@ -101,7 +108,7 @@ public class ThreadService {
             //tant que rs has next get matiere and add it to the list
             while (rs.next()) {
                 
-                t.setId(rs.getString("id"));
+                t.setId(rs.getInt("id"));
                 t.setThreadType(rs.getInt("thread_type_id"));
                 t.setUser(rs.getInt("user_id"));
                 t.setQuestion(rs.getString("question"));
@@ -127,5 +134,68 @@ public class ThreadService {
             System.out.println(ex.getMessage());
         }
     }
-    
+    public void search(Thread t){
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            try {
+                if (t.getQuestion().contains(" ")){
+                    
+                        String my_new_str = t.getQuestion().replace(" ", "+");
+                Desktop.getDesktop().browse(new URI("https://www.google.com/search?q="+t.getQuestion()));
+                }
+                else {
+                    Desktop.getDesktop().browse(new URI("https://www.google.com/search?q="+t.getQuestion()));
+                }
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(ThreadService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ThreadService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
+    }
+    public void searchPDF(Thread t){
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            try {
+                if (t.getQuestion().contains(" ")){
+                    
+                        String my_new_str = t.getQuestion().replace(" ", "+");
+                    
+               
+                Desktop.getDesktop().browse(new URI("https://www.google.com/search?q=filetype%3Apdf+"+my_new_str));
+                 }
+                else 
+                {
+                    Desktop.getDesktop().browse(new URI("https://www.google.com/search?q=filetype%3Apdf+"+t.getQuestion()));
+                }
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(ThreadService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ThreadService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
+    }
+    public void VerifyByReponses(Thread t){
+        ReponseService ReponseService = new ReponseService();
+        List<Reponse> reponses = ReponseService.getReponsesByThread(t.getId());
+        if (t.getVerified().equals("1")){
+            System.out.println("Thread is already Verified");
+        }
+        else {
+            
+        
+        if(reponses.size()>=5){
+            String req = "update thread set verified=1 WHERE id = "+t.getId();
+        try {
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+            
+            pst.executeUpdate();
+            System.out.println("Thread verified");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+        else{
+               System.out.println("Thread is still not verified you need " + (5-reponses.size()) + " more");
+                }
+        }
+    }
 }

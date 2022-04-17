@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="edu.edspace.gui.NewTopicController">
+   <children>
+      <Label layoutX="130.0" layoutY="181.0" prefHeight="37.0" prefWidth="100.0" text="Topic content :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="topicField" layoutX="230.0" layoutY="187.0" prefHeight="26.0" prefWidth="229.0" promptText="Place the topic you want to add here" />
+      <Label layoutX="174.0" layoutY="69.0" style="-fx-font-family: &quot;Lucida Sans Unicode&quot;;" text="Add a new topic" textAlignment="CENTER" textFill="#61ac78">
+         <font>
+            <Font name="Berlin Sans FB" size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="addBtn" layoutX="284.0" layoutY="289.0" mnemonicParsing="false" onAction="#addTopic" prefHeight="38.0" prefWidth="39.0" style="-fx-background-color: #61ac78; -fx-background-radius: 500; -fx-font-size: 15; -fx-font-weight: bold;" text="+" />
+      <Hyperlink fx:id="homeLink" layoutX="37.0" layoutY="25.0" prefHeight="28.0" prefWidth="100.0" style="-fx-underline: true;" text="&lt;-- Home" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>

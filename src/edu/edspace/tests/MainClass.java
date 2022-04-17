@@ -6,6 +6,10 @@ package edu.edspace.tests;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import edu.edspace.entities.Classe;
 import edu.edspace.entities.Club;
 import edu.edspace.entities.ClubCategory;
 import edu.edspace.entities.ClubPub;
@@ -15,13 +19,28 @@ import edu.edspace.services.ClubService;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.DocumentFavoris;
 import edu.edspace.entities.Matiere;
+
 import edu.edspace.entities.Reponse;
+
+import edu.edspace.entities.Message;
+import edu.edspace.entities.Niveau;
+
 import edu.edspace.services.DocumentFavorisService;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
+import edu.edspace.services.MessageService;
+import edu.edspace.services.NiveauService;
 import edu.edspace.services.ThreadService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -30,7 +49,11 @@ import edu.edspace.entities.Thread;
 import edu.edspace.entities.ThreadType;
 import edu.edspace.entities.User;
 import edu.edspace.services.AdminService;
+
 import edu.edspace.services.ReponseService;
+
+import edu.edspace.services.ClasseService;
+
 import edu.edspace.services.StudentService;
 import edu.edspace.services.TopicService;
 import edu.edspace.services.UserService;
@@ -39,12 +62,17 @@ import edu.edspace.services.UserService;
  *
  * @author MeriamBI
  */
-public class MainClass {
+public class MainClass extends Application{
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         MyConnection.getInstance().getCnx();
-        
-        gestionReponse();
+
+       // gestionClasse();
+       // statics();
+       // c();
+
+        gestionThread();
+
         
     }
     public static void gestionReponse(){
@@ -134,7 +162,20 @@ public class MainClass {
         System.out.println("=>Threads:\n" + ThreadService.listThreads());
         System.out.println("///////////////////////////////////////////////////////////////");
         String oldId = t.getQuestion();
-        t.setQuestion("Updated");
+        
+        
+        //t.setQuestion("Updated");
+        //ThreadService.searchPDF(t);
+        t = ThreadService.getThread(5);
+        ReponseService ReponseService = new ReponseService();
+        Reponse r1 = new Reponse();
+        r1.setReply("Hello");
+        r1.setDisplay(false);
+        r1.setThread(t.getId());
+        r1.setUser(1);
+        //ReponseService.addReponse(r1);
+        //ReponseService.addReponse(r2);
+        ThreadService.VerifyByReponses(t);
         //ThreadService.modifierThread(t, oldId);
         //ThreadService.deleteThread(t);
         //ThreadService.addThread(t);
@@ -247,5 +288,31 @@ public class MainClass {
     public static void Admin(){
     User admin = new User();
     }
-    
+    public static void c(){
+        Niveau x=new Niveau();
+        x.setId("3A");
+        NiveauService cs=new NiveauService();
+        MessageService y=new MessageService();
+        Message m=new Message();
+        m.setContent("aaa aa bbb cc tt xx");
+        
+       y.switcher(m);
+          
+       }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/home.fxml"));
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            primaryStage.setScene(scene);
+            primaryStage.initStyle(StageStyle.TRANSPARENT);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
 }

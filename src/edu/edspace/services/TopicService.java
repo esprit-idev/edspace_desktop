@@ -81,7 +81,7 @@ public class TopicService {
             //tant que rs has next get matiere and add it to the list
             while (rs.next()) {
                 edu.edspace.entities.Thread t = new edu.edspace.entities.Thread();
-                t.setId(rs.getString("id"));
+                t.setId(rs.getInt("id"));
                 t.setThreadType(rs.getInt("thread_type_id"));
                 t.setUser(rs.getInt("user_id"));
                 t.setQuestion(rs.getString("question"));
