@@ -60,7 +60,7 @@ public class NewsService {
                 preparedStatement.setString(5, pub.getOwner());
                 preparedStatement.setString(6, pub.getContent());
                 preparedStatement.executeUpdate();
-
+                System.out.println("added");
         }catch(SQLException ex){
             ex.getStackTrace();
         }
