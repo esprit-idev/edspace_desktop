@@ -1,9 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "c:\\Users\\eslem\\Downloads\\mysql-connector-java-5.1.23-bin.jar",
-        "c:\\Users\\eslem\\Downloads\\desktop tools-20220403T204344Z-001\\desktop tools\\mail.jar",
-        "c:\\Users\\eslem\\Downloads\\desktop tools-20220403T204344Z-001\\desktop tools\\activation.jar",
-        "c:\\Users\\eslem\\Downloads\\desktop tools-20220403T204344Z-001\\desktop tools\\commons-io-2.4.jar"
-    ]
-}

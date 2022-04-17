@@ -3,11 +3,8 @@ package edu.edspace.services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.List;
 
-import edu.edspace.entities.CategoryNews;
 import edu.edspace.utils.MyConnection;
 
 public class statics {

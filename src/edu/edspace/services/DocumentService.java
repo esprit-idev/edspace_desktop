@@ -37,8 +37,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+//import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -263,7 +263,7 @@ public class DocumentService {
         String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; // Desired command
         //to_change
         wkhtml = Runtime.getRuntime().exec(command); // Start process
-        IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
+       // IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
 
         wkhtml.waitFor(); // Allow process to run
 
@@ -313,11 +313,11 @@ public class DocumentService {
 
     public String convertFileToBase64(String filepath) {
         byte[] fileContent = null;
-        try {
-            fileContent = FileUtils.readFileToByteArray(new File(filepath));
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+       // try {
+         //   fileContent = FileUtils.readFileToByteArray(new File(filepath));
+       // } catch (IOException ex) {
+         //   System.out.println(ex.getMessage());
+     //   }
         String myBase64 = java.util.Base64.getEncoder().encodeToString(fileContent);
         return myBase64;
     }

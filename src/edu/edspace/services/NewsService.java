@@ -59,7 +59,7 @@ public class NewsService {
                 preparedStatement.setString(4, pub.getTitle());
                 preparedStatement.setString(5, pub.getOwner());
                 preparedStatement.setString(6, pub.getContent());
-                preparedStatement.execute();
+                preparedStatement.executeUpdate();
 
         }catch(SQLException ex){
             ex.getStackTrace();
@@ -84,7 +84,7 @@ public class NewsService {
             preparedStatement.setString(5, pub.getOwner());
             preparedStatement.setString(6, pub.getCategoryName());
             preparedStatement.setInt(7, pub.getId());
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
             System.out.println("updated");
         } catch (SQLException ex) {
             ex.getStackTrace();
@@ -102,4 +102,5 @@ public class NewsService {
             System.out.println(e.getMessage());
         }
     }
+
 }

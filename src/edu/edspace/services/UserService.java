@@ -37,7 +37,7 @@ public class UserService {
 
     
     
-    public void login(String userName, String Pwd)  {
+    public Boolean login(String userName, String Pwd)  {
         try {
         String req = "SELECT * FROM user WHERE username=?";
         PreparedStatement pre = cnx.prepareStatement(req);
@@ -51,17 +51,16 @@ public class UserService {
                 Session.setRoles(rs.getString("roles"));
                 System.out.println("login ");
             }
-            else{ 
-                System.out.println("Verifier votre mot de passe et votre adresse mail");
+            return true;
             }
-            System.out.println( Session.getUsername() + Session.getEmail());
-        }
+        
+        
        
     
          } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-    
+        return false;
 }
     
     public void Exist(String username, String id){
@@ -86,7 +85,15 @@ public class UserService {
 }
 
     
-    
+    public void export(){
+    try{
+    String query = "select * from user" ;
+     PreparedStatement pre = cnx.prepareStatement(query);
+     ResultSet rs = pre.executeQuery();
+    }catch (SQLException ex){
+    System.out.println("hello");
+    }
+    }
 
    
 

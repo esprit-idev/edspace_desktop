@@ -1,0 +1,25 @@
+.parent{
+    -fx-background-color : #F7F8FC;
+}
+.sidebar{
+    -fx-background-color :  #363740;
+}
+.topbar {
+    -fx-background-color : #f5f5f5;
+}
+.glyph-icon{ 
+    -fx-font-size : 39px;
+}
+.home{
+    -fx-font-size: 18px;
+}
+.gridContainer{
+
+}
+.button{
+    -fx-background-color: "transparent";
+}
+.chart{
+    -fx-border-color:#DFE0EB;
+    -fx-border-radius: 8px;
+}

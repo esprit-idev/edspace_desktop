@@ -41,7 +41,7 @@ public class NewsCategoryService {
              query = "INSERT INTO categorie_news ( category_name) VALUES (?)";
              preparedStatement = connection.prepareStatement(query);
              preparedStatement.setString(1, pub.getCategoryName());
-             preparedStatement.execute();
+             preparedStatement.executeUpdate();
 
      }catch(SQLException ex){
          ex.getStackTrace();
@@ -57,7 +57,7 @@ public class NewsCategoryService {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, pub.getCategoryName());
             preparedStatement.setInt(2, pub.getId());
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
             System.out.println("updated");
         } catch (SQLException ex) {
             ex.getStackTrace();

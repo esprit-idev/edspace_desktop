@@ -4,8 +4,15 @@
  */
 package edu.edspace.tests;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import edu.edspace.entities.CategoryEmploi;
+import edu.edspace.entities.CategoryNews;
+import edu.edspace.entities.Classe;
 import edu.edspace.entities.Club;
 import edu.edspace.entities.ClubCategory;
 import edu.edspace.entities.ClubPub;
@@ -14,13 +21,31 @@ import edu.edspace.services.ClubPubService;
 import edu.edspace.services.ClubService;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.DocumentFavoris;
+import edu.edspace.entities.Emploi;
 import edu.edspace.entities.Matiere;
+import edu.edspace.entities.Message;
+import edu.edspace.entities.News;
+import edu.edspace.entities.Niveau;
 import edu.edspace.services.DocumentFavorisService;
 import edu.edspace.services.DocumentService;
+import edu.edspace.services.EmploiCategoryService;
+import edu.edspace.services.EmploiService;
 import edu.edspace.services.MatiereService;
+import edu.edspace.services.MessageService;
+import edu.edspace.services.NewsCategoryService;
+import edu.edspace.services.NewsService;
+import edu.edspace.services.NiveauService;
 import edu.edspace.services.ThreadService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -28,21 +53,33 @@ import java.time.format.DateTimeFormatter;
 import edu.edspace.entities.Thread;
 import edu.edspace.entities.User;
 import edu.edspace.services.AdminService;
+
 import edu.edspace.services.MailService;
+import edu.edspace.services.ClasseService;
 import edu.edspace.services.StudentService;
 import edu.edspace.services.UserService;
+import edu.edspace.services.statics;
 
 /**
  *
  * @author MeriamBI
  */
-public class MainClass {
+public class MainClass extends Application{
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         MyConnection.getInstance().getCnx();
+
         
        // Student();
-       User();
+      // User();
+      // news();
+       // emplois();
+        // newsCategory();
+       // gestionClasse();
+       // statics();
+       // c();
+       launch(args);
+
         
     }
 
@@ -232,5 +269,94 @@ public class MainClass {
     public static void Admin(){
     User admin = new User();
     }
-    
+    public static void c(){
+        Niveau x=new Niveau();
+        x.setId("3A");
+        NiveauService cs=new NiveauService();
+        MessageService y=new MessageService();
+        Message m=new Message();
+        m.setContent("aaa aa bbb cc tt xx");
+        
+       y.switcher(m);
+          
+       }
+    public static void news(){
+        NewsService pubs = new NewsService();
+       // DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+       // String date = df.format(new Date());
+        News p = new News("Esprit test 2", "T", "Tt", "1","2021/04/08", "yo.png");
+        pubs.addNews(p);
+        System.out.print("added successfully");
+        pubs.updateNews(p);
+        System.out.println(pubs.AllNews());
+        System.out.println(p.getId());
+        pubs.deleteNews(26);
+        System.out.println(pubs.AllNews());
+        // pubs.updateNews(p);
+        // System.out.println(pubs.AllNews());
+        // System.out.println(p.getId());
+        // pubs.deleteNews(26);
+        // System.out.println(pubs.AllNews());
+    }
+    public static void emplois(){
+            EmploiService emp = new EmploiService();
+            Emploi em = new Emploi();
+            emp.addEmploi(em);
+            System.out.println(emp.AllEmplois());
+    }
+    public static void newsCategory(){
+                NewsCategoryService nCat = new NewsCategoryService();
+                System.out.println(nCat.AllCats());
+                CategoryNews c = new CategoryNews("Important");
+                nCat.addCat(c);
+                System.out.println(nCat.AllCats());
+                nCat.updateCat(c);
+                nCat.deleteCat(2);
+                System.out.println(nCat.AllCats());
+                // NewsCategoryService nCat = new NewsCategoryService();
+                // System.out.println(nCat.AllCats());
+                // CategoryNews c = new CategoryNews("Important");
+                // nCat.addCat(c);
+                // System.out.println(nCat.AllCats());
+                // nCat.updateCat(c);
+                // nCat.deleteCat(2);
+                // System.out.println(nCat.AllCats());
+            }
+    public static void emploisCategory(){
+                EmploiCategoryService nCat = new EmploiCategoryService();
+                System.out.println(nCat.AllCats());
+                CategoryEmploi c = new CategoryEmploi();
+                nCat.addCat(c);
+                System.out.println(nCat.AllCats());
+                nCat.updateCat(c);
+                nCat.deleteCat(2);
+                System.out.println(nCat.AllCats());
+                //EmploiCategoryService nCat = new EmploiCategoryService();
+                
+            }
+    public static void statics(){
+                //"[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"
+                statics sc = new statics();
+                 System.out.println(sc.numberOfPubsByCategory(1));
+                //role : "[\"ROLE_ADMIN\"]"
+             //  System.out.println(sc.numberOfStudents("[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"));
+               //  System.out.println(sc.numberOfOffreEmploi());
+              //System.out.println(sc.numberOfLikes(27));
+            }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+            Scene scene = new Scene(parent);
+           // scene.setFill(Color.TRANSPARENT);
+            primaryStage.setScene(scene);
+            //primaryStage.initStyle(StageStyle.TRANSPARENT);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
 }
