@@ -51,14 +51,14 @@ public class NewsService {
 // add a publication 
     public void addNews(News pub){
            try{ 
-                query = "INSERT INTO publication_news ( category_name_id, image, date, title,owner, content) VALUES (?,?,?,?,?,?)";
+                query = "INSERT INTO publication_news (title, owner, content, category_name_id, datePub, image) VALUES (?,?,?,?,?,?)";
                 preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, pub.getCategoryName());
-                preparedStatement.setString(2, pub.getImage());
-                preparedStatement.setString(3, pub.getDate());
-                preparedStatement.setString(4, pub.getTitle());
-                preparedStatement.setString(5, pub.getOwner());
-                preparedStatement.setString(6, pub.getContent());
+                preparedStatement.setString(1, pub.getTitle());
+                preparedStatement.setString(2, pub.getOwner());
+                preparedStatement.setString(3, pub.getContent());
+                preparedStatement.setString(4, pub.getCategoryName());
+                preparedStatement.setString(5, pub.getDate());
+                preparedStatement.setString(6, pub.getImage());
                 preparedStatement.executeUpdate();
                 System.out.println("added");
         }catch(SQLException ex){

@@ -179,9 +179,9 @@
                   </Label>
                   <TableView fx:id="tableViewId" layoutX="131.0" layoutY="148.0" prefHeight="280.0" prefWidth="531.0">
                      <columns>
-                        <TableColumn prefWidth="252.0" text="Category Name" />
-                        <TableColumn prefWidth="141.0" text="Update" />
-                        <TableColumn prefWidth="141.0" text="Delete" />
+                        <TableColumn fx:id="categoryNameCol" prefWidth="252.0" text="Category Name" />
+                        <TableColumn fx:id="updateCol" prefWidth="141.0" text="Update" />
+                        <TableColumn fx:id="deleteCol" prefWidth="141.0" text="Delete" />
                      </columns>
                   </TableView>
                   <ImageView fx:id="search_iv" fitHeight="17.0" fitWidth="16.0" layoutX="745.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">

@@ -80,11 +80,28 @@ public class HomeBackController implements Initializable {
 			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
 		}
     }
-
     @FXML
     private void getCatNewsView(MouseEvent event){
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+    }
+    @FXML
+    private void getEmploiView(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allEmploi.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+    }
+    @FXML
+    private void getDashboardView(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
 			rootPane.getChildren().setAll(pane);
 		} catch (IOException ex) {
 			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
