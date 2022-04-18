@@ -23,13 +23,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -47,69 +45,66 @@ import javafx.scene.layout.GridPane;
  *
  * @author MeriamBI
  */
-public class DocsListController implements Initializable {
+public class DocsReportedController implements Initializable {
 
     @FXML
-    private Button btnOverview;
-    @FXML
-    private Button btnOrders;
-    @FXML
-    private Button btnCustomers;
-    @FXML
-    private Button btnMenus;
-    @FXML
-    private Button btnMatiere;
-    @FXML
-    private Button btnSettings;
-    @FXML
-    private Button btnEmploi;
-    @FXML
-    private Button btnSignout1;
-    @FXML
-    private Button btnCentrePartage;
-    @FXML
-    private Button btnSignout3;
-    @FXML
-    private ImageView logo_iv;
-    @FXML
-    private ImageView home_iv;
-    @FXML
-    private ImageView tabaff_iv;
-    @FXML
-    private ImageView users_iv;
-    @FXML
-    private ImageView niveaux_iv;
-    @FXML
-    private ImageView classe_iv;
-    @FXML
-    private ImageView matieres_iv;
-    @FXML
-    private ImageView club_iv;
-    @FXML
-    private ImageView offre_iv;
-    @FXML
-    private ImageView forum_iv;
-    @FXML
-    private ImageView centre_iv;
-    @FXML
-    private ImageView signOut_iv;
-    @FXML
     private AnchorPane rootPane;
-    @FXML
-    private Button btnNews;
-    @FXML
-    private ScrollPane scroll;
-    @FXML
-    private GridPane grid;
-    
     @FXML
     private ComboBox<String> niveau_cb;
     @FXML
     private ComboBox<String> matiere_cb;
     @FXML
-    private ImageView reported_iv;
-    @FXML
     private Label reinitialiser_label;
+    @FXML
+    private ScrollPane scroll;
+    @FXML
+    private GridPane grid;
+    @FXML
+    private ImageView logo_iv;
+    @FXML
+    private Button btnOverview;
+    @FXML
+    private ImageView home_iv;
+    @FXML
+    private Button btnNews;
+    @FXML
+    private ImageView tabaff_iv;
+    @FXML
+    private Button btnOrders;
+    @FXML
+    private ImageView users_iv;
+    @FXML
+    private Button btnCustomers;
+    @FXML
+    private ImageView niveaux_iv;
+    @FXML
+    private Button btnMenus;
+    @FXML
+    private ImageView classe_iv;
+    @FXML
+    private Button btnMatiere;
+    @FXML
+    private ImageView matieres_iv;
+    @FXML
+    private Button btnSettings;
+    @FXML
+    private ImageView club_iv;
+    @FXML
+    private Button btnEmploi;
+    @FXML
+    private ImageView offre_iv;
+    @FXML
+    private Button btnSignout1;
+    @FXML
+    private ImageView forum_iv;
+    @FXML
+    private Button btnCentrePartage;
+    @FXML
+    private ImageView centre_iv;
+    @FXML
+    private Button btnSignout3;
+    @FXML
+    private ImageView signOut_iv;
 
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
@@ -127,12 +122,20 @@ public class DocsListController implements Initializable {
     }
 
     @FXML
+    private void reinitialiserFiltre(MouseEvent event) {
+    }
+
+    @FXML
+    private void handleClicks(ActionEvent event) {
+    }
+
+    @FXML
     private void getNewsView(MouseEvent event) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
-            Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DocsReportedController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -141,7 +144,7 @@ public class DocsListController implements Initializable {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
-            Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DocsReportedController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -153,7 +156,7 @@ public class DocsListController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DocsReportedController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -164,7 +167,7 @@ public class DocsListController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DocsReportedController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -175,28 +178,19 @@ public class DocsListController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DocsReportedController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @FXML
-    private void reinitialiserFiltre(MouseEvent event) {
-
-    }
-
-    @FXML
-    private void handleClicks(ActionEvent event) {
-
     }
 
     private void initDisplay() {
         DocumentService ds = new DocumentService();
-        docs = ds.listDocs();
+        docs = ds.listReportedDocs();
         if (docs.isEmpty()) {
             //display "empty"
         } else {
             initGrid(docs);
         }
+
         niveau_cb.setItems(niveauxList());
         niveau_cb.setPromptText("Tous les niveaux");
 
@@ -211,14 +205,19 @@ public class DocsListController implements Initializable {
         matiere_cb.valueProperty().addListener(new ChangeListener<>() {
             @Override
             public void changed(ObservableValue ov, String oldVal, String newVal) {
+                List<Document> docRep = new ArrayList<>();
                 docs = ds.filterByNiveauMatiere(niveau_cb.getValue(), newVal);
                 grid.getChildren().clear();
-                if (docs.isEmpty()){
-                    //display "empty"
-                }else{
-                    initGrid(docs);
+                for (int i = 0; i < docs.size(); i++) {
+                    if (docs.get(i).getSignalements() > 0) {
+                        docRep.add(docs.get(i));
+                    }
                 }
-                
+                if (docRep.isEmpty()) {
+                    //display "empty"
+                } else {
+                    initGrid(docRep);
+                }
             }
         });
     }
@@ -308,7 +307,6 @@ public class DocsListController implements Initializable {
         forum_iv.setImage(outI);
         centre_iv.setImage(outI);
         signOut_iv.setImage(outI);
-        reported_iv.setImage(outI);
     }
 
 }

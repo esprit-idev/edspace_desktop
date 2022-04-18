@@ -14,22 +14,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.document.DocsListController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.document.DocsReportedController">
    <children>
       <Pane layoutX="262.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="800.0">
          <children>
-            <Label layoutX="39.0" layoutY="27.0" text="Liste des documents">
+            <Label layoutX="39.0" layoutY="27.0" text="Liste des documents signalés">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
             <ComboBox fx:id="niveau_cb" layoutX="185.0" layoutY="87.0" prefHeight="25.0" prefWidth="166.0" promptText="Choisissez un niveau" />
             <ComboBox fx:id="matiere_cb" layoutX="362.0" layoutY="87.0" prefHeight="25.0" prefWidth="166.0" promptText="Choisissez une matière" />
-            <ImageView fx:id="reported_iv" fitHeight="30.0" fitWidth="30.0" layoutX="740.0" layoutY="29.0" onMouseClicked="#getReportedDocs" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../images/icons8_Home_32px.png" />
-               </image>
-            </ImageView>
             <Label fx:id="reinitialiser_label" layoutX="554.0" layoutY="91.0" onMouseClicked="#reinitialiserFiltre" text="Réinitialiser" />
          </children>
       </Pane>

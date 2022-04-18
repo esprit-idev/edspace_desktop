@@ -23,13 +23,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -47,73 +45,60 @@ import javafx.scene.layout.GridPane;
  *
  * @author MeriamBI
  */
-public class DocsListController implements Initializable {
+public class DocListFrontController implements Initializable {
 
     @FXML
-    private Button btnOverview;
-    @FXML
-    private Button btnOrders;
-    @FXML
-    private Button btnCustomers;
-    @FXML
-    private Button btnMenus;
-    @FXML
-    private Button btnMatiere;
-    @FXML
-    private Button btnSettings;
-    @FXML
-    private Button btnEmploi;
-    @FXML
-    private Button btnSignout1;
-    @FXML
-    private Button btnCentrePartage;
-    @FXML
-    private Button btnSignout3;
-    @FXML
-    private ImageView logo_iv;
-    @FXML
-    private ImageView home_iv;
-    @FXML
-    private ImageView tabaff_iv;
-    @FXML
-    private ImageView users_iv;
-    @FXML
-    private ImageView niveaux_iv;
-    @FXML
-    private ImageView classe_iv;
-    @FXML
-    private ImageView matieres_iv;
-    @FXML
-    private ImageView club_iv;
-    @FXML
-    private ImageView offre_iv;
-    @FXML
-    private ImageView forum_iv;
-    @FXML
-    private ImageView centre_iv;
-    @FXML
-    private ImageView signOut_iv;
-    @FXML
     private AnchorPane rootPane;
-    @FXML
-    private Button btnNews;
-    @FXML
-    private ScrollPane scroll;
-    @FXML
-    private GridPane grid;
-    
     @FXML
     private ComboBox<String> niveau_cb;
     @FXML
     private ComboBox<String> matiere_cb;
     @FXML
-    private ImageView reported_iv;
-    @FXML
     private Label reinitialiser_label;
-
+    @FXML
+    private ScrollPane scroll;
+    @FXML
+    private GridPane grid;
+    @FXML
+    private ImageView logo_iv;
+    @FXML
+    private Button btnNews;
+    @FXML
+    private ImageView tabaff_iv;
+    @FXML
+    private Button btnForum;
+    @FXML
+    private ImageView forum_iv;
+    @FXML
+    private Button btnClubs;
+    @FXML
+    private ImageView club_iv;
+    @FXML
+    private Button btnEmploi;
+    @FXML
+    private ImageView emploi_v;
+    @FXML
+    private Button btnCentrePartage;
+    @FXML
+    private ImageView centre_iv;
+    @FXML
+    private Button btnStudents;
+    @FXML
+    private ImageView users_iv;
+    @FXML
+    private Button btnProfil;
+    @FXML
+    private ImageView profil_iv;
+    @FXML
+    private Button btnSignout;
+    @FXML
+    private ImageView signOut_iv;
+    
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
     private List<Document> docs = new ArrayList();
+    @FXML
+    private ImageView add_iv;
 
     /**
      * Initializes the controller class.
@@ -124,71 +109,27 @@ public class DocsListController implements Initializable {
         MyConnection.getInstance().getCnx();
         initImages();
         initDisplay();
-    }
-
-    @FXML
-    private void getNewsView(MouseEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allNews.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void getCatNewsView(MouseEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML
-    private void getAllDocsView(MouseEvent event) {
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocsList.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML
-    private void getAllMatieresView(MouseEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML
-    private void getReportedDocs(MouseEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocsReported.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML
-    private void reinitialiserFiltre(MouseEvent event) {
-
-    }
-
+    }    
+    
     @FXML
     private void handleClicks(ActionEvent event) {
-
     }
-
+    
+    @FXML
+    private void addDoc(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocAdd.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(DocListFrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML
+    private void reinitialiserFiltre(MouseEvent event) {
+    }
+    
     private void initDisplay() {
         DocumentService ds = new DocumentService();
         docs = ds.listDocs();
@@ -222,7 +163,7 @@ public class DocsListController implements Initializable {
             }
         });
     }
-
+    
     private void initGrid(List<Document> docs) {
         int column = 0;
         int row = 0;
@@ -279,7 +220,7 @@ public class DocsListController implements Initializable {
         alert.setResizable(true);
         alert.showAndWait();
     }
-
+    
     public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
@@ -293,22 +234,33 @@ public class DocsListController implements Initializable {
         File fileOut = new File("images/icons8_Sign_Out_32px.png");
         Image outI = new Image(fileOut.toURI().toString());
 
-        File fileSearch = new File("images/icons8_Search_52px.png");
-        Image searchI = new Image(fileSearch.toURI().toString());
-
         logo_iv.setImage(logoI);
-        home_iv.setImage(homeI);
         tabaff_iv.setImage(homeI);
         users_iv.setImage(homeI);
-        niveaux_iv.setImage(homeI);
-        matieres_iv.setImage(homeI);
-        classe_iv.setImage(homeI);
         club_iv.setImage(outI);
-        offre_iv.setImage(outI);
         forum_iv.setImage(outI);
         centre_iv.setImage(outI);
         signOut_iv.setImage(outI);
-        reported_iv.setImage(outI);
+        emploi_v.setImage(outI);
+        users_iv.setImage(outI);
+        profil_iv.setImage(outI);
+        add_iv.setImage(homeI);
+    }
+    
+    @FXML
+    private void getNewsView(MouseEvent event) {
     }
 
+    
+
+    @FXML
+    private void getAllDocsView(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocListFront.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(DocListFrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

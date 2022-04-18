@@ -19,8 +19,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -137,17 +141,6 @@ public class MatieresListController implements Initializable {
         initImages();
         initDisplay();
     }
-    
-    private void initDisplay(){
-        MatiereService ms = new MatiereService();
-        mats = ms.listMatieres();
-        //remplissage tableau
-        mat_col.setCellValueFactory(new PropertyValueFactory<>("id")); //affecter l'attribut id à la colonne matiere 
-        niv_col.setCellValueFactory(new PropertyValueFactory<>("niveau")); //affecter l'attribut niveau à la colonne niveau 
-        table.setItems(matieresList()); //remplir le tableu avec la liste des matieres
-        filtreN_cb.setItems(niveauxList()); //init du filtre par niveau
-        niveau_cb.setItems(niveauxList()); //init du cb choix niveau pour l'ajout 
-    }
 
     @FXML
     private void handleClicks(ActionEvent event) {
@@ -155,6 +148,9 @@ public class MatieresListController implements Initializable {
 
     @FXML
     private void reinitialiserFiltre(MouseEvent event) {
+        SortedList<Matiere> sortedData = new SortedList<>(matieresList());
+        sortedData.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortedData);
     }
 
     @FXML
@@ -285,8 +281,29 @@ public class MatieresListController implements Initializable {
         }
 
     }
-    
-    private void refreshTable(){
+
+    private void initDisplay() {
+        MatiereService ms = new MatiereService();
+        mats = ms.listMatieres();
+        //remplissage tableau
+        mat_col.setCellValueFactory(new PropertyValueFactory<>("id")); //affecter l'attribut id à la colonne matiere 
+        niv_col.setCellValueFactory(new PropertyValueFactory<>("niveau")); //affecter l'attribut niveau à la colonne niveau 
+        table.setItems(matieresList()); //remplir le tableu avec la liste des matieres
+        //init du filtre par niveau
+        
+        filtreN_cb.setItems(niveauxList()); filtreN_cb.setPromptText("Tous les niveaux");
+        niveau_cb.setItems(niveauxList()); //init du cb choix niveau pour l'ajout 
+        filtreN_cb.valueProperty().addListener(new ChangeListener<>() {
+            @Override
+            public void changed(ObservableValue ov, String oldVal, String newVal) {
+                SortedList<Matiere> sortedData = new SortedList<>(matieresListFiltered(newVal));
+                sortedData.comparatorProperty().bind(table.comparatorProperty());
+                table.setItems(sortedData);
+            }
+        });
+    }
+
+    private void refreshTable() {
         mats.clear();
         initDisplay();
     }
@@ -302,7 +319,18 @@ public class MatieresListController implements Initializable {
         return oblistM;
     }
 
-    //list of niveuax in ObservableList
+    //list of matieres in ObservableList
+    private ObservableList<Matiere> matieresListFiltered(String niveau) {
+        ObservableList<Matiere> oblistM = FXCollections.observableArrayList();
+        MatiereService ns = new MatiereService();
+        mats = ns.filterByNiveau(niveau);
+        for (int i = 0; i < mats.size(); i++) {
+            oblistM.add(mats.get(i));
+        }
+        return oblistM;
+    }
+
+    //list of niveaux in ObservableList
     private ObservableList<String> niveauxList() {
         ObservableList<String> oblistN = FXCollections.observableArrayList();
         NiveauService ns = new NiveauService();

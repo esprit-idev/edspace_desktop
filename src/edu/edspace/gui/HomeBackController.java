@@ -102,7 +102,7 @@ public class HomeBackController implements Initializable {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -111,7 +111,7 @@ public class HomeBackController implements Initializable {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -123,7 +123,7 @@ public class HomeBackController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -134,7 +134,7 @@ public class HomeBackController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
