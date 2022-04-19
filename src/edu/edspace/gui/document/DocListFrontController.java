@@ -128,6 +128,9 @@ public class DocListFrontController implements Initializable {
     
     @FXML
     private void reinitialiserFiltre(MouseEvent event) {
+        niveau_cb.setValue(null);
+        matiere_cb.setValue(null);
+        initDisplay();
     }
     
     private void initDisplay() {

@@ -147,6 +147,7 @@ public class MatieresListController implements Initializable {
 
     @FXML
     private void reinitialiserFiltre(MouseEvent event) {
+        filtreN_cb.setValue(null);
         SortedList<Matiere> sortedData = new SortedList<>(matieresList());
         sortedData.comparatorProperty().bind(table.comparatorProperty());
         table.setItems(sortedData);
@@ -165,7 +166,7 @@ public class MatieresListController implements Initializable {
             String title = "Erreur d'ajout";
             String header = "Veuillez remplir tous les champs";
             String content = "Aucun champs ne doit être vide";
-            showAlert(AlertType.ERROR, title, header, content);
+            showAlert(AlertType.WARNING, title, header, content);
         }
     }
 
@@ -226,7 +227,7 @@ public class MatieresListController implements Initializable {
                 String title = "Erreur de mise à jour";
                 String header = "Veuillez remplir tous les champs";
                 String content = "Aucun champs ne doit être vide";
-                showAlert(AlertType.ERROR, title, header, content);
+                showAlert(AlertType.WARNING, title, header, content);
             }
         } else { //si aucune matière sélectionnée à partir du tableau
             String title = "";

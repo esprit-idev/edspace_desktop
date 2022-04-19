@@ -205,7 +205,7 @@ public class DocAddController implements Initializable {
             String title = "Erreur survenue lors de l'ajout";
             String header = "Veuillez remplir tous les champs";
             String content = "Aucun champs ne doit être vide";
-            showAlert(Alert.AlertType.ERROR, title, header, content);
+            showAlert(Alert.AlertType.WARNING, title, header, content);
         }
     }
 

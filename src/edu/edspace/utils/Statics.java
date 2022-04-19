@@ -7,4 +7,5 @@ package edu.edspace.utils;
 
 public class Statics {
     public static final String myDocs="C:/Users/MeriamBI/Desktop/pidev/EdSpace_Symfony/public/documents/";
+    public static final String initDir="C:/Users/MeriamBI/Desktop";
 }

@@ -65,7 +65,7 @@
             </Label>
             <HBox alignment="TOP_RIGHT" prefHeight="23.0" prefWidth="166.0" style="-fx-background-radius: 30; -fx-border-radius: 30;">
                <children>
-                  <ImageView fx:id="fave_iv" fitHeight="15.0" fitWidth="15.0" onMouseClicked="#pin_unpin" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="fave_iv" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
