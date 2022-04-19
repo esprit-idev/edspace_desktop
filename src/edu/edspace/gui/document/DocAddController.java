@@ -289,11 +289,14 @@ public class DocAddController implements Initializable {
 
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
+        
+        File fileClub = new File("images/org_grey.png");
+        Image clubI = new Image(fileClub.toURI().toString());
 
         logo_iv.setImage(logoI);
         tabaff_iv.setImage(homeI);
         forum_iv.setImage(forumI);
-        club_iv.setImage(usersI);
+        club_iv.setImage(clubI);
         emploi_v.setImage(offreI);
         centre_iv.setImage(docsI);
         users_iv.setImage(usersI);
