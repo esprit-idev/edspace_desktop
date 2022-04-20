@@ -15,6 +15,7 @@ import edu.edspace.utils.MyConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 /**
  *
  * @author eslem
@@ -30,12 +31,12 @@ public class NewsService {
         List<News> listNews = new ArrayList<>();
         try {
 			// String query all publications 
-			query = "SELECT * FROM `publication_news`" ;
+			query = "SELECT publication_news.*, categorie_news.category_name as catName FROM publication_news JOIN categorie_news on publication_news.category_name_id = categorie_news.id" ;
             resultSet = connection.createStatement().executeQuery(query);
 			while (resultSet.next()) {
 				News pub = new News();
 				pub.setId(resultSet.getInt(1));
-                pub.setCategoryName(resultSet.getString(2));
+                pub.setCategoryName(resultSet.getString("catName"));
                 pub.setDate(resultSet.getString(3));
                 pub.setTitle(resultSet.getString(4));
                 pub.setOwner(resultSet.getString(5));
@@ -51,7 +52,7 @@ public class NewsService {
 // add a publication 
     public void addNews(News pub){
            try{ 
-                query = "INSERT INTO publication_news (title, owner, content, category_name_id, datePub, image) VALUES (?,?,?,?,?,?)";
+                query = "INSERT INTO publication_news (title, owner, content, category_name_id, date, image) VALUES (?,?,?,?,?,?)";
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, pub.getTitle());
                 preparedStatement.setString(2, pub.getOwner());
@@ -60,13 +61,12 @@ public class NewsService {
                 preparedStatement.setString(5, pub.getDate());
                 preparedStatement.setString(6, pub.getImage());
                 preparedStatement.executeUpdate();
-                System.out.println("added");
         }catch(SQLException ex){
-            ex.getStackTrace();
+            System.out.println(ex.getMessage());;
         }
     }
 //update news 
-    public void updateNews(News pub){
+    public void updateNews(News pub, int id){
         try {
             query = "UPDATE publication_news SET " +
                     "title=?," + 
@@ -75,7 +75,7 @@ public class NewsService {
                     "date= ?,"+ 
                     "owner=?," +
                     "category_name_id=?" +
-                    "WHERE id =" + pub.getId();
+                    "WHERE id =?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, pub.getTitle());
             preparedStatement.setString(2, pub.getContent());
@@ -83,11 +83,11 @@ public class NewsService {
             preparedStatement.setString(4, pub.getDate());
             preparedStatement.setString(5, pub.getOwner());
             preparedStatement.setString(6, pub.getCategoryName());
-            preparedStatement.setInt(7, pub.getId());
+            preparedStatement.setInt(7, id);
             preparedStatement.executeUpdate();
             System.out.println("updated");
         } catch (SQLException ex) {
-            ex.getStackTrace();
+            System.out.println(ex.getMessage());;
         }
     }
 //delete news
@@ -102,5 +102,32 @@ public class NewsService {
             System.out.println(e.getMessage());
         }
     }
+//findnewsbycategory
+public List<News> listPubsByCategory(String id){
+        query = "SELECT c.category_name from publication_news p INNER JOIN categorie_news c ON p.category_name_id = c.id where c.id =" + id;
+        return getMatieresList(query);
+}
+public List<News> getMatieresList(String req) {
+    List<News> myList = new ArrayList<>();
+    try {
+        Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+        ResultSet rs = st.executeQuery(req); //resultat de la requete
 
+        //tant que rs has next get matiere and add it to the list
+        while (rs.next()) {
+            News pub = new News();
+            pub.setId(rs.getInt(1)); //set id from req result
+            pub.setCategoryName(resultSet.getString(2));
+            pub.setDate(resultSet.getString(3));
+            pub.setTitle(resultSet.getString(4));
+            pub.setOwner(resultSet.getString(5));
+            pub.setImage(resultSet.getString(6));
+            pub.setContent(resultSet.getString(10));
+            myList.add(pub); //ajout de la matiere a la liste
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return myList;
+}
 }

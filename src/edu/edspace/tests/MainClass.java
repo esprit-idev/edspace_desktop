@@ -269,60 +269,7 @@ public class MainClass extends Application{
        y.switcher(m);
           
        }
-    public static void news(){
-        NewsService pubs = new NewsService();
-       // DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-       // String date = df.format(new Date());
-        News p = new News("Esprit test 2", "T", "Tt", "1","2021/04/08", "yo.png");
-        pubs.addNews(p);
-        System.out.print("added successfully");
-        pubs.updateNews(p);
-        System.out.println(pubs.AllNews());
-        System.out.println(p.getId());
-        pubs.deleteNews(26);
-        System.out.println(pubs.AllNews());
-        // pubs.updateNews(p);
-        // System.out.println(pubs.AllNews());
-        // System.out.println(p.getId());
-        // pubs.deleteNews(26);
-        // System.out.println(pubs.AllNews());
-    }
-    public static void emplois(){
-            EmploiService emp = new EmploiService();
-            Emploi em = new Emploi();
-            emp.addEmploi(em);
-            System.out.println(emp.AllEmplois());
-    }
-    public static void newsCategory(){
-                NewsCategoryService nCat = new NewsCategoryService();
-                System.out.println(nCat.AllCats());
-                CategoryNews c = new CategoryNews("Important");
-                nCat.addCat(c);
-                System.out.println(nCat.AllCats());
-                nCat.updateCat(c);
-                nCat.deleteCat(2);
-                System.out.println(nCat.AllCats());
-                // NewsCategoryService nCat = new NewsCategoryService();
-                // System.out.println(nCat.AllCats());
-                // CategoryNews c = new CategoryNews("Important");
-                // nCat.addCat(c);
-                // System.out.println(nCat.AllCats());
-                // nCat.updateCat(c);
-                // nCat.deleteCat(2);
-                // System.out.println(nCat.AllCats());
-            }
-    public static void emploisCategory(){
-                EmploiCategoryService nCat = new EmploiCategoryService();
-                System.out.println(nCat.AllCats());
-                CategoryEmploi c = new CategoryEmploi();
-                nCat.addCat(c);
-                System.out.println(nCat.AllCats());
-                nCat.updateCat(c);
-                nCat.deleteCat(2);
-                System.out.println(nCat.AllCats());
-                //EmploiCategoryService nCat = new EmploiCategoryService();
-                
-            }
+
     public static void statics(){
                 //"[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"
                 statics sc = new statics();

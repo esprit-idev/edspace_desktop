@@ -58,3 +58,7 @@
 .scroll-pane > .corner {
     -fx-background-color: black;
 }
+.card{
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}

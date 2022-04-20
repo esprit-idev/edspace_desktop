@@ -5,6 +5,7 @@
 package edu.edspace.services;
 
 import edu.edspace.entities.Document;
+import edu.edspace.entities.Matiere;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
 import java.awt.Desktop;
@@ -74,6 +75,21 @@ public class DocumentService {
     public List<Document> listDocs() {
         String req = "select * from document"; //requete select from db
         return getDocumentsList(req);
+    }
+    
+    public int countRelatedDocs(Matiere matiere){
+        int relatedDocs=0;
+        String req = "select count(*) from document where matiere_id=?"; //requete select from db
+        try {
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+            pst.setString(1, matiere.getId());
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            relatedDocs = rs.getInt("count(*)");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return relatedDocs;
     }
 
     public void modifierDocument(Document document) {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="309.0" prefWidth="241.0" styleClass="card" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.news.CardController">
+   <children>
+      <ImageView fx:id="image" fitHeight="211.0" fitWidth="242.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" />
+      <Label fx:id="title" layoutX="9.0" layoutY="220.0" text="title" />
+      <Label fx:id="category" layoutX="8.0" layoutY="234.0" text="category" />
+      <Button fx:id="modifBtn" layoutX="7.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#updateMatiere" prefHeight="25.0" prefWidth="105.0" text="Modifier" />
+      <Button fx:id="deleteBtn" layoutX="127.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#delete" prefHeight="25.0" prefWidth="105.0" text="Supprimer" />
+   </children>
+   <effect>
+      <GaussianBlur radius="15.19" />
+   </effect>
+   <stylesheets>
+      <URL value="@../css/styles.css" />
+      <URL value="@../../css/styles.css" />
+   </stylesheets>
+</AnchorPane>
