@@ -99,13 +99,13 @@ public class HomeBackController implements Initializable {
     @FXML
     private void getNewsView(MouseEvent event) {
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allNews.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @FXML
     private void getCatNewsView(MouseEvent event) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
@@ -114,7 +114,6 @@ public class HomeBackController implements Initializable {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     @FXML
     private void getAllDocsView(MouseEvent event) {
 
@@ -125,6 +124,24 @@ public class HomeBackController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    @FXML
+    private void getEmploiView(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+    }
+    @FXML
+    private void getDashboardView(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
+		}
     }
     
     @FXML

@@ -33,15 +33,15 @@ public class CategoryEmploi {
         this.id = id;
     }
 
-    public String getCatgeoryName() {
+    public String getCategoryName() {
         return categoryName;
     }
 
-    public void setCatgeoryName(String catgeoryName) {
+    public void setCategoryName(String catgeoryName) {
         this.categoryName = catgeoryName;
     }
     @Override
     public String toString(){
-        return "Category_emploi{" + "id=" + id + "categoryName=" + categoryName +  '}' + "\n";
+        return  categoryName;
     }
 }

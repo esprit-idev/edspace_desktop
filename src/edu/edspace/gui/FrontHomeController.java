@@ -4,7 +4,6 @@
  */
 package edu.edspace.gui;
 
-import edu.edspace.gui.document.DocListFrontController;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
 import java.io.IOException;
@@ -136,7 +135,7 @@ public class FrontHomeController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(DocListFrontController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrontHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
