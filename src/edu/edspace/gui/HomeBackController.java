@@ -173,31 +173,51 @@ public class HomeBackController implements Initializable {
     public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
-
-        File fileHome = new File("images/icons8_Home_32px.png");
+        
+        File fileHome = new File("images/stats_grey.png");
         Image homeI = new Image(fileHome.toURI().toString());
+        
+        File fileTab = new File("images/announcement_grey.png");
+        Image tabI = new Image(fileTab.toURI().toString());
+        
+        File fileLevel = new File("images/level_grey.png");
+        Image levelI = new Image(fileLevel.toURI().toString());
+        
+        File fileClass = new File("images/class-management_grey.png");
+        Image classI = new Image(fileClass.toURI().toString());
+        
+        File fileBook = new File("images/book_grey.png");
+        Image bookI = new Image(fileBook.toURI().toString());
+        
+        File fileForum = new File("images/forum2_grey.png");
+        Image forumI = new Image(fileForum.toURI().toString());
+        
+        File fileOffre = new File("images/briefcase_grey.png");
+        Image offreI = new Image(fileOffre.toURI().toString());
+        
+        File fileDocs = new File("images/file_grey.png");
+        Image docsI = new Image(fileDocs.toURI().toString());
 
-        File fileUsers = new File("images/icons8_Person_32px.png");
+        File fileUsers = new File("images/users_grey.png");
         Image usersI = new Image(fileUsers.toURI().toString());
+        
+        File fileClub = new File("images/org_grey.png");
+        Image clubI = new Image(fileClub.toURI().toString());
 
-        File fileOut = new File("images/icons8_Sign_Out_32px.png");
+        File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
-
-        File fileSearch = new File("images/icons8_Search_52px.png");
-        Image searchI = new Image(fileSearch.toURI().toString());
-
+        
         logo_iv.setImage(logoI);
         home_iv.setImage(homeI);
-        tabaff_iv.setImage(homeI);
-        users_iv.setImage(homeI);
-        niveaux_iv.setImage(homeI);
-        matieres_iv.setImage(homeI);
-        classe_iv.setImage(homeI);
-        club_iv.setImage(outI);
-        offre_iv.setImage(outI);
-        forum_iv.setImage(outI);
-        centre_iv.setImage(outI);
-        search_iv.setImage(searchI);
+        tabaff_iv.setImage(tabI);
+        users_iv.setImage(usersI);
+        niveaux_iv.setImage(levelI);
+        classe_iv.setImage(classI);
+        matieres_iv.setImage(bookI);
+        club_iv.setImage(clubI);
+        offre_iv.setImage(offreI);
+        forum_iv.setImage(forumI);
+        centre_iv.setImage(docsI);
         signOut_iv.setImage(outI);
     }
 }

@@ -2,8 +2,7 @@ package edu.edspace.gui.news;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.ResourceBundle;
 
 import edu.edspace.entities.Emploi;
@@ -36,7 +35,6 @@ public class CardController implements Initializable{
     private ImageView image;
 
     File file = null;
-    private List<News> newsList = new ArrayList<>();
     NewsService newsService = new NewsService();
     AllNewsController AL = new AllNewsController();
 
@@ -47,6 +45,9 @@ public class CardController implements Initializable{
         File f = new File(Statics.myPubImages + nw.getImage());
         Image i = new Image(f.toURI().toString());
         image.setImage(i);
+        image.setPreserveRatio(true);
+        image.fitWidthProperty().bind(rootPane.widthProperty());
+        image.fitHeightProperty().bind(rootPane.heightProperty());
     }
     public void setEmpData(Emploi emps) {
         this.emp= emps;

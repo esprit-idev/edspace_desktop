@@ -4,56 +4,30 @@
  */
 package edu.edspace.tests;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import edu.edspace.entities.CategoryEmploi;
-import edu.edspace.entities.CategoryNews;
-import edu.edspace.entities.Classe;
-import edu.edspace.entities.Club;
-import edu.edspace.entities.ClubCategory;
-import edu.edspace.entities.ClubPub;
 import edu.edspace.services.ClubCategService;
 import edu.edspace.services.ClubPubService;
 import edu.edspace.services.ClubService;
-import edu.edspace.entities.Document;
-import edu.edspace.entities.DocumentFavoris;
-import edu.edspace.entities.Emploi;
-import edu.edspace.entities.Matiere;
 import edu.edspace.entities.Message;
-import edu.edspace.entities.News;
 import edu.edspace.entities.Niveau;
-import edu.edspace.services.DocumentFavorisService;
-import edu.edspace.services.DocumentService;
-import edu.edspace.services.EmploiCategoryService;
-import edu.edspace.services.EmploiService;
-import edu.edspace.services.MatiereService;
+
 import edu.edspace.services.MessageService;
-import edu.edspace.services.NewsCategoryService;
-import edu.edspace.services.NewsService;
+
 import edu.edspace.services.NiveauService;
 import edu.edspace.services.ThreadService;
 import edu.edspace.utils.MyConnection;
-import edu.edspace.utils.Statics;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 import edu.edspace.entities.Thread;
-import java.awt.AWTException;
 import edu.edspace.entities.User;
-import edu.edspace.services.AdminService;
-import edu.edspace.services.ClasseService;
+
 import edu.edspace.services.StudentService;
 import edu.edspace.services.UserService;
 import edu.edspace.services.statics;
@@ -285,9 +259,7 @@ public class MainClass extends Application{
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
             Scene scene = new Scene(parent);
-           // scene.setFill(Color.TRANSPARENT);
             primaryStage.setScene(scene);
-            //primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);

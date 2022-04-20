@@ -128,6 +128,9 @@ public class DocListFrontController implements Initializable {
     
     @FXML
     private void reinitialiserFiltre(MouseEvent event) {
+        niveau_cb.setValue(null);
+        matiere_cb.setValue(null);
+        initDisplay();
     }
     
     private void initDisplay() {
@@ -221,30 +224,49 @@ public class DocListFrontController implements Initializable {
         alert.showAndWait();
     }
     
+    
     public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
 
-        File fileHome = new File("images/icons8_Home_32px.png");
+        File fileHome = new File("images/announcement_grey.png");
         Image homeI = new Image(fileHome.toURI().toString());
+        
+        File fileForum = new File("images/forum2_grey.png");
+        Image forumI = new Image(fileForum.toURI().toString());
+        
+        File fileOffre = new File("images/briefcase_grey.png");
+        Image offreI = new Image(fileOffre.toURI().toString());
+        
+        File fileDocs = new File("images/file_grey.png");
+        Image docsI = new Image(fileDocs.toURI().toString());
 
-        File fileUsers = new File("images/icons8_Person_32px.png");
+        File fileUsers = new File("images/users_grey.png");
         Image usersI = new Image(fileUsers.toURI().toString());
+        
+        File fileAccount = new File("images/account_grey.png");
+        Image accountI = new Image(fileAccount.toURI().toString());
 
-        File fileOut = new File("images/icons8_Sign_Out_32px.png");
+        File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
+        
+        File fileClub = new File("images/org_grey.png");
+        Image clubI = new Image(fileClub.toURI().toString());
+        
+        File fileAdd = new File("images/add-new.png");
+        Image addI = new Image(fileAdd.toURI().toString());
 
         logo_iv.setImage(logoI);
         tabaff_iv.setImage(homeI);
-        users_iv.setImage(homeI);
-        club_iv.setImage(outI);
-        forum_iv.setImage(outI);
-        centre_iv.setImage(outI);
+        forum_iv.setImage(forumI);
+        club_iv.setImage(clubI);
+        emploi_v.setImage(offreI);
+        centre_iv.setImage(docsI);
+        users_iv.setImage(usersI);
+        profil_iv.setImage(accountI);
         signOut_iv.setImage(outI);
-        emploi_v.setImage(outI);
-        users_iv.setImage(outI);
-        profil_iv.setImage(outI);
-        add_iv.setImage(homeI);
+        
+        add_iv.setImage(addI);
     }
     
     @FXML

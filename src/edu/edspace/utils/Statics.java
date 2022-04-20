@@ -4,9 +4,8 @@
  */
 package edu.edspace.utils;
 
-import edu.edspace.services.statics;
-
 public class Statics {
     public static final String myDocs="C:/Users/MeriamBI/Desktop/pidev/EdSpace_Symfony/public/documents/";
     public static final String myPubImages="C:/Users/eslem/Desktop/edspace_symfony/public/images/";
+    public static final String initDir="C:/Users/MeriamBI/Desktop";
 }
