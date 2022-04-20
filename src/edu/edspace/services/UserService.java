@@ -45,7 +45,7 @@ public class UserService {
         ResultSet rs = pre.executeQuery();
         while (rs.next()) {
             /*
-            String myPwd="$2"+rs.getString("password").substring(3);
+            String myPwd="$2y"+rs.getString("password").substring(3);
             if (BCrypt.checkpw(Pwd, myPwd)) {
                 Session.setId(rs.getInt("id"));
                 Session.setUsername(rs.getString("username"));
