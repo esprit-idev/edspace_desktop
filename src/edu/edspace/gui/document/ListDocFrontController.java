@@ -23,14 +23,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -45,7 +42,7 @@ import javafx.scene.layout.GridPane;
  *
  * @author MeriamBI
  */
-public class DocListFrontController implements Initializable {
+public class ListDocFrontController implements Initializable {
 
     @FXML
     private AnchorPane rootPane;
@@ -54,51 +51,19 @@ public class DocListFrontController implements Initializable {
     @FXML
     private ComboBox<String> matiere_cb;
     @FXML
+    private ImageView add_iv;
+    @FXML
     private Label reinitialiser_label;
+    @FXML
+    private ImageView home_iv;
     @FXML
     private ScrollPane scroll;
     @FXML
     private GridPane grid;
-    @FXML
-    private ImageView logo_iv;
-    @FXML
-    private Button btnNews;
-    @FXML
-    private ImageView tabaff_iv;
-    @FXML
-    private Button btnForum;
-    @FXML
-    private ImageView forum_iv;
-    @FXML
-    private Button btnClubs;
-    @FXML
-    private ImageView club_iv;
-    @FXML
-    private Button btnEmploi;
-    @FXML
-    private ImageView emploi_v;
-    @FXML
-    private Button btnCentrePartage;
-    @FXML
-    private ImageView centre_iv;
-    @FXML
-    private Button btnStudents;
-    @FXML
-    private ImageView users_iv;
-    @FXML
-    private Button btnProfil;
-    @FXML
-    private ImageView profil_iv;
-    @FXML
-    private Button btnSignout;
-    @FXML
-    private ImageView signOut_iv;
     
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
     private List<Document> docs = new ArrayList();
-    @FXML
-    private ImageView add_iv;
 
     /**
      * Initializes the controller class.
@@ -111,18 +76,15 @@ public class DocListFrontController implements Initializable {
         initDisplay();
     }    
     
-    @FXML
-    private void handleClicks(ActionEvent event) {
-    }
     
     @FXML
     private void addDoc(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocAdd.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/AddDoc.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(DocListFrontController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListDocFrontController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -214,65 +176,27 @@ public class DocListFrontController implements Initializable {
         return oblistM;
     }
     
-    
     public void initImages() {
-        File fileLogo = new File("images/logo1.png");
-        Image logoI = new Image(fileLogo.toURI().toString());
 
-        File fileHome = new File("images/announcement_grey.png");
+        File fileHome = new File("images/home_grey.png");
         Image homeI = new Image(fileHome.toURI().toString());
         
-        File fileForum = new File("images/forum2_grey.png");
-        Image forumI = new Image(fileForum.toURI().toString());
-        
-        File fileOffre = new File("images/briefcase_grey.png");
-        Image offreI = new Image(fileOffre.toURI().toString());
-        
-        File fileDocs = new File("images/file_grey.png");
-        Image docsI = new Image(fileDocs.toURI().toString());
-
-        File fileUsers = new File("images/users_grey.png");
-        Image usersI = new Image(fileUsers.toURI().toString());
-        
-        File fileAccount = new File("images/account_grey.png");
-        Image accountI = new Image(fileAccount.toURI().toString());
-
-        File fileOut = new File("images/logout_grey.png");
-        Image outI = new Image(fileOut.toURI().toString());
-        
-        File fileClub = new File("images/org_grey.png");
-        Image clubI = new Image(fileClub.toURI().toString());
-        
-        File fileAdd = new File("images/add-new.png");
+        File fileAdd = new File("images/add-new_grey.png");
         Image addI = new Image(fileAdd.toURI().toString());
 
-        logo_iv.setImage(logoI);
-        tabaff_iv.setImage(homeI);
-        forum_iv.setImage(forumI);
-        club_iv.setImage(clubI);
-        emploi_v.setImage(offreI);
-        centre_iv.setImage(docsI);
-        users_iv.setImage(usersI);
-        profil_iv.setImage(accountI);
-        signOut_iv.setImage(outI);
-        
+        home_iv.setImage(homeI);        
         add_iv.setImage(addI);
-    }
-    
-    @FXML
-    private void getNewsView(MouseEvent event) {
+        
     }
 
-    
-
     @FXML
-    private void getAllDocsView(MouseEvent event) {
+    private void getHome(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocListFront.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/FrontHome.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(DocListFrontController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListDocFrontController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

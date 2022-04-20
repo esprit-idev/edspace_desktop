@@ -39,8 +39,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import org.apache.commons.io.IOUtils;
+
+//import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.IOUtils;
+
+//import org.apache.commons.io.IOUtils;
 ;
+
 
 /**
  *
@@ -277,15 +282,74 @@ public class DocumentService {
 
             System.out.println("email sent!");
     }
-
+/*
     public void convertUrlToPdf(String filename) throws InterruptedException, IOException {
         Process wkhtml; // Create uninitialized process
         String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; //to_change
         //to_change
         wkhtml = Runtime.getRuntime().exec(command); // Start process
+
+       // IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
+
+
         IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
+
         wkhtml.waitFor(); // Allow process to run
 
     }
+
+
+    public File convertBlobToFile(Blob blob, Document d) {
+        InputStream blobStream = null;
+        try {
+            blobStream = blob.getBinaryStream();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        //saving blob to a file using fileoutput stream (converting blob from db to file
+        FileOutputStream fos = null;
+        File fichier = null;
+        try {
+            fichier = new File(Statics.myDocs + d.getNom());
+            fos = new FileOutputStream(fichier);
+            if (!fichier.exists()) {
+                try {
+                    fichier.createNewFile();
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+        byte[] buffer = new byte[1024];
+        int n = 0;
+        try {
+            while ((n = blobStream.read(buffer)) != -1) {
+                fos.write(buffer, 0, n);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        try {
+            fos.flush();
+            fos.close();
+            blobStream.close();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return fichier;
+    }
+
+    public String convertFileToBase64(String filepath) {
+        byte[] fileContent = null;
+       // try {
+         //   fileContent = FileUtils.readFileToByteArray(new File(filepath));
+       // } catch (IOException ex) {
+         //   System.out.println(ex.getMessage());
+     //   }
+        String myBase64 = java.util.Base64.getEncoder().encodeToString(fileContent);
+        return myBase64;
+    }*/
 
 }
