@@ -28,6 +28,13 @@ import java.io.IOException;
 import edu.edspace.entities.Thread;
 import edu.edspace.entities.User;
 
+import edu.edspace.services.AdminService;
+
+import edu.edspace.services.MailService;
+import edu.edspace.services.ClasseService;
+
+
+
 import edu.edspace.services.StudentService;
 import edu.edspace.services.UserService;
 import edu.edspace.services.statics;
@@ -41,7 +48,23 @@ public class MainClass extends Application{
 
     public static void main(String[] args){
         MyConnection.getInstance().getCnx();
+
+
+        
+       // Student();
+      // User();
+      // news();
+       // emplois();
+        // newsCategory();
+       // gestionClasse();
+       // statics();
+       // c();
        launch(args);
+
+        
+
+      // launch(args);
+
     }
 
     public static void ClubPub() {
@@ -208,27 +231,9 @@ public class MainClass extends Application{
     }
     }*/
     
-    public static void Student() {
-        User stu = new User("malek3","chatti","malek3@gmail.com","malek3") ;
-        User stu2 = new User("malek2","zzz","malek2@gmail.com","123456789") ;
-       // stu.setIsBanned(false);
-        StudentService  SS = new StudentService();
-       UserService US = new UserService();
-        US.login("malek3", "malek3");
-       // SS.ajouterStudent(stu);
-       // System.out.println(SS.listStudent());
-       //update
-      // User stu1 =SS.getStudent(33);
-      // SS.updateStudent(stu, "33");
-      //delete
-      // SS.supprimerPersonne(stu1);
+   
         
-    }
-    public static void User(){
-     UserService US = new UserService();
-       // US.login("malek", "123456789");
-    }
-    
+   
     public static void Admin(){
     User admin = new User();
     }
@@ -257,7 +262,10 @@ public class MainClass extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/FrontHome.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+           //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+           //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/FrontHome.fxml")); //new front
+           //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeFront.fxml")); //old front
             Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
             primaryStage.show();

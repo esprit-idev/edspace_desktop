@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -51,8 +53,8 @@ public class AdminService {
     
     
 
-    public List<User> listAdmin() {
-        List<User> listAdmin = new ArrayList<>();
+    public ObservableList<User> listAdmin() {
+        ObservableList<User> listAdmin = FXCollections.observableArrayList();
         try {
             String req = "select * from user where roles='[\"ROLE_ADMIN\"]'"  ; //requete select from db
             Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
@@ -91,11 +93,11 @@ public class AdminService {
         }
     }
     
-      public void supprimerAdmin(User admin) {
+      public void supprimerAdmin(String id) {
         String req = "delete from user where id = ?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-            pst.setInt(1, admin.getId());
+            pst.setString(1, id);
             pst.executeUpdate();
             System.out.println("Admin supprimée");
         } catch (SQLException ex) {

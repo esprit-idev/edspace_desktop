@@ -12,8 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -35,29 +37,75 @@ public class UserService {
 
     
     
-    public void login(String userName, String Pwd)  {
+    public Boolean login(String userName, String Pwd)  {
         try {
         String req = "SELECT * FROM user WHERE username=?";
         PreparedStatement pre = cnx.prepareStatement(req);
         pre.setString(1, userName);
         ResultSet rs = pre.executeQuery();
         while (rs.next()) {
+            /*
+            String myPwd="$2"+rs.getString("password").substring(3);
+            if (BCrypt.checkpw(Pwd, myPwd)) {
+                Session.setId(rs.getInt("id"));
+                Session.setUsername(rs.getString("username"));
+                Session.setEmail(rs.getString("email"));
+                Session.setRoles(rs.getString("roles"));
+                System.out.println("login ");
+            }
+            */
             if (BCrypt.checkpw(Pwd, rs.getString("password"))) {
                 Session.setId(rs.getInt("id"));
                 Session.setUsername(rs.getString("username"));
                 Session.setEmail(rs.getString("email"));
                 Session.setRoles(rs.getString("roles"));
-                System.out.println("login");
+                System.out.println("login ");
             }
-            else{ 
-                System.out.println("Verifier votre mot de passe et votre adresse mail");
+            return true;
             }
-        }
+        
+        
        
     
          } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        return false;
+}
+    
+    public void Exist(String username, String id){
+        try {
+        String req = "SELECT * FROM user WHERE username=? and id=?";
+        PreparedStatement pre = cnx.prepareStatement(req);
+        pre.setString(1, username);
+       // pre.setBoolean(2, true);
+        pre.setString(2, id);
+        ResultSet rs = pre.executeQuery();
+        while (rs.next()) {
+            System.out.println("Exist" + rs.getString("id"));
+            System.out.println("deconnecter");
+
+        }
+        System.out.println("erreur");
+    
+}catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     
 }
-}
+
+    
+    public void export(){
+    try{
+    String query = "select * from user" ;
+     PreparedStatement pre = cnx.prepareStatement(query);
+     ResultSet rs = pre.executeQuery();
+    }catch (SQLException ex){
+    System.out.println("hello");
+    }
+    }
+
+   
+
+
+    }
