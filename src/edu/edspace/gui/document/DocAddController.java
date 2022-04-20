@@ -162,7 +162,6 @@ public class DocAddController implements Initializable {
     @FXML
     private void addDoc(MouseEvent event) {
         String docName = nom_tf.getText();
-
         String niveau = niveau_cb.getValue();
         String matiere = matiere_cb.getValue();
         String file = null;
@@ -193,12 +192,16 @@ public class DocAddController implements Initializable {
             String content = "Veuillez saisir une URL valide exemple:'https://www.google.com/'";
             showAlert(Alert.AlertType.ERROR, title, header, content);
         } else if (docName != null && docName.length() != 0 && niveau != null && niveau.length() != 0 && matiere != null && matiere.length() != 0) {
-            System.out.println(type);
             Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
-            
-            System.out.println(doc.toString());
             DocumentService ds = new DocumentService();
             ds.ajouterDocument(doc);
+            try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocListFront.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(DocAddController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         } else {
             Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
             System.out.println(doc.toString());

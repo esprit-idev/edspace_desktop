@@ -41,9 +41,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import javax.mail.MessagingException;
 
 /**
@@ -69,8 +71,12 @@ public class DocRController implements Initializable {
 
     @FXML
     private AnchorPane rootPane;
+
     @FXML
     private VBox vbox;
+
+    @FXML
+    private HBox hbox;
 
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
@@ -86,6 +92,7 @@ public class DocRController implements Initializable {
     }
 
     public void setData(Document doc) {
+        String role = "student";
         String currentUser = "Anas Houissa"; //to_change
         this.doc = doc;
         date_label.setText(doc.getDate_insert());
@@ -100,13 +107,18 @@ public class DocRController implements Initializable {
         fave_iv.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             pin_unpin(doc);
         });
-        setFaveIv(doc);
+        if (!role.equals("admin")) {
+            setFaveIv(doc);
+        } else {
+            hbox.getChildren().remove(fave_iv);
+        }
+
         /*more_cb.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
             doAction(doc);
         });*/
     }
-    //actions to be triggered when choosing selecting option from more_cb
 
+    //actions to be triggered when choosing selecting option from more_cb
     private void doAction(Document doc) {
         String selected = more_cb.getValue();
         if (selected != null) {
@@ -167,10 +179,13 @@ public class DocRController implements Initializable {
         dialog.setHeaderText("Mise à jour du document " + doc.getNom());
 
         // Set the icon
-        //dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
+        File fileRefresh = new File("images/refresh_green.png");
+        Image refresh = new Image(fileRefresh.toURI().toString());
+        dialog.setGraphic(new ImageView(refresh));
         // Set the button types
         ButtonType saveButtonType = new ButtonType("Enregistrer", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType);
+        ButtonType cancelButtonType = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType,cancelButtonType);
 
         // Create the nom and niveau labels and fields
         //grid setting
@@ -208,13 +223,15 @@ public class DocRController implements Initializable {
         grid.add(matiere_cb, 1, 2);
         dialog.getDialogPane().setContent(grid);
         Optional<ButtonType> result = dialog.showAndWait();
-        String newNiv = niveau_cb.getValue();
+        if (result.get() == saveButtonType) {
+            String newNiv = niveau_cb.getValue();
         String newMat = matiere_cb.getValue();
         DocumentService ds = new DocumentService();
         doc.setNiveau(newNiv);
         doc.setMatiere(newMat);
         ds.modifierDocument(doc);
         setData(doc);
+        }
     }
 
     private void deleteDoc(Document doc) {
@@ -266,11 +283,12 @@ public class DocRController implements Initializable {
         dialog.setHeaderText("Partage de " + doc.getNom());
 
         // Set the icon
-        //dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
-        // Set the button types
+        File fileRefresh = new File("images/share_green.png");
+        Image refresh = new Image(fileRefresh.toURI().toString());
+        dialog.setGraphic(new ImageView(refresh));
         ButtonType sendButtonType = new ButtonType("Envoyer", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(sendButtonType);
-
+        ButtonType cancelButtonType = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(sendButtonType, cancelButtonType);
         // Create the nom and niveau labels and fields
         //grid setting
         GridPane grid = new GridPane();
@@ -305,38 +323,38 @@ public class DocRController implements Initializable {
         grid.add(body_tf, 1, 4);
         dialog.getDialogPane().setContent(grid);
         Optional<ButtonType> result = dialog.showAndWait();
+        if (result.get() == sendButtonType) {
+            DocumentService ds = new DocumentService();
+            String from = from_tf.getText();
+            String pwd = pwd_tf.getText();
+            String to = to_tf.getText();
+            String object = object_tf.getText();
+            String body = body_tf.getText();
+            try {
+                if (from != null && from.length() != 0 && pwd != null && pwd.length() != 0 && to != null && to.length() != 0
+                        && object != null && object.length() != 0 && body != null && body.length() != 0) {
+                    ds.sendDocViaEmail(doc, from, pwd, to, object, body);
+                } else {
+                    String title = "Erreur survenue lors de l'envoi";
+                    String header = "Veuillez remplir tous les champs";
+                    String content = "Aucun champs ne doit être vide";
+                    showAlert(Alert.AlertType.WARNING, title, header, content);
+                }
 
-        DocumentService ds = new DocumentService();
-        String from = from_tf.getText();
-        String pwd = pwd_tf.getText();
-        String to = to_tf.getText();
-        String object = object_tf.getText();
-        String body = body_tf.getText();
-        try {
-            if (from != null && from.length() != 0 && pwd != null && pwd.length() != 0 && to != null && to.length() != 0
-                    && object != null && object.length() != 0 && body != null && body.length() != 0) {
-                ds.sendDocViaEmail(doc, from, pwd, to, object, body);
-            } else {
-                String title = "Erreur d'envoi";
-                String header = "Veuillez remplir tous les champs";
-                String content = "Aucun champs ne doit être vide";
-                showAlert(Alert.AlertType.WARNING, title, header, content);
+            } catch (MessagingException ex) {
+                System.out.println(ex.getMessage());
+                String title = "Erreur survenue lors de l'envoi";
+                String header = "L'envoi de l'email a échoué";
+                String content = "Vérifier votre adresse mail et/ou votre mot de passe";
+                showAlert(Alert.AlertType.ERROR, title, header, content);
             }
-
-        } catch (MessagingException ex) {
-            System.out.println(ex.getMessage());
-            String title = "Erreur d'envoi";
-            String header = "L'envoi de l'email a échoué";
-            String content = "Vérifier votre adresse mail et/ou votre mot de passe";
-            showAlert(Alert.AlertType.ERROR, title, header, content);
         }
-
     }
 
     private void reportDoc(Document doc) {
         String title = "Confirmation du signal";
         String header = "Êtes-vous sur de bien vouloir signaler ce document?";
-        String content = "Ce document ne sera supprimé du centre de partage s'il viole les politiques de la plateforme";
+        String content = "Ce document sera supprimé après examen s'il enfreigne les Standards de la plateforme";
         final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setHeaderText(header);
@@ -355,17 +373,24 @@ public class DocRController implements Initializable {
 
     }
 
-    //list of niveaux in ObservableList
+    //list of options in ObservableList
     private ObservableList<String> optionsList(String currentUser) {
+        String role = "student";
         ObservableList<String> oblist = FXCollections.observableArrayList();
         oblist.add("Ouvrir");
-        if (currentUser.equals(doc.getProp())) {
-            oblist.add("Modifier");
+
+        if (!role.equals("admin")) {
+            if (currentUser.equals(doc.getProp())) {
+                oblist.add("Modifier");
+                oblist.add("Supprimer");
+            }
+            oblist.add("Télécharger");
+            oblist.add("Partager");
+            oblist.add("Signaler");
+        } else {
             oblist.add("Supprimer");
+            oblist.add("Télécharger");
         }
-        oblist.add("Télécharger");
-        oblist.add("Partager");
-        oblist.add("Signaler");
         return oblist;
     }
 

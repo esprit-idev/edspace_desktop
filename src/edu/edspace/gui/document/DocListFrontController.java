@@ -213,16 +213,6 @@ public class DocListFrontController implements Initializable {
         }
         return oblistM;
     }
-
-    //alert dialog sample
-    private void showAlert(Alert.AlertType alertType, String title, String header, String content) {
-        final Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.setResizable(true);
-        alert.showAndWait();
-    }
     
     
     public void initImages() {
