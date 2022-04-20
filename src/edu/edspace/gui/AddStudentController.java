@@ -9,12 +9,15 @@ import edu.edspace.entities.User;
 import edu.edspace.services.StudentService;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -34,7 +37,11 @@ public class AddStudentController implements Initializable {
     @FXML
     private Button btnAddStudent;
     @FXML
-    private TextField SId;
+    private Text errmsgN;
+    @FXML
+    private Text msgnovalidemail;
+    @FXML
+    private Text msgpass;
 
     /**
      * Initializes the controller class.
@@ -46,7 +53,23 @@ public class AddStudentController implements Initializable {
 
     @FXML
     private void addStudent(ActionEvent event) {
-   
+         Boolean error = false;
+        
+          if(nomStudent.getText().equals("")) {
+              errmsgN.setVisible(true);
+               error = true;
+}
+          
+          if (passwordStudent.getText().length() < 8) {
+            msgpass.setVisible(true);
+            error = true;
+        }
+          if (!validate(emailStudent.getText())) {
+                msgnovalidemail.setVisible(true);
+                error = true;
+            }
+          
+   if (!error) {
     User stu = new User();
     // stu.setId(Integer.parseInt(SId.getText()));
      stu.setPrenom(prenomStudent.getText());
@@ -56,6 +79,12 @@ public class AddStudentController implements Initializable {
      StudentService SS = new StudentService();
    // SS.AjouterUser(stu);
     SS.ajouterStudent(stu);
-    }
+    }}
     
-}
+     public static boolean validate(String email) {
+        final String EMAIL_VERIFICATION = "^([\\w-\\.]+)@([\\w\\.]+)\\.([a-z]){2,}$";
+        Pattern pattern = Pattern.compile(EMAIL_VERIFICATION);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    
+}}

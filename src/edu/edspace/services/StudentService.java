@@ -37,7 +37,7 @@ public class StudentService {
             pst.setString(3, null);
             pst.setString(4, stu.getUsername()); 
             pst.setString(5, stu.getPrenom()); 
-            pst.setString(6, stu.getEmail());
+            pst.setString(6, stu.getEmail().toLowerCase());
             pst.setString(7,BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)));
             pst.setBoolean(8 , false);
             pst.setString(9,null);
@@ -111,11 +111,11 @@ public class StudentService {
         }
     }
     
-      public void supprimerPersonne(String username) {
-        String req = "delete from user where username = ?";
+      public void supprimerPersonne(String id) {
+        String req = "delete from user where id = ?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-            pst.setString(1, username);
+            pst.setString(1, id);
             pst.executeUpdate();
             System.out.println("Etudiant supprimée");
         } catch (SQLException ex) {

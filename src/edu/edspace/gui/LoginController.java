@@ -6,6 +6,9 @@
 package edu.edspace.gui;
 
 import edu.edspace.services.UserService;
+import java.io.File;
+import java.sql.Connection;
+import edu.edspace.utils.MyConnection;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,14 +18,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -38,9 +46,13 @@ public class LoginController implements Initializable {
     @FXML
     private Button btnLogin;
     @FXML
-    private Text msgerreur;
-    @FXML
     private Text nullErr;
+    @FXML
+    private ImageView logo;
+    @FXML
+    private Button mdpOublie;
+    @FXML
+    private Text nullmdp;
 
     /**
      * Initializes the controller class.
@@ -48,6 +60,11 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+      //  Connection = MyConnection.getInstance().getCnx();
+      //  initImages();
+      File fileLogo = new File("images/logo2.png");
+        Image logoI = new Image(fileLogo.toURI().toString());
+        logo.setImage(logoI);
     }    
 
 
@@ -59,11 +76,23 @@ public class LoginController implements Initializable {
         System.out.println("login: " + emailLogin.getText());
         System.out.println("password_field: " + pwdLogin.getText());
 
-        if (emailLogin.getText().equals("") || pwdLogin.getText().equals("")) {
+        if (emailLogin.getText().equals("")) {
             nullErr.setVisible(true);
             error = true;
+           // System.out.println("here");
+            //   AlertUtils.makeInformation("Choisir une date pour createdAt");
+        } if(pwdLogin.getText().equals("")) {
+              nullmdp.setVisible(true);
+               error = true;
+}
+        /*
+         if ( pwdLogin.getText().equals("")) {
+            nullmdp.setVisible(true);
+            error = true;
           //   AlertUtils.makeInformation("Choisir une date pour createdAt");
-        } else {
+        } */
+        
+        else {
             nullErr.setVisible(false);
         }
 
@@ -85,8 +114,25 @@ public class LoginController implements Initializable {
         }
                 
             } else {
-                msgerreur.setVisible(true);
+              //  msgerreur.setVisible(true);
+               // JOptionPane.showMessageDialog(null, "verifier");
+              JOptionPane.showMessageDialog(null, "votre Email ou mot de passe que vous avez saisi(e) n'est pas associé(e) à un compte ",
+               "Alerte", JOptionPane.WARNING_MESSAGE);
             }
+        }
+    }
+
+    @FXML
+    private void mdp(ActionEvent event) {
+         try {
+            Parent blog_parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Mdp.fxml"));
+        Scene blog_scene = new Scene(blog_parent);
+        Stage app_stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        app_stage.setScene(blog_scene);
+        app_stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(AllStudentsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

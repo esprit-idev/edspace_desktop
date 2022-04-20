@@ -4,16 +4,12 @@
  */
 package edu.edspace.services;
 
-import java.sql.Blob;
 import edu.edspace.entities.Document;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
+import java.awt.Desktop;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URLConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,8 +33,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
 //import org.apache.commons.io.FileUtils;
 //import org.apache.commons.io.IOUtils;
+
+//import org.apache.commons.io.IOUtils;
+;
+
 
 /**
  *
@@ -48,33 +49,22 @@ public class DocumentService {
 
     public void ajouterDocument(Document document) {
         try {
-            String req = "insert into document (signalements,nom,date_insert,proprietaire,url,base64,niveau_id,matiere_id,type,fichier) values"
-                    + "(?,?,?,?,?,?,?,?,?,?)";
+            String req = "insert into document (signalements,nom,date_insert,proprietaire,url,niveau_id,matiere_id,type) values"
+                    + "(?,?,?,?,?,?,?,?)";
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, document.getSignalements());
             pst.setString(2, document.getNom());
             pst.setString(3, document.getDate_insert());
             pst.setString(4, document.getProp());
             pst.setString(5, document.getUrl());
-            pst.setString(7, document.getNiveau());
-            pst.setString(8, document.getMatiere());
+            pst.setString(6, document.getNiveau());
+            pst.setString(7, document.getMatiere());
 
-            File fichier = document.getFichier();
-            FileInputStream inputStream = null;
-            String mimeType = "url";
-            String base64 = null;
-            if (fichier != null) {
-                base64 = convertFileToBase64(Statics.myDocs + document.getNom());
-                mimeType = URLConnection.guessContentTypeFromName(document.getNom());
-                try {
-                    inputStream = new FileInputStream(fichier);
-                } catch (FileNotFoundException ex) {
-                    System.out.println(ex.getMessage());
-                }
+            if (!document.getType().equals("url")) {
+                document.setType(URLConnection.guessContentTypeFromName(document.getNom()));
             }
-            pst.setString(6, base64);
-            pst.setString(9, mimeType);
-            pst.setBlob(10, inputStream);
+
+            pst.setString(8, document.getType());
             pst.executeUpdate();
             System.out.println("Document ajouté");
             ResultSet rs = pst.getGeneratedKeys();
@@ -117,6 +107,48 @@ public class DocumentService {
         }
     }
 
+    public void apercuDocument(Document doc) {
+        File fic = new File(Statics.myDocs + doc.getNom());
+        if (doc.getUrl() == null) {
+            try {
+                Desktop.getDesktop().open(fic);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        } else {
+            File ficConverti = new File("C:/Users/MeriamBI/Desktop/testpdfhtml/" + doc.getNom() + ".pdf");
+            try {
+                Desktop.getDesktop().open(ficConverti);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
+    }
+
+    public void downloadDocument() {
+        /*Stage primaryStage = null;
+        primaryStage.setTitle("JavaFX App");
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File("src"));
+
+        Button button = new Button("Select Directory");
+        button.setOnAction(e -> {
+            File selectedDirectory = directoryChooser.showDialog(primaryStage);
+
+            System.out.println(selectedDirectory.getAbsolutePath());
+        });
+
+
+        VBox vBox = new VBox(button);
+        //HBox hBox = new HBox(button1, button2);
+        Scene scene = new Scene(vBox, 960, 600);
+
+        primaryStage.setScene(scene);
+        primaryStage.show();*/
+    }
+
     public List<Document> filterByOwner(String owner) {
         String req = "select * from document where proprietaire='" + owner + "'"; //requete select from db
         return getDocumentsList(req);
@@ -126,7 +158,7 @@ public class DocumentService {
         String req = "select * from document where niveau_id='" + niveau + "' and matiere_id='" + matiere + "'"; //requete select from db
         return getDocumentsList(req);
     }
-    
+
     public List<Document> listReportedDocs() {
         String req = "select * from document where signalements>0"; //requete select from db
         return getDocumentsList(req);
@@ -176,14 +208,6 @@ public class DocumentService {
                 d.setType(rs.getString("type"));
                 d.setSignalements(rs.getInt("signalements"));
                 d.setUrl(rs.getString("url"));
-                d.setBase64(rs.getString("base64"));
-                if (rs.getString("url") == null) {
-                    File fichier = convertBlobToFile(rs.getBlob("fichier"), d);
-                    d.setFichier(fichier);
-                } else {
-                    d.setFichier(null);
-                }
-
                 myList.add(d);
             }
         } catch (SQLException ex) {
@@ -203,7 +227,7 @@ public class DocumentService {
         props.put("mail.smtp.ssl.required", "true");
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        String to = "meriamesprittest@gmail.com"; //to_change with destination email
+        String to = "meriamesprittest@esprit.tn"; //to_change with destination email
         String from = "meriamesprittest@gmail.com"; //to_change with current user email
         String password = "meriamesprittest221199*#"; //to_change with current user email pwd
         try {
@@ -214,9 +238,7 @@ public class DocumentService {
                 }
             });
 
-            //compose message     
-       
-            File file = doc.getFichier();
+            //compose message 
             Multipart multipart = new MimeMultipart();
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
@@ -224,7 +246,7 @@ public class DocumentService {
             message.setSubject("this is the subject"); //to_change with email subject
             //create MimeBodyPart object and set your message text     
             BodyPart messageBodyPart1 = new MimeBodyPart();
-            if (file != null) {
+            if (doc.getUrl() == null) {
                 messageBodyPart1.setText("This is the body\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*change with current username*/); //to_change with email body
             } else {
                 messageBodyPart1.setText("This is the body\n" + doc.getUrl() + "\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*change with current username*/); //to_change with email body
@@ -233,14 +255,14 @@ public class DocumentService {
             //create new MimeBodyPart object and set DataHandler object to this object      
             MimeBodyPart messageBodyPart2 = new MimeBodyPart();
 
-            if (file != null) {
-                String filepath = doc.getFichier().getPath();//change accordingly  
+            if (doc.getUrl() == null) {
+                String filepath = Statics.myDocs + doc.getNom();
                 DataSource source = new FileDataSource(filepath);
                 messageBodyPart2.setDataHandler(new DataHandler(source));
                 messageBodyPart2.setFileName(filepath);
                 //create Multipart object and add MimeBodyPart objects to this object      
 
-                if (file != null) {
+                if (doc.getUrl() == null) {
                     multipart.addBodyPart(messageBodyPart2);
                 }
             }
@@ -257,17 +279,22 @@ public class DocumentService {
             ex.printStackTrace();
         }
     }
-
+/*
     public void convertUrlToPdf(String filename) throws InterruptedException, IOException {
         Process wkhtml; // Create uninitialized process
-        String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; // Desired command
+        String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; //to_change
         //to_change
         wkhtml = Runtime.getRuntime().exec(command); // Start process
+
        // IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
+
+
+        IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
 
         wkhtml.waitFor(); // Allow process to run
 
     }
+
 
     public File convertBlobToFile(Blob blob, Document d) {
         InputStream blobStream = null;
@@ -320,5 +347,6 @@ public class DocumentService {
      //   }
         String myBase64 = java.util.Base64.getEncoder().encodeToString(fileContent);
         return myBase64;
-    }
+    }*/
+
 }
