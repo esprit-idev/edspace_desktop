@@ -13,7 +13,7 @@ public class statics {
     ResultSet resultSet;
     PreparedStatement preparedStatement;
     String query = null;
-    int total = 0;
+    Integer total = 0;
 
     //number of news by category
     public int numberOfPubsByCategory(int id){
@@ -46,7 +46,7 @@ public class statics {
         return total;
     }
     //number of news
-    public int numberOfPublications(){
+    public String numberOfPublications(){
         total = 0;
         try {
             query = "Select count(*) from publication_news";
@@ -57,11 +57,11 @@ public class statics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return total;
+        return total.toString();
         
     }
     //number of emploi
-    public int numberOfOffreEmploi(){
+    public String numberOfOffreEmploi(){
         total = 0;
         try {
             query = "Select count(*) from emploi";
@@ -72,11 +72,11 @@ public class statics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return total;
+        return total.toString();
         
     }
     //number of clubs
-    public int numberOfClubs(){
+    public String numberOfClubs(){
         try {
             query = "Select count(*) from club";
             resultSet = connection.createStatement().executeQuery(query);
@@ -86,7 +86,7 @@ public class statics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return total; 
+        return total.toString(); 
     }
     //number of classes 
     public int numberOfClasses(){
@@ -102,7 +102,7 @@ public class statics {
         return total; 
     }
     //number of niveau
-    public int numberOfNiveau(){
+    public String numberOfNiveau(){
         try {
             query = "Select count(*) from niveau";
             resultSet = connection.createStatement().executeQuery(query);
@@ -112,7 +112,7 @@ public class statics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return total; 
+        return total.toString(); 
     }
     // number of matiere 
     public int numberOfMatiere(){
@@ -167,7 +167,7 @@ public class statics {
         return total; 
     }
     // number of Students 
-    public int numberOfStudents(String r){
+    public String numberOfStudents(String r){
         try {
             query = "Select count(*) from user where roles like '" + r +"'";
             resultSet = connection.createStatement().executeQuery(query);
@@ -177,7 +177,7 @@ public class statics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return total; 
+        return total.toString(); 
     }
     // number of categories in news
     public int numberOfCategoryNews(){
