@@ -336,7 +336,7 @@ public class MainClass extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeFront.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
             Scene scene = new Scene(parent);
            // scene.setFill(Color.TRANSPARENT);
             primaryStage.setScene(scene);

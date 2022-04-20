@@ -5,11 +5,12 @@
         <group>
             <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/DocsReportedController.java</file>
             <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/DocRController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/tests/MainClass.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/utils/Statics.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/DocListFrontController.java</file>
+            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/home/HomeFrontController.java</file>
+            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/home/HomeFront.fxml</file>
+            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/AddDocController.java</file>
             <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/DocAddController.java</file>
             <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/services/DocumentService.java</file>
+            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/home/Sample.fxml</file>
         </group>
     </open-files>
 </project-private>

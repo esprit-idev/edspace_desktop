@@ -51,67 +51,39 @@ import javafx.stage.FileChooser;
  *
  * @author MeriamBI
  */
-public class DocAddController implements Initializable {
+public class AddDocController implements Initializable {
 
     @FXML
-    private AnchorPane rootPane;
+    private TextField nom_tf;
     @FXML
     private ComboBox<String> niveau_cb;
     @FXML
     private ComboBox<String> matiere_cb;
     @FXML
-    private RadioButton attachFile_rb;
-    @FXML
-    private RadioButton insertUrl_rb;
-    @FXML
     private Button chooseFile_btn;
-    @FXML
-    private TextField url_tf;
     @FXML
     private Button add_btn;
     @FXML
-    private ImageView logo_iv;
-    @FXML
-    private Button btnNews;
-    @FXML
-    private ImageView tabaff_iv;
-    @FXML
-    private Button btnForum;
-    @FXML
-    private ImageView forum_iv;
-    @FXML
-    private Button btnClubs;
-    @FXML
-    private ImageView club_iv;
-    @FXML
-    private Button btnEmploi;
-    @FXML
-    private ImageView emploi_v;
-    @FXML
-    private Button btnCentrePartage;
-    @FXML
-    private ImageView centre_iv;
-    @FXML
-    private Button btnStudents;
-    @FXML
-    private ImageView users_iv;
-    @FXML
-    private Button btnProfil;
-    @FXML
-    private ImageView profil_iv;
-    @FXML
-    private Button btnSignout;
-    @FXML
-    private ImageView signOut_iv;
+    private RadioButton attachFile_rb;
     @FXML
     private ToggleGroup group;
-
+    @FXML
+    private RadioButton insertUrl_rb;
+    @FXML
+    private TextField url_tf;
+    @FXML
+    private ImageView out_iv;
+    @FXML
+    private ImageView home_iv;
+    @FXML
+    private ImageView logo_iv;
+    
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
     @FXML
-    private TextField nom_tf;
+    private AnchorPane rootPane;
     @FXML
-    private AnchorPane childPane;
+    private ImageView back_iv;
 
     /**
      * Initializes the controller class.
@@ -178,7 +150,7 @@ public class DocAddController implements Initializable {
             try {
                 Files.copy(Paths.get(file), Paths.get(Statics.myDocs + docName));
             } catch (IOException ex) {
-                Logger.getLogger(DocAddController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AddDocController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
@@ -196,11 +168,11 @@ public class DocAddController implements Initializable {
             DocumentService ds = new DocumentService();
             ds.ajouterDocument(doc);
             try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocListFront.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/ListDocFront.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(DocAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddDocController.class.getName()).log(Level.SEVERE, null, ex);
         }
         } else {
             Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
@@ -272,55 +244,41 @@ public class DocAddController implements Initializable {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
 
-        File fileHome = new File("images/announcement_grey.png");
+        File fileHome = new File("images/home_grey.png");
         Image homeI = new Image(fileHome.toURI().toString());
-        
-        File fileForum = new File("images/forum2_grey.png");
-        Image forumI = new Image(fileForum.toURI().toString());
-        
-        File fileOffre = new File("images/briefcase_grey.png");
-        Image offreI = new Image(fileOffre.toURI().toString());
-        
-        File fileDocs = new File("images/file_grey.png");
-        Image docsI = new Image(fileDocs.toURI().toString());
-
-        File fileUsers = new File("images/users_grey.png");
-        Image usersI = new Image(fileUsers.toURI().toString());
-        
-        File fileAccount = new File("images/account_grey.png");
-        Image accountI = new Image(fileAccount.toURI().toString());
 
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
         
-        File fileClub = new File("images/org_grey.png");
-        Image clubI = new Image(fileClub.toURI().toString());
+        File fileBack = new File("images/back_grey.png");
+        Image backI = new Image(fileBack.toURI().toString());
 
         logo_iv.setImage(logoI);
-        tabaff_iv.setImage(homeI);
-        forum_iv.setImage(forumI);
-        club_iv.setImage(clubI);
-        emploi_v.setImage(offreI);
-        centre_iv.setImage(docsI);
-        users_iv.setImage(usersI);
-        profil_iv.setImage(accountI);
-        signOut_iv.setImage(outI);
-        
+        home_iv.setImage(homeI);
+        out_iv.setImage(outI);
+        back_iv.setImage(backI);
     }
 
     @FXML
-    private void getNewsView(MouseEvent event) {
-    }
-
-    @FXML
-    private void getAllDocsView(MouseEvent event) {
+    private void getHome(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocListFront.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/FrontHome.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(DocAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddDocController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    @FXML
+    private void getCentre(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/ListDocFront.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AddDocController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
