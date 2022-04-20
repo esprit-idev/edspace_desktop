@@ -17,6 +17,7 @@ import edu.edspace.utils.Statics;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -185,7 +186,7 @@ public class DocRController implements Initializable {
         // Set the button types
         ButtonType saveButtonType = new ButtonType("Enregistrer", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelButtonType = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
-        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType,cancelButtonType);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, cancelButtonType);
 
         // Create the nom and niveau labels and fields
         //grid setting
@@ -225,12 +226,12 @@ public class DocRController implements Initializable {
         Optional<ButtonType> result = dialog.showAndWait();
         if (result.get() == saveButtonType) {
             String newNiv = niveau_cb.getValue();
-        String newMat = matiere_cb.getValue();
-        DocumentService ds = new DocumentService();
-        doc.setNiveau(newNiv);
-        doc.setMatiere(newMat);
-        ds.modifierDocument(doc);
-        setData(doc);
+            String newMat = matiere_cb.getValue();
+            DocumentService ds = new DocumentService();
+            doc.setNiveau(newNiv);
+            doc.setMatiere(newMat);
+            ds.modifierDocument(doc);
+            setData(doc);
         }
     }
 
@@ -267,12 +268,14 @@ public class DocRController implements Initializable {
         DocumentService ds = new DocumentService();
         try {
             ds.downloadDocument(doc, chosenDir);
+        } catch (FileAlreadyExistsException ex) {
+            System.out.println(ex.getMessage());
+            String title = "Erreur survenue lors de l'ajout";
+            String header = "Un document avec le même nom existe déjà";
+            String content = "Veuillez choisir un autre nom";
+            showAlert(Alert.AlertType.ERROR, title, header, content);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-            String title = "Erreur survenue lors du téléchargement";
-            String header = "Ce document existe déjà dans " + chosenDir;
-            String content = "Veuillez choisir un autre emplacement";
-            showAlert(Alert.AlertType.ERROR, title, header, content);
         }
     }
 

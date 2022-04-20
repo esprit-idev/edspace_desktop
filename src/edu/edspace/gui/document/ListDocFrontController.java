@@ -36,6 +36,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 /**
  * FXML Controller class
@@ -60,7 +61,7 @@ public class ListDocFrontController implements Initializable {
     private ScrollPane scroll;
     @FXML
     private GridPane grid;
-    
+
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
     private List<Document> docs = new ArrayList();
@@ -74,9 +75,8 @@ public class ListDocFrontController implements Initializable {
         MyConnection.getInstance().getCnx();
         initImages();
         initDisplay();
-    }    
-    
-    
+    }
+
     @FXML
     private void addDoc(MouseEvent event) {
         try {
@@ -87,14 +87,14 @@ public class ListDocFrontController implements Initializable {
             Logger.getLogger(ListDocFrontController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     private void reinitialiserFiltre(MouseEvent event) {
         niveau_cb.setValue(null);
         matiere_cb.setValue(null);
         initDisplay();
     }
-    
+
     private void initDisplay() {
         DocumentService ds = new DocumentService();
         docs = ds.listDocs();
@@ -119,16 +119,16 @@ public class ListDocFrontController implements Initializable {
             public void changed(ObservableValue ov, String oldVal, String newVal) {
                 docs = ds.filterByNiveauMatiere(niveau_cb.getValue(), newVal);
                 grid.getChildren().clear();
-                if (docs.isEmpty()){
+                if (docs.isEmpty()) {
                     //display "empty"
-                }else{
+                } else {
                     initGrid(docs);
                 }
-                
+
             }
         });
     }
-    
+
     private void initGrid(List<Document> docs) {
         int column = 0;
         int row = 0;
@@ -137,17 +137,17 @@ public class ListDocFrontController implements Initializable {
                 FXMLLoader fXMLLoader = new FXMLLoader();
                 fXMLLoader.setLocation(getClass().getResource("/edu/edspace/gui/document/DocR.fxml"));
                 AnchorPane anchorPane = fXMLLoader.load();
-
                 DocRController docRController = fXMLLoader.getController();
                 docRController.setData(docs.get(i));
 
-                if (column == 3) {
+                if (column == 5) {
                     column = 0;
                     row++;
                 }
                 grid.add(anchorPane, column++, row);
+                //grid.getRowConstraints().add(new RowConstraints(30));
 
-                GridPane.setMargin(anchorPane, new Insets(10));
+                GridPane.setMargin(anchorPane, new Insets(9));
             } catch (IOException ex) {
                 Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -175,18 +175,18 @@ public class ListDocFrontController implements Initializable {
         }
         return oblistM;
     }
-    
+
     public void initImages() {
 
         File fileHome = new File("images/home_grey.png");
         Image homeI = new Image(fileHome.toURI().toString());
-        
+
         File fileAdd = new File("images/add-new_grey.png");
         Image addI = new Image(fileAdd.toURI().toString());
 
-        home_iv.setImage(homeI);        
+        home_iv.setImage(homeI);
         add_iv.setImage(addI);
-        
+
     }
 
     @FXML

@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -77,7 +78,7 @@ public class AddDocController implements Initializable {
     private ImageView home_iv;
     @FXML
     private ImageView logo_iv;
-    
+
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
     @FXML
@@ -149,6 +150,12 @@ public class AddDocController implements Initializable {
             type = URLConnection.guessContentTypeFromName(file);
             try {
                 Files.copy(Paths.get(file), Paths.get(Statics.myDocs + docName));
+            } catch (FileAlreadyExistsException ex) {
+                System.out.println(ex.getMessage());
+                String title = "Erreur survenue lors de l'ajout";
+                String header = "Un document avec le même nom existe déjà";
+                String content = "Veuillez choisir un autre nom";
+                showAlert(Alert.AlertType.ERROR, title, header, content);
             } catch (IOException ex) {
                 Logger.getLogger(AddDocController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -166,14 +173,15 @@ public class AddDocController implements Initializable {
         } else if (docName != null && docName.length() != 0 && niveau != null && niveau.length() != 0 && matiere != null && matiere.length() != 0) {
             Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
             DocumentService ds = new DocumentService();
-            ds.ajouterDocument(doc);
             try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/ListDocFront.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(AddDocController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                ds.ajouterDocument(doc);
+            } catch (FileAlreadyExistsException ex) {
+                System.out.println(ex.getMessage());
+                String title = "Erreur survenue lors de l'ajout";
+                String header = "Un document avec le même nom existe déjà";
+                String content = "Veuillez choisir un autre nom";
+                showAlert(Alert.AlertType.ERROR, title, header, content);
+            }
         } else {
             Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
             System.out.println(doc.toString());
@@ -249,7 +257,7 @@ public class AddDocController implements Initializable {
 
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
-        
+
         File fileBack = new File("images/back_grey.png");
         Image backI = new Image(fileBack.toURI().toString());
 
@@ -280,5 +288,5 @@ public class AddDocController implements Initializable {
             Logger.getLogger(AddDocController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

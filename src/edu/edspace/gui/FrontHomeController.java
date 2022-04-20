@@ -4,6 +4,7 @@
  */
 package edu.edspace.gui;
 
+import edu.edspace.gui.document.ListDocFrontController;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
 import java.io.IOException;
