@@ -112,8 +112,12 @@ public class DocumentService {
     }
 
     public void supprimerDocument(Document document) {
+        String reqF = "delete from document_favoris where document_id = ?";
         String req = "delete from document where id = ?";
         try {
+            PreparedStatement pstF = MyConnection.getInstance().getCnx().prepareStatement(reqF);
+            pstF.setInt(1, document.getId());
+            pstF.executeUpdate();
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
             pst.setInt(1, document.getId());
             pst.executeUpdate();
@@ -142,7 +146,12 @@ public class DocumentService {
     }
 
     public void downloadDocument(Document doc,String chosenDir) throws IOException {
+        if(doc.getType().equals("url")){
+            Files.copy(Paths.get(Statics.convertedDir + doc.getNom()+".pdf"), Paths.get(chosenDir+"/"+ doc.getNom()+".pdf"));
+        }else{
             Files.copy(Paths.get(Statics.myDocs + doc.getNom()), Paths.get(chosenDir+"/"+ doc.getNom()));
+        }
+            
     }
 
     public List<Document> filterByOwner(String owner) {

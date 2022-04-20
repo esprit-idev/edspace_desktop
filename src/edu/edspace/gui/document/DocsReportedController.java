@@ -231,11 +231,11 @@ public class DocsReportedController implements Initializable {
         for (int i = 0; i < docs.size(); i++) {
             try {
                 FXMLLoader fXMLLoader = new FXMLLoader();
-                fXMLLoader.setLocation(getClass().getResource("/edu/edspace/gui/document/DocR.fxml"));
+                fXMLLoader.setLocation(getClass().getResource("/edu/edspace/gui/document/DocRReported.fxml"));
                 AnchorPane anchorPane = fXMLLoader.load();
 
-                DocRController docRController = fXMLLoader.getController();
-                docRController.setData(docs.get(i));
+                DocRReportedController docRReportedController = fXMLLoader.getController();
+                docRReportedController.setData(docs.get(i));
 
                 if (column == 3) {
                     column = 0;
@@ -270,16 +270,6 @@ public class DocsReportedController implements Initializable {
             oblistM.add(mats.get(i).getId());
         }
         return oblistM;
-    }
-
-    //alert dialog sample
-    private void showAlert(Alert.AlertType alertType, String title, String header, String content) {
-        final Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.setResizable(true);
-        alert.showAndWait();
     }
 
     public void initImages() {

@@ -33,6 +33,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -163,7 +164,7 @@ public class MatieresListController implements Initializable {
             ms.ajouterMatiere(m);
             refreshTable();
         } else {
-            String title = "Erreur d'ajout";
+            String title = "Erreur survenue lors de l'ajout";
             String header = "Veuillez remplir tous les champs";
             String content = "Aucun champs ne doit être vide";
             showAlert(AlertType.WARNING, title, header, content);
@@ -175,15 +176,19 @@ public class MatieresListController implements Initializable {
         Matiere matiere = table.getSelectionModel().getSelectedItem();
         if (matiere != null) {
             // Create the custom dialog
-            Dialog<Pair<String, String>> dialog = new Dialog<>();
+            Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Mise à jour Box");
             dialog.setHeaderText("Mise à jour de la matière " + matiere.getId());
 
             // Set the icon
-            //dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
+            File fileRefresh = new File("images/refresh_green.png");
+            Image refresh = new Image(fileRefresh.toURI().toString());
+            dialog.setGraphic(new ImageView(refresh));
             // Set the button types
-            ButtonType saveButtonType = new ButtonType("Enregistrer", ButtonData.OK_DONE);
-            dialog.getDialogPane().getButtonTypes().addAll(saveButtonType);
+            ButtonType saveButtonType = new ButtonType("Enregistrer", ButtonBar.ButtonData.OK_DONE);
+            ButtonType cancelButtonType = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, cancelButtonType);
 
             // Create the nom and niveau labels and fields
             //grid setting
@@ -206,28 +211,30 @@ public class MatieresListController implements Initializable {
             grid.add(new Label("Niveau concerné:"), 0, 1);
             grid.add(cb, 1, 1);
             dialog.getDialogPane().setContent(grid);
-            Optional<Pair<String, String>> result = dialog.showAndWait();
-            //controle de saisie
-            if (tf.getText() != null && tf.getText().length() != 0) {
-                DocumentService ds = new DocumentService();
-                int relatedDocs = ds.countRelatedDocs(matiere);
-                //check if related docs exist then can't delete
-                if (relatedDocs == 0) {
-                    Matiere newMat = new Matiere(tf.getText(), cb.getValue());
-                    MatiereService ms = new MatiereService();
-                    ms.modifierMatiere(newMat, matiere.getId());
-                    refreshTable();
+            Optional<ButtonType> result = dialog.showAndWait();
+            if (result.get() == saveButtonType) {
+                //controle de saisie
+                if (tf.getText() != null && tf.getText().length() != 0) {
+                    DocumentService ds = new DocumentService();
+                    int relatedDocs = ds.countRelatedDocs(matiere);
+                    //check if related docs exist then can't delete
+                    if (relatedDocs == 0) {
+                        Matiere newMat = new Matiere(tf.getText(), cb.getValue());
+                        MatiereService ms = new MatiereService();
+                        ms.modifierMatiere(newMat, matiere.getId());
+                        refreshTable();
+                    } else {
+                        String title = "Erreur survenue lors de la mise à jour";
+                        String header = "Impossible de mettre à jour cette matière";
+                        String content = "Il existe un ou plusieurs document(s) dans le centre de partage concerné(s) par cette matière";
+                        showAlert(AlertType.ERROR, title, header, content);
+                    }
                 } else {
-                    String title = "Erreur de mise à jour";
-                    String header = "Impossible de mettre à jour cette matière";
-                    String content = "Il existe un ou plusieurs document(s) dans le centre de partage concerné(s) par cette matière";
-                    showAlert(AlertType.ERROR, title, header, content);
+                    String title = "Erreur survenue lors de la mise à jour";
+                    String header = "Veuillez remplir tous les champs";
+                    String content = "Aucun champs ne doit être vide";
+                    showAlert(AlertType.WARNING, title, header, content);
                 }
-            } else {
-                String title = "Erreur de mise à jour";
-                String header = "Veuillez remplir tous les champs";
-                String content = "Aucun champs ne doit être vide";
-                showAlert(AlertType.WARNING, title, header, content);
             }
         } else { //si aucune matière sélectionnée à partir du tableau
             String title = "";
@@ -243,8 +250,8 @@ public class MatieresListController implements Initializable {
         Matiere matiere = table.getSelectionModel().getSelectedItem();
         if (matiere != null) {
             String title = "Confirmation de la suppression";
-            String header = "Cette matière sera supprimée définitivement";
-            String content = "Êtes-vous sur de bien vouloir supprimer cette matière?";
+            String header = "Êtes-vous sur de bien vouloir supprimer cette matière?";
+            String content = "Cette matière sera supprimée définitivement";
             final Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle(title);
             alert.setHeaderText(header);
@@ -265,7 +272,7 @@ public class MatieresListController implements Initializable {
                     refreshTable();
                 } else {
                     alert.close();
-                    String titleErr = "Erreur de suppression";
+                    String titleErr = "Erreur survenue lors de la suppression";
                     String headerErr = "Impossible de supprimer cette matière";
                     String contentErr = "Il existe un ou plusieurs document(s) dans le centre de partage concerné(s) par cette matière";
                     showAlert(AlertType.ERROR, titleErr, headerErr, contentErr);
@@ -290,8 +297,9 @@ public class MatieresListController implements Initializable {
         niv_col.setCellValueFactory(new PropertyValueFactory<>("niveau")); //affecter l'attribut niveau à la colonne niveau 
         table.setItems(matieresList()); //remplir le tableu avec la liste des matieres
         //init du filtre par niveau
-        
-        filtreN_cb.setItems(niveauxList()); filtreN_cb.setPromptText("Tous les niveaux");
+
+        filtreN_cb.setItems(niveauxList());
+        filtreN_cb.setPromptText("Tous les niveaux");
         niveau_cb.setItems(niveauxList()); //init du cb choix niveau pour l'ajout 
         filtreN_cb.valueProperty().addListener(new ChangeListener<>() {
             @Override
@@ -355,40 +363,40 @@ public class MatieresListController implements Initializable {
     public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
-        
+
         File fileHome = new File("images/stats_grey.png");
         Image homeI = new Image(fileHome.toURI().toString());
-        
+
         File fileTab = new File("images/announcement_grey.png");
         Image tabI = new Image(fileTab.toURI().toString());
-        
+
         File fileLevel = new File("images/level_grey.png");
         Image levelI = new Image(fileLevel.toURI().toString());
-        
+
         File fileClass = new File("images/class-management_grey.png");
         Image classI = new Image(fileClass.toURI().toString());
-        
+
         File fileBook = new File("images/book_grey.png");
         Image bookI = new Image(fileBook.toURI().toString());
-        
+
         File fileForum = new File("images/forum2_grey.png");
         Image forumI = new Image(fileForum.toURI().toString());
-        
+
         File fileOffre = new File("images/briefcase_grey.png");
         Image offreI = new Image(fileOffre.toURI().toString());
-        
+
         File fileDocs = new File("images/file_grey.png");
         Image docsI = new Image(fileDocs.toURI().toString());
 
         File fileUsers = new File("images/users_grey.png");
         Image usersI = new Image(fileUsers.toURI().toString());
-        
+
         File fileClub = new File("images/org_grey.png");
         Image clubI = new Image(fileClub.toURI().toString());
 
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
-        
+
         logo_iv.setImage(logoI);
         home_iv.setImage(homeI);
         tabaff_iv.setImage(tabI);
