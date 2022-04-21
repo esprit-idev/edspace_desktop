@@ -3,27 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/AllStudentsController.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/Home.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/tests/MainClass.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/services/StudentService.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/utils/MyConnection.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/services/AdminService.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/services/UserService.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/LoginController.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/UpdateStudentController.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/AddStudentController.java</file>
-=======
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/DocsReportedController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/DocRController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/home/HomeFrontController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/home/HomeFront.fxml</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/AddDocController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/DocAddController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/services/DocumentService.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/home/Sample.fxml</file>
->>>>>>> 28b79904e9390e1e059a59332c73f09a96905391
+            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/services/StudentService.java</file>
+            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/tests/MainClass.java</file>
         </group>
     </open-files>
 </project-private>

@@ -189,11 +189,11 @@ public class HomeBackController implements Initializable {
         // TODO
         connection = MyConnection.getInstance().getCnx();
         initImages();
-        init();
+        initChart();
         
     }
     //here are statics of our dashboard
-    public void init(){
+    public void initChart(){
         statics sc = new statics();
         pubNum.setText(sc.numberOfPublications());
         empNum.setText(sc.numberOfOffreEmploi());

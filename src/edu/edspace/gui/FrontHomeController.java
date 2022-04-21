@@ -4,6 +4,7 @@
  */
 package edu.edspace.gui;
 
+import edu.edspace.gui.document.ListDocFrontController;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
 import java.io.IOException;
@@ -114,6 +115,13 @@ public class FrontHomeController implements Initializable {
 
     @FXML
     private void getTabAff(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/news/frontNews.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(FrontHomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -126,6 +134,13 @@ public class FrontHomeController implements Initializable {
 
     @FXML
     private void getOffre(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/emploi/frontEmploi.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(FrontHomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

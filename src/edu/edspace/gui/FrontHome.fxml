@@ -19,7 +19,7 @@
                   <Circle fill="#54b48c" layoutX="84.0" layoutY="87.0" onMouseClicked="#getTabAff" radius="50.0" stroke="#54b48c" strokeType="INSIDE" />
                   <ImageView fx:id="tabAff_iv" fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" onMouseClicked="#getTabAff" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../images/announcement_grey_bigger.png" />
+                        <Image url="@../../../../images/announcement_grey.png" />
                      </image>
                   </ImageView>
                   <Label alignment="CENTER" layoutX="-6.0" layoutY="146.0" prefHeight="17.0" prefWidth="174.0" text="Tableau d'affichage" textFill="WHITE">

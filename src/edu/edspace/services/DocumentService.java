@@ -12,6 +12,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLConnection;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.PreparedStatement;
@@ -53,7 +54,7 @@ import javax.mail.internet.MimeMultipart;
  */
 public class DocumentService {
 
-    public void ajouterDocument(Document document) {
+    public void ajouterDocument(Document document) throws FileAlreadyExistsException{
         try {
             String req = "insert into document (signalements,nom,date_insert,proprietaire,url,niveau_id,matiere_id,type) values"
                     + "(?,?,?,?,?,?,?,?)";
