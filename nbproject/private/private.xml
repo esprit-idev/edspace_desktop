@@ -12,15 +12,21 @@
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/AddStudent.fxml</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ThreadListController.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/NewsService.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/news/allCategoryNewsController.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/MdpController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/document/AddDocController.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/AllStudentsController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/entities/Document.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/AllAdmins.fxml</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/FrontHomeController.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/LogController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/DocumentService.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/css/styles.css</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/UpdateStudentController.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ThreadController.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ListTopicsController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/emploi/AllEmploiController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/tests/MainClass.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/LoginController.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/NewThreadController.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/AdminService.java</file>
@@ -29,6 +35,7 @@
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/HomeBackController.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/HomeFrontController.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/AddStudentController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/ClubPubService.java</file>
             <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/NewTopic.java</file>
         </group>
     </open-files>
