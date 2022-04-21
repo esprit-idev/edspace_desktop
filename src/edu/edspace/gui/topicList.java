@@ -27,9 +27,7 @@ public class topicList extends Application {
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("listTopics.fxml"));
-            
             Scene scene = new Scene(root, 300, 250);
-            
             primaryStage.setTitle("Hello World!");
             primaryStage.setScene(scene);
             primaryStage.show();
