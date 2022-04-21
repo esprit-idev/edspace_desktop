@@ -130,6 +130,15 @@ public class FrontHomeController implements Initializable {
 
     @FXML
     private void getForum(MouseEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -177,6 +186,17 @@ public class FrontHomeController implements Initializable {
 
     @FXML
     private void getProfile(MouseEvent event) {
+    }
+
+    @FXML
+    private void getListeStudent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/StudentClasse.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(FrontHomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

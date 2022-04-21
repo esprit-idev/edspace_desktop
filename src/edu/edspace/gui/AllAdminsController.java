@@ -6,6 +6,7 @@
 package edu.edspace.gui;
 
 import edu.edspace.entities.User;
+import static edu.edspace.gui.AllStudentsController.validate;
 import edu.edspace.services.AdminService;
 import edu.edspace.services.StudentService;
 import java.io.File;
@@ -33,6 +34,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javax.swing.JOptionPane;
 
 /**
@@ -125,6 +127,10 @@ public class AllAdminsController implements Initializable {
     private Button getStudent;
     @FXML
     private ImageView stud;
+    @FXML
+    private Text msgemail;
+    @FXML
+    private Text msgmin;
 
     /**
      * Initializes the controller class.
@@ -157,6 +163,13 @@ public class AllAdminsController implements Initializable {
     @FXML
     private void Add(ActionEvent event) {
        Boolean error = false; 
+       
+       if (!validate(emailAdmin.getText())) {
+              //msgemvid.setVisible(false);
+                msgemail.setVisible(true);
+                error = true;
+            }
+       
         if(nomAdmin.getText().equals("")) {
           Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -164,6 +177,10 @@ public class AllAdminsController implements Initializable {
             alert.showAndWait();
         error = true;
         }
+        if (mdpAdmin.getText().length() < 8) {
+            msgmin.setVisible(true);
+            error = true;
+        } 
         
         if (!error) {
     User stu = new User();
@@ -245,7 +262,7 @@ if(n == JOptionPane.YES_OPTION)
         tableAdmin.setItems(list); 
 
     }
-    
+   
 
      public void initImages() {
         File fileLogo = new File("images/logo1.png");
