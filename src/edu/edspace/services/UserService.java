@@ -58,8 +58,11 @@ public class UserService {
             if (BCrypt.checkpw(Pwd, rs.getString("password"))) {
                 Session.setId(rs.getInt("id"));
                 Session.setUsername(rs.getString("username"));
+                Session.setPrenom(rs.getString("prenom"));
                 Session.setEmail(rs.getString("email"));
                 Session.setRoles(rs.getString("roles"));
+                Session.setClasse_id(rs.getString("classe_id"));
+
                 System.out.println("login ");
             }
             return true;

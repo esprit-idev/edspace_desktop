@@ -16,6 +16,8 @@ public class Session {
     private static String email;
     private static String roles;
     private static String password;
+    private static String classe_id;
+
 
     private static String id_Lo;
 
@@ -25,6 +27,14 @@ public class Session {
 
     public static void setId_Lo(String id_Lo) {
         Session.id_Lo = id_Lo;
+    }
+    
+    public static String getClasse_id() {
+        return classe_id;
+    }
+
+    public static void setClasse_id(String classe_id) {
+        Session.classe_id = classe_id;
     }
 
     public static int getId() {

@@ -5,6 +5,7 @@
  */
 package edu.edspace.services;
 
+import edu.edspace.entities.Session;
 import edu.edspace.entities.User;
 import edu.edspace.utils.MyConnection;
 import java.sql.PreparedStatement;
@@ -149,6 +150,31 @@ public class StudentService {
             
         }
         return stu ;
+    }
+      
+      
+      public ObservableList<User> listStudentByClasse() {
+        ObservableList<User> listStudent = FXCollections.observableArrayList();
+        Session cur = new Session();
+        try {
+            String req = "select * from user where classe_id="+ cur.getClasse_id(); //requete select from db
+            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+            ResultSet rs=st.executeQuery(req); //resultat de la requete
+            
+            //tant que rs has next get personne and add it to the list
+            while(rs.next()){
+                User stu =new User();
+                stu.setId(rs.getInt("id")); //set id from req result
+                stu.setUsername(rs.getString("username")); 
+                stu.setPrenom(rs.getString("prenom")); 
+                stu.setEmail(rs.getString("email")); 
+               // stu.setIsBanned(rs.getBoolean("IsBanned"));
+                listStudent.add(stu); //ajout de la personne a la liste
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listStudent;
     }
       
 }

@@ -79,7 +79,7 @@
             </Pane>
             <Pane layoutX="736.0" layoutY="354.0" prefHeight="202.0" prefWidth="179.0">
                <children>
-                  <Button fx:id="users_btn" mnemonicParsing="false" onMouseClicked="#getUsers" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Button fx:id="users_btn" mnemonicParsing="false" onAction="#getListeStudent" onMouseClicked="#getUsers" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
                   <Circle fill="#54b48c" layoutX="84.0" layoutY="87.0" onMouseClicked="#getUsers" radius="50.0" stroke="#54b48c" strokeType="INSIDE" />
                   <ImageView fx:id="users_iv" fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" onMouseClicked="#getUsers" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -16,7 +16,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.AllAdminsController">
    <children>
-      <Pane layoutX="710.0" layoutY="70.0" prefHeight="459.0" prefWidth="294.0" style="-fx-background-color: #FFFFFF;">
+      <Pane layoutX="698.0" layoutY="70.0" prefHeight="459.0" prefWidth="306.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <Label layoutX="47.0" layoutY="67.0" text="Nom" />
             <Label layoutX="39.0" layoutY="149.0" text="Prenom" />
@@ -40,6 +40,8 @@
                   <Font size="17.0" />
                </font>
             </Text>
+            <Text fx:id="msgemail" fill="RED" layoutX="104.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email non valide" visible="false" />
+            <Text fx:id="msgmin" fill="RED" layoutX="5.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Un mot de passe doit contenir au minimum 8 caractères" visible="false" />
          </children>
       </Pane>
       <Pane layoutX="283.0" layoutY="70.0" prefHeight="459.0" prefWidth="399.0" style="-fx-background-color: #FFFFFF;">
