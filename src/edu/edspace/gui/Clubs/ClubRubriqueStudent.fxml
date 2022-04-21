@@ -178,7 +178,7 @@
                         <Label fx:id="clubId" layoutX="7.0" layoutY="15.0" text="Label" visible="false" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="91.0" prefWidth="800.0" styleClass="roundimg" stylesheets="@../css/clubsCss.css">
+                  <AnchorPane prefHeight="91.0" prefWidth="800.0" styleClass="roundimg" stylesheets="@../../css/clubsCss.css">
                      <children>
                         <ImageView fx:id="clubPic" fitHeight="150.0" fitWidth="200.0" layoutX="299.0" pickOnBounds="true" preserveRatio="true" />
                      </children>

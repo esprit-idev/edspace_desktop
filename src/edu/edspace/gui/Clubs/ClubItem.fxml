@@ -53,7 +53,7 @@
       </VBox>
    </children>
    <stylesheets>
-      <URL value="@../css/clubsCss.css" />
+      <URL value="@../../css/clubsCss.css" />
       <URL value="@../../css/clubsCss.css" />
    </stylesheets>
 </AnchorPane>

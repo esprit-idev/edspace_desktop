@@ -15,13 +15,15 @@ public class Session {
     private static String prenom;
     private static String email;
     private static String roles;
-    private static int id_Lo;
+    private static String password;
 
-    public static int getId_Lo() {
+    private static String id_Lo;
+
+    public static String getId_Lo() {
         return id_Lo;
     }
 
-    public static void setId_Lo(int id_Lo) {
+    public static void setId_Lo(String id_Lo) {
         Session.id_Lo = id_Lo;
     }
 
@@ -61,5 +63,12 @@ public class Session {
 
     public static void setRoles(String roles) {
         Session.roles = roles;
+    }
+     public static String getPassword() {
+        return password;
+    }
+
+    public static void setPassword(String password) {
+        Session.password = password;
     }
 }
