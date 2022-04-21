@@ -37,6 +37,8 @@ public class AdminService {
             pst.setString(4, ad.getUsername()); 
             pst.setString(5, ad.getPrenom()); 
             pst.setString(6, ad.getEmail());
+           /*  String myPwd = "$2y"+BCrypt.hashpw(ad.getPassword(), BCrypt.gensalt(13)).substring(3);
+            pst.setString(7, myPwd);*/
             pst.setString(7,BCrypt.hashpw(ad.getPassword(), BCrypt.gensalt(13)));
             pst.setBoolean(8 , false);
             pst.setString(9,null);

@@ -24,9 +24,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -43,7 +45,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField emailLogin;
     @FXML
-    private TextField pwdLogin;
+    private PasswordField pwdLogin;
     @FXML
     private Button btnLogin;
     @FXML
@@ -54,6 +56,10 @@ public class LoginController implements Initializable {
     private Button mdpOublie;
     @FXML
     private Text nullmdp;
+    @FXML
+    private Label curr;
+    @FXML
+    private AnchorPane rootPane;
 
     /**
      * Initializes the controller class.
@@ -66,7 +72,16 @@ public class LoginController implements Initializable {
         File fileLogo = new File("images/logo2.png");
         Image logoI = new Image(fileLogo.toURI().toString());
         logo.setImage(logoI);
-    }
+
+         /*Session now =new Session();
+          String s = String.valueOf(now.getUsername()) ;
+       // gett.setText(blog.getUsername());
+        curr.setText(s);*/
+    }    
+
+
+    
+
 
     @FXML
     private void login(ActionEvent event) {
@@ -81,6 +96,15 @@ public class LoginController implements Initializable {
             error = true;
             // System.out.println("here");
             //   AlertUtils.makeInformation("Choisir une date pour createdAt");
+
+        } if(pwdLogin.getText().equals("")) {
+              nullmdp.setVisible(true);
+               error = true;
+}
+       
+        
+        else {
+
         }
         if (pwdLogin.getText().equals("")) {
             nullmdp.setVisible(true);
@@ -91,6 +115,7 @@ public class LoginController implements Initializable {
             error = true;
           //   AlertUtils.makeInformation("Choisir une date pour createdAt");
         } */ else {
+
             nullErr.setVisible(false);
         }
 
@@ -98,6 +123,28 @@ public class LoginController implements Initializable {
             UserService US = new UserService();
             if (US.login(emailLogin.getText(), pwdLogin.getText())) {
 
+              
+                    
+            try {
+                 Session now =new Session();
+          String s = String.valueOf(now.getRoles()) ;
+          //System.out.println(s);
+                       if(s.equals("[\"ROLE_ADMIN\"]")){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);}
+                       else{FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/FrontHome.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);}
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       /* } catch (IOException ex) {
+            Logger.getLogger(AllStudentsController.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+                
+
+/*
                 //FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AddStudent.fxml"));
                 try {
                     if (Session.getRoles().contains("ADMIN")) {
@@ -118,7 +165,8 @@ public class LoginController implements Initializable {
 
                 } catch (IOException ex) {
                     Logger.getLogger(AllStudentsController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
+
 
             } else {
                 //  msgerreur.setVisible(true);

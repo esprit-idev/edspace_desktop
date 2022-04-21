@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -13,18 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="623.0" prefWidth="989.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.AllAdminsController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.AllAdminsController">
    <children>
-      <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="624.0" prefWidth="194.0" style="-fx-background-color: #1C2424;">
-         <children>
-            <ImageView fx:id="logo" fitHeight="128.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../images/logo1.png" />
-               </image>
-            </ImageView>
-         </children>
-      </VBox>
-      <Pane layoutX="659.0" layoutY="103.0" prefHeight="459.0" prefWidth="294.0" style="-fx-background-color: #FFFFFF;">
+      <Pane layoutX="698.0" layoutY="70.0" prefHeight="459.0" prefWidth="306.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <Label layoutX="47.0" layoutY="67.0" text="Nom" />
             <Label layoutX="39.0" layoutY="149.0" text="Prenom" />
@@ -48,9 +40,11 @@
                   <Font size="17.0" />
                </font>
             </Text>
+            <Text fx:id="msgemail" fill="RED" layoutX="104.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email non valide" visible="false" />
+            <Text fx:id="msgmin" fill="RED" layoutX="5.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Un mot de passe doit contenir au minimum 8 caractères" visible="false" />
          </children>
       </Pane>
-      <Pane layoutX="218.0" layoutY="106.0" prefHeight="459.0" prefWidth="428.0" style="-fx-background-color: #FFFFFF;">
+      <Pane layoutX="283.0" layoutY="70.0" prefHeight="459.0" prefWidth="399.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <TableView fx:id="tableAdmin" layoutX="34.0" layoutY="66.0" onMouseClicked="#handleMouseAction" prefHeight="306.0" prefWidth="340.0" style="-fx-background-color: #FFFFFF;">
               <columns>
@@ -60,7 +54,7 @@
                   <TableColumn fx:id="id" prefWidth="93.0" text="id" visible="false" />
               </columns>
             </TableView>
-            <Button fx:id="btndelete" layoutX="347.0" layoutY="395.0" mnemonicParsing="false" onAction="#delete" prefHeight="31.0" prefWidth="26.0">
+            <Button fx:id="btndelete" layoutX="361.0" layoutY="414.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="31.0" prefWidth="26.0">
                <graphic>
                   <ImageView fx:id="delicon" fitHeight="37.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -71,11 +65,170 @@
             </Button>
          </children>
       </Pane>
-      <Label fx:id="gett" layoutX="221.0" layoutY="595.0" />
-      <Text fill="#38ae73" layoutX="203.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les administrateurs ">
+      <Label fx:id="gett" layoutX="468.0" layoutY="36.0" prefHeight="17.0" prefWidth="28.0" visible="false" />
+      <Text fill="#38ae73" layoutX="266.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les administrateurs ">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #1C2424;">
+         <children>
+            <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/logo1.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="50.0" />
+               </VBox.margin>
+            </ImageView>
+            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Dashboard" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fx:id="home_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/icons8_Home_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnNews" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getNewsView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Tableau d'affichage">
+               <graphic>
+                  <ImageView fx:id="tabaff_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#users" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Utilisateurs">
+               <graphic>
+                  <ImageView fx:id="users_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Niveaux d'études">
+               <graphic>
+                  <ImageView fx:id="niveaux_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Classes">
+               <graphic>
+                  <ImageView fx:id="classe_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnMatiere" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getAllMatieresView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Matières">
+               <graphic>
+                  <ImageView fx:id="matieres_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Clubs universitaires">
+               <graphic>
+                  <ImageView fx:id="club_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnEmploi" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#getEmploiView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Offres d'emploi">
+               <graphic>
+                  <ImageView fx:id="offre_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Forum">
+               <graphic>
+                  <ImageView fx:id="forum_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnCentrePartage" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getAllDocsView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Centre de partage">
+               <graphic>
+                  <ImageView fx:id="centre_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Déconnexion">
+               <graphic>
+                  <ImageView fx:id="signOut_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/icons8_Sign_Out_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
+      <Button fx:id="getStudent" layoutX="969.0" layoutY="18.0" mnemonicParsing="false" onAction="#getStudents">
+         <graphic>
+            <ImageView fx:id="stud" fitHeight="42.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/student.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
