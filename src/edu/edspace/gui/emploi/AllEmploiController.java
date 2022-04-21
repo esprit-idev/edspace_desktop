@@ -15,7 +15,6 @@ import edu.edspace.entities.Emploi;
 import edu.edspace.gui.news.CardController;
 import edu.edspace.services.EmploiCategoryService;
 import edu.edspace.services.EmploiService;
-import edu.edspace.gui.HomeController;
 import edu.edspace.gui.news.AllNewsController;
 import edu.edspace.utils.MyConnection;
 import javafx.fxml.FXML;
