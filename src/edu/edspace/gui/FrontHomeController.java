@@ -133,7 +133,7 @@ public class FrontHomeController implements Initializable {
         try {
             //instance mtaa el crud
             //redirection
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/FrontThread.fxml"));
             Parent root = loader.load();
             club_iv.getScene().setRoot(root);
         } catch (IOException ex) {
