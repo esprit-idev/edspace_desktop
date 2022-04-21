@@ -8,6 +8,7 @@ import edu.edspace.entities.Document;
 import edu.edspace.entities.DocumentFavoris;
 import edu.edspace.entities.Matiere;
 import edu.edspace.entities.Niveau;
+import edu.edspace.entities.Session;
 import edu.edspace.services.DocumentFavorisService;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
@@ -82,6 +83,9 @@ public class DocRController implements Initializable {
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
     private Document doc;
+    
+    private String currentUser = Session.getUsername()+" "+Session.getPrenom();
+    private int currentUserId=Session.getId();
 
     /**
      * Initializes the controller class.
@@ -94,7 +98,7 @@ public class DocRController implements Initializable {
 
     public void setData(Document doc) {
         String role = "student";
-        String currentUser = "Anas Houissa"; //to_change
+        //String currentUser = "Anas Houissa"; //to_change
         this.doc = doc;
         date_label.setText(doc.getDate_insert());
         matniv_label.setText(doc.getNiveau() + " | " + doc.getMatiere());
@@ -137,14 +141,14 @@ public class DocRController implements Initializable {
                 reportDoc(doc);
             }
         }
-        String currentUser = "Anas Houissa"; //to_change
+        //String currentUser = "Anas Houissa"; //to_change
         more_cb.getSelectionModel().clearSelection();
         more_cb.setItems(optionsList(currentUser));
 
     }
 
     private void pin_unpin(Document doc) {
-        int currentUserId = 5; //to_change
+        //int currentUserId = 5; //to_change
         DocumentFavoris fave = new DocumentFavoris(currentUserId, doc.getId());
         DocumentFavorisService dfs = new DocumentFavorisService();
         if (isPinned(doc)) {
@@ -420,7 +424,7 @@ public class DocRController implements Initializable {
     }
 
     private boolean isPinned(Document doc) {
-        int currentUserId = 5; //to_change
+        //int currentUserId = 5; //to_change
         DocumentFavoris document = new DocumentFavoris(currentUserId, doc.getId());
         DocumentFavorisService dfs = new DocumentFavorisService();
         List<DocumentFavoris> lf = dfs.listFaves(currentUserId);

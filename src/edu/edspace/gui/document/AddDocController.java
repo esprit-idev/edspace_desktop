@@ -7,6 +7,7 @@ package edu.edspace.gui.document;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.Matiere;
 import edu.edspace.entities.Niveau;
+import edu.edspace.entities.Session;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
 import edu.edspace.services.NiveauService;
@@ -85,6 +86,8 @@ public class AddDocController implements Initializable {
     private AnchorPane rootPane;
     @FXML
     private ImageView back_iv;
+    
+    private String owner = Session.getUsername()+" "+Session.getPrenom();
 
     /**
      * Initializes the controller class.
@@ -163,7 +166,7 @@ public class AddDocController implements Initializable {
         } else {
             url = url_tf.getText();
         }
-        String owner = "Anas Houissa"; //to_change
+        //String owner = "Anas Houissa"; //to_change 
         String insert_date = new SimpleDateFormat("dd/MM/yy").format(new Date());
         if (insertUrl_rb.isSelected() && isValid(url) == false) {
             String title = "Erreur survenue lors de l'ajout";
