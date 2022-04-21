@@ -18,9 +18,11 @@ import edu.edspace.services.EmploiService;
 
 import edu.edspace.gui.news.AllNewsController;
 import edu.edspace.utils.MyConnection;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -156,7 +158,76 @@ public class AllEmploiController implements Initializable{
         initData();
 
     }
-    //sidebar
+//sidebar
+@FXML
+private void getNewsView(MouseEvent event){
+    try {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
+        rootPane.getChildren().setAll(pane);
+    } catch (IOException ex) {
+        Logger.getLogger(AllEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+@FXML
+private void displayClubs(ActionEvent event) {
+    try {
+        //instance mtaa el crud
+        //redirection
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+        Parent root = loader.load();
+        club_iv.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+}
+
+@FXML
+private void getUsers(ActionEvent event) {
+    
+    try {
+        //instance mtaa el crud
+        //redirection
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+        Parent root = loader.load();
+        club_iv.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+    
+}
+@FXML
+private void getForum(MouseEvent event) {
+    try {
+        //instance mtaa el crud
+        //redirection
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+        Parent root = loader.load();
+        club_iv.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+    
+}
+@FXML
+    private void getCatNewsView(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allCategoryNews.fxml"));
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            Logger.getLogger(AllEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML
+    private void getAllDocsView(MouseEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocsList.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AllEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     @FXML
     private void getEmploiView(MouseEvent event){
         try {
@@ -167,13 +238,24 @@ public class AllEmploiController implements Initializable{
 		}
     }
     @FXML
-    public void getNewsView(MouseEvent event){
+    private void getDashboardView(MouseEvent event){
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
-            rootPane.getChildren().setAll(pane);
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+			rootPane.getChildren().setAll(pane);
 		} catch (IOException ex) {
-			
+			Logger.getLogger(AllEmploiController.class.getName()).log(Level.SEVERE, null, ex);
 		}
+    }
+    
+    @FXML
+    private void getAllMatieresView(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AllEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     @FXML
     private void getCatEmploiView(MouseEvent event){
@@ -184,24 +266,7 @@ public class AllEmploiController implements Initializable{
 			
 		}
     }
-    @FXML
-    private void getDashboardView(MouseEvent event){
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
-			rootPane.getChildren().setAll(pane);
-		} catch (IOException ex) {
-			
-		}
-    }
-    @FXML
-    private void getCatNewsView(MouseEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allCategoryNews.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(AllEmploiController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+
     public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());

@@ -57,6 +57,9 @@ public class CardController implements Initializable{
         File f = new File(Statics.myPubImages + emp.getImage());
         Image i = new Image(f.toURI().toString());
         image.setImage(i);
+        image.setPreserveRatio(true);
+        image.fitWidthProperty().bind(rootPane.widthProperty());
+        image.fitHeightProperty().bind(rootPane.heightProperty());
     }
     public Button getDeleteButton() {
         return deleteBtn;

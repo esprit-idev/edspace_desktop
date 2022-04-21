@@ -166,7 +166,7 @@
             </Button>
          </children>
       </VBox>
-      <ScrollPane fx:id="scrolla" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="783.0" styleClass="bgwhite" stylesheets="@../css/clubsCss.css">
+      <ScrollPane fx:id="scrolla" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="783.0" styleClass="bgwhite" stylesheets="@../../css/clubsCss.css">
          <content>
             <VBox styleClass="bgwhite">
                <children>
