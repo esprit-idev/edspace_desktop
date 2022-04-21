@@ -17,8 +17,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,7 +27,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -135,19 +132,10 @@ public class DocsReportedController implements Initializable {
     @FXML
     private void getNewsView(MouseEvent event) {
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allNews.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
-            Logger.getLogger(DocsReportedController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void getCatNewsView(MouseEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(DocsReportedController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
@@ -159,7 +147,27 @@ public class DocsReportedController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(DocsReportedController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getEmploiView(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getDashboardView(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -170,8 +178,36 @@ public class DocsReportedController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(DocsReportedController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
+    }
+    
+    @FXML
+    private void displayClubs(MouseEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getUsers(MouseEvent event) {
+        
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
     }
 
     @FXML
@@ -181,7 +217,7 @@ public class DocsReportedController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(DocsReportedController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
@@ -245,7 +281,7 @@ public class DocsReportedController implements Initializable {
 
                 GridPane.setMargin(anchorPane, new Insets(10));
             } catch (IOException ex) {
-                Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }

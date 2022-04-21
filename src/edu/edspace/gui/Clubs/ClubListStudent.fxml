@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubListStudentController">
    <children>
-      <ScrollPane fx:id="scroll" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" styleClass="bgwhite" stylesheets="@../css/clubsCss.css">
+      <ScrollPane fx:id="scroll" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" styleClass="bgwhite" stylesheets="@../../css/clubsCss.css">
          <content>
             <VBox prefWidth="1087.0" style="-fx-background-color: #1C2424;" styleClass="bgwhite">
                <children>

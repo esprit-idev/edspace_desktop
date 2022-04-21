@@ -297,7 +297,7 @@ public class HomeBackController implements Initializable {
             //redirection
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
             Parent root = loader.load();
-            club_iv.getScene().setRoot(root);
+            rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -311,12 +311,13 @@ public class HomeBackController implements Initializable {
             //redirection
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
             Parent root = loader.load();
-            club_iv.getScene().setRoot(root);
+            rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         
     }
+    
     @FXML
     private void getUsers(ActionEvent event) {
         
@@ -326,7 +327,7 @@ public class HomeBackController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
 
             Parent root = loader.load();
-            club_iv.getScene().setRoot(root);
+            rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
