@@ -4,22 +4,32 @@
  */
 package edu.edspace.gui;
 
+import edu.edspace.entities.CategoryEmploi;
+import edu.edspace.entities.CategoryNews;
+import edu.edspace.services.EmploiCategoryService;
+import edu.edspace.services.NewsCategoryService;
+import edu.edspace.services.statics;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -95,6 +105,22 @@ public class HomeBackController implements Initializable {
     private ImageView signOut_iv;
     @FXML
     private ImageView search_iv;
+    @FXML
+    private Label pubNum;
+    @FXML
+    private Label empNum;
+    @FXML
+    private Label studentNum;
+    @FXML
+    private Label clubNum;
+    @FXML
+    private Label niveauNum;
+    @FXML
+    private PieChart pieChart;
+    @FXML
+    private PieChart pieChartEmp;
+    private List<CategoryNews> categories = new ArrayList<CategoryNews>();
+    private List<CategoryEmploi> categoriesEmpl = new ArrayList<CategoryEmploi>();
 
     @FXML
     private void getNewsView(MouseEvent event) {
@@ -163,8 +189,51 @@ public class HomeBackController implements Initializable {
         // TODO
         connection = MyConnection.getInstance().getCnx();
         initImages();
+        initChart();
+        
     }
-
+    //here are statics of our dashboard
+    public void initChart(){
+        statics sc = new statics();
+        pubNum.setText(sc.numberOfPublications());
+        empNum.setText(sc.numberOfOffreEmploi());
+        studentNum.setText(sc.numberOfStudents("[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"));
+        clubNum.setText(sc.numberOfClubs());
+        niveauNum.setText(sc.numberOfNiveau());
+        //setting the two different pie charts
+        ObservableList<PieChart.Data> pieDataNews = FXCollections.observableArrayList(pieDataNews());
+        ObservableList<PieChart.Data> pieDataEmpl = FXCollections.observableArrayList(pieDataEmploi());
+        pieChart.setData(pieDataNews);
+        pieChart.setTitle("N Publications Par Categorie");
+        pieChartEmp.setData(pieDataEmpl);
+        pieChartEmp.setTitle("N Offres Par Categorie");
+    }
+    //observable list of pichart data, filled with category names and their corresponding publications number
+    private ObservableList<PieChart.Data> pieDataNews(){
+        statics sc = new statics();
+        ObservableList<PieChart.Data> allcat = FXCollections.observableArrayList();
+        NewsCategoryService ns = new NewsCategoryService();
+        categories= ns.AllCats();
+        int num = 0;
+        for (int i = 0; i < categories.size(); i++) {
+            num = sc.numberOfPubsByCategory(categories.get(i).getId());
+            allcat.add(new PieChart.Data(categories.get(i).getCategoryName(),num ));
+        }
+        return allcat;
+    }
+    //observable list of pichart data, filled with category names and their corresponding emploi number
+    private ObservableList<PieChart.Data> pieDataEmploi(){
+        statics sc = new statics();
+        ObservableList<PieChart.Data> allcat = FXCollections.observableArrayList();
+        EmploiCategoryService ns = new EmploiCategoryService();
+        categoriesEmpl= ns.AllCats();
+        int num = 0;
+        for (int i = 0; i < categoriesEmpl.size(); i++) {
+            num = sc.numberOfEmploisByCategory(categoriesEmpl.get(i).getId());
+            allcat.add(new PieChart.Data(categoriesEmpl.get(i).getCategoryName(),num));
+        }
+        return allcat;
+        }
     @FXML
     private void handleClicks(ActionEvent event) {
 
