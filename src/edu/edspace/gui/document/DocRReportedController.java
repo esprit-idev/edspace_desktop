@@ -84,7 +84,7 @@ public class DocRReportedController implements Initializable {
     }
 
     public void setData(Document doc) {
-        String role = "student"; //to_change
+        String role = Session.getRoles(); //to_change
         //String currentUser = "Anas Houissa"; //to_change
         this.doc = doc;
         date_label.setText(doc.getDate_insert());

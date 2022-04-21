@@ -39,13 +39,15 @@ import edu.edspace.services.ClasseService;
 import edu.edspace.services.StudentService;
 import edu.edspace.services.UserService;
 import edu.edspace.services.statics;
-
+import java.io.File;
 
 /**
  *
  * @author MeriamBI
  */
-public class MainClass extends Application{
+public class MainClass extends Application {
+
+
 
     public static void main(String[] args){
        launch(args);
@@ -53,7 +55,7 @@ public class MainClass extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/FrontHome.fxml")); //new front
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeFront.fxml")); //old front
@@ -61,11 +63,13 @@ public class MainClass extends Application{
             primaryStage.setScene(scene);
             primaryStage.setTitle("EdSpace");
             //change this to your own path or comment it to not cause problems
-            //primaryStage.getIcons().add(new Image("C:\\Users\\eslem\\Desktop\\edspace_desktop\\images\\graduate.png"));
+            File fileGraduate = new File("images/graduate_grey.png");
+            Image graduateI = new Image(fileGraduate.toURI().toString());
+            primaryStage.getIcons().add(graduateI);
             primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 }

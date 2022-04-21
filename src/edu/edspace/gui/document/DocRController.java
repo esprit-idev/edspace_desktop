@@ -83,6 +83,7 @@ public class DocRController implements Initializable {
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
     private Document doc;
+    private String role = Session.getRoles();
     
     private String currentUser = Session.getUsername()+" "+Session.getPrenom();
     private int currentUserId=Session.getId();
@@ -97,7 +98,6 @@ public class DocRController implements Initializable {
     }
 
     public void setData(Document doc) {
-        String role = "student";
         //String currentUser = "Anas Houissa"; //to_change
         this.doc = doc;
         date_label.setText(doc.getDate_insert());
@@ -112,7 +112,7 @@ public class DocRController implements Initializable {
         fave_iv.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             pin_unpin(doc);
         });
-        if (!role.equals("admin")) {
+        if (!Session.getRoles().contains("ADMIN")) {
             setFaveIv(doc);
         } else {
             hbox.getChildren().remove(fave_iv);
@@ -382,11 +382,10 @@ public class DocRController implements Initializable {
 
     //list of options in ObservableList
     private ObservableList<String> optionsList(String currentUser) {
-        String role = "student";
         ObservableList<String> oblist = FXCollections.observableArrayList();
         oblist.add("Ouvrir");
 
-        if (!role.equals("admin")) {
+        if (!Session.getRoles().contains("ADMIN")) {
             if (currentUser.equals(doc.getProp())) {
                 oblist.add("Modifier");
                 oblist.add("Supprimer");

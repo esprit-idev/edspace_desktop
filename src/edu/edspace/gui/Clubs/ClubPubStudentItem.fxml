@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="main" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="pub-item" stylesheets="@../../css/clubsCss.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubPubItemController">
+   <children>
+      <VBox layoutY="21.0">
+         <children>
+            <HBox>
+               <children>
+                  <Circle fx:id="clubimg" fill="DODGERBLUE" layoutX="50.0" layoutY="50.0" radius="24.0" stroke="BLACK" strokeType="INSIDE">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="20.0" top="-14.0" />
+                     </HBox.margin>
+                  </Circle>
+                  <Label fx:id="clubName_l" prefHeight="30.0" prefWidth="382.0" text="Spark">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="-5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ImageView fx:id="deleteBtn" accessibleRole="BUTTON" fitHeight="24.0" fitWidth="104.0" onMouseClicked="#deletepub" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../../../../images/fb.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="editBtn" fitHeight="24.0" fitWidth="29.0" onMouseClicked="#editPub" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/like.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Line startX="600.0" stroke="#434242" />
+            <VBox prefWidth="574.0">
+               <children>
+                  <Label fx:id="pubDesc" prefWidth="574.0" text="Updating property file: E:\Webprojects\PIDEV\edspace_desktop\build\built-jar.propertiesCompiling 3 source files to E:\Webprojects\PIDEV\edspace_desktop\build\classesCopying 1 file to E:\Webprojects\PIDEV\edspace_desktop\build\classes" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ImageView fx:id="pubImg" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+            <Line startX="600.0" stroke="#434242" />
+            <Label fx:id="pubDate" prefHeight="47.0" prefWidth="362.0" text="Publié le 121/151/4545">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

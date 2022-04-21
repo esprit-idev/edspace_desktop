@@ -15,7 +15,7 @@ import edu.edspace.entities.Emploi;
 import edu.edspace.gui.news.CardController;
 import edu.edspace.services.EmploiCategoryService;
 import edu.edspace.services.EmploiService;
-import edu.edspace.gui.HomeController;
+
 import edu.edspace.gui.news.AllNewsController;
 import edu.edspace.utils.MyConnection;
 import javafx.fxml.FXML;
@@ -172,7 +172,7 @@ public class AllEmploiController implements Initializable{
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
             rootPane.getChildren().setAll(pane);
 		} catch (IOException ex) {
-			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+			
 		}
     }
     @FXML
@@ -181,7 +181,7 @@ public class AllEmploiController implements Initializable{
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allcategoryEmploi.fxml"));
 			rootPane.getChildren().setAll(pane);
 		} catch (IOException ex) {
-			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+			
 		}
     }
     @FXML
@@ -190,7 +190,7 @@ public class AllEmploiController implements Initializable{
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
 			rootPane.getChildren().setAll(pane);
 		} catch (IOException ex) {
-			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+			
 		}
     }
     @FXML

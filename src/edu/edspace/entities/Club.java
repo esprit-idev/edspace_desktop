@@ -10,13 +10,12 @@ package edu.edspace.entities;
  */
 public class Club {
 
-    String clubId, clubName, clubPic, clubDesc;
-    int clubRespo, clubCategorie;
+    String clubId,clubCategorie, clubName, clubPic, clubDesc,clubRespo;
     public Club() {
 
     }
 
-    public Club( String clubName, String clubPic, String clubDesc, int clubRespo, int clubCategorie) {
+    public Club( String clubName, String clubPic, String clubDesc, String clubRespo, String clubCategorie) {
         this.clubName = clubName;
         this.clubPic = clubPic;
         this.clubDesc = clubDesc;
@@ -24,7 +23,7 @@ public class Club {
         this.clubCategorie = clubCategorie;
     }
 
-    public Club(String clubId, String clubName, String clubPic, String clubDesc, int clubRespo, int clubCategorie) {
+    public Club(String clubId, String clubName, String clubPic, String clubDesc, String clubRespo, String clubCategorie) {
         this.clubId = clubId;
         this.clubName = clubName;
         this.clubPic = clubPic;
@@ -65,19 +64,19 @@ public class Club {
         this.clubDesc = clubDesc;
     }
 
-    public int getClubRespo() {
+    public String getClubRespo() {
         return clubRespo;
     }
 
-    public void setClubRespo(int clubRespo) {
+    public void setClubRespo(String clubRespo) {
         this.clubRespo = clubRespo;
     }
 
-    public int getClubCategorie() {
+    public String getClubCategorie() {
         return clubCategorie;
     }
 
-    public void setClubCategorie(int clubCategorie) {
+    public void setClubCategorie(String clubCategorie) {
         this.clubCategorie = clubCategorie;
     }
 
