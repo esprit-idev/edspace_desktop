@@ -135,6 +135,7 @@ public class AddStudentController implements Initializable {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     
+
 }
 
     @FXML
@@ -157,3 +158,6 @@ public class AddStudentController implements Initializable {
     private void getAllDocsView(MouseEvent event) {
     }
 }
+
+
+

@@ -21,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -113,7 +114,21 @@ public class AddNewsController implements Initializable{
     Connection connection = null;
     NewsService newsService = null;
     private List<CategoryNews> categories = new ArrayList<CategoryNews>();
-
+    //control saisie variables
+    @FXML
+    private Label titleError;
+    @FXML
+    private Label descriptionError;
+    @FXML
+    private Label authorError;
+    @FXML
+    private Label fileError;
+    @FXML
+    private Label imageError;
+    @FXML
+    private Label dateError;
+    @FXML
+    private Label categoryError;
     @FXML
     private void chooseImage(){
         FileChooser fileChooser = new FileChooser();
@@ -140,28 +155,20 @@ public class AddNewsController implements Initializable{
 		String datePub = String.valueOf(dateField.getValue());
         int ext =  chooseFileBtn.getText().lastIndexOf(File.separator);
         String image = chooseFileBtn.getText().substring(ext+1);
-        System.out.println("image");
-        System.out.println(image);
         String file = chooseFileBtn.getText();
-        System.out.println("file");
-        System.out.println(file);
-         try {
-           Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image));
-        }catch (IOException ex) {
-             Logger.getLogger(AddNewsController.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        
          CategoryNews categoryField = categoryNameField.getSelectionModel().getSelectedItem();
          Integer categoryName;
          if(categoryField !=null){
             categoryName = categoryField.getId();
-            if (title.isEmpty() || description.isEmpty() || datePub.isEmpty() || author.isEmpty() || categoryName == null || image.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Please fill the fields");
-                alert.showAndWait();
-            } 
-            else 
-                {
+            if (title.isEmpty() || description.isEmpty() || datePub.isEmpty() || author.isEmpty() || categoryName == null || image.isEmpty() || chooseFileBtn.getText().isEmpty()) {
+                showError();
+            }else {
+                    try {
+                        Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image));
+                     }catch (IOException ex) {
+                          Logger.getLogger(AddNewsController.class.getName()).log(Level.SEVERE, null, ex);
+                      }
                     News p = new News(title, author, description,categoryName.toString(),datePub,image);
                    // System.out.println(p);
                     NewsService newsService = new NewsService();
@@ -170,13 +177,16 @@ public class AddNewsController implements Initializable{
                     
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please select a category");
-            alert.showAndWait();
+            showError();
          }
-            
-		
+    }
+    private void showError(){
+            titleError.setVisible(true);
+            descriptionError.setVisible(true);
+            authorError.setVisible(true);
+            fileError.setVisible(true);
+            categoryError.setVisible(true);
+            dateError.setVisible(true);
     }
     @FXML
     public void cancel(MouseEvent event){

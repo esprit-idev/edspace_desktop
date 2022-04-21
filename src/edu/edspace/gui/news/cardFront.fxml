@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="rootPane" layoutX="5.0" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="336.0" prefWidth="241.0" styleClass="card" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.news.CardFrontController">
+   <children>
+      <ImageView fx:id="image" fitHeight="211.0" fitWidth="242.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" />
+      <Label fx:id="title" layoutX="9.0" layoutY="250.0" text="title" />
+      <Label fx:id="category" layoutX="8.0" layoutY="268.0" text="category" />
+   </children>
+   <effect>
+      <GaussianBlur radius="15.19" />
+   </effect>
+</AnchorPane>

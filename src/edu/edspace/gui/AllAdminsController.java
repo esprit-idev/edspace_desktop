@@ -246,6 +246,7 @@ if(n == JOptionPane.YES_OPTION)
 
     }
     
+
      public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
@@ -346,3 +347,6 @@ if(n == JOptionPane.YES_OPTION)
 
     
 }
+
+
+

@@ -54,6 +54,7 @@ public class NewsService {
            try{ 
                 query = "INSERT INTO publication_news (title, owner, content, category_name_id, date, image) VALUES (?,?,?,?,?,?)";
                 preparedStatement = connection.prepareStatement(query);
+
                 preparedStatement.setString(1, pub.getTitle());
                 preparedStatement.setString(2, pub.getOwner());
                 preparedStatement.setString(3, pub.getContent());
@@ -61,6 +62,7 @@ public class NewsService {
                 preparedStatement.setString(5, pub.getDate());
                 preparedStatement.setString(6, pub.getImage());
                 preparedStatement.executeUpdate();
+
         }catch(SQLException ex){
             System.out.println(ex.getMessage());;
         }
@@ -83,11 +85,13 @@ public class NewsService {
             preparedStatement.setString(4, pub.getDate());
             preparedStatement.setString(5, pub.getOwner());
             preparedStatement.setString(6, pub.getCategoryName());
+
             preparedStatement.setInt(7, id);
             preparedStatement.executeUpdate();
+
             System.out.println("updated");
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());;
+            System.out.println(ex.getMessage());
         }
     }
 //delete news
@@ -102,32 +106,32 @@ public class NewsService {
             System.out.println(e.getMessage());
         }
     }
-//findnewsbycategory
-public List<News> listPubsByCategory(String id){
-        query = "SELECT c.category_name from publication_news p INNER JOIN categorie_news c ON p.category_name_id = c.id where c.id =" + id;
-        return getMatieresList(query);
-}
-public List<News> getMatieresList(String req) {
-    List<News> myList = new ArrayList<>();
-    try {
-        Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
-        ResultSet rs = st.executeQuery(req); //resultat de la requete
 
-        //tant que rs has next get matiere and add it to the list
-        while (rs.next()) {
-            News pub = new News();
-            pub.setId(rs.getInt(1)); //set id from req result
-            pub.setCategoryName(resultSet.getString(2));
-            pub.setDate(resultSet.getString(3));
-            pub.setTitle(resultSet.getString(4));
-            pub.setOwner(resultSet.getString(5));
-            pub.setImage(resultSet.getString(6));
-            pub.setContent(resultSet.getString(10));
-            myList.add(pub); //ajout de la matiere a la liste
-        }
-    } catch (SQLException ex) {
-        System.out.println(ex.getMessage());
+    public List<News> AllNewsforFilter(String req){
+        List<News> listNews = new ArrayList<>();
+        try {
+			// String query all publications 
+			query = req ;
+            resultSet = connection.createStatement().executeQuery(query);
+			while (resultSet.next()) {
+				News pub = new News();
+				pub.setId(resultSet.getInt(1));
+                pub.setCategoryName(resultSet.getString(2));
+                pub.setDate(resultSet.getString(3));
+                pub.setTitle(resultSet.getString(4));
+                pub.setOwner(resultSet.getString(5));
+                pub.setImage(resultSet.getString(6));
+                pub.setContent(resultSet.getString(10));
+				listNews.add(pub);
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+        return listNews;
     }
-    return myList;
+public List<News> filterByCat(int cat) {
+    String req = "SELECT * from publication_news where category_name_id='"+cat+"'";
+    return AllNewsforFilter(req);
 }
+
 }

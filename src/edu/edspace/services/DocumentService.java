@@ -12,6 +12,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLConnection;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.PreparedStatement;
@@ -53,7 +54,7 @@ import javax.mail.internet.MimeMultipart;
  */
 public class DocumentService {
 
-    public void ajouterDocument(Document document) {
+    public void ajouterDocument(Document document) throws FileAlreadyExistsException{
         try {
             String req = "insert into document (signalements,nom,date_insert,proprietaire,url,niveau_id,matiere_id,type) values"
                     + "(?,?,?,?,?,?,?,?)";
@@ -288,17 +289,10 @@ public class DocumentService {
         String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; //to_change
         //to_change
         wkhtml = Runtime.getRuntime().exec(command); // Start process
-
        // IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
-
-
         IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
-
         wkhtml.waitFor(); // Allow process to run
-
     }
-
-
     public File convertBlobToFile(Blob blob, Document d) {
         InputStream blobStream = null;
         try {
@@ -340,7 +334,6 @@ public class DocumentService {
         }
         return fichier;
     }
-
     public String convertFileToBase64(String filepath) {
         byte[] fileContent = null;
        // try {

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.emploi.FrontEmploi">
+   <children>
+      <Pane layoutX="-1.0" layoutY="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="1093.0">
+         <children>
+            <VBox prefHeight="172.0" prefWidth="1089.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Voici les dernières nouvelles de votre établissement." textAlignment="CENTER" wrappingWidth="1088.22265625">
+                     <font>
+                        <Font name="Segoe UI Bold" size="30.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
+            <ComboBox fx:id="category_cb" layoutX="455.0" layoutY="172.0" prefHeight="25.0" prefWidth="180.0" promptText="Choisissez une categorie" />
+            <ImageView fx:id="home_iv" fitHeight="37.0" fitWidth="46.0" layoutX="993.0" layoutY="39.0" onMouseClicked="#getHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../images/home_grey.png" />
+               </image>
+            </ImageView>
+            <ScrollPane fx:id="scroll" layoutX="7.0" layoutY="241.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="1080.0" style="-fx-background-color: #1C2424;">
+               <content>
+                  <TilePane fx:id="tilePane" alignment="TOP_CENTER" hgap="10.0" prefHeight="636.0" prefWidth="1075.0" style="-fx-background-color: #1C2424;" vgap="5.0">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </TilePane>
+               </content>
+            </ScrollPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -38,6 +38,10 @@ public class StudentService {
             pst.setString(4, stu.getUsername()); 
             pst.setString(5, stu.getPrenom()); 
             pst.setString(6, stu.getEmail().toLowerCase());
+            
+         /*   String myPwd = "$2y"+BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)).substring(3);
+            pst.setString(7, myPwd);*/
+           
             pst.setString(7,BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)));
             pst.setBoolean(8 , false);
             pst.setString(9,null);

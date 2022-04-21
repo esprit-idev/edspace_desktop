@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import edu.edspace.entities.CategoryNews;
-import edu.edspace.gui.HomeController;
+
 import edu.edspace.services.NewsCategoryService;
 import edu.edspace.utils.MyConnection;
 import javafx.collections.FXCollections;
@@ -209,7 +209,7 @@ public class allCategoryNewsController implements Initializable{
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
     @FXML
