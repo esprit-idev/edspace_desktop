@@ -5,6 +5,7 @@
  */
 package edu.edspace.gui;
 
+import edu.edspace.entities.Session;
 import edu.edspace.services.UserService;
 import java.io.File;
 import java.sql.Connection;
@@ -23,9 +24,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -42,7 +45,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField emailLogin;
     @FXML
-    private TextField pwdLogin;
+    private PasswordField pwdLogin;
     @FXML
     private Button btnLogin;
     @FXML
@@ -53,6 +56,10 @@ public class LoginController implements Initializable {
     private Button mdpOublie;
     @FXML
     private Text nullmdp;
+    @FXML
+    private Label curr;
+    @FXML
+    private AnchorPane rootPane;
 
     /**
      * Initializes the controller class.
@@ -65,6 +72,10 @@ public class LoginController implements Initializable {
       File fileLogo = new File("images/logo2.png");
         Image logoI = new Image(fileLogo.toURI().toString());
         logo.setImage(logoI);
+         /*Session now =new Session();
+          String s = String.valueOf(now.getUsername()) ;
+       // gett.setText(blog.getUsername());
+        curr.setText(s);*/
     }    
 
 
@@ -85,12 +96,7 @@ public class LoginController implements Initializable {
               nullmdp.setVisible(true);
                error = true;
 }
-        /*
-         if ( pwdLogin.getText().equals("")) {
-            nullmdp.setVisible(true);
-            error = true;
-          //   AlertUtils.makeInformation("Choisir une date pour createdAt");
-        } */
+       
         
         else {
             nullErr.setVisible(false);
@@ -99,19 +105,25 @@ public class LoginController implements Initializable {
         if (!error) {
             UserService US = new UserService();
             if (US.login(emailLogin.getText(), pwdLogin.getText())) {
-               
-                
-                    //FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AddStudent.fxml"));
-                   try {
-                    Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/AllStudents.fxml"));
-            Scene scene = new Scene(parent);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.show();
+              
+                    
+            try {
+                 Session now =new Session();
+          String s = String.valueOf(now.getRoles()) ;
+          //System.out.println(s);
+                       if(s.equals("[\"ROLE_ADMIN\"]")){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);}
+                       else{FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllStudents.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);}
         } catch (IOException ex) {
-            Logger.getLogger(AllStudentsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
+       /* } catch (IOException ex) {
+            Logger.getLogger(AllStudentsController.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
                 
             } else {
               //  msgerreur.setVisible(true);

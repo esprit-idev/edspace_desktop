@@ -12,6 +12,7 @@ import edu.edspace.services.ClubPubService;
 import edu.edspace.services.ClubService;
 import edu.edspace.entities.Message;
 import edu.edspace.entities.Niveau;
+import edu.edspace.entities.Session;
 
 import edu.edspace.services.MessageService;
 
@@ -262,7 +263,7 @@ public class MainClass extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-
+            if(Session.getUsername()==null){
             Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
 
            // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
@@ -270,6 +271,23 @@ public class MainClass extends Application{
             Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
             primaryStage.show();
+        }
+        else{
+        Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+
+           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+
+            Scene scene = new Scene(parent);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+          /*  Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+
+           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+
+            Scene scene = new Scene(parent);
+            primaryStage.setScene(scene);
+            primaryStage.show();*/
         } catch (IOException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
         }
