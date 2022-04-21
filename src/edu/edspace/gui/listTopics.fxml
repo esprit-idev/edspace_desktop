@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.ListTopicsController">
+   <children>
+      <Text fx:id="test" fill="#2a7940" layoutX="183.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Topics List" textAlignment="CENTER" wrappingWidth="234.114013671875">
+         <font>
+            <Font size="36.0" />
+         </font></Text>
+      <TableView fx:id="table" layoutX="100.0" layoutY="81.0" prefHeight="257.0" prefWidth="398.0" style="-fx-background-color: gray; -fx-border-color: #1b893a; -fx-border-insets: -1 -1 0 0; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 10px; -fx-font-family: &quot;Courier New&quot;;">
+        <columns>
+          <TableColumn fx:id="content" prefWidth="104.0" sortType="DESCENDING" style="-fx-background-color: transparent; -fx-text-color: green; -fx-font-size: 15px; -fx-font-family: &quot;Courier New&quot;;" text="Content" />
+        </columns>
+      </TableView>
+      <Separator cacheShape="false" centerShape="false" focusTraversable="false" layoutX="200.0" layoutY="62.0" prefWidth="200.0" scaleShape="false" style="-fx-background-color: #1b893a;" />
+      <Button layoutX="276.0" layoutY="345.0" mnemonicParsing="false" onAction="#redirectAddTopic" prefHeight="48.0" prefWidth="47.0" style="-fx-background-radius: 5em; -fx-background-color: #1f7e53;" text="+" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Hyperlink fx:id="previous" layoutX="41.0" layoutY="27.0" text="Previous" />
+   </children>
+</AnchorPane>

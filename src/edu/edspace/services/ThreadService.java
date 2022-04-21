@@ -51,7 +51,7 @@ public class ThreadService {
     public List<Thread> listThreads() {
         List<Thread> threads = new ArrayList<>();
         try {
-            String query = "select * from thread"; //requete select from db
+            String query = "select * from thread where display= 0"; //requete select from db
             Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
             ResultSet rs = st.executeQuery(query); //resultat de la requete
 
@@ -74,13 +74,13 @@ public class ThreadService {
         return threads;
     }
     
-    public void modifierThread(Thread t,String Id) {
-        String req = "update thread set question=? WHERE question=?";
+    public void modifierThread(Thread t,int Id) {
+        String req = "update thread set question=? WHERE id=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
             pst.setString(1, t.getQuestion());
             
-            pst.setString(2, Id);
+            pst.setInt(2, Id);
             pst.executeUpdate();
             System.out.println("Thread Updated");
         } catch (SQLException ex) {

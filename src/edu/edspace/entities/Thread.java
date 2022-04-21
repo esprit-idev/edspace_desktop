@@ -37,7 +37,7 @@ public class Thread {
     }
 
     public int getUser() {
-        return 1;
+        return this.user;
     }
 
     public void setUser(int user) {

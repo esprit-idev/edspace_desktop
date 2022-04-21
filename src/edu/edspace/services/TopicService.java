@@ -40,7 +40,7 @@ public class TopicService {
     public List<ThreadType> listTopics() {
         List<ThreadType> tts = new ArrayList<>();
         try {
-            String query = "select * from thread_type"; 
+            String query = "select * from thread_type where display = 0"; 
             Statement st = MyConnection.getInstance().getCnx().createStatement(); 
             ResultSet rs = st.executeQuery(query); 
             while (rs.next()) {
