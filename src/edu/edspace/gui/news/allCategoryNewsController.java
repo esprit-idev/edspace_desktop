@@ -242,7 +242,7 @@ private void getUsers(ActionEvent event) {
 @FXML
     private void getCatNewsView(MouseEvent event) {
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allCategoryNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
             Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -262,7 +262,7 @@ private void getUsers(ActionEvent event) {
     @FXML
     private void getEmploiView(MouseEvent event){
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allEmploi.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
 			rootPane.getChildren().setAll(pane);
 		} catch (IOException ex) {
 			Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);

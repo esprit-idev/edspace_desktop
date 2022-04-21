@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.FrontHomeController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.FrontHomeController">
    <children>
       <Pane prefHeight="649.0" prefWidth="1094.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -29,7 +29,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane layoutX="454.0" layoutY="112.0" prefHeight="202.0" prefWidth="179.0">
+            <Pane layoutX="454.0" layoutY="112.0" onMouseClicked="#getForum" prefHeight="202.0" prefWidth="179.0">
                <children>
                   <Button fx:id="forum_btn" mnemonicParsing="false" onMouseClicked="#getForum" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
                   <Circle fill="#54b48c" layoutX="84.0" layoutY="87.0" onMouseClicked="#getForum" radius="50.0" stroke="#54b48c" strokeType="INSIDE" />
@@ -38,7 +38,7 @@
                         <Image url="@../../../../../images/forum2_grey_bigger.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Forum" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" onMouseClicked="#getForum" prefHeight="17.0" prefWidth="168.0" text="Forum" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>

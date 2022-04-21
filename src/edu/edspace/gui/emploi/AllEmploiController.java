@@ -196,9 +196,22 @@ private void getUsers(ActionEvent event) {
     
 }
 @FXML
+private void getForum(MouseEvent event) {
+    try {
+        //instance mtaa el crud
+        //redirection
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+        Parent root = loader.load();
+        club_iv.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+    
+}
+@FXML
     private void getCatNewsView(MouseEvent event) {
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allCategoryNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
             Logger.getLogger(AllEmploiController.class.getName()).log(Level.SEVERE, null, ex);
@@ -218,7 +231,7 @@ private void getUsers(ActionEvent event) {
     @FXML
     private void getEmploiView(MouseEvent event){
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allEmploi.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
 			rootPane.getChildren().setAll(pane);
 		} catch (IOException ex) {
 			Logger.getLogger(AllEmploiController.class.getName()).log(Level.SEVERE, null, ex);
@@ -244,6 +257,16 @@ private void getUsers(ActionEvent event) {
             Logger.getLogger(AllEmploiController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @FXML
+    private void getCatEmploiView(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allcategoryEmploi.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			
+		}
+    }
+
     public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());

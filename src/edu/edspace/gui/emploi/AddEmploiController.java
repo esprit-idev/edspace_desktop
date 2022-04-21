@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -118,16 +119,8 @@ public class AddEmploiController implements Initializable {
 		String datePub = String.valueOf(dateField.getValue());
         int ext =  chooseFileBtn.getText().lastIndexOf(File.separator);
         String image = chooseFileBtn.getText().substring(ext+1);
-        System.out.println("image");
-        System.out.println(image);
         String file = chooseFileBtn.getText();
-        System.out.println("file");
-        System.out.println(file);
-        try {
-           Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image));
-        }catch (IOException ex) {
-             Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
-         }
+
          CategoryEmploi categoryField = categoryNameFieldBox.getSelectionModel().getSelectedItem();
          Integer categoryName;
          if(categoryField !=null){
@@ -140,6 +133,11 @@ public class AddEmploiController implements Initializable {
             } 
             else 
                 {
+                    try {
+                        Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image),StandardCopyOption.REPLACE_EXISTING);
+                     }catch (IOException ex) {
+                          Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+                      }
                     Emploi p = new Emploi(title, description,categoryName.toString(),datePub,image);
                     EmploiService newsService = new EmploiService();
                     newsService.addEmploi(p);
@@ -167,7 +165,7 @@ public class AddEmploiController implements Initializable {
     //cancel button method
     @FXML
     public void cancel(MouseEvent event){
-        getNewsView(event);
+        getEmploiView(event);
     }
     //init method
     @Override
@@ -178,8 +176,8 @@ public class AddEmploiController implements Initializable {
     }
     
 //sidebar
-    @FXML
-    private void getNewsView(MouseEvent event){
+@FXML
+private void getNewsView(MouseEvent event) {
     try {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
         rootPane.getChildren().setAll(pane);
@@ -187,21 +185,59 @@ public class AddEmploiController implements Initializable {
         Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
-    @FXML
-    private void displayClubs(ActionEvent event) {
+@FXML
+private void getEmploiView(MouseEvent event){
+    try {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
+        rootPane.getChildren().setAll(pane);
+    } catch (IOException ex) {
+        Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+@FXML
+private void getCatNewsView(MouseEvent event){
+    try {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allCategoryNews.fxml"));
+        rootPane.getChildren().setAll(pane);
+    } catch (IOException ex) {
+        Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+@FXML
+private void getForum(MouseEvent event) {
     try {
         //instance mtaa el crud
         //redirection
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
         Parent root = loader.load();
         club_iv.getScene().setRoot(root);
     } catch (IOException ex) {
         ex.printStackTrace();
     }
+    
 }
+@FXML
+private void getAllDocsView(MouseEvent event) {
 
-    @FXML
-    private void getUsers(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocsList.fxml"));
+        Parent root = loader.load();
+        rootPane.getScene().setRoot(root);
+    } catch (IOException ex) {
+        Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+@FXML
+private void getDashboardView(MouseEvent event){
+    try {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+        rootPane.getChildren().setAll(pane);
+    } catch (IOException ex) {
+        Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+@FXML
+private void getUsers(ActionEvent event) {
     
     try {
         //instance mtaa el crud
@@ -214,54 +250,32 @@ public class AddEmploiController implements Initializable {
     }
     
 }
-    @FXML
-    private void getCatNewsView(MouseEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+@FXML
+private void getAllMatieresView(MouseEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml"));
+        Parent root = loader.load();
+        rootPane.getScene().setRoot(root);
+    } catch (IOException ex) {
+        Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
     }
-    @FXML
-    private void getAllDocsView(MouseEvent event) {
+}    
+@FXML
+private void displayClubs(ActionEvent event) {
+    try {
+        //instance mtaa el crud
+        //redirection
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+        Parent root = loader.load();
+        club_iv.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+}
+@FXML
+private void handleClicks(ActionEvent event) {
+}
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocsList.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    @FXML
-    private void getEmploiView(MouseEvent event){
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allEmploi.fxml"));
-			rootPane.getChildren().setAll(pane);
-		} catch (IOException ex) {
-			Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-    }
-    @FXML
-    private void getDashboardView(MouseEvent event){
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
-			rootPane.getChildren().setAll(pane);
-		} catch (IOException ex) {
-			Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-    }
-    @FXML
-    private void getAllMatieresView(MouseEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
@@ -289,13 +303,13 @@ public class AddEmploiController implements Initializable {
         
         File fileDocs = new File("images/file_grey.png");
         Image docsI = new Image(fileDocs.toURI().toString());
-    
+
         File fileUsers = new File("images/users_grey.png");
         Image usersI = new Image(fileUsers.toURI().toString());
         
         File fileClub = new File("images/org_grey.png");
         Image clubI = new Image(fileClub.toURI().toString());
-    
+
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
         
@@ -311,5 +325,5 @@ public class AddEmploiController implements Initializable {
         forum_iv.setImage(forumI);
         centre_iv.setImage(docsI);
         signOut_iv.setImage(outI);
-    }   
+    }  
 }

@@ -197,7 +197,7 @@ public class AllCategoryEmploiController implements Initializable{
     @FXML
     private void getNewsView(MouseEvent event){
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/news/gui/allNews.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
             Logger.getLogger(AllCategoryEmploiController.class.getName()).log(Level.SEVERE, null, ex);
@@ -211,6 +211,19 @@ public class AllCategoryEmploiController implements Initializable{
         } catch (IOException ex) {
             Logger.getLogger(AllCategoryEmploiController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    @FXML
+    private void getForum(MouseEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
     }
     @FXML
     private void getAllDocsView(MouseEvent event) {

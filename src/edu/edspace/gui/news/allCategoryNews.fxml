@@ -171,9 +171,9 @@
             <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;">
                <children>
                   <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #F4F6F9; -fx-border-color: #1C2424; -fx-border-radius: 2em;" />
-                  <Label layoutX="57.0" layoutY="25.0" text="Dashboard" textFill="#54b48c">
+                  <Label layoutX="32.0" layoutY="43.0" text="Categories De News" textFill="#2f4a3f">
                      <font>
-                        <Font name="System Bold" size="34.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
                   <Button fx:id="modify" layoutX="591.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#updateCategory" prefHeight="25.0" prefWidth="80.0" text="Modify" />

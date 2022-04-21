@@ -27,6 +27,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -51,6 +54,14 @@ public class NewThreadController implements Initializable {
     private Label ftopic;
     @FXML
     private Hyperlink previous;
+    @FXML
+    private AnchorPane rootPane;
+    @FXML
+    private ImageView out_iv;
+    @FXML
+    private ImageView logo_iv;
+    @FXML
+    private ImageView profile_iv;
     public void update(Thread t){
         previous.setOnAction(e->{
            FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
@@ -133,6 +144,14 @@ public class NewThreadController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void logout(MouseEvent event) {
+    }
+
+    @FXML
+    private void getProfile(MouseEvent event) {
     }
     
 }
