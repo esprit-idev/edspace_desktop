@@ -58,21 +58,21 @@ import edu.edspace.services.StudentService;
 import edu.edspace.services.UserService;
 import edu.edspace.services.statics;
 
-
 /**
  *
  * @author MeriamBI
  */
-public class MainClass extends Application{
+public class MainClass extends Application {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         MyConnection.getInstance().getCnx();
-       launch(args);
+
+        launch(args);
     }
 
     public static void ClubPub() {
-        ClubPubService clubPubService = new ClubPubService();
-        System.out.println(clubPubService.displayPostedClubPubs(5));
+        ClubService clubService = new ClubService();
+        System.out.println(clubService.displayClub());
         //add
         /*  ClubPub cpa = new ClubPub("test", "test", null, new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()), 5, 0);
         clubPubService.ajouterPubClub(cpa);
@@ -233,47 +233,49 @@ public class MainClass extends Application{
         ds.apercuDocument(url);
     }
     }*/
-    
     public static void Student() {
-        User stu = new User("malek3","chatti","malek3@gmail.com","malek3") ;
-        User stu2 = new User("malek2","zzz","malek2@gmail.com","123456789") ;
-       // stu.setIsBanned(false);
-        StudentService  SS = new StudentService();
-       UserService US = new UserService();
+        User stu = new User("malek3", "chatti", "malek3@gmail.com", "malek3");
+        User stu2 = new User("malek2", "zzz", "malek2@gmail.com", "123456789");
+        // stu.setIsBanned(false);
+        StudentService SS = new StudentService();
+        UserService US = new UserService();
         US.login("malek3", "malek3");
-       // SS.ajouterStudent(stu);
-       // System.out.println(SS.listStudent());
-       //update
-      // User stu1 =SS.getStudent(33);
-      // SS.updateStudent(stu, "33");
-      //delete
-      // SS.supprimerPersonne(stu1);
-        
+        // SS.ajouterStudent(stu);
+        // System.out.println(SS.listStudent());
+        //update
+        // User stu1 =SS.getStudent(33);
+        // SS.updateStudent(stu, "33");
+        //delete
+        // SS.supprimerPersonne(stu1);
+
     }
-    public static void User(){
-     UserService US = new UserService();
-       // US.login("malek", "123456789");
+
+    public static void User() {
+        UserService US = new UserService();
+        // US.login("malek", "123456789");
     }
-    
-    public static void Admin(){
-    User admin = new User();
+
+    public static void Admin() {
+        User admin = new User();
     }
-    public static void c(){
-        Niveau x=new Niveau();
+
+    public static void c() {
+        Niveau x = new Niveau();
         x.setId("3A");
-        NiveauService cs=new NiveauService();
-        MessageService y=new MessageService();
-        Message m=new Message();
+        NiveauService cs = new NiveauService();
+        MessageService y = new MessageService();
+        Message m = new Message();
         m.setContent("aaa aa bbb cc tt xx");
-        
-       y.switcher(m);
-          
-       }
-    public static void news(){
+
+        y.switcher(m);
+
+    }
+
+    public static void news() {
         NewsService pubs = new NewsService();
-       // DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-       // String date = df.format(new Date());
-        News p = new News("Esprit test 2", "T", "Tt", "1","2021/04/08", "yo.png");
+        // DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        // String date = df.format(new Date());
+        News p = new News("Esprit test 2", "T", "Tt", "1", "2021/04/08", "yo.png");
         pubs.addNews(p);
         System.out.print("added successfully");
         pubs.updateNews(p);
@@ -287,64 +289,68 @@ public class MainClass extends Application{
         // pubs.deleteNews(26);
         // System.out.println(pubs.AllNews());
     }
-    public static void emplois(){
-            EmploiService emp = new EmploiService();
-            Emploi em = new Emploi();
-            emp.addEmploi(em);
-            System.out.println(emp.AllEmplois());
+
+    public static void emplois() {
+        EmploiService emp = new EmploiService();
+        Emploi em = new Emploi();
+        emp.addEmploi(em);
+        System.out.println(emp.AllEmplois());
     }
-    public static void newsCategory(){
-                NewsCategoryService nCat = new NewsCategoryService();
-                System.out.println(nCat.AllCats());
-                CategoryNews c = new CategoryNews("Important");
-                nCat.addCat(c);
-                System.out.println(nCat.AllCats());
-                nCat.updateCat(c);
-                nCat.deleteCat(2);
-                System.out.println(nCat.AllCats());
-                // NewsCategoryService nCat = new NewsCategoryService();
-                // System.out.println(nCat.AllCats());
-                // CategoryNews c = new CategoryNews("Important");
-                // nCat.addCat(c);
-                // System.out.println(nCat.AllCats());
-                // nCat.updateCat(c);
-                // nCat.deleteCat(2);
-                // System.out.println(nCat.AllCats());
-            }
-    public static void emploisCategory(){
-                EmploiCategoryService nCat = new EmploiCategoryService();
-                System.out.println(nCat.AllCats());
-                CategoryEmploi c = new CategoryEmploi();
-                nCat.addCat(c);
-                System.out.println(nCat.AllCats());
-                nCat.updateCat(c);
-                nCat.deleteCat(2);
-                System.out.println(nCat.AllCats());
-                //EmploiCategoryService nCat = new EmploiCategoryService();
-                
-            }
-    public static void statics(){
-                //"[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"
-                statics sc = new statics();
-                 System.out.println(sc.numberOfPubsByCategory(1));
-                //role : "[\"ROLE_ADMIN\"]"
-             //  System.out.println(sc.numberOfStudents("[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"));
-               //  System.out.println(sc.numberOfOffreEmploi());
-              //System.out.println(sc.numberOfLikes(27));
-            }
+
+    public static void newsCategory() {
+        NewsCategoryService nCat = new NewsCategoryService();
+        System.out.println(nCat.AllCats());
+        CategoryNews c = new CategoryNews("Important");
+        nCat.addCat(c);
+        System.out.println(nCat.AllCats());
+        nCat.updateCat(c);
+        nCat.deleteCat(2);
+        System.out.println(nCat.AllCats());
+        // NewsCategoryService nCat = new NewsCategoryService();
+        // System.out.println(nCat.AllCats());
+        // CategoryNews c = new CategoryNews("Important");
+        // nCat.addCat(c);
+        // System.out.println(nCat.AllCats());
+        // nCat.updateCat(c);
+        // nCat.deleteCat(2);
+        // System.out.println(nCat.AllCats());
+    }
+
+    public static void emploisCategory() {
+        EmploiCategoryService nCat = new EmploiCategoryService();
+        System.out.println(nCat.AllCats());
+        CategoryEmploi c = new CategoryEmploi();
+        nCat.addCat(c);
+        System.out.println(nCat.AllCats());
+        nCat.updateCat(c);
+        nCat.deleteCat(2);
+        System.out.println(nCat.AllCats());
+        //EmploiCategoryService nCat = new EmploiCategoryService();
+
+    }
+
+    public static void statics() {
+        //"[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"
+        statics sc = new statics();
+        System.out.println(sc.numberOfPubsByCategory(1));
+        //role : "[\"ROLE_ADMIN\"]"
+        //  System.out.println(sc.numberOfStudents("[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"));
+        //  System.out.println(sc.numberOfOffreEmploi());
+        //System.out.println(sc.numberOfLikes(27));
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
-            Scene scene = new Scene(parent);
-           // scene.setFill(Color.TRANSPARENT);
+            Scene scene = new Scene(parent, 1050, 600);
+            // scene.setFill(Color.TRANSPARENT);
             primaryStage.setScene(scene);
             //primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 }

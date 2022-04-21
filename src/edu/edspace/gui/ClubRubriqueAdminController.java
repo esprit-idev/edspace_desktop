@@ -1,0 +1,245 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ */
+package edu.edspace.gui;
+
+import edu.edspace.entities.ClubPub;
+import edu.edspace.services.ClubPubService;
+import edu.edspace.services.ClubService;
+import edu.edspace.utils.MyConnection;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+/**
+ * FXML Controller class
+ *
+ * @author anash
+ */
+public class ClubRubriqueAdminController implements Initializable {
+
+    @FXML
+    private ImageView logo_iv;
+    @FXML
+    private Button btnOverview;
+    @FXML
+    private ImageView home_iv;
+    @FXML
+    private Button btnNews;
+    @FXML
+    private ImageView tabaff_iv;
+    @FXML
+    private Button btnOrders;
+    @FXML
+    private ImageView users_iv;
+    @FXML
+    private Button btnCustomers;
+    @FXML
+    private ImageView niveaux_iv;
+    @FXML
+    private Button btnMenus;
+    @FXML
+    private ImageView classe_iv;
+    @FXML
+    private Button btnPackages;
+    @FXML
+    private ImageView matieres_iv;
+    @FXML
+    private Button btn_Club;
+    @FXML
+    private ImageView club_iv;
+    @FXML
+    private Button btnEmploi;
+    @FXML
+    private ImageView offre_iv;
+    @FXML
+    private Button btnSignout1;
+    @FXML
+    private ImageView forum_iv;
+    @FXML
+    private Button btnSignout2;
+    @FXML
+    private ImageView centre_iv;
+    @FXML
+    private Button btnSignout3;
+    @FXML
+    private ImageView signOut_iv;
+    @FXML
+    private ScrollPane scroll;
+    @FXML
+    private Label clubName_l;
+    @FXML
+    private Label clubId;
+    @FXML
+    private Label clubDesc;
+    @FXML
+    private GridPane pubs;
+    private List<ClubPub> pubsList = new ArrayList<>();
+    private int clubid;
+    @FXML
+    private Button btndisplayPubenAttente;
+    @FXML
+    private Button badgeEnAttente;
+    @FXML
+    private ImageView enattenteIcon;
+    @FXML
+    private AnchorPane main;
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+
+    }
+
+    @FXML
+    private void handleClicks(ActionEvent event) {
+    }
+
+    public void initData(int clubid) {
+        MyConnection.getInstance().getCnx();
+        ClubPubService cb = new ClubPubService();
+        ClubService cp = new ClubService();
+        //setbadge
+        if (cb.displayHangingClubPubs(clubid).isEmpty()) {
+            badgeEnAttente.setVisible(false);
+        } else {
+            badgeEnAttente.setText(String.valueOf(cb.displayHangingClubPubs(clubid).size()));
+        }
+        //set icon color
+        Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.rgb(250, 250, 250)));
+        ColorAdjust bright = new ColorAdjust(0, 1, 1, 1);
+        lighting.setContentInput(bright);
+        lighting.setSurfaceScale(0.0);
+        enattenteIcon.setEffect(lighting);
+
+        //display hanging pubs
+        enattenteIcon.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ClubHangingPubsInterface.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root, 625, 500);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                ClubHangingPubsInterfaceController clubHangingPubsInterfaceController = loader.getController();
+                clubHangingPubsInterfaceController.initData(clubid);
+                stage.initStyle(StageStyle.UTILITY);
+                stage.show();
+                stage.setOnCloseRequest(events -> {
+                    pubs.getChildren().clear();
+                    initData(clubid);
+                });
+            } catch (IOException ex) {
+                Logger.getLogger(ClubRubriqueAdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        //setting actual pubs
+        String clubPic = cp.getClubImage(clubid);
+        pubsList = cb.displayPostedClubPubs(clubid);
+        int colu = 0;
+        int row = 0;
+        if (pubsList.isEmpty()) {
+            HBox h = new HBox(300);
+            h.setPadding(new Insets(50, 0, 0, 0));
+            Label l1 = new Label("");
+
+            Label l = new Label("Pas de publications.");
+            h.getChildren().addAll(l1, l);
+            pubs.add(h, colu++, row);
+        } else {
+            try {
+                for (int i = 0; i < pubsList.size(); i++) {
+                    FXMLLoader fxml = new FXMLLoader();
+                    fxml.setLocation(getClass().getResource("ClubPubAdminItem.fxml"));
+
+                    AnchorPane anchorPane = fxml.load();//child
+                    ClubPubAdminItemController clubPubAdminItemController = fxml.getController();
+                    clubPubAdminItemController.setData(pubsList.get(i), clubName_l.getText(),
+                            clubPic
+                    );
+                    if (colu == 1) {
+                        colu = 0;
+                        row++;
+                    }
+                    pubs.add(anchorPane, colu++, row);
+                    GridPane.setMargin(anchorPane, new Insets(10));
+
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+    }
+
+    @FXML
+    private void getNewsView(MouseEvent event) {
+    }
+
+    @FXML
+    private void displayClubs(ActionEvent event) {
+    }
+
+    public void setClubid(int clubid) {
+        this.clubid = clubid;
+    }
+
+    public void setClubName_l(String clubName_l) {
+        this.clubName_l.setText(clubName_l);
+    }
+
+    public void setClubDesc(String clubDesc) {
+        this.clubDesc.setText(clubDesc);
+    }
+
+    @FXML
+    private void displayPubenAttente(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ClubHangingPubsInterface.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            ClubHangingPubsInterfaceController clubHangingPubsInterfaceController = loader.getController();
+            clubHangingPubsInterfaceController.initData(clubid);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ClubRubriqueAdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void reload(MouseEvent event) {
+    }
+
+}

@@ -20,7 +20,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,10 +42,10 @@ public class ClubPubService {
                 can't drop or alter with PreparedStatement*/
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req); //instance of myconnection pour etablir la cnx
             pst.setInt(1, clubPub.getClub()); //parameter1=index in request(req) and parameter2=data to pass (nom de la personne)
-            pst.setString(2, clubPub.getPubDate());
+            pst.setString(2, new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
             pst.setString(3, clubPub.getPubDesc());
-            pst.setString(4, clubPub.getPubFile());
-            pst.setString(5, null);
+            pst.setString(4, null);
+            pst.setString(5, clubPub.getPubFile());
             pst.setString(6, null);
             pst.setString(7, clubPub.getPubImage());
 
@@ -54,14 +56,13 @@ public class ClubPubService {
         }
     }
 
-    public void updateClubPub(ClubPub clubPub, int currentId) {
-        String req = "update club_pub set pub_date=?,pub_description=?,club_img=?,is_posted=0 WHERE id=?";
+    public void updateClubPub(String desc, int currentId) {
+        String req = "update club_pub set pub_date=?,pub_description=?,is_posted=0 WHERE id=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-            pst.setString(1, clubPub.getPubDate());
-            pst.setString(2, clubPub.getPubDesc());
-            pst.setString(3, clubPub.getPubImage());
-            pst.setInt(4, currentId);
+            pst.setString(1, new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+            pst.setString(2, desc);
+            pst.setInt(3, currentId);
             pst.executeUpdate();
             System.out.println("ClubPub updated");
         } catch (SQLException ex) {
@@ -95,7 +96,7 @@ public class ClubPubService {
                 clubPub.setClub(rs.getInt(2));
                 clubPub.setPubDate(rs.getString(3));
                 clubPub.setPubDesc(rs.getString(4));
-                clubPub.setPubFile(rs.getString(5));
+                clubPub.setPubFile(rs.getString(6));
                 clubPub.setPubImage(rs.getString(8));
                 clubPubList.add(clubPub); //ajout de la matiere a la liste
             }
@@ -119,7 +120,7 @@ public class ClubPubService {
                 clubPub.setClub(rs.getInt(2));
                 clubPub.setPubDate(rs.getString(3));
                 clubPub.setPubDesc(rs.getString(4));
-                clubPub.setPubFile(rs.getString(5));
+                clubPub.setPubFile(rs.getString(6));
                 clubPub.setPubImage(rs.getString(8));
                 clubPubList.add(clubPub); //ajout de la matiere a la liste
             }
@@ -143,7 +144,7 @@ public class ClubPubService {
                 clubPub.setClub(rs.getInt(2));
                 clubPub.setPubDate(rs.getString(3));
                 clubPub.setPubDesc(rs.getString(4));
-                clubPub.setPubFile(rs.getString(5));
+                clubPub.setPubFile(rs.getString(6));
                 clubPub.setPubImage(rs.getString(8));
                 clubPubList.add(clubPub); //ajout de la matiere a la liste
             }
@@ -167,7 +168,7 @@ public class ClubPubService {
                 clubPub.setClub(rs.getInt(2));
                 clubPub.setPubDate(rs.getString(3));
                 clubPub.setPubDesc(rs.getString(4));
-                clubPub.setPubFile(rs.getString(5));
+                clubPub.setPubFile(rs.getString(6));
                 clubPub.setPubImage(rs.getString(8));
                 clubPubList.add(clubPub); //ajout de la matiere a la liste
             }
@@ -178,7 +179,7 @@ public class ClubPubService {
     }
 
     public void acceptClubPub(int currentId) {
-        String req = "update is_posted=1 WHERE id=?";
+        String req = "update club_pub set is_posted=1 WHERE id=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
             pst.setInt(1, currentId);
@@ -287,13 +288,29 @@ public class ClubPubService {
             pst.setInt(2, userId);
             ResultSet rs = pst.executeQuery();
             rs.next();
-            if(rs.getInt("COUNT(*)")!=0){
-                isLiked=true;
+            if (rs.getInt("COUNT(*)") != 0) {
+                isLiked = true;
             }
-        System.out.println("ClubPub isLiked or not ");
+            System.out.println("ClubPub isLiked or not ");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return isLiked;
+    }
+
+    public String getpubDesc(int pubId) {
+        String desc ="";
+        String req = "select pub_description from club_pub where id=?";
+        try {
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+            pst.setInt(1, pubId);
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            desc = rs.getString(1);
+            System.out.println("ClubPub numbs ");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return desc;
     }
 }

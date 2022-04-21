@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package edu.edspace.gui;
 
-import edu.edspace.utils.MyConnection;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -13,71 +8,66 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import edu.edspace.entities.CategoryNews;
+import edu.edspace.services.NewsCategoryService;
+import edu.edspace.utils.MyConnection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-/**
- * FXML Controller class
- *
- * @author MeriamBI
- */
-public class HomeBackController implements Initializable {
 
-    Connection connection = null;
-    @FXML
-    private Button btnOverview;
-    @FXML
-    private Button btnOrders;
-    @FXML
-    private Button btnCustomers;
-    @FXML
-    private Button btnMenus;
-    @FXML
-    private Button btnPackages;
-    @FXML
+public class allCategoryNewsController implements Initializable{
 
-    private Button btnSignout;
-
-    private Button btnSettings;
     @FXML
-    private Button btnEmploi;
+    private ImageView logo_iv;
     @FXML
-    private Button btnSignout1;
+    private ImageView home_iv;
     @FXML
-    private Button btnSignout2;
+    private ImageView tabaff_iv;
     @FXML
-    private Button btnSignout3;
+    private ImageView users_iv;
     @FXML
-    private Pane pnlCustomer;
+    private ImageView niveaux_iv;
     @FXML
-    private Pane pnlOrders;
+    private ImageView matieres_iv;
     @FXML
-    private Pane pnlMenus;
+    private ImageView classe_iv;
     @FXML
-    private Pane pnlOverview;
+    private ImageView club_iv;
     @FXML
-    private VBox pnItems;
+    private ImageView offre_iv;
     @FXML
-    private ImageView logo_iv,home_iv,tabaff_iv,users_iv,niveaux_iv,matieres_iv,classe_iv,club_iv,offre_iv,forum_iv,centre_iv,search_iv,signOut_iv;
+    private ImageView forum_iv; 
     @FXML
-
-    private Button btn_Club;
-
+    private ImageView centre_iv; 
+    @FXML
+    private ImageView search_iv; 
+    @FXML
+    private ImageView signOut_iv;
+    @FXML
     private AnchorPane rootPane;
     @FXML
     private Button btnNews;
     @FXML
     private Button btnCatNews;
+    @FXML
+    private TableView<CategoryNews> tableViewId;
+    @FXML
+    private TableColumn<CategoryNews,String> categoryNameCol;
+    
+    Connection connection = null;
+    ObservableList<CategoryNews> cats = FXCollections.observableArrayList();
     @FXML
     private void getNewsView(MouseEvent event){
         try {
@@ -87,29 +77,20 @@ public class HomeBackController implements Initializable {
 			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
 		}
     }
-
-    @FXML
-    private void getCatNewsView(MouseEvent event){
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
-			rootPane.getChildren().setAll(pane);
-		} catch (IOException ex) {
-			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-    }
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        connection = MyConnection.getInstance().getCnx();
-        initImages();
-    }    
-    
     @FXML
     private void handleClicks(ActionEvent event) {
+    }
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        connection = MyConnection.getInstance().getCnx();
+        initImages();
+        CategoryNews cat = new CategoryNews();
+        NewsCategoryService catService = new NewsCategoryService();
+        cats.clear();
+        //catService.AllCats();
+        cats.addAll(catService.AllCats());
+        tableViewId.setItems(cats);
+       // categoryNameCol.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
     }
     public void initImages(){
         File fileLogo = new File("images/logo1.png");
@@ -138,22 +119,7 @@ public class HomeBackController implements Initializable {
         offre_iv.setImage(outI);
         forum_iv.setImage(outI);
         centre_iv.setImage(outI);
-        search_iv.setImage(outI);
+        search_iv.setImage(searchI);
         signOut_iv.setImage(outI);
     }
-
-
-    @FXML
-    private void displayClubs(ActionEvent event) {
-         try {
-            //instance mtaa el crud
-            //redirection
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("ClubListStudent.fxml"));
-            Parent root=loader.load();
-            btn_Club.getScene().setRoot(root);
-        } catch (IOException ex) {
-            ex.printStackTrace();        }
-    }
-
-
 }

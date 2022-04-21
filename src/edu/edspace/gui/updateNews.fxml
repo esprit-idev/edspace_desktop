@@ -3,7 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,8 +18,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1349.0" styleClass="parent" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Home">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1349.0" styleClass="parent" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.updateNewsController">
    <children>
       <Pane prefHeight="750.0" prefWidth="210.0" styleClass="sidebar" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -29,7 +33,7 @@
                <children>
                   <Button fx:id="newsNavBtn" mnemonicParsing="false" stylesheets="@../css/styles.css">
                      <graphic>
-                        <Label contentDisplay="CENTER" prefHeight="31.0" prefWidth="122.0" text="News" textFill="#dde2ff">
+                        <Label contentDisplay="CENTER" text="News" textFill="#dde2ff">
                            <font>
                               <Font name="Segoe UI" size="18.0" />
                            </font>
@@ -113,6 +117,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </HBox>
+<<<<<<< HEAD:build/classes/edu/edspace/gui/Home.fxml
             <HBox layoutY="338.0" prefHeight="56.0" prefWidth="229.0">
                <children>
                   <Button fx:id="btn_Club" mnemonicParsing="false" onAction="#displayClubs" stylesheets="@../css/styles.css">
@@ -135,6 +140,8 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </HBox>
+=======
+>>>>>>> ce161be29e73ea94f401e31365a8ed8666ebb73f:src/edu/edspace/gui/updateNews.fxml
          </children>
          <padding>
             <Insets top="3.0" />
@@ -166,7 +173,7 @@
                   <Label text="LOG OUT" />
                </graphic>
             </Button>
-            <Label prefHeight="20.0" prefWidth="65.0" styleClass="home" stylesheets="@../css/styles.css" text="Home" textFill="#252733" GridPane.rowIndex="1">
+            <Label prefHeight="27.0" prefWidth="141.0" styleClass="home" stylesheets="@../css/styles.css" text="Add News" textFill="#252733" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
@@ -187,114 +194,6 @@
             </Label>
          </children>
       </GridPane>
-      <FlowPane layoutX="223.0" layoutY="72.0" prefHeight="166.0" prefWidth="1128.0">
-         <children>
-            <VBox prefHeight="134.0" prefWidth="258.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #DFE0EB; -fx-border-radius: 8;">
-               <FlowPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </FlowPane.margin>
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-alignment: CENTER;" text="Publication News">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <font>
-                        <Font name="System Bold" size="19.0" />
-                     </font>
-                  </Label>
-                  <Label style="-fx-text-alignment: center;" text="6" textFill="#3751ff">
-                     <font>
-                        <Font name="System Bold" size="40.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox prefHeight="127.0" prefWidth="258.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #3751FF; -fx-border-radius: 8;">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-alignment: CENTER;" text="Offre D'Emploi">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <font>
-                        <Font name="System Bold" size="19.0" />
-                     </font>
-                  </Label>
-                  <Label style="-fx-text-alignment: center;" text="26" textFill="#3751ff">
-                     <font>
-                        <Font name="System Bold" size="40.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-               <FlowPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </FlowPane.margin>
-            </VBox>
-            <VBox layoutX="298.0" layoutY="20.0" prefHeight="127.0" prefWidth="258.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #DFE0EB; -fx-border-radius: 8;">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-alignment: CENTER;" text="Etudiants">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <font>
-                        <Font name="System Bold" size="19.0" />
-                     </font>
-                  </Label>
-                  <Label style="-fx-text-alignment: center;" text="26" textFill="#3751ff">
-                     <font>
-                        <Font name="System Bold" size="40.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-               <FlowPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </FlowPane.margin>
-            </VBox>
-            <VBox layoutX="566.0" layoutY="10.0" prefHeight="127.0" prefWidth="258.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #DFE0EB; -fx-border-radius: 8;">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-alignment: CENTER;" text="Clubs">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <font>
-                        <Font name="System Bold" size="19.0" />
-                     </font>
-                  </Label>
-                  <Label style="-fx-text-alignment: center;" text="26" textFill="#3751ff">
-                     <font>
-                        <Font name="System Bold" size="40.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-               <FlowPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </FlowPane.margin>
-            </VBox>
-         </children>
-      </FlowPane>
       <FlowPane layoutX="212.0" layoutY="680.0" prefHeight="69.0" prefWidth="1139.0" stylesheets="@../css/styles.css">
          <children>
             <Label alignment="CENTER" text="IDev Team">
@@ -304,6 +203,63 @@
             </Label>
          </children>
       </FlowPane>
-      <Pane layoutX="266.0" layoutY="263.0" prefHeight="370.0" prefWidth="1064.0" styleClass="chart" />
+      <Pane layoutX="495.0" layoutY="87.0" prefHeight="522.0" prefWidth="580.0" style="-fx-background-radius: 8; -fx-background-color: #FFFFFF;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="228.0" layoutY="16.0" style="-fx-alignment: &quot;CENTER&quot;;" text="Update your publication" />
+            <VBox layoutX="14.0" layoutY="79.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="56.0" />
+                  <TextField fx:id="titleField" prefHeight="25.0" prefWidth="546.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="11.0" layoutY="150.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="75.0" />
+                  <TextField fx:id="descriptionField" prefHeight="25.0" prefWidth="546.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="11.0" layoutY="207.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author" wrappingWidth="75.0" />
+                  <TextField fx:id="authorField" prefHeight="25.0" prefWidth="546.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="11.0" layoutY="271.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image" wrappingWidth="75.0" />
+                  <ImageView fx:id="imageField" fitHeight="20.0" fitWidth="546.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+            <VBox layoutX="11.0" layoutY="309.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="75.0" />
+                  <DatePicker fx:id="dateField" prefHeight="25.0" prefWidth="549.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="14.0" layoutY="367.0" prefHeight="57.0" prefWidth="552.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category Name" wrappingWidth="113.0" />
+                  <ComboBox fx:id="categoryNameField" prefHeight="25.0" prefWidth="546.0" />
+               </children>
+            </VBox>
+            <HBox layoutX="107.0" layoutY="427.0" prefHeight="64.0" prefWidth="360.0">
+               <children>
+                  <Button fx:id="update" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#save" prefHeight="35.0" prefWidth="122.0" style="-fx-font-weight: 900;" styleClass="add_btn" text="Update" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="122.0" styleClass="cancel_btn" text="Cancel" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="50.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

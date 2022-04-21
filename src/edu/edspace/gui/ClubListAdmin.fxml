@@ -5,16 +5,21 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="h_box" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.ClubListStudentController">
+<HBox fx:id="hboxa" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.ClubListAdminController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1077.0" style="-fx-background-color: #1C2424;">
          <children>
@@ -161,8 +166,9 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-         </children></VBox>
-      <ScrollPane fx:id="scroll" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="783.0" styleClass="bgwhite" stylesheets="@../css/clubsCss.css">
+         </children>
+      </VBox>
+      <ScrollPane fx:id="scrolla" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="783.0" styleClass="bgwhite" stylesheets="@../css/clubsCss.css">
          <content>
             <VBox styleClass="bgwhite">
                <children>
@@ -180,10 +186,110 @@
                         <Label layoutX="161.0" layoutY="20.0" prefHeight="27.0" prefWidth="154.0" text="Filter par categorie" />
                      </children>
                   </AnchorPane>
-                  <GridPane fx:id="grid" prefHeight="600.0" prefWidth="744.0">
+                  <VBox>
+                     <children>
+                        <AnchorPane>
+                           <children>
+                              <Label fx:id="addlabel" text="Ajouter un club">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnAnnulerModif" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="603.0" layoutY="4.0" mnemonicParsing="false" text="Annuler la modification" textAlignment="CENTER" visible="false" />
+                           </children>
+                        </AnchorPane>
+                        <HBox prefHeight="72.0" prefWidth="785.0">
+                           <children>
+                              <VBox prefHeight="388.0" prefWidth="124.0">
+                                 <children>
+                                    <Label text="Nom du Club">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="c_name_tf" prefHeight="25.0" prefWidth="132.0">
+                                       <VBox.margin>
+                                          <Insets left="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Categorie">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <ComboBox fx:id="c_cat" prefHeight="25.0" prefWidth="212.0">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="10.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="30.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Responsable">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <ComboBox fx:id="c_respo" prefHeight="25.0" prefWidth="281.0">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="10.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="30.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox>
+                           <children>
+                              <Label text="Description">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextArea fx:id="c_desc_tf" prefHeight="66.0" prefWidth="745.0">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="30.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                              <Button fx:id="addbtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addClub" prefHeight="34.0" prefWidth="111.0" text="Ajouter" textAlignment="CENTER">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="320.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" text="Button" />
+                     </children>
+                  </VBox>
+                  <GridPane fx:id="grida" prefWidth="785.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
+                     <children>
+                        <TableView fx:id="tab" prefWidth="785.0">
+                          <columns>
+                            <TableColumn fx:id="tab_nom" prefWidth="110.0" text="Nom du club" />
+                            <TableColumn fx:id="tab_desc" prefWidth="215.0" resizable="false" text="Description" />
+                              <TableColumn fx:id="tab_cat" prefWidth="141.0" text="Categorie" />
+                              <TableColumn fx:id="tab_res" prefWidth="192.0" text="Responsable" />
+                              <TableColumn fx:id="tab_action" prefWidth="126.0" text="Action" />
+                          </columns>
+                        </TableView>
+                     </children>
                   </GridPane>
                </children>
             </VBox>
