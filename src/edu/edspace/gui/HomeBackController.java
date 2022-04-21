@@ -55,7 +55,7 @@ public class HomeBackController implements Initializable {
     private Button btnMenus;
     @FXML
     private Button btnMatiere;
-    @FXML
+
     private Button btnSettings;
     @FXML
     private Button btnEmploi;
@@ -72,15 +72,7 @@ public class HomeBackController implements Initializable {
     @FXML
     private Button btnNews;
     @FXML
-    private Pane pnlCustomer;
-    @FXML
-    private Pane pnlOrders;
-    @FXML
-    private Pane pnlMenus;
-    @FXML
     private Pane pnlOverview;
-    @FXML
-    private VBox pnItems;
     @FXML
     private ImageView home_iv;
     @FXML
@@ -121,6 +113,8 @@ public class HomeBackController implements Initializable {
     private PieChart pieChartEmp;
     private List<CategoryNews> categories = new ArrayList<CategoryNews>();
     private List<CategoryEmploi> categoriesEmpl = new ArrayList<CategoryEmploi>();
+    @FXML
+    private Button btnClubs;
 
     @FXML
     private void getNewsView(MouseEvent event) {
@@ -131,7 +125,7 @@ public class HomeBackController implements Initializable {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    @FXML
+
     private void getCatNewsView(MouseEvent event) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
@@ -140,6 +134,7 @@ public class HomeBackController implements Initializable {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @FXML
     private void getAllDocsView(MouseEvent event) {
 
@@ -151,25 +146,26 @@ public class HomeBackController implements Initializable {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @FXML
-    private void getEmploiView(MouseEvent event){
+    private void getEmploiView(MouseEvent event) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
-			rootPane.getChildren().setAll(pane);
-		} catch (IOException ex) {
-			Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
-		}
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    @FXML
-    private void getDashboardView(MouseEvent event){
+
+    private void getDashboardView(MouseEvent event) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
-			rootPane.getChildren().setAll(pane);
-		} catch (IOException ex) {
-			Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
-		}
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     @FXML
     private void getAllMatieresView(MouseEvent event) {
         try {
@@ -190,10 +186,11 @@ public class HomeBackController implements Initializable {
         connection = MyConnection.getInstance().getCnx();
         initImages();
         initChart();
-        
+
     }
+
     //here are statics of our dashboard
-    public void initChart(){
+    public void initChart() {
         statics sc = new statics();
         pubNum.setText(sc.numberOfPublications());
         empNum.setText(sc.numberOfOffreEmploi());
@@ -208,32 +205,35 @@ public class HomeBackController implements Initializable {
         pieChartEmp.setData(pieDataEmpl);
         pieChartEmp.setTitle("N Offres Par Categorie");
     }
+
     //observable list of pichart data, filled with category names and their corresponding publications number
-    private ObservableList<PieChart.Data> pieDataNews(){
+    private ObservableList<PieChart.Data> pieDataNews() {
         statics sc = new statics();
         ObservableList<PieChart.Data> allcat = FXCollections.observableArrayList();
         NewsCategoryService ns = new NewsCategoryService();
-        categories= ns.AllCats();
+        categories = ns.AllCats();
         int num = 0;
         for (int i = 0; i < categories.size(); i++) {
             num = sc.numberOfPubsByCategory(categories.get(i).getId());
-            allcat.add(new PieChart.Data(categories.get(i).getCategoryName(),num ));
+            allcat.add(new PieChart.Data(categories.get(i).getCategoryName(), num));
         }
         return allcat;
     }
+
     //observable list of pichart data, filled with category names and their corresponding emploi number
-    private ObservableList<PieChart.Data> pieDataEmploi(){
+    private ObservableList<PieChart.Data> pieDataEmploi() {
         statics sc = new statics();
         ObservableList<PieChart.Data> allcat = FXCollections.observableArrayList();
         EmploiCategoryService ns = new EmploiCategoryService();
-        categoriesEmpl= ns.AllCats();
+        categoriesEmpl = ns.AllCats();
         int num = 0;
         for (int i = 0; i < categoriesEmpl.size(); i++) {
             num = sc.numberOfEmploisByCategory(categoriesEmpl.get(i).getId());
-            allcat.add(new PieChart.Data(categoriesEmpl.get(i).getCategoryName(),num));
+            allcat.add(new PieChart.Data(categoriesEmpl.get(i).getCategoryName(), num));
         }
         return allcat;
-        }
+    }
+
     @FXML
     private void handleClicks(ActionEvent event) {
 
@@ -242,40 +242,40 @@ public class HomeBackController implements Initializable {
     public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
-        
+
         File fileHome = new File("images/stats_grey.png");
         Image homeI = new Image(fileHome.toURI().toString());
-        
+
         File fileTab = new File("images/announcement_grey.png");
         Image tabI = new Image(fileTab.toURI().toString());
-        
+
         File fileLevel = new File("images/level_grey.png");
         Image levelI = new Image(fileLevel.toURI().toString());
-        
+
         File fileClass = new File("images/class-management_grey.png");
         Image classI = new Image(fileClass.toURI().toString());
-        
+
         File fileBook = new File("images/book_grey.png");
         Image bookI = new Image(fileBook.toURI().toString());
-        
+
         File fileForum = new File("images/forum2_grey.png");
         Image forumI = new Image(fileForum.toURI().toString());
-        
+
         File fileOffre = new File("images/briefcase_grey.png");
         Image offreI = new Image(fileOffre.toURI().toString());
-        
+
         File fileDocs = new File("images/file_grey.png");
         Image docsI = new Image(fileDocs.toURI().toString());
 
         File fileUsers = new File("images/users_grey.png");
         Image usersI = new Image(fileUsers.toURI().toString());
-        
+
         File fileClub = new File("images/org_grey.png");
         Image clubI = new Image(fileClub.toURI().toString());
 
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
-        
+
         logo_iv.setImage(logoI);
         home_iv.setImage(homeI);
         tabaff_iv.setImage(tabI);
@@ -289,4 +289,19 @@ public class HomeBackController implements Initializable {
         centre_iv.setImage(docsI);
         signOut_iv.setImage(outI);
     }
+
+    @FXML
+    private void displayClubs(ActionEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
 }

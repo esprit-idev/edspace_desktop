@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
 /**
  *
@@ -19,7 +21,9 @@ import java.util.List;
  */
 public class ClubCategService {
 
-    public void ajouterClubCat(ClubCategory clubCategory) {
+    public boolean ajouterClubCat(ClubCategory clubCategory) {
+                boolean res = false;
+
         try {
             String req = "insert into categorie_club (categorie_nom) values"
                     + "(?)"; //requete d'inertion avec parametres
@@ -30,9 +34,11 @@ public class ClubCategService {
             pst.setString(1, clubCategory.getCategorie()); //parameter1=index in request(req) and parameter2=data to pass (nom de la personne)
             pst.executeUpdate(); //pour exécuter la requete
             System.out.println("ClubCategory added");
+            res=true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        return res;
     }
 
     public List<ClubCategory> displayClubCategories() {
@@ -55,7 +61,8 @@ public class ClubCategService {
         return clubCategList;
     }
 
-    public void updateClubCategories(String catName, String currentId) {
+    public boolean updateClubCategories(String catName, String currentId) {
+        boolean res = false;
         String req = "update categorie_club set categorie_nom=? WHERE id=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
@@ -63,21 +70,49 @@ public class ClubCategService {
             pst.setString(2, currentId);
             pst.executeUpdate();
             System.out.println("ClubCategory updated");
+            res=true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        return res;
     }
 
-    public void deleteClubCategories(String catgId) {
+    public boolean deleteClubCategories(String catgId) {
+        boolean res = false;
         String req = "delete from categorie_club where id = ?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
             pst.setString(1, catgId);
             pst.executeUpdate();
             System.out.println("ClubCategory deleted");
+            res = true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        return res;
+    }
+
+    public void getCategories(ObservableList<ClubCategory> categoriesList, TableView<ClubCategory> tab) {
+        categoriesList.clear();
+
+        try {
+            String req = "select * from categorie_club"; //requete select from db
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req); //instance of myConnection pour etablir la cnx
+            ResultSet rs = pst.executeQuery(req); //resultat de la requete
+
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                ClubCategory category = new ClubCategory();
+                category.setId(rs.getString("id")); //set id from req result
+                category.setCategorie(rs.getString("categorie_nom"));
+
+                categoriesList.add(category); //ajout de la matiere a la liste
+                tab.setItems(categoriesList);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 
 }

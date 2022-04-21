@@ -42,12 +42,13 @@ import edu.edspace.services.StudentService;
 import edu.edspace.services.UserService;
 import edu.edspace.services.statics;
 
-
 /**
  *
  * @author MeriamBI
  */
-public class MainClass extends Application{
+public class MainClass extends Application {
+
+
 
     public static void main(String[] args){
        launch(args);
@@ -55,8 +56,8 @@ public class MainClass extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
-           //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+           Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/FrontHome.fxml")); //new front
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeFront.fxml")); //old front
             Scene scene = new Scene(parent);
@@ -69,6 +70,6 @@ public class MainClass extends Application{
         } catch (IOException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 }

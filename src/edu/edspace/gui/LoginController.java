@@ -103,7 +103,9 @@ public class LoginController implements Initializable {
                 
                     //FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AddStudent.fxml"));
                    try {
-                    Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/AllStudents.fxml"));
+                    Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml")); //backoffice
+                                     //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/FrontHome.fxml"));
+
             Scene scene = new Scene(parent);
             Stage stage = new Stage();
             stage.setScene(scene);
