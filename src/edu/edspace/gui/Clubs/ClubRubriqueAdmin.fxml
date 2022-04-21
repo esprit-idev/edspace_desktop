@@ -18,7 +18,7 @@
          <children>
             <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../images/logo1.png" />
+                  <Image url="@../../../../../images/logo1.png" />
                </image>
                <VBox.margin>
                   <Insets bottom="10.0" top="50.0" />
@@ -28,7 +28,7 @@
                <graphic>
                   <ImageView fx:id="home_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/icons8_Home_32px.png" />
+                        <Image url="@../../../../../images/icons8_Home_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -46,7 +46,7 @@
                <graphic>
                   <ImageView fx:id="tabaff_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                        <Image url="@../../../../../images/icons8_Person_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -58,7 +58,7 @@
                <graphic>
                   <ImageView fx:id="users_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                        <Image url="@../../../../../images/icons8_Person_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -70,7 +70,7 @@
                <graphic>
                   <ImageView fx:id="niveaux_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                        <Image url="@../../../../../images/icons8_Person_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -82,7 +82,7 @@
                <graphic>
                   <ImageView fx:id="classe_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                        <Image url="@../../../../../images/icons8_Person_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -94,7 +94,7 @@
                <graphic>
                   <ImageView fx:id="matieres_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                        <Image url="@../../../../../images/icons8_Person_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -106,7 +106,7 @@
                <graphic>
                   <ImageView fx:id="club_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                        <Image url="@../../../../../images/icons8_Person_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -118,7 +118,7 @@
                <graphic>
                   <ImageView fx:id="offre_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                        <Image url="@../../../../../images/icons8_Person_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -130,7 +130,7 @@
                <graphic>
                   <ImageView fx:id="forum_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                        <Image url="@../../../../../images/icons8_Person_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -142,7 +142,7 @@
                <graphic>
                   <ImageView fx:id="centre_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/icons8_Person_32px.png" />
+                        <Image url="@../../../../../images/icons8_Person_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -154,7 +154,7 @@
                <graphic>
                   <ImageView fx:id="signOut_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/icons8_Sign_Out_32px.png" />
+                        <Image url="@../../../../../images/icons8_Sign_Out_32px.png" />
                      </image>
                   </ImageView>
                </graphic>

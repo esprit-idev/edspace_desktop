@@ -54,6 +54,7 @@ public class NewsService {
            try{ 
                 query = "INSERT INTO publication_news (title, owner, content, category_name_id, date, image) VALUES (?,?,?,?,?,?)";
                 preparedStatement = connection.prepareStatement(query);
+
                 preparedStatement.setString(1, pub.getTitle());
                 preparedStatement.setString(2, pub.getOwner());
                 preparedStatement.setString(3, pub.getContent());
@@ -61,6 +62,7 @@ public class NewsService {
                 preparedStatement.setString(5, pub.getDate());
                 preparedStatement.setString(6, pub.getImage());
                 preparedStatement.executeUpdate();
+
         }catch(SQLException ex){
             System.out.println(ex.getMessage());;
         }
@@ -83,11 +85,13 @@ public class NewsService {
             preparedStatement.setString(4, pub.getDate());
             preparedStatement.setString(5, pub.getOwner());
             preparedStatement.setString(6, pub.getCategoryName());
+
             preparedStatement.setInt(7, id);
             preparedStatement.executeUpdate();
+
             System.out.println("updated");
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());;
+            System.out.println(ex.getMessage());
         }
     }
 //delete news
@@ -102,6 +106,7 @@ public class NewsService {
             System.out.println(e.getMessage());
         }
     }
+
     public List<News> AllNewsforFilter(String req){
         List<News> listNews = new ArrayList<>();
         try {
@@ -128,4 +133,5 @@ public List<News> filterByCat(int cat) {
     String req = "SELECT * from publication_news where category_name_id='"+cat+"'";
     return AllNewsforFilter(req);
 }
+
 }

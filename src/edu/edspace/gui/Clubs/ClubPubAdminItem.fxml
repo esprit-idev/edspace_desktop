@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="main" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="pub-item" stylesheets="@../css/clubsCss.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubPubAdminItemController">
+<AnchorPane id="AnchorPane" fx:id="main" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="pub-item" stylesheets="@../../css/clubsCss.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubPubAdminItemController">
    <children>
       <VBox layoutY="21.0">
          <children>
@@ -35,7 +35,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../../../images/del.png" />
+                        <Image url="@../../../../images/del.png" />
                      </image>
                   </ImageView>
                </children>

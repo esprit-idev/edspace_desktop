@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import edu.edspace.entities.CategoryNews;
-import edu.edspace.gui.HomeController;
+
 import edu.edspace.services.NewsCategoryService;
 import edu.edspace.utils.MyConnection;
 import javafx.collections.FXCollections;
@@ -202,23 +202,50 @@ public class allCategoryNewsController implements Initializable{
         initTable();
         }
 
-    //sidebar views
-    @FXML
-    private void getNewsView(MouseEvent event){
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//sidebar
+@FXML
+private void getNewsView(MouseEvent event){
+    try {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
+        rootPane.getChildren().setAll(pane);
+    } catch (IOException ex) {
+        Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
     }
-    @FXML
+}
+@FXML
+private void displayClubs(ActionEvent event) {
+    try {
+        //instance mtaa el crud
+        //redirection
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+        Parent root = loader.load();
+        club_iv.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+}
+
+@FXML
+private void getUsers(ActionEvent event) {
+    
+    try {
+        //instance mtaa el crud
+        //redirection
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+        Parent root = loader.load();
+        club_iv.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+    
+}
+@FXML
     private void getCatNewsView(MouseEvent event) {
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allCategoryNews.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
-            Logger.getLogger(allCategoryNewsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     @FXML
@@ -229,16 +256,16 @@ public class allCategoryNewsController implements Initializable{
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(allCategoryNewsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     @FXML
     private void getEmploiView(MouseEvent event){
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allEmploi.fxml"));
 			rootPane.getChildren().setAll(pane);
 		} catch (IOException ex) {
-			Logger.getLogger(allCategoryNewsController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
 		}
     }
     @FXML
@@ -247,7 +274,7 @@ public class allCategoryNewsController implements Initializable{
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
 			rootPane.getChildren().setAll(pane);
 		} catch (IOException ex) {
-			Logger.getLogger(allCategoryNewsController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
 		}
     }
     
@@ -258,10 +285,9 @@ public class allCategoryNewsController implements Initializable{
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(allCategoryNewsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
-    @FXML
+    }    @FXML
     private void handleClicks(ActionEvent event) {
     }
     public void initImages() {

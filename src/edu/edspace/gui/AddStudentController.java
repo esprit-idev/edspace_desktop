@@ -17,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 /**
@@ -42,6 +44,52 @@ public class AddStudentController implements Initializable {
     private Text msgnovalidemail;
     @FXML
     private Text msgpass;
+    @FXML
+    private ImageView logo_iv;
+    @FXML
+    private Button btnOverview;
+    @FXML
+    private ImageView home_iv;
+    @FXML
+    private Button btnNews;
+    @FXML
+    private ImageView tabaff_iv;
+    @FXML
+    private Button btnOrders;
+    @FXML
+    private ImageView users_iv;
+    @FXML
+    private Button btnCustomers;
+    @FXML
+    private ImageView niveaux_iv;
+    @FXML
+    private Button btnMenus;
+    @FXML
+    private ImageView classe_iv;
+    @FXML
+    private Button btnMatiere;
+    @FXML
+    private ImageView matieres_iv;
+    @FXML
+    private Button btnSettings;
+    @FXML
+    private ImageView club_iv;
+    @FXML
+    private Button btnEmploi;
+    @FXML
+    private ImageView offre_iv;
+    @FXML
+    private Button btnSignout1;
+    @FXML
+    private ImageView forum_iv;
+    @FXML
+    private Button btnCentrePartage;
+    @FXML
+    private ImageView centre_iv;
+    @FXML
+    private Button btnSignout3;
+    @FXML
+    private ImageView signOut_iv;
 
     /**
      * Initializes the controller class.
@@ -87,4 +135,29 @@ public class AddStudentController implements Initializable {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     
-}}
+
+}
+
+    @FXML
+    private void handleClicks(ActionEvent event) {
+    }
+
+    @FXML
+    private void getNewsView(MouseEvent event) {
+    }
+
+    @FXML
+    private void getAllMatieresView(MouseEvent event) {
+    }
+
+    @FXML
+    private void getEmploiView(MouseEvent event) {
+    }
+
+    @FXML
+    private void getAllDocsView(MouseEvent event) {
+    }
+}
+
+
+

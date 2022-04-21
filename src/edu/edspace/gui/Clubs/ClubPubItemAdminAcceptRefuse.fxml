@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="main" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="pub-item" stylesheets="@../css/clubsCss.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubPubItemAdminAcceptRefuseController">
+<AnchorPane id="AnchorPane" fx:id="main" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="pub-item" stylesheets="@../../css/clubsCss.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubPubItemAdminAcceptRefuseController">
    <children>
       <VBox layoutY="21.0">
          <children>
@@ -35,12 +35,12 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../../../images/refuse.png" />
+                        <Image url="@../../../../images/refuse.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="acceptBtn" fitHeight="21.0" fitWidth="29.0" onMouseClicked="#acceptPub" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/accept.png" />
+                        <Image url="@../../../../images/accept.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="10.0" />

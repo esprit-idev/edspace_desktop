@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author 21656
  */
 public class Thread {
-    String id;
+    int id;
     String question;
     int nb_likes;
     String postDate;
@@ -37,7 +37,7 @@ public class Thread {
     }
 
     public int getUser() {
-        return 1;
+        return this.user;
     }
 
     public void setUser(int user) {
@@ -56,7 +56,7 @@ public class Thread {
         
     }
     
-    public Thread(String id,String question, int nb_likes, String postDate, int threadType) {
+    public Thread(int id,String question, int nb_likes, String postDate, int threadType) {
         this.id = id;
         this.question = question;
         this.nb_likes = nb_likes;
@@ -108,11 +108,11 @@ public class Thread {
         this.threadType = threadType;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     

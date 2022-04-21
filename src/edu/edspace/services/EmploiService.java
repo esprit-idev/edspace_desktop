@@ -6,6 +6,7 @@
 package edu.edspace.services;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,7 +62,7 @@ public class EmploiService {
             preparedStatement.setString(3, em.getContent());
             preparedStatement.setString(4, em.getDate());
             preparedStatement.setString(5, em.getImage());
-            preparedStatement.executeUpdate();
+            preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -83,8 +84,10 @@ public class EmploiService {
             preparedStatement.setString(3, em.getCategoryName());
             preparedStatement.setString(4, em.getDate());
             preparedStatement.setString(5, em.getImage());
+
             preparedStatement.setInt(6, id);
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

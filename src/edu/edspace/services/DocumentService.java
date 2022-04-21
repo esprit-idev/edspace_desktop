@@ -289,17 +289,10 @@ public class DocumentService {
         String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; //to_change
         //to_change
         wkhtml = Runtime.getRuntime().exec(command); // Start process
-
        // IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
-
-
         IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
-
         wkhtml.waitFor(); // Allow process to run
-
     }
-
-
     public File convertBlobToFile(Blob blob, Document d) {
         InputStream blobStream = null;
         try {
@@ -341,7 +334,6 @@ public class DocumentService {
         }
         return fichier;
     }
-
     public String convertFileToBase64(String filepath) {
         byte[] fileContent = null;
        // try {
