@@ -4,7 +4,6 @@
  */
 package edu.edspace.gui.Clubs;
 
-
 import edu.edspace.entities.Club;
 import edu.edspace.entities.ClubCategory;
 import edu.edspace.entities.User;
@@ -385,7 +384,6 @@ public class ClubListAdminController implements Initializable {
             ex.printStackTrace();
         }
     }
-
     @FXML
     private void addClub(ActionEvent event) {
         ClubService cb = new ClubService();
@@ -497,7 +495,8 @@ public class ClubListAdminController implements Initializable {
         }
 
     }
-            public void initImages() {
+
+    public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
 
