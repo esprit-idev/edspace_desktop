@@ -31,12 +31,12 @@ public class EmploiService {
     public List<Emploi> AllEmplois(){
         List<Emploi> listEmplois = new ArrayList<>();
         try {
-            query = "SELECT * FROM `emploi`";
+            query = "SELECT emploi.*, categorie_emploi.category_name as catName FROM emploi JOIN categorie_emploi ON emploi.category_name_id = categorie_emploi.id";
             resultSet = connection.createStatement().executeQuery(query);
             while(resultSet.next()){
                 Emploi em = new Emploi();
                 em.setId(resultSet.getInt(1));
-                em.setCategoryName(resultSet.getString(2));
+                em.setCategoryName(resultSet.getString("catName"));
                 em.setTitle(resultSet.getString(3));
                 em.setContent(resultSet.getString(4));
                 em.setDate(resultSet.getString(5));
@@ -45,7 +45,7 @@ public class EmploiService {
             }
         } catch (SQLException e) {
 
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return listEmplois;
     }
@@ -68,7 +68,7 @@ public class EmploiService {
     }
 
     //update an offer 
-    public void updateEmploi(Emploi em){
+    public void updateEmploi(Emploi em, int id){
         try {
             query = "UPDATE emploi SET " +
             "title=?," +
@@ -83,7 +83,7 @@ public class EmploiService {
             preparedStatement.setString(3, em.getCategoryName());
             preparedStatement.setString(4, em.getDate());
             preparedStatement.setString(5, em.getImage());
-            preparedStatement.setInt(6, em.getId());
+            preparedStatement.setInt(6, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

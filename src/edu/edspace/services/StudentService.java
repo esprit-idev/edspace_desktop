@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -35,25 +37,46 @@ public class StudentService {
             pst.setString(3, null);
             pst.setString(4, stu.getUsername()); 
             pst.setString(5, stu.getPrenom()); 
-            pst.setString(6, stu.getEmail());
+            pst.setString(6, stu.getEmail().toLowerCase());
+            /*
+            String myPwd = "$2y"+BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)).substring(3);
+            pst.setString(7, myPwd);
+            */
             pst.setString(7,BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)));
             pst.setBoolean(8 , false);
             pst.setString(9,null);
             pst.setString(10,"[\"ROLE_STUDENT\"]");
-             pst.setString(11,null);
-             pst.setString(12,null);
+            pst.setString(11,null);
+            pst.setString(12,null);
             pst.executeUpdate(); //pour exécuter la requete
             System.out.println("Etudiant ajoutée");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
+   public void AjouterUser(User u)  {
+        try {
+        String req = "insert into user(username, prenom ,email ,password,roles) values(?,?,?,?,?)";
+        PreparedStatement pre = MyConnection.getInstance().getCnx().prepareStatement(req);
+        pre.setString(1, u.getUsername());
+       // pre.setString(2, u.getUsername().toLowerCase());
+        pre.setString(2, u.getPrenom());
+        pre.setString(3, u.getEmail());
 
+       // pre.setString(4, u.getEmail().toLowerCase());
+        pre.setString(4, BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(13)));
+         pre.setString(5,"[\"ROLE_STUDENT\"]");
+       // pre.setString(7, "a:0:{}");
+        pre.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
     
     
 
-    public List<User> listStudent() {
-        List<User> listStudent = new ArrayList<>();
+    public ObservableList<User> listStudent() {
+        ObservableList<User> listStudent = FXCollections.observableArrayList();
         try {
             String req = "select * from user where roles='[\"ROLE_STUDENT\"]'"  ; //requete select from db
             Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
@@ -92,11 +115,11 @@ public class StudentService {
         }
     }
     
-      public void supprimerPersonne(User stu) {
+      public void supprimerPersonne(String id) {
         String req = "delete from user where id = ?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-            pst.setInt(1, stu.getId());
+            pst.setString(1, id);
             pst.executeUpdate();
             System.out.println("Etudiant supprimée");
         } catch (SQLException ex) {

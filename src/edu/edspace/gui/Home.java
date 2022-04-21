@@ -5,6 +5,7 @@
  */
 package edu.edspace.gui;
 
+import edu.edspace.gui.Clubs.ClubListStudentController;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;

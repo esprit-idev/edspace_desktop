@@ -6,7 +6,6 @@ package edu.edspace.services;
 
 import edu.edspace.entities.DocumentFavoris;
 import edu.edspace.utils.MyConnection;
-import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,11 +38,12 @@ public class DocumentFavorisService {
     }
     
     public void unpinDocument(DocumentFavoris fave) {
-        String req = "delete from document_favoris where id = ?";
+        //String req = "delete from document_favoris where id = ?";
+        String req = "delete from document_favoris where user_id = ? and document_id=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-            System.out.println(fave.getId());
-            pst.setInt(1, fave.getId());
+            pst.setInt(1, fave.getUser_id());
+            pst.setInt(2, fave.getDocument_id());
             pst.executeUpdate();
             System.out.println("Document détaché");
         } catch (SQLException ex) {
