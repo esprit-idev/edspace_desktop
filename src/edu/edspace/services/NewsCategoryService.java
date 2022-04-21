@@ -49,15 +49,17 @@ public class NewsCategoryService {
     }
 
     //update news 
-    public void updateCat(CategoryNews pub){
+    public void updateCat(int id, String categoryName){
         try {
             query = "UPDATE `categorie_news` SET" +
             "`category_name` = ?" +
             " WHERE `id` = ? ";
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, pub.getCategoryName());
-            preparedStatement.setInt(2, pub.getId());
-            preparedStatement.execute();
+
+            preparedStatement.setString(1, categoryName);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+
             System.out.println("updated");
         } catch (SQLException ex) {
             ex.getStackTrace();
@@ -77,4 +79,22 @@ public class NewsCategoryService {
             System.out.println(e.getMessage());
         }
     }
+        // list all cat news
+        public List<CategoryNews> AllCatsNames(){
+            List<CategoryNews> listCats = new ArrayList<>();
+            try {
+                // String query all publications 
+                query = "SELECT category_name FROM `categorie_news` " ;
+                resultSet = connection.createStatement().executeQuery(query);
+                while (resultSet.next()) {
+                    CategoryNews pub = new CategoryNews();
+                    pub.setCategoryName(resultSet.getString(1));
+                    listCats.add(pub);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            return listCats;
+        }
+    
 }

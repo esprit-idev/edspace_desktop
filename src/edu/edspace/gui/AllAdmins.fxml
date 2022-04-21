@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="623.0" prefWidth="989.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.AllAdminsController">
+   <children>
+      <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="624.0" prefWidth="194.0" style="-fx-background-color: #1C2424;">
+         <children>
+            <ImageView fx:id="logo" fitHeight="128.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/logo1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <Pane layoutX="659.0" layoutY="103.0" prefHeight="459.0" prefWidth="294.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <Label layoutX="47.0" layoutY="67.0" text="Nom" />
+            <Label layoutX="39.0" layoutY="149.0" text="Prenom" />
+            <Label layoutX="46.0" layoutY="221.0" text="Email" />
+            <Label layoutX="45.0" layoutY="300.0" text="Mot de passe" />
+            <TextField fx:id="nomAdmin" layoutX="40.0" layoutY="90.0" prefHeight="25.0" prefWidth="203.0" promptText="Nom" />
+            <TextField fx:id="prenomAdmin" layoutX="40.0" layoutY="166.0" prefHeight="25.0" prefWidth="203.0" promptText="Prenom" />
+            <TextField fx:id="emailAdmin" layoutX="40.0" layoutY="243.0" prefHeight="25.0" prefWidth="203.0" promptText="Email" />
+            <TextField fx:id="mdpAdmin" layoutX="40.0" layoutY="317.0" prefHeight="25.0" prefWidth="203.0" promptText="Mot de passe" />
+            <Button fx:id="btnaddAdmin" layoutX="116.0" layoutY="374.0" mnemonicParsing="false" onAction="#Add" text="Ajouter" />
+            <Button fx:id="btnUpdate" layoutX="9.0" layoutY="421.0" mnemonicParsing="false" onAction="#Update">
+               <graphic>
+                  <ImageView fx:id="update" fitHeight="26.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/update.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Text fill="#38ae73" layoutX="101.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Formulaire">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutX="218.0" layoutY="106.0" prefHeight="459.0" prefWidth="428.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <TableView fx:id="tableAdmin" layoutX="34.0" layoutY="66.0" onMouseClicked="#handleMouseAction" prefHeight="306.0" prefWidth="340.0" style="-fx-background-color: #FFFFFF;">
+              <columns>
+                <TableColumn fx:id="nom" prefWidth="93.0" text="Nom" />
+                <TableColumn fx:id="prenom" prefWidth="87.0" text="Prenom" />
+                  <TableColumn fx:id="email" prefWidth="157.0" text="Email" />
+                  <TableColumn fx:id="id" prefWidth="93.0" text="id" visible="false" />
+              </columns>
+            </TableView>
+            <Button fx:id="btndelete" layoutX="347.0" layoutY="395.0" mnemonicParsing="false" onAction="#delete" prefHeight="31.0" prefWidth="26.0">
+               <graphic>
+                  <ImageView fx:id="delicon" fitHeight="37.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Label fx:id="gett" layoutX="221.0" layoutY="595.0" />
+      <Text fill="#38ae73" layoutX="203.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les administrateurs ">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

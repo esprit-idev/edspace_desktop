@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" layoutX="50.0" prefHeight="640.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.AllStudentsController">
+   <children>
+      <Label fx:id="gett" contentDisplay="CENTER" layoutX="243.0" layoutY="542.0" prefHeight="17.0" prefWidth="73.0" textAlignment="CENTER" />
+      <VBox layoutX="-54.0" prefHeight="640.0" prefWidth="213.0" style="-fx-background-color: #1C2424;">
+         <children>
+            <ImageView fx:id="logo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/logo1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <Text fill="#2cb28e" layoutX="180.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les étudiants " wrappingWidth="155.716796875">
+         <font>
+            <Font name="Calibri" size="26.0" />
+         </font>
+      </Text>
+      <Pane layoutX="631.0" layoutY="100.0" prefHeight="409.0" prefWidth="304.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <Label layoutX="64.0" layoutY="57.0" text="Nom" />
+            <Label layoutX="64.0" layoutY="127.0" text="Prenom" />
+            <Label layoutX="71.0" layoutY="196.0" text="Email" />
+            <Label layoutX="69.0" layoutY="274.0" text="Mot de passe" />
+            <TextField fx:id="nomStudent" layoutX="67.0" layoutY="74.0" prefHeight="25.0" prefWidth="191.0" />
+            <TextField fx:id="prenomStudent" layoutX="67.0" layoutY="144.0" prefHeight="25.0" prefWidth="191.0" />
+            <TextField fx:id="emailStudent" layoutX="67.0" layoutY="217.0" prefHeight="25.0" prefWidth="191.0" />
+            <TextField fx:id="mdpStudent" layoutX="67.0" layoutY="291.0" prefHeight="25.0" prefWidth="191.0" />
+            <Button fx:id="btnAjout" layoutX="132.0" layoutY="345.0" mnemonicParsing="false" onAction="#btnajout" prefHeight="29.0" prefWidth="62.0" style="-fx-background-color: #F45F7F;" text="Ajouter" />
+            <Button fx:id="btnUpdate" layoutX="8.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnUpdate">
+               <graphic>
+                  <ImageView fx:id="update" fitHeight="27.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/update.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Text fill="#239a6b" layoutX="121.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Formulaire">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="msgnom" fill="RED" layoutX="57.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le champs est vide veuillez saisir un nom" visible="false" />
+            <Text fx:id="msgpre" fill="RED" layoutX="57.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le champs est vide veuillez saisir un prenom" visible="false" />
+            <Text fx:id="msgemvid" fill="RED" layoutX="54.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le champs est vide veuillez saisir un email" visible="false" />
+            <Text fx:id="msgmdpvid" fill="RED" layoutX="31.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le champs est vide veuillez saisir un mot de passe" visible="false" />
+            <Text fx:id="invalidmsg" fill="RED" layoutX="105.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="l'email doit etre valide " visible="false" />
+            <Text fx:id="msgmin" fill="RED" layoutX="26.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="le mot de passe doit contenir au moins 8 caractères" visible="false" />
+            <Text fill="#fc0000" layoutX="41.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="l'email deja existe dans la base de donnée" visible="false" />
+         </children>
+      </Pane>
+      <Pane layoutX="177.0" layoutY="100.0" prefHeight="409.0" prefWidth="443.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <TableView fx:id="tableStudent" layoutX="37.0" layoutY="53.0" onMouseClicked="#handleMouseAction" prefHeight="314.0" prefWidth="377.0">
+              <columns>
+                <TableColumn fx:id="NStudent" prefWidth="85.0" text="Nom" />
+                <TableColumn fx:id="PStudent" prefWidth="133.0" text="Prenom" />
+                  <TableColumn fx:id="EStudent" prefWidth="158.0" text="Email" />
+              </columns>
+            </TableView>
+            <Button fx:id="btndel" layoutX="379.0" layoutY="367.0" mnemonicParsing="false" onAction="#del" prefHeight="20.0" prefWidth="10.0" style="-fx-background-color: #FFFFFF;" stylesheets="@style.css" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fx:id="icondelete" accessibleRole="BUTTON" fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Text fill="#239a6b" layoutX="144.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des etudiants">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

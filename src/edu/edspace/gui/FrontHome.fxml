@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.FrontHomeController">
+   <children>
+      <Pane prefHeight="649.0" prefWidth="1094.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane layoutX="175.0" layoutY="112.0">
+               <children>
+                  <Button fx:id="tabAff_btn" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getTabAff" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Circle fill="#54b48c" layoutX="84.0" layoutY="87.0" onMouseClicked="#getTabAff" radius="50.0" stroke="#54b48c" strokeType="INSIDE" />
+                  <ImageView fx:id="tabAff_iv" fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" onMouseClicked="#getTabAff" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/announcement_grey.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutX="-6.0" layoutY="146.0" prefHeight="17.0" prefWidth="174.0" text="Tableau d'affichage" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="454.0" layoutY="112.0" prefHeight="202.0" prefWidth="179.0">
+               <children>
+                  <Button fx:id="forum_btn" mnemonicParsing="false" onMouseClicked="#getForum" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Circle fill="#54b48c" layoutX="84.0" layoutY="87.0" onMouseClicked="#getForum" radius="50.0" stroke="#54b48c" strokeType="INSIDE" />
+                  <ImageView fx:id="forum_iv" fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" onMouseClicked="#getForum" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../images/forum2_grey_bigger.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Forum" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="173.0" layoutY="354.0" prefHeight="202.0" prefWidth="179.0">
+               <children>
+                  <Button fx:id="offre_btn" mnemonicParsing="false" onMouseClicked="#getOffre" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Circle fill="#54b48c" layoutX="84.0" layoutY="87.0" onMouseClicked="#getOffre" radius="50.0" stroke="#54b48c" strokeType="INSIDE" />
+                  <ImageView fx:id="offre_iv" fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" onMouseClicked="#getOffre" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../images/briefcase_grey_bigger.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutX="3.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Offres d'emploi" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="454.0" layoutY="354.0" prefHeight="202.0" prefWidth="179.0">
+               <children>
+                  <Button fx:id="centre_btn" mnemonicParsing="false" onMouseClicked="#getCentre" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Circle fill="#54b48c" layoutX="84.0" layoutY="87.0" onMouseClicked="#getCentre" radius="50.0" stroke="#54b48c" strokeType="INSIDE" />
+                  <ImageView fx:id="centre_iv" fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" onMouseClicked="#getCentre" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../images/file_grey_bigger.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Centre de partage" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="736.0" layoutY="354.0" prefHeight="202.0" prefWidth="179.0">
+               <children>
+                  <Button fx:id="users_btn" mnemonicParsing="false" onMouseClicked="#getUsers" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Circle fill="#54b48c" layoutX="84.0" layoutY="87.0" onMouseClicked="#getUsers" radius="50.0" stroke="#54b48c" strokeType="INSIDE" />
+                  <ImageView fx:id="users_iv" fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" onMouseClicked="#getUsers" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../images/users_grey_bigger.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Etudiant de ma classe" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="738.0" layoutY="112.0" prefHeight="190.0" prefWidth="174.0">
+               <children>
+                  <Button fx:id="clubs_btn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#getClubs" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Circle fill="#54b48c" layoutX="84.0" layoutY="87.0" onMouseClicked="#getClubs" radius="50.0" stroke="#54b48c" strokeType="INSIDE" />
+                  <ImageView fx:id="club_iv" fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" onMouseClicked="#getClubs" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../images/org_grey_bigger.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Clubs universitaires" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ImageView fx:id="out_iv" fitHeight="30.0" fitWidth="30.0" layoutX="1012.0" layoutY="577.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../images/logout_grey.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="profile_iv" fitHeight="37.0" fitWidth="46.0" layoutX="1009.0" layoutY="36.0" onMouseClicked="#getProfile" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../images/profile2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="logo_iv" fitHeight="46.0" fitWidth="137.0" layoutX="475.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../images/logo1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

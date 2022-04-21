@@ -42,7 +42,7 @@ public class CategoryNews {
     }
     @Override
     public String toString(){
-        return "Category_News{" + "id=" + id + "categoryName=" + categoryName +  '}' + "\n";
+        return categoryName;
     }
     
 }

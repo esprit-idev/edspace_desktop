@@ -16,7 +16,7 @@ public class EmploiCategoryService {
     PreparedStatement preparedStatement;
     String query = null;
 
-    // list all cat news
+    // list all cat
     public List<CategoryEmploi> AllCats(){
         List<CategoryEmploi> listCats = new ArrayList<>();
         try {
@@ -26,7 +26,7 @@ public class EmploiCategoryService {
 			while (resultSet.next()) {
 				CategoryEmploi pub = new CategoryEmploi();
 				pub.setId(resultSet.getInt(1));
-                pub.setCatgeoryName(resultSet.getString(2));
+                pub.setCategoryName(resultSet.getString(2));
 				listCats.add(pub);
 			}
 		} catch (SQLException ex) {
@@ -38,9 +38,9 @@ public class EmploiCategoryService {
     // add a category
     public void addCat(CategoryEmploi pub){
         try{ 
-             query = "INSERT INTO categorie_news ( category_name) VALUES (?)";
+             query = "INSERT INTO categorie_emploi ( category_name) VALUES (?)";
              preparedStatement = connection.prepareStatement(query);
-             preparedStatement.setString(1, pub.getCatgeoryName());
+             preparedStatement.setString(1, pub.getCategoryName());
              preparedStatement.execute();
 
      }catch(SQLException ex){
@@ -48,23 +48,26 @@ public class EmploiCategoryService {
      }
     }
 
-    //update news 
-    public void updateCat(CategoryEmploi pub){
+    //update 
+    public void updateCat(String cat, int id){
         try {
             query = "UPDATE `categorie_emploi` SET" +
             "`category_name` = ?" +
             " WHERE `id` = ? ";
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, pub.getCatgeoryName());
-            preparedStatement.setInt(2, pub.getId());
-            preparedStatement.execute();
+
+            preparedStatement.setString(1, cat);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+
             System.out.println("updated");
         } catch (SQLException ex) {
             ex.getStackTrace();
         }
     }
 
-    //delete news
+    //delete
+
 
     public void deleteCat(int id){
         try {

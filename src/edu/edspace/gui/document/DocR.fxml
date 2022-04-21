@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.document.DocRController">
+   <children>
+      <VBox fx:id="vbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="190.0" style="-fx-background-color: #E9E9E9; -fx-border-radius: 30; -fx-background-radius: 30;">
+         <children>
+            <HBox alignment="TOP_RIGHT" prefHeight="23.0" prefWidth="166.0" style="-fx-background-radius: 30; -fx-border-radius: 30;">
+               <children>
+                  <ComboBox fx:id="more_cb" maxHeight="24.0" maxWidth="24.0" minHeight="24.0" minWidth="24.0" prefHeight="24.0" prefWidth="24.0" />
+               </children>
+            </HBox>
+            <Label fx:id="name_label" alignment="TOP_LEFT" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" text="Nom doc" textAlignment="CENTER" textFill="#74aef9">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="7.0" />
+               </padding>
+            </Label>
+            <Label fx:id="matniv_label" text="Niveau | Matière">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <padding>
+                  <Insets left="7.0" />
+               </padding>
+            </Label>
+            <Label fx:id="owner_label" text="Owner">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="7.0" />
+               </padding>
+            </Label>
+            <Label fx:id="date_label" text="Date">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <padding>
+                  <Insets left="7.0" />
+               </padding>
+            </Label>
+            <HBox fx:id="hbox" alignment="TOP_RIGHT" prefHeight="23.0" prefWidth="166.0" style="-fx-background-radius: 30; -fx-border-radius: 30;">
+               <children>
+                  <ImageView fx:id="fave_iv" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../../../../../images/pin_red.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -15,6 +15,7 @@ import edu.edspace.utils.MyConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 /**
  *
  * @author eslem
@@ -30,7 +31,87 @@ public class NewsService {
         List<News> listNews = new ArrayList<>();
         try {
 			// String query all publications 
-			query = "SELECT * FROM `publication_news`" ;
+			query = "SELECT publication_news.*, categorie_news.category_name as catName FROM publication_news JOIN categorie_news on publication_news.category_name_id = categorie_news.id" ;
+            resultSet = connection.createStatement().executeQuery(query);
+			while (resultSet.next()) {
+				News pub = new News();
+				pub.setId(resultSet.getInt(1));
+                pub.setCategoryName(resultSet.getString("catName"));
+                pub.setDate(resultSet.getString(3));
+                pub.setTitle(resultSet.getString(4));
+                pub.setOwner(resultSet.getString(5));
+                pub.setImage(resultSet.getString(6));
+                pub.setContent(resultSet.getString(10));
+				listNews.add(pub);
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+        return listNews;
+    }
+// add a publication 
+    public void addNews(News pub){
+           try{ 
+                query = "INSERT INTO publication_news (title, owner, content, category_name_id, date, image) VALUES (?,?,?,?,?,?)";
+                preparedStatement = connection.prepareStatement(query);
+
+                preparedStatement.setString(1, pub.getTitle());
+                preparedStatement.setString(2, pub.getOwner());
+                preparedStatement.setString(3, pub.getContent());
+                preparedStatement.setString(4, pub.getCategoryName());
+                preparedStatement.setString(5, pub.getDate());
+                preparedStatement.setString(6, pub.getImage());
+                preparedStatement.executeUpdate();
+
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());;
+        }
+    }
+//update news 
+    public void updateNews(News pub, int id){
+        try {
+            query = "UPDATE publication_news SET " +
+                    "title=?," + 
+		            "content=?," + 
+		            "image=?," + 
+                    "date= ?,"+ 
+                    "owner=?," +
+                    "category_name_id=?" +
+                    "WHERE id =?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, pub.getTitle());
+            preparedStatement.setString(2, pub.getContent());
+            preparedStatement.setString(3, pub.getImage());
+            preparedStatement.setString(4, pub.getDate());
+            preparedStatement.setString(5, pub.getOwner());
+            preparedStatement.setString(6, pub.getCategoryName());
+
+            preparedStatement.setInt(7, id);
+            preparedStatement.executeUpdate();
+
+            System.out.println("updated");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+//delete news
+    public void deleteNews(int id){
+        try {
+            query = "DELETE FROM publication_news WHERE id= ? ";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            System.out.println("deleted");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public List<News> AllNewsforFilter(String req){
+        List<News> listNews = new ArrayList<>();
+        try {
+			// String query all publications 
+			query = req ;
             resultSet = connection.createStatement().executeQuery(query);
 			while (resultSet.next()) {
 				News pub = new News();
@@ -48,58 +129,9 @@ public class NewsService {
 		}
         return listNews;
     }
-// add a publication 
-    public void addNews(News pub){
-           try{ 
-                query = "INSERT INTO publication_news ( category_name_id, image, date, title,owner, content) VALUES (?,?,?,?,?,?)";
-                preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, pub.getCategoryName());
-                preparedStatement.setString(2, pub.getImage());
-                preparedStatement.setString(3, pub.getDate());
-                preparedStatement.setString(4, pub.getTitle());
-                preparedStatement.setString(5, pub.getOwner());
-                preparedStatement.setString(6, pub.getContent());
-                preparedStatement.execute();
+public List<News> filterByCat(int cat) {
+    String req = "SELECT * from publication_news where category_name_id='"+cat+"'";
+    return AllNewsforFilter(req);
+}
 
-        }catch(SQLException ex){
-            ex.getStackTrace();
-        }
-    }
-//update news 
-    public void updateNews(News pub){
-        try {
-            query = "UPDATE publication_news SET " +
-                    "title=?," + 
-		            "content=?," + 
-		            "image=?," + 
-                    "date= ?,"+ 
-                    "owner=?," +
-                    "category_name_id=?" +
-                    "WHERE id =" + pub.getId();
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, pub.getTitle());
-            preparedStatement.setString(2, pub.getContent());
-            preparedStatement.setString(3, pub.getImage());
-            preparedStatement.setString(4, pub.getDate());
-            preparedStatement.setString(5, pub.getOwner());
-            preparedStatement.setString(6, pub.getCategoryName());
-            preparedStatement.setInt(7, pub.getId());
-            preparedStatement.execute();
-            System.out.println("updated");
-        } catch (SQLException ex) {
-            ex.getStackTrace();
-        }
-    }
-//delete news
-    public void deleteNews(int id){
-        try {
-            query = "DELETE FROM publication_news WHERE id= ? ";
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-            System.out.println("deleted");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }

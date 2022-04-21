@@ -4,17 +4,17 @@
  */
 package edu.edspace.services;
 
-import java.sql.Blob;
 import edu.edspace.entities.Document;
+import edu.edspace.entities.Matiere;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
+import java.awt.Desktop;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URLConnection;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +22,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -33,12 +35,18 @@ import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+
+//import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.IOUtils;
+
+//import org.apache.commons.io.IOUtils;
+;
+
 
 /**
  *
@@ -46,35 +54,24 @@ import org.apache.commons.io.IOUtils;
  */
 public class DocumentService {
 
-    public void ajouterDocument(Document document) {
+    public void ajouterDocument(Document document) throws FileAlreadyExistsException{
         try {
-            String req = "insert into document (signalements,nom,date_insert,proprietaire,url,base64,niveau_id,matiere_id,type,fichier) values"
-                    + "(?,?,?,?,?,?,?,?,?,?)";
+            String req = "insert into document (signalements,nom,date_insert,proprietaire,url,niveau_id,matiere_id,type) values"
+                    + "(?,?,?,?,?,?,?,?)";
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, document.getSignalements());
             pst.setString(2, document.getNom());
             pst.setString(3, document.getDate_insert());
             pst.setString(4, document.getProp());
             pst.setString(5, document.getUrl());
-            pst.setString(7, document.getNiveau());
-            pst.setString(8, document.getMatiere());
+            pst.setString(6, document.getNiveau());
+            pst.setString(7, document.getMatiere());
 
-            File fichier = document.getFichier();
-            FileInputStream inputStream = null;
-            String mimeType = "url";
-            String base64 = null;
-            if (fichier != null) {
-                base64 = convertFileToBase64(Statics.myDocs + document.getNom());
-                mimeType = URLConnection.guessContentTypeFromName(document.getNom());
-                try {
-                    inputStream = new FileInputStream(fichier);
-                } catch (FileNotFoundException ex) {
-                    System.out.println(ex.getMessage());
-                }
+            if (!document.getType().equals("url")) {
+                document.setType(URLConnection.guessContentTypeFromName(document.getNom()));
             }
-            pst.setString(6, base64);
-            pst.setString(9, mimeType);
-            pst.setBlob(10, inputStream);
+
+            pst.setString(8, document.getType());
             pst.executeUpdate();
             System.out.println("Document ajouté");
             ResultSet rs = pst.getGeneratedKeys();
@@ -89,6 +86,21 @@ public class DocumentService {
     public List<Document> listDocs() {
         String req = "select * from document"; //requete select from db
         return getDocumentsList(req);
+    }
+    
+    public int countRelatedDocs(Matiere matiere){
+        int relatedDocs=0;
+        String req = "select count(*) from document where matiere_id=?"; //requete select from db
+        try {
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+            pst.setString(1, matiere.getId());
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            relatedDocs = rs.getInt("count(*)");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return relatedDocs;
     }
 
     public void modifierDocument(Document document) {
@@ -106,8 +118,12 @@ public class DocumentService {
     }
 
     public void supprimerDocument(Document document) {
+        String reqF = "delete from document_favoris where document_id = ?";
         String req = "delete from document where id = ?";
         try {
+            PreparedStatement pstF = MyConnection.getInstance().getCnx().prepareStatement(reqF);
+            pstF.setInt(1, document.getId());
+            pstF.executeUpdate();
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
             pst.setInt(1, document.getId());
             pst.executeUpdate();
@@ -115,6 +131,33 @@ public class DocumentService {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public void apercuDocument(Document doc) {
+        File fic = new File(Statics.myDocs + doc.getNom());
+        if (doc.getUrl() == null) {
+            try {
+                Desktop.getDesktop().open(fic);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        } else {
+            File ficConverti = new File("C:/Users/MeriamBI/Desktop/testpdfhtml/" + doc.getNom() + ".pdf");
+            try {
+                Desktop.getDesktop().open(ficConverti);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
+    public void downloadDocument(Document doc,String chosenDir) throws IOException {
+        if(doc.getType().equals("url")){
+            Files.copy(Paths.get(Statics.convertedDir + doc.getNom()+".pdf"), Paths.get(chosenDir+"/"+ doc.getNom()+".pdf"));
+        }else{
+            Files.copy(Paths.get(Statics.myDocs + doc.getNom()), Paths.get(chosenDir+"/"+ doc.getNom()));
+        }
+            
     }
 
     public List<Document> filterByOwner(String owner) {
@@ -126,7 +169,7 @@ public class DocumentService {
         String req = "select * from document where niveau_id='" + niveau + "' and matiere_id='" + matiere + "'"; //requete select from db
         return getDocumentsList(req);
     }
-    
+
     public List<Document> listReportedDocs() {
         String req = "select * from document where signalements>0"; //requete select from db
         return getDocumentsList(req);
@@ -176,14 +219,6 @@ public class DocumentService {
                 d.setType(rs.getString("type"));
                 d.setSignalements(rs.getInt("signalements"));
                 d.setUrl(rs.getString("url"));
-                d.setBase64(rs.getString("base64"));
-                if (rs.getString("url") == null) {
-                    File fichier = convertBlobToFile(rs.getBlob("fichier"), d);
-                    d.setFichier(fichier);
-                } else {
-                    d.setFichier(null);
-                }
-
                 myList.add(d);
             }
         } catch (SQLException ex) {
@@ -192,7 +227,7 @@ public class DocumentService {
         return myList;
     }
 
-    public void sendDocViaEmail(Document doc) {
+    public void sendDocViaEmail(Document doc,String from,String password,String to,String object,String body) throws AddressException, MessagingException {
         // Get a Properties object
         Properties props = System.getProperties();
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
@@ -203,10 +238,6 @@ public class DocumentService {
         props.put("mail.smtp.ssl.required", "true");
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        String to = "meriamesprittest@gmail.com"; //to_change with destination email
-        String from = "meriamesprittest@gmail.com"; //to_change with current user email
-        String password = "meriamesprittest221199*#"; //to_change with current user email pwd
-        try {
             Session session = Session.getDefaultInstance(props,
                     new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -214,33 +245,31 @@ public class DocumentService {
                 }
             });
 
-            //compose message     
-       
-            File file = doc.getFichier();
+            //compose message 
             Multipart multipart = new MimeMultipart();
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("this is the subject"); //to_change with email subject
+            message.setSubject(object);
             //create MimeBodyPart object and set your message text     
             BodyPart messageBodyPart1 = new MimeBodyPart();
-            if (file != null) {
-                messageBodyPart1.setText("This is the body\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*change with current username*/); //to_change with email body
+            if (doc.getUrl() == null) {
+                messageBodyPart1.setText(body+"\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*to_change with current username*/);
             } else {
-                messageBodyPart1.setText("This is the body\n" + doc.getUrl() + "\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*change with current username*/); //to_change with email body
+                messageBodyPart1.setText(body+"\n" + doc.getUrl() + "\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*to_change with current username*/);
             }
 
             //create new MimeBodyPart object and set DataHandler object to this object      
             MimeBodyPart messageBodyPart2 = new MimeBodyPart();
 
-            if (file != null) {
-                String filepath = doc.getFichier().getPath();//change accordingly  
+            if (doc.getUrl() == null) {
+                String filepath = Statics.myDocs + doc.getNom();
                 DataSource source = new FileDataSource(filepath);
                 messageBodyPart2.setDataHandler(new DataHandler(source));
                 messageBodyPart2.setFileName(filepath);
                 //create Multipart object and add MimeBodyPart objects to this object      
 
-                if (file != null) {
+                if (doc.getUrl() == null) {
                     multipart.addBodyPart(messageBodyPart2);
                 }
             }
@@ -253,22 +282,17 @@ public class DocumentService {
             Transport.send(message);
 
             System.out.println("email sent!");
-        } catch (MessagingException ex) {
-            ex.printStackTrace();
-        }
     }
-
+/*
     public void convertUrlToPdf(String filename) throws InterruptedException, IOException {
         Process wkhtml; // Create uninitialized process
-        String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; // Desired command
+        String command = "wkhtmltopdf https://github.com/KnpLabs/snappy C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; //to_change
         //to_change
         wkhtml = Runtime.getRuntime().exec(command); // Start process
+       // IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
         IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
-
         wkhtml.waitFor(); // Allow process to run
-
     }
-
     public File convertBlobToFile(Blob blob, Document d) {
         InputStream blobStream = null;
         try {
@@ -310,15 +334,15 @@ public class DocumentService {
         }
         return fichier;
     }
-
     public String convertFileToBase64(String filepath) {
         byte[] fileContent = null;
-        try {
-            fileContent = FileUtils.readFileToByteArray(new File(filepath));
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+       // try {
+         //   fileContent = FileUtils.readFileToByteArray(new File(filepath));
+       // } catch (IOException ex) {
+         //   System.out.println(ex.getMessage());
+     //   }
         String myBase64 = java.util.Base64.getEncoder().encodeToString(fileContent);
         return myBase64;
-    }
+    }*/
+
 }
