@@ -39,6 +39,7 @@ import edu.edspace.services.ClasseService;
 import edu.edspace.services.StudentService;
 import edu.edspace.services.UserService;
 import edu.edspace.services.statics;
+import java.io.File;
 
 /**
  *
@@ -62,7 +63,9 @@ public class MainClass extends Application {
             primaryStage.setScene(scene);
             primaryStage.setTitle("EdSpace");
             //change this to your own path or comment it to not cause problems
-            primaryStage.getIcons().add(new Image("E:\\Webprojects\\PIDEV\\edspace_desktop\\images\\graduate.png"));
+            File fileGraduate = new File("images/file_grey.png");
+            Image graduateI = new Image(fileGraduate.toURI().toString());
+            primaryStage.getIcons().add(graduateI);
             primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);

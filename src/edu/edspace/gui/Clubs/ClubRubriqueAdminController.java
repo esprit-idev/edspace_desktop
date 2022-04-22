@@ -5,6 +5,7 @@
 package edu.edspace.gui.Clubs;
 
 import edu.edspace.entities.ClubPub;
+import edu.edspace.gui.news.allCategoryNewsController;
 import edu.edspace.services.ClubPubService;
 import edu.edspace.services.ClubService;
 import edu.edspace.utils.MyConnection;
@@ -120,7 +121,6 @@ public class ClubRubriqueAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initImages();
-
     }
 
     @FXML
@@ -205,6 +205,7 @@ public class ClubRubriqueAdminController implements Initializable {
 
     @FXML
     private void getNewsView(MouseEvent event) {
+       
     }
 
     @FXML

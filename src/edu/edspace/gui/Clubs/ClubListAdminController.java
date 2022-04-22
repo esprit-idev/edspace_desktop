@@ -51,6 +51,7 @@ import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -370,6 +371,12 @@ public class ClubListAdminController implements Initializable {
 
     @FXML
     private void getNewsView(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+            club_iv.getScene().setRoot(pane);
+		} catch (IOException ex) {
+            ex.printStackTrace();
+		}
     }
 
     @FXML

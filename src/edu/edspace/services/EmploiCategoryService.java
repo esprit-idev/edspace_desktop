@@ -55,9 +55,11 @@ public class EmploiCategoryService {
             "`category_name` = ?" +
             " WHERE `id` = ? ";
             preparedStatement = connection.prepareStatement(query);
+
             preparedStatement.setString(1, cat);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
+
             System.out.println("updated");
         } catch (SQLException ex) {
             ex.getStackTrace();

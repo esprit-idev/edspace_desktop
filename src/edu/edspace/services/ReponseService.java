@@ -44,7 +44,7 @@ public class ReponseService {
     public List<Reponse> listReponses() {
         List<Reponse> reps = new ArrayList<>();
         try {
-            String query = "select * from reponse"; //requete select from db
+            String query = "select * from reponse where display = 0"; //requete select from db
             Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
             ResultSet rs = st.executeQuery(query); //resultat de la requete
 
@@ -83,7 +83,7 @@ public class ReponseService {
     public List<Reponse> getReponsesByThread(int id){
         List<Reponse> reps = new ArrayList<>();
         try {
-            String query = "select * from reponse where thread_id = "+id; //requete select from db
+            String query = "select * from reponse where display = 0 and thread_id = "+id; //requete select from db
             Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
             ResultSet rs = st.executeQuery(query); //resultat de la requete
 

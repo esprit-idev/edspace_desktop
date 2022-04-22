@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package edu.edspace.services;
+package edu.edspace.gui;
 
 /**
  *
- * @author 21656
+ * @author MeriamBI
  */
-public class ThreadTypeService {
+public class MatieresList {
     
 }

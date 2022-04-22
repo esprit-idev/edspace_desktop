@@ -129,10 +129,33 @@ public class ClubCategoriesListController implements Initializable {
     @FXML
     private void handleClicks(ActionEvent event) {
     }
+ @FXML
+    private void dashboard(ActionEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     @FXML
     private void getNewsView(MouseEvent event) {
     }
+
+     @FXML
+    private void users(MouseEvent event) {
+    }
+     @FXML
+    private void niveau(MouseEvent event) {
+    }
+     @FXML
+    private void classes(MouseEvent event) {
+    }
+        
 
     @FXML
     private void displayClubs(ActionEvent event) {
