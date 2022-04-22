@@ -59,7 +59,7 @@ public class ThreadController implements Initializable {
     private Button addBtn;
     @FXML
     private Hyperlink previous;
-    private int admin = 1;
+    private int admin = 0;
     final List<Reponse> re = new ArrayList();
     @FXML
     private AnchorPane rootPane;
@@ -67,7 +67,18 @@ public class ThreadController implements Initializable {
     public void setThread(String te, int id){
         
         previous.setOnAction(e->{
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+            if(this.admin == 1){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
         try {
             
             Parent root = loader.load();
@@ -76,7 +87,8 @@ public class ThreadController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       });
+                        }
+        });
         this.thread = te;
         this.id=id;
         
