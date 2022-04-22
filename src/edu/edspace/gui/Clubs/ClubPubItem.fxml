@@ -32,7 +32,7 @@
                         <Insets left="10.0" top="-5.0" />
                      </HBox.margin>
                   </Label>
-                  <ImageView fx:id="deleteBtn" accessibleRole="BUTTON" fitHeight="46.0" fitWidth="21.0" onMouseClicked="#deletepub" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="deleteBtn" accessibleRole="BUTTON" fitHeight="46.0" fitWidth="21.0" onMouseClicked="#deletepub" pickOnBounds="true" preserveRatio="true" visible="false">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -40,7 +40,7 @@
                         <Image url="@../../../../images/del.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="editBtn" fitHeight="46.0" fitWidth="21.0" onMouseClicked="#editPub" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="editBtn" fitHeight="46.0" fitWidth="21.0" onMouseClicked="#editPub" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../../../../images/edit.png" />
                      </image>

@@ -5,8 +5,11 @@
 package edu.edspace.gui.document;
 
 import edu.edspace.entities.Document;
+import edu.edspace.entities.DocumentFavoris;
 import edu.edspace.entities.Matiere;
 import edu.edspace.entities.Niveau;
+import edu.edspace.entities.Session;
+import edu.edspace.services.DocumentFavorisService;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
 import edu.edspace.services.NiveauService;
@@ -21,13 +24,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -42,7 +43,7 @@ import javafx.scene.layout.GridPane;
  *
  * @author MeriamBI
  */
-public class ListDocFrontController implements Initializable {
+public class FaveDocsController implements Initializable {
 
     @FXML
     private AnchorPane rootPane;
@@ -50,8 +51,6 @@ public class ListDocFrontController implements Initializable {
     private ComboBox<String> niveau_cb;
     @FXML
     private ComboBox<String> matiere_cb;
-    @FXML
-    private ImageView add_iv;
     @FXML
     private Label reinitialiser_label;
     @FXML
@@ -61,13 +60,14 @@ public class ListDocFrontController implements Initializable {
     @FXML
     private GridPane grid;
     @FXML
-    private Button fave_btn;
-    @FXML
-    private ImageView fave_iv;
+    private ImageView back_iv;
 
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
+    private List<DocumentFavoris> faves = new ArrayList();
     private List<Document> docs = new ArrayList();
+
+    private int currentUserId = Session.getId();
 
     /**
      * Initializes the controller class.
@@ -81,17 +81,6 @@ public class ListDocFrontController implements Initializable {
     }
 
     @FXML
-    private void addDoc(MouseEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/AddDoc.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    @FXML
     private void reinitialiserFiltre(MouseEvent event) {
         niveau_cb.setValue(null);
         matiere_cb.setValue(null);
@@ -100,11 +89,12 @@ public class ListDocFrontController implements Initializable {
 
     private void initDisplay() {
         DocumentService ds = new DocumentService();
-        docs = ds.listDocs();
-        if (docs.isEmpty()) {
+        DocumentFavorisService dfs = new DocumentFavorisService();
+        faves = dfs.listFaves(currentUserId);
+        if (faves.isEmpty()) {
             //display "empty"
         } else {
-            initGrid(docs);
+            initGrid(faves);
         }
         niveau_cb.setItems(niveauxList());
         niveau_cb.setPromptText("Tous les niveaux");
@@ -120,28 +110,39 @@ public class ListDocFrontController implements Initializable {
         matiere_cb.valueProperty().addListener(new ChangeListener<>() {
             @Override
             public void changed(ObservableValue ov, String oldVal, String newVal) {
-                docs = ds.filterByNiveauMatiere(niveau_cb.getValue(), newVal);
+                List<Document> filteredDocs = new ArrayList<>();
+                List<DocumentFavoris> filteredFaves = new ArrayList<>();
+                filteredDocs = ds.filterByNiveauMatiere(niveau_cb.getValue(), newVal);
+                for (int i = 0; i < filteredDocs.size(); i++) {
+                    for (int j = 0; j < faves.size(); j++) {
+                        if (filteredDocs.get(i).getId() == faves.get(j).getDocument_id()) {
+                            filteredFaves.add(faves.get(j));
+                        }
+                    }
+                }
                 grid.getChildren().clear();
-                if (docs.isEmpty()) {
+                if (filteredFaves.isEmpty()) {
                     //display "empty"
                 } else {
-                    initGrid(docs);
+                    initGrid(filteredFaves);
                 }
 
             }
         });
     }
 
-    private void initGrid(List<Document> docs) {
+    private void initGrid(List<DocumentFavoris> myFaves) {
         int column = 0;
         int row = 0;
-        for (int i = 0; i < docs.size(); i++) {
+        for (int i = 0; i < myFaves.size(); i++) {
             try {
                 FXMLLoader fXMLLoader = new FXMLLoader();
                 fXMLLoader.setLocation(getClass().getResource("/edu/edspace/gui/document/DocR.fxml"));
                 AnchorPane anchorPane = fXMLLoader.load();
                 DocRController docRController = fXMLLoader.getController();
-                docRController.setData(docs.get(i));
+                DocumentService ds = new DocumentService();
+                Document d = ds.findDocById(myFaves.get(i).getDocument_id());
+                docRController.setData(d);
 
                 if (column == 5) {
                     column = 0;
@@ -187,24 +188,11 @@ public class ListDocFrontController implements Initializable {
         File fileAdd = new File("images/add-new_grey.png");
         Image addI = new Image(fileAdd.toURI().toString());
 
-        File fileHeart = new File("images/heart.png");
-        Image heartI = new Image(fileHeart.toURI().toString());
+        File fileBack = new File("images/back_grey.png");
+        Image backI = new Image(fileBack.toURI().toString());
 
         home_iv.setImage(homeI);
-        add_iv.setImage(addI);
-        fave_iv.setImage(heartI);
-
-    }
-
-    @FXML
-    private void getFave(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/FaveDocs.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        back_iv.setImage(backI);
     }
 
     @FXML
@@ -217,4 +205,16 @@ public class ListDocFrontController implements Initializable {
             ex.printStackTrace();
         }
     }
+    
+    @FXML
+    private void getCentre(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/ListDocFront.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

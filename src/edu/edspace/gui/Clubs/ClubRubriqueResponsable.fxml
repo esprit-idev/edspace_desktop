@@ -22,7 +22,7 @@
          <content>
             <VBox prefHeight="649.0" prefWidth="1087.0">
                <children>
-                  <AnchorPane prefHeight="91.0" prefWidth="800.0">
+                  <AnchorPane prefHeight="91.0">
                      <children>
                         <Label fx:id="clubName_l" alignment="CENTER" layoutY="-3.0" prefHeight="91.0" prefWidth="800.0" text="Sopark">
                            <font>
@@ -49,6 +49,11 @@
                               <Image url="@../../../../../images/back.png" />
                            </image>
                         </ImageView>
+                        <ImageView fx:id="home_iv" fitHeight="40.0" fitWidth="40.0" layoutX="818.0" layoutY="29.0" onMouseClicked="#getHome" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/home65.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="91.0" prefWidth="800.0" styleClass="roundimg" stylesheets="@../../css/clubsCss.css">
@@ -71,7 +76,8 @@
                         <Label fx:id="clubDesc" alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="774.0" text="Updating property file: E:\Webprojects\PIDEV\edspace_desktop\build\built-jar.propertiesCompiling 3 source files to E:\Webprojects\PIDEV\edspace_desktop\build\classesCopying 1 file to E:\Webprojects\PIDEV\edspace_desktop\build\classes" textAlignment="CENTER" wrapText="true">
                            <padding>
                               <Insets left="20.0" right="20.0" top="20.0" />
-                           </padding></Label>
+                           </padding>
+                        </Label>
                         <Button fx:id="clubdescbtn" layoutY="-14.0" mnemonicParsing="false" onAction="#changeClubDesc" prefHeight="35.0" prefWidth="38.0" styleClass="camera" stylesheets="@../../css/clubsCss.css" textFill="#1c2424" />
                         <ImageView fx:id="addClubdesc" fitHeight="24.0" fitWidth="24.0" layoutX="6.0" layoutY="-9.0" onMouseClicked="#editclubDesc" pickOnBounds="true" preserveRatio="true">
                            <image>

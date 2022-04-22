@@ -4,14 +4,11 @@
  */
 package edu.edspace.gui;
 
-import edu.edspace.gui.document.ListDocFrontController;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -120,7 +117,7 @@ public class FrontHomeController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(FrontHomeController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
@@ -148,7 +145,7 @@ public class FrontHomeController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(FrontHomeController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
@@ -159,12 +156,8 @@ public class FrontHomeController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(FrontHomeController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-    }
-
-    @FXML
-    private void getUsers(MouseEvent event) {
     }
 
     @FXML
@@ -189,13 +182,13 @@ public class FrontHomeController implements Initializable {
     }
 
     @FXML
-    private void getListeStudent(ActionEvent event) {
+    private void getListeStudent(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/StudentClasse.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(FrontHomeController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
     

@@ -124,7 +124,7 @@ public class ClubRubriqueResponsableController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        initImages();
 
     }
 
@@ -172,7 +172,6 @@ public class ClubRubriqueResponsableController implements Initializable {
         }
 
     }
-
 
     @FXML
     private void addPub(ActionEvent event) {
@@ -249,7 +248,6 @@ public class ClubRubriqueResponsableController implements Initializable {
     public void setClubDesc(String clubDesc) {
         this.clubDesc.setText(clubDesc);
     }
-
 
     @FXML
     private void displayPubenAttente(ActionEvent event) {
@@ -462,7 +460,7 @@ public class ClubRubriqueResponsableController implements Initializable {
 
     @FXML
     private void ClubList(MouseEvent event) {
-          try {
+        try {
             //instance mtaa el crud
             //redirection
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListStudent.fxml"));
@@ -473,4 +471,37 @@ public class ClubRubriqueResponsableController implements Initializable {
         }
     }
 
+    private void initImages() {
+        File fileRefuse = new File("src/images/refused.png");
+        Image refusedI = new Image(fileRefuse.toURI().toString());
+
+        File fileAtt = new File("src/images/enattente.png");
+        Image attI = new Image(fileAtt.toURI().toString());
+
+        File fileBack = new File("images/back.png");
+        Image backI = new Image(fileBack.toURI().toString());
+        
+        File fileEdit = new File("images/edit.png");
+        Image editI = new Image(fileEdit.toURI().toString());
+        
+        File fileImage = new File("images/add-photo_grey.png");
+        Image imageI = new Image(fileImage.toURI().toString());
+        
+        refusedIcon.setImage(refusedI);
+        enattenteIcon.setImage(attI);
+        ClubListIV.setImage(backI);
+        addClubdesc.setImage(editI);
+        addpicIV.setImage(imageI);
+    }
+
+    @FXML
+    private void getHome(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/FrontHome.fxml"));
+            Parent root = loader.load();
+            clubName_l.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

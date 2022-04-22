@@ -5,9 +5,12 @@
 package edu.edspace.gui.Clubs;
 
 import edu.edspace.entities.Club;
+import edu.edspace.entities.ClubCategory;
 import edu.edspace.gui.document.ListDocFrontController;
+import edu.edspace.services.ClubCategService;
 import edu.edspace.services.ClubService;
 import edu.edspace.utils.MyConnection;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,15 +18,19 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -44,18 +51,22 @@ public class ClubListStudentController implements Initializable {
     private GridPane grid;
     private List<Club> clubs = new ArrayList<>();
     @FXML
-    private ImageView home_iv;
+    private ImageView home_iv1;
+    @FXML
+    private ComboBox<String> filter_cb;
   
+    private List<ClubCategory> categories = new ArrayList();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     
         // TODO
-
         MyConnection.getInstance().getCnx();
+        initImages();
+        filter_cb.setItems(catsList());
+        filter_cb.setPromptText("Toutes les catégories");
         ClubService cb = new ClubService();
         clubs = cb.displayClub();
         int colu = 0;
@@ -92,8 +103,27 @@ public class ClubListStudentController implements Initializable {
             Parent root = loader.load();
             grid.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(ListDocFrontController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
+    }
+    
+    public void initImages() {
+
+        File fileHome = new File("images/home_grey.png");
+        Image homeI = new Image(fileHome.toURI().toString());
+
+        home_iv1.setImage(homeI);
+
+    }
+
+    private ObservableList<String> catsList() {
+        ObservableList<String> oblistN = FXCollections.observableArrayList();
+        ClubCategService ccs = new ClubCategService();
+        categories = ccs.displayClubCategories();
+        for (int i = 0; i < categories.size(); i++) {
+            oblistN.add(categories.get(i).getCategorie());
+        }
+        return oblistN;
     }
 
 }

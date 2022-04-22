@@ -88,6 +88,11 @@ public class ClubPubItemController implements Initializable {
 
     public void setData(ClubPub clubPub, String clubName, String clubPicture) {
         this.clubPub = clubPub;
+        int currentUserClubId=2; //to_change
+            if (currentUserClubId==clubPub.getClub()) {
+                editBtn.setVisible(true);
+                deleteBtn.setVisible(true);         
+            }
         clubName_l.setText(clubName.toUpperCase().split("RUBRIQUE CLUB")[1].toUpperCase());
         pubDate.setText("Publie le " + clubPub.getPubDate());
         pubDesc.setText(Jsoup.parse(clubPub.getPubDesc()).text());
