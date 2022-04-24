@@ -631,7 +631,7 @@ public class ClubRubriqueResponsableController implements Initializable {
     private String getmicTExt(String duree) {
         String s = "";
         try {
-            String command = "py C:\\Users\\anash\\Desktop\\s.py " + duree;
+            String command = "py C:\\Users\\anash\\Desktop\\speechScript.py " + duree;
             Process p = Runtime.getRuntime().exec(command);
             try {
                 // Start a new java process 
