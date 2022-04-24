@@ -38,6 +38,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -121,6 +122,7 @@ public class ClubRubriqueAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initImages();
+        
     }
 
     @FXML

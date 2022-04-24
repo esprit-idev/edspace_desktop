@@ -17,17 +17,17 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -60,6 +60,10 @@ public class ListDocFrontController implements Initializable {
     private ScrollPane scroll;
     @FXML
     private GridPane grid;
+    @FXML
+    private Button fave_btn;
+    @FXML
+    private ImageView fave_iv;
 
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
@@ -83,7 +87,7 @@ public class ListDocFrontController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(ListDocFrontController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
@@ -148,7 +152,7 @@ public class ListDocFrontController implements Initializable {
 
                 GridPane.setMargin(anchorPane, new Insets(9));
             } catch (IOException ex) {
-                Logger.getLogger(DocsListController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }
@@ -183,9 +187,24 @@ public class ListDocFrontController implements Initializable {
         File fileAdd = new File("images/add-new_grey.png");
         Image addI = new Image(fileAdd.toURI().toString());
 
+        File fileHeart = new File("images/heart.png");
+        Image heartI = new Image(fileHeart.toURI().toString());
+
         home_iv.setImage(homeI);
         add_iv.setImage(addI);
+        fave_iv.setImage(heartI);
 
+    }
+
+    @FXML
+    private void getFave(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/FaveDocs.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -195,7 +214,7 @@ public class ListDocFrontController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(ListDocFrontController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 }

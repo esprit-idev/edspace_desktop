@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="main" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubRubriqueAdminController">
+<AnchorPane id="AnchorPane" fx:id="main" prefHeight="649.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubRubriqueAdminController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="-13.0" prefHeight="600.0" prefWidth="256.0" style="-fx-background-color: #1C2424;">
+      <VBox alignment="TOP_CENTER" layoutX="-13.0" prefHeight="649.0" prefWidth="256.0" style="-fx-background-color: #1C2424;">
          <children>
             <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -164,7 +164,7 @@
             </Button>
          </children>
       </VBox>
-      <ScrollPane fx:id="scroll" layoutX="243.0" prefHeight="600.0" prefWidth="800.0">
+      <ScrollPane fx:id="scroll" layoutX="243.0" prefHeight="649.0" prefWidth="843.0">
          <content>
             <VBox onDragDetected="#reload" prefHeight="600.0" prefWidth="800.0">
                <children>

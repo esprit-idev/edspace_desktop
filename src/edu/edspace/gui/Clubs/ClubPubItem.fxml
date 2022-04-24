@@ -24,7 +24,7 @@
                         <Insets bottom="5.0" left="20.0" top="-14.0" />
                      </HBox.margin>
                   </Circle>
-                  <Label fx:id="clubName_l" prefHeight="30.0" prefWidth="442.0" text="Spark">
+                  <Label fx:id="clubName_l" prefHeight="30.0" prefWidth="431.0" text="Spark">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -64,19 +64,33 @@
                </children>
             </VBox>
             <Line startX="600.0" stroke="#434242" />
-            <Label fx:id="pubDate" prefHeight="47.0" prefWidth="362.0" text="Publié le 121/151/4545">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
+            <AnchorPane>
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
-            </Label>
+               <children>
+                  <Label fx:id="pubDate" prefHeight="47.0" prefWidth="362.0" text="Publié le 121/151/4545">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="30.0" fitWidth="27.0" layoutX="489.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/heart.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="l_likes" layoutX="520.0" layoutY="15.0" prefHeight="17.0" prefWidth="68.0" text="n likes">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
       </VBox>
    </children>
    <stylesheets>
-      <URL value="@../css/clubsCss.css" />
+      <URL value="@../../css/clubsCss.css" />
       <URL value="@../../css/clubsCss.css" />
    </stylesheets>
 </AnchorPane>

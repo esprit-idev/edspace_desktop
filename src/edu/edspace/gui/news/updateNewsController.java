@@ -21,6 +21,7 @@ import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -163,15 +164,7 @@ public class updateNewsController implements Initializable {
         }
         return allcat;
     }
-    @FXML
-    private void getNewsView(MouseEvent event){
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
-			rootPane.getChildren().setAll(pane);
-		} catch (IOException ex) {
-			Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         MyConnection.getInstance().getCnx();
@@ -248,6 +241,42 @@ public class updateNewsController implements Initializable {
         chooseFileBtn.setText(f.toString());
     }
 //sidebar
+@FXML
+private void getNewsView(MouseEvent event){
+    try {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
+        rootPane.getChildren().setAll(pane);
+    } catch (IOException ex) {
+        Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+@FXML
+private void displayClubs(ActionEvent event) {
+    try {
+        //instance mtaa el crud
+        //redirection
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+        Parent root = loader.load();
+        club_iv.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+}
+
+@FXML
+private void getUsers(ActionEvent event) {
+    
+    try {
+        //instance mtaa el crud
+        //redirection
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+        Parent root = loader.load();
+        club_iv.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+    
+}
 @FXML
     private void getCatNewsView(MouseEvent event) {
         try {

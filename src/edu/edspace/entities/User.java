@@ -13,7 +13,7 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", username=" + username + ", prenom=" + prenom + ", email=" + email + ", password=" + password + ", image=" + image + ", roles=" + roles + ", isBanned=" + isBanned + '}';
     }
-         private int id ;
+         private int id ,classe_id;
     private String username,prenom,email,password , image , roles;
     private boolean isBanned ;
 
@@ -73,6 +73,12 @@ public class User {
     }
     public void setId(int id){
         this.id=id ;
+    }
+    public int getClasse_id(){
+        return classe_id ;
+    }
+    public void setClasse_id(int classe_id){
+        this.classe_id=classe_id ;
     }
     public String getUsername(){
         return username ;

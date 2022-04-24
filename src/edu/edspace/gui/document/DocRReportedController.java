@@ -7,6 +7,7 @@ package edu.edspace.gui.document;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.Matiere;
 import edu.edspace.entities.Niveau;
+import edu.edspace.entities.Session;
 import edu.edspace.services.DocumentService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
@@ -26,7 +27,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -73,6 +73,8 @@ public class DocRReportedController implements Initializable {
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
     private Document doc;
+    
+    String currentUser = Session.getUsername()+" "+Session.getPrenom();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -81,8 +83,8 @@ public class DocRReportedController implements Initializable {
     }
 
     public void setData(Document doc) {
-        String role = "student";
-        String currentUser = "Anas Houissa"; //to_change
+        String role = Session.getRoles(); //to_change
+        //String currentUser = "Anas Houissa"; //to_change
         this.doc = doc;
         date_label.setText(doc.getDate_insert());
         matniv_label.setText(doc.getNiveau() + " | " + doc.getMatiere());
@@ -114,7 +116,7 @@ public class DocRReportedController implements Initializable {
                 ignoreReport(doc);
             }
         }
-        String currentUser = "Anas Houissa"; //to_change
+        //String currentUser = "Anas Houissa"; //to_change
         more_cb.getSelectionModel().clearSelection();
         more_cb.setItems(optionsList(currentUser));
 
@@ -208,5 +210,4 @@ public class DocRReportedController implements Initializable {
         oblist.add("Ignorer");
         return oblist;
     }
-
 }

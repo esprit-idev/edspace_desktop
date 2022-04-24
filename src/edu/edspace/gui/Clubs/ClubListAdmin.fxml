@@ -19,9 +19,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="hboxa" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubListAdminController">
+<HBox fx:id="hboxa" prefHeight="649.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubListAdminController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1077.0" style="-fx-background-color: #1C2424;">
+      <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="256.0" style="-fx-background-color: #1C2424;">
          <children>
             <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -168,9 +168,9 @@
             </Button>
          </children>
       </VBox>
-      <ScrollPane fx:id="scrolla" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="783.0" styleClass="bgwhite" stylesheets="@../css/clubsCss.css">
+      <ScrollPane fx:id="scrolla" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="833.0" styleClass="bgwhite" stylesheets="@../../css/clubsCss.css">
          <content>
-            <VBox styleClass="bgwhite">
+            <VBox prefWidth="830.0" styleClass="bgwhite">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="785.0" text="Clubs universitaires" textAlignment="CENTER" textFill="#a19a9a">
                      <font>
@@ -182,8 +182,10 @@
                   </Label>
                   <AnchorPane prefHeight="67.0" prefWidth="785.0" styleClass="bgwhite">
                      <children>
-                        <ComboBox layoutX="286.0" layoutY="21.0" prefHeight="25.0" prefWidth="213.0" />
-                        <Label layoutX="161.0" layoutY="20.0" prefHeight="27.0" prefWidth="154.0" text="Filter par categorie" />
+                        <ComboBox fx:id="filter_cat_combo" layoutX="175.0" layoutY="21.0" prefHeight="25.0" prefWidth="213.0" />
+                        <Label layoutX="50.0" layoutY="20.0" prefHeight="27.0" prefWidth="154.0" text="Filter par categorie" />
+                        <Label layoutX="452.0" layoutY="20.0" prefHeight="27.0" prefWidth="154.0" text="Chercher un club" />
+                        <TextField fx:id="search_tf" layoutX="555.0" layoutY="21.0" promptText="Nom du club" />
                      </children>
                   </AnchorPane>
                   <VBox>
@@ -281,11 +283,11 @@
                      <children>
                         <TableView fx:id="tab" prefWidth="785.0">
                           <columns>
-                            <TableColumn fx:id="tab_nom" prefWidth="110.0" text="Nom du club" />
-                            <TableColumn fx:id="tab_desc" prefWidth="215.0" resizable="false" text="Description" />
-                              <TableColumn fx:id="tab_cat" prefWidth="141.0" text="Categorie" />
-                              <TableColumn fx:id="tab_res" prefWidth="192.0" text="Responsable" />
-                              <TableColumn fx:id="tab_action" prefWidth="126.0" text="Action" />
+                            <TableColumn fx:id="tab_nom" prefWidth="110.0" resizable="false" text="Nom du club" />
+                            <TableColumn fx:id="tab_desc" prefWidth="259.0" resizable="false" text="Description" />
+                              <TableColumn fx:id="tab_cat" prefWidth="97.0" resizable="false" text="Categorie" />
+                              <TableColumn fx:id="tab_res" prefWidth="211.0" resizable="false" text="Responsable" />
+                              <TableColumn fx:id="tab_action" prefWidth="142.0" resizable="false" text="Action" />
                           </columns>
                         </TableView>
                      </children>
