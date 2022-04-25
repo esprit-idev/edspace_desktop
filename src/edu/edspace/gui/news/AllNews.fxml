@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.news.AllNewsController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.news.AllNewsController">
    <children>
       <Pane fx:id="paneId" layoutX="256.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="213.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;" stylesheets="@../../css/styles.css">
          <children>

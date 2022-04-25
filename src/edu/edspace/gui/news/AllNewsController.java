@@ -258,7 +258,7 @@ public class AllNewsController implements Initializable{
             //redirection
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
             Parent root = loader.load();
-            club_iv.getScene().setRoot(root);
+            forum_iv.getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

@@ -188,7 +188,7 @@
                      </image>
                   </ImageView>
                   <TextField fx:id="nomTextField" layoutX="258.0" layoutY="130.0" promptText="Nom de la categorie" />
-                  <Button fx:id="add_btn" layoutX="438.0" layoutY="130.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#addMatiere" text="Ajouter" />
+                  <Button fx:id="add_btn" layoutX="438.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#addCat" text="Ajouter" />
                   <Button fx:id="modify1" layoutX="592.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#deleteCategory" prefHeight="25.0" prefWidth="80.0" text="Supprimer" />
                </children>
             </Pane>

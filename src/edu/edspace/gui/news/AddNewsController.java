@@ -3,6 +3,7 @@ package edu.edspace.gui.news;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -166,7 +167,7 @@ public class AddNewsController implements Initializable{
                 showError();
             }else {
                     try {
-                        Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image));
+                        Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image),StandardCopyOption.REPLACE_EXISTING);
                      }catch (IOException ex) {
                           Logger.getLogger(AddNewsController.class.getName()).log(Level.SEVERE, null, ex);
                       }

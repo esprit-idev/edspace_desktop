@@ -45,7 +45,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Label fx:id="title" text="Label" textFill="WHITE">
+                              <Label fx:id="title" text="Label" textFill="WHITE" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="48.0" />
                                  </font>

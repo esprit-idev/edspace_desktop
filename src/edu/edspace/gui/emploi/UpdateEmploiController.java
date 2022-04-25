@@ -119,11 +119,7 @@ public class UpdateEmploiController implements Initializable {
         String image = chooseFileBtn.getText().substring(ext+1);
         String file = chooseFileBtn.getText();
 
-        try {
-            Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image));
-         }catch (IOException ex) {
-              Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
-          }
+
          CategoryEmploi categoryField = categoryNameFieldBox.getSelectionModel().getSelectedItem();
          Integer categoryName;
          if(categoryField !=null){
@@ -136,6 +132,11 @@ public class UpdateEmploiController implements Initializable {
             } 
             else 
                 {
+                    try {
+                        Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image));
+                     }catch (IOException ex) {
+                          Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+                      }
                     Emploi p = new Emploi(title, description,categoryName.toString(),datePub,image);
                     EmploiService newsService = new EmploiService();
                     newsService.updateEmploi(p,id);

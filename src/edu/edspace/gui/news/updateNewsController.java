@@ -6,6 +6,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,11 +121,7 @@ public class updateNewsController implements Initializable {
         int ext =  chooseFileBtn.getText().lastIndexOf(File.separator);
         image = chooseFileBtn.getText().substring(ext+1);
         String file = chooseFileBtn.getText();
-        try {
-           Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image));
-        }catch (IOException ex) {
-             Logger.getLogger(AddNewsController.class.getName()).log(Level.SEVERE, null, ex);
-         }
+
         CategoryNews catField = categoryNameField.getSelectionModel().getSelectedItem();
         Integer categoryName;
          if(catField != null){
@@ -137,6 +134,11 @@ public class updateNewsController implements Initializable {
             } 
             else 
                 {
+                    try {
+                        Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image),StandardCopyOption.REPLACE_EXISTING);
+                     }catch (IOException ex) {
+                          Logger.getLogger(AddNewsController.class.getName()).log(Level.SEVERE, null, ex);
+                      }
                     News p = new News(title, author, description,categoryName.toString(),datePub,image);
                     NewsService newsService = new NewsService();
                     newsService.updateNews(p,id);
