@@ -45,7 +45,7 @@ public class MainClass extends Application {
             Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
             primaryStage.setTitle("EdSpace");
-            File fileLogo = new File("images/graduate.png");
+            File fileLogo = new File("images/graduate_grey.png");
             Image logoI = new Image(fileLogo.toURI().toString());
             primaryStage.getIcons().add(logoI);
             primaryStage.show();

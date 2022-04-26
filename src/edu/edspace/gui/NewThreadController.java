@@ -48,7 +48,7 @@ public class NewThreadController implements Initializable {
     @FXML
     private Button save;
     int user = 1;
-    int admin = 1;
+    int admin = 0;
 
     /**
      * Initializes the controller class.
@@ -91,7 +91,7 @@ public class NewThreadController implements Initializable {
     }
     public void update(Thread t){
         previous.setOnAction(e->{
-            if(this.admin == 0){
+            if(this.admin == 1){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             
@@ -119,6 +119,13 @@ public class NewThreadController implements Initializable {
         save.setOnAction(e->{
             if(tfQuestion.getText().length()==0){
                 error1.setVisible(true);
+            }
+                else{
+                 if(checkForBadWords(tfQuestion.getText())==true){
+                 bad.setVisible(true);
+                       tfQuestion.setText(null);
+                       tfQuestion.setBorder(Border.stroke(Color.RED));
+                       tfQuestion.setPromptText("Replace the question");
             }
                 else{
             t.setQuestion(tfQuestion.getText());
@@ -149,7 +156,7 @@ public class NewThreadController implements Initializable {
         alert.setTitle("Thread");
         alert.setContentText("Thread updated successfuly!");
         alert.showAndWait();
-            }});
+            }}});
         
         topic.setVisible(false);
         ftopic.setVisible(false);
@@ -211,7 +218,7 @@ public class NewThreadController implements Initializable {
                  bad.setVisible(true);
                        tfQuestion.setText(null);
                        tfQuestion.setBorder(Border.stroke(Color.RED));
-                       tfQuestion.setPromptText("Replace the answer");
+                       tfQuestion.setPromptText("Replace the question");
             }
             else{
         ThreadService threadService = new ThreadService();

@@ -67,6 +67,8 @@ public class ClubPubItemController implements Initializable {
     private AnchorPane main;
     @FXML
     private Hyperlink pubfile;
+    @FXML
+    private Label l_likes;
 
     /**
      * Initializes the controller class.
@@ -88,6 +90,7 @@ public class ClubPubItemController implements Initializable {
 
     public void setData(ClubPub clubPub, String clubName, String clubPicture) {
         this.clubPub = clubPub;
+        ClubPubService cps = new ClubPubService();
         clubName_l.setText(clubName.toUpperCase().split("RUBRIQUE CLUB")[1].toUpperCase());
         pubDate.setText("Publie le " + clubPub.getPubDate());
         pubDesc.setText(Jsoup.parse(clubPub.getPubDesc()).text());
@@ -106,6 +109,7 @@ public class ClubPubItemController implements Initializable {
         File file2 = new File(Statics.ClubPubsPic + clubPub.getPubImage());
         Image imagePub = new Image(file2.toURI().toString());
         pubImg.setImage(imagePub);
+        l_likes.setText(String.valueOf(cps.countLikesPerPub(getPubid())) + " Likes");
     }
 
     @FXML
@@ -155,7 +159,7 @@ public class ClubPubItemController implements Initializable {
         grid.setPadding(new Insets(20, 150, 10, 10));
         //nom tf init
         TextArea tf = new TextArea();
-        tf.setText(cps.getpubDesc(getPubid()));
+        tf.setText(Jsoup.parse(cps.getpubDesc(getPubid())).text());
 
         //add tf and cb to the grid +lables
         grid.add(new Label("Description:"), 0, 0);

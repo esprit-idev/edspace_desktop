@@ -6,11 +6,14 @@ package edu.edspace.gui.Clubs;
 
 import edu.edspace.entities.ClubCategory;
 import edu.edspace.services.ClubCategService;
+import edu.edspace.services.ClubPubService;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -116,6 +119,7 @@ public class ClubCategoriesListController implements Initializable {
     @FXML
     private TableColumn<ClubCategory, String> tab_action;
     ObservableList<ClubCategory> categoriesList = FXCollections.observableArrayList();
+    private int pubNB;
 
     /**
      * Initializes the controller class.
@@ -131,7 +135,32 @@ public class ClubCategoriesListController implements Initializable {
     }
 
     @FXML
+    private void dashboard(ActionEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
     private void getNewsView(MouseEvent event) {
+    }
+
+    @FXML
+    private void users(MouseEvent event) {
+    }
+
+    @FXML
+    private void niveau(MouseEvent event) {
+    }
+
+    @FXML
+    private void classes(MouseEvent event) {
     }
 
     @FXML
@@ -197,9 +226,9 @@ public class ClubCategoriesListController implements Initializable {
                 alert.setContentText("Veuillez remplir tous le champ du formulaire");
                 alert.showAndWait();
             } else {
-                
+
                 if (cb.updateClubCategories(c_name_tf.getText(), selectedClubCat.getId())) {
-                    System.out.println(selectedClubCat.getId()+"  "+selectedClubCat.getCategorie());
+                    System.out.println(selectedClubCat.getId() + "  " + selectedClubCat.getCategorie());
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initStyle(StageStyle.UTILITY);
                     alert.setTitle("Success");
@@ -347,7 +376,8 @@ public class ClubCategoriesListController implements Initializable {
         tab_action.setCellFactory(cellFactory);
         tab.setItems(categoriesList);
     }
-        public void initImages() {
+
+    public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
 

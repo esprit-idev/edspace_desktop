@@ -19,6 +19,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -68,8 +70,6 @@ public class AddDocController implements Initializable {
     @FXML
     private RadioButton attachFile_rb;
     @FXML
-    private ToggleGroup group;
-    @FXML
     private RadioButton insertUrl_rb;
     @FXML
     private TextField url_tf;
@@ -86,8 +86,16 @@ public class AddDocController implements Initializable {
     private AnchorPane rootPane;
     @FXML
     private ImageView back_iv;
-    
-    private String owner = Session.getUsername()+" "+Session.getPrenom();
+
+    private String owner = Session.getUsername() + " " + Session.getPrenom();
+    @FXML
+    private ImageView nomw_iv;
+    @FXML
+    private ImageView filew_iv;
+    @FXML
+    private ImageView matierew_iv;
+    @FXML
+    private ImageView niveauw_iv;
 
     /**
      * Initializes the controller class.
@@ -98,6 +106,24 @@ public class AddDocController implements Initializable {
         MyConnection.getInstance().getCnx();
         initImages();
         initDisplay();
+        
+        final ToggleGroup group = new ToggleGroup();
+        insertUrl_rb.setToggleGroup(group);
+        attachFile_rb.setToggleGroup(group);
+        group.selectedToggleProperty().addListener(
+                (ObservableValue<? extends Toggle> ov, Toggle oldTog,
+                        Toggle newTog) -> {
+                    System.out.println(group.getSelectedToggle().getUserData());
+                    if (attachFile_rb.isSelected()) {
+                        chooseFile_btn.setVisible(true);
+                        url_tf.setVisible(false);
+
+                    } else {
+                        chooseFile_btn.setVisible(false);
+                        url_tf.setVisible(true);
+                    }
+                });
+        
     }
 
     private void initDisplay() {
@@ -159,8 +185,10 @@ public class AddDocController implements Initializable {
                 String header = "Un document avec le même nom existe déjà";
                 String content = "Veuillez choisir un autre nom";
                 showAlert(Alert.AlertType.ERROR, title, header, content);
-            } catch (IOException ex) {
-                Logger.getLogger(AddDocController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch(NoSuchFileException ex){
+                filew_iv.setVisible(true);
+            }catch (IOException ex) {
+                ex.printStackTrace();
             }
 
         } else {
@@ -168,11 +196,8 @@ public class AddDocController implements Initializable {
         }
         //String owner = "Anas Houissa"; //to_change 
         String insert_date = new SimpleDateFormat("dd/MM/yy").format(new Date());
-        if (insertUrl_rb.isSelected() && isValid(url) == false) {
-            String title = "Erreur survenue lors de l'ajout";
-            String header = "URL invalide";
-            String content = "Veuillez saisir une URL valide exemple:'https://www.google.com/'";
-            showAlert(Alert.AlertType.ERROR, title, header, content);
+        if (insertUrl_rb.isSelected() && isValid(url) == false && url.equals("")) {
+            filew_iv.setVisible(true);
         } else if (docName != null && docName.length() != 0 && niveau != null && niveau.length() != 0 && matiere != null && matiere.length() != 0) {
             Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
             DocumentService ds = new DocumentService();
@@ -201,8 +226,7 @@ public class AddDocController implements Initializable {
             chooseFile_btn.setVisible(true);
             url_tf.setVisible(false);
 
-        }
-        if (insertUrl_rb.isSelected()) {
+        } else {
             chooseFile_btn.setVisible(false);
             url_tf.setVisible(true);
         }

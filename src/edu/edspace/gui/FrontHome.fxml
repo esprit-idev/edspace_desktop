@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.FrontHomeController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1094.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.FrontHomeController">
    <children>
       <Pane prefHeight="649.0" prefWidth="1094.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,7 +22,7 @@
                         <Image url="@../../../../images/announcement_grey.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="-6.0" layoutY="146.0" prefHeight="17.0" prefWidth="174.0" text="Tableau d'affichage" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="-6.0" layoutY="146.0" onMouseClicked="#getTabAff" prefHeight="17.0" prefWidth="174.0" text="Tableau d'affichage" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
@@ -54,7 +54,7 @@
                         <Image url="@../../../../../images/briefcase_grey_bigger.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="3.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Offres d'emploi" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="3.0" layoutY="146.0" onMouseClicked="#getOffre" prefHeight="17.0" prefWidth="168.0" text="Offres d'emploi" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
@@ -70,7 +70,7 @@
                         <Image url="@../../../../../images/file_grey_bigger.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Centre de partage" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" onMouseClicked="#getCentre" prefHeight="17.0" prefWidth="168.0" text="Centre de partage" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
@@ -79,14 +79,14 @@
             </Pane>
             <Pane layoutX="736.0" layoutY="354.0" prefHeight="202.0" prefWidth="179.0">
                <children>
-                  <Button fx:id="users_btn" mnemonicParsing="false" onAction="#getListeStudent" onMouseClicked="#getUsers" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
-                  <Circle fill="#54b48c" layoutX="84.0" layoutY="87.0" onMouseClicked="#getUsers" radius="50.0" stroke="#54b48c" strokeType="INSIDE" />
-                  <ImageView fx:id="users_iv" fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" onMouseClicked="#getUsers" pickOnBounds="true" preserveRatio="true">
+                  <Button fx:id="users_btn" mnemonicParsing="false" onMouseClicked="#getListeStudent" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Circle fill="#54b48c" layoutX="84.0" layoutY="87.0" onMouseClicked="#getListeStudent" radius="50.0" stroke="#54b48c" strokeType="INSIDE" />
+                  <ImageView fx:id="users_iv" fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" onMouseClicked="#getListeStudent" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../images/users_grey_bigger.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Etudiant de ma classe" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" onMouseClicked="#getListeStudent" prefHeight="17.0" prefWidth="168.0" text="Etudiant de ma classe" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
@@ -102,7 +102,7 @@
                         <Image url="@../../../../../images/org_grey_bigger.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Clubs universitaires" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" onMouseClicked="#getClubs" prefHeight="17.0" prefWidth="168.0" text="Clubs universitaires" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>

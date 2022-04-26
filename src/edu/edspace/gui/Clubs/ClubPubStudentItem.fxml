@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="main" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="pub-item" stylesheets="@../../css/clubsCss.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubPubItemController">
+<AnchorPane id="AnchorPane" fx:id="main" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="pub-item" stylesheets="@../../css/clubsCss.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubPubStudentItemController">
    <children>
       <VBox layoutY="21.0">
          <children>
@@ -22,7 +23,7 @@
                         <Insets bottom="5.0" left="20.0" top="-14.0" />
                      </HBox.margin>
                   </Circle>
-                  <Label fx:id="clubName_l" prefHeight="30.0" prefWidth="382.0" text="Spark">
+                  <Label fx:id="clubName_l" prefHeight="30.0" prefWidth="327.0" text="Spark">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -30,7 +31,7 @@
                         <Insets left="10.0" top="-5.0" />
                      </HBox.margin>
                   </Label>
-                  <ImageView fx:id="deleteBtn" accessibleRole="BUTTON" fitHeight="24.0" fitWidth="104.0" onMouseClicked="#deletepub" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="shareBtn" accessibleRole="BUTTON" fitHeight="24.0" fitWidth="104.0" onMouseClicked="#sharepub" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -38,11 +39,22 @@
                         <Image url="@../../../../images/fb.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="editBtn" fitHeight="24.0" fitWidth="29.0" onMouseClicked="#editPub" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="likeBtn" fitHeight="25.0" fitWidth="24.0" onMouseClicked="#likePub" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/like.png" />
+                        <Image url="@../../../../images/dislike.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
                   </ImageView>
+                  <Label fx:id="likes_bn" prefHeight="17.0" prefWidth="73.0" text="n LIKES">
+                     <HBox.margin>
+                        <Insets left="5.0" top="6.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
             <Line startX="600.0" stroke="#434242" />
@@ -54,6 +66,7 @@
                      </VBox.margin>
                   </Label>
                   <ImageView fx:id="pubImg" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
+                  <Hyperlink fx:id="pubfile" onAction="#openPubFile" prefWidth="513.0" text="Hyperlink" underline="true" visible="false" />
                </children>
             </VBox>
             <Line startX="600.0" stroke="#434242" />

@@ -261,9 +261,6 @@
             </Button>
          </children>
       </VBox>
-<<<<<<< HEAD
-=======
-
       <VBox layoutX="256.0" prefHeight="576.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane fx:id="pnlOverview" prefHeight="694.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;">
@@ -355,6 +352,5 @@
             </Pane>
          </children>
       </VBox>
->>>>>>> e1215f08359905c7a20a5708d1ea49bc61111081
    </children>
 </AnchorPane>

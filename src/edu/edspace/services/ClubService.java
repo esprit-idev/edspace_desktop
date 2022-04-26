@@ -40,7 +40,7 @@ public class ClubService {
             pst.executeUpdate(); //pour exécuter la requete
             String req2 = "update user set club_id=?, roles=? WHERE id=" + club.getClubRespo();
             PreparedStatement pst2 = MyConnection.getInstance().getCnx().prepareStatement(req2); //instance of myconnection pour etablir la cnx
-            pst2.setInt(1, getClubId(club.getClubRespo())); //parameter1=index in request(req) and parameter2=data to pass (nom de la personne)
+            pst2.setInt(1, getClubIdByRespoEmail(club.getClubRespo())); //parameter1=index in request(req) and parameter2=data to pass (nom de la personne)
             pst2.setString(2, "[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]");
             pst2.executeUpdate(); //pour exécuter la requete
 
@@ -189,6 +189,58 @@ public class ClubService {
 
     }
 
+    public void getClubsByName(ObservableList<Club> clubList, TableView<Club> tab, String clubName) {
+        clubList.clear();
+
+        try {
+            String req = "select * from club WHERE club_nom like'%" + clubName + "%';";
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req); //instance of myConnection pour etablir la cnx
+            ResultSet rs = pst.executeQuery(req); //resultat de la requete
+
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                Club club = new Club();
+                club.setClubId(rs.getString("id")); //set id from req result
+                club.setClubCategorie(getCatName(Integer.parseInt(rs.getString("club_categorie_id"))));
+                club.setClubRespo(getRespoName(Integer.parseInt(rs.getString("club_responsable_id"))));
+                club.setClubName(rs.getString("club_nom"));
+                club.setClubDesc(rs.getString("club_description"));
+                club.setClubPic(rs.getString("club_pic"));
+                clubList.add(club); //ajout de la matiere a la liste
+                tab.setItems(clubList);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    public void getClubsByCatName(ObservableList<Club> clubList, TableView<Club> tab, String catName) {
+        clubList.clear();
+          int catId=getCatId(catName);
+        try {
+            String req = "select * from club WHERE club_categorie_id=" + catId + ";";
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req); //instance of myConnection pour etablir la cnx
+            ResultSet rs = pst.executeQuery(req); //resultat de la requete
+
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                Club club = new Club();
+                club.setClubId(rs.getString("id")); //set id from req result
+                club.setClubCategorie(getCatName(Integer.parseInt(rs.getString("club_categorie_id"))));
+                club.setClubRespo(getRespoName(Integer.parseInt(rs.getString("club_responsable_id"))));
+                club.setClubName(rs.getString("club_nom"));
+                club.setClubDesc(rs.getString("club_description"));
+                club.setClubPic(rs.getString("club_pic"));
+                clubList.add(club); //ajout de la matiere a la liste
+                tab.setItems(clubList);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
     public int getCatId(String categorie) {
         int cate = 0;
         try {
@@ -271,7 +323,7 @@ public class ClubService {
         return listStudent;
     }
 
-    public int getClubId(String respo) {
+    public int getClubIdByRespoEmail(String respo) {
         int cate = 0;
         try {
             String req = "SELECT id FROM club WHERE club_responsable_id=" + respo;
@@ -288,6 +340,7 @@ public class ClubService {
         }
         return cate;
     }
+
     public String getClubImage(int clubid) {
         String img = "";
         try {
@@ -305,6 +358,7 @@ public class ClubService {
         }
         return img;
     }
+
     public String getClubName(int clubid) {
         String name = "";
         try {
@@ -323,7 +377,7 @@ public class ClubService {
         return name;
     }
 
-        public boolean updateClubPic(String clubImg, int currentId) {
+    public boolean updateClubPic(String clubImg, int currentId) {
         boolean res = false;
         String req = "update club set club_pic=? WHERE id=?";
         try {
@@ -338,7 +392,8 @@ public class ClubService {
         }
         return res;
     }
-        public boolean updateClubDesc(String desc, int currentId) {
+
+    public boolean updateClubDesc(String desc, int currentId) {
         boolean res = false;
         String req = "update club set club_description=? WHERE id=?";
         try {
@@ -354,4 +409,86 @@ public class ClubService {
         return res;
     }
 
+    public int getUserClubID(int userId) {
+        int res = 0;
+        String req = "select club_id from user WHERE id=" + userId;
+        try {
+            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                res = rs.getInt(1); //set id from req result
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return res;
+    }
+
+    public int getClubIdByClubName(String clubName) {
+        int clubid = 0;
+        try {
+            String req = "SELECT id FROM club WHERE club_nom='" + clubName + "';";
+
+            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                clubid = rs.getInt(1); //set id from req result
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return clubid;
+    }
+
+    public boolean clubExists(String clubName) {
+        boolean exist = false;
+        try {
+            String req = "SELECT count(id) FROM club WHERE club_nom='" + clubName + "';";
+
+            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                if (rs.getInt(1) > 0) {
+                    exist = true;
+
+                } else {
+                    exist = false;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return exist;
+    }
+
+    public List<Club> displayClubFiltredByName(String clubName) {
+        List<Club> clubList = new ArrayList<>();
+        int cat = getCatId(clubName);
+        try {
+            String req = "select * from club where club_categorie_id=" + cat + ";"; //requete select from db
+            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                Club club = new Club();
+                club.setClubId(rs.getString(1)); //set id from req result
+                club.setClubCategorie(getCatName(rs.getInt(2)));
+                club.setClubRespo(getRespoName(rs.getInt(3)));
+                club.setClubName(rs.getString(4));
+                club.setClubDesc(rs.getString(5));
+                club.setClubPic(rs.getString(6));
+                clubList.add(club); //ajout de la matiere a la liste
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return clubList;
+    }
 }
