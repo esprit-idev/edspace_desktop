@@ -32,7 +32,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -79,9 +78,9 @@ public class DocRController implements Initializable {
     private List<Niveau> niveaux = new ArrayList();
     private Document doc;
     private String role = Session.getRoles();
-    
-    private String currentUser = Session.getUsername()+" "+Session.getPrenom();
-    private int currentUserId=Session.getId();
+
+    private String currentUser = Session.getUsername() + " " + Session.getPrenom();
+    private int currentUserId = Session.getId();
 
     /**
      * Initializes the controller class.
@@ -148,6 +147,7 @@ public class DocRController implements Initializable {
         DocumentFavorisService dfs = new DocumentFavorisService();
         if (isPinned(doc)) {
             dfs.unpinDocument(fave);
+            rootPane.getChildren().remove(vbox);
         } else {
             dfs.pinDocument(fave);
         }
@@ -297,11 +297,6 @@ public class DocRController implements Initializable {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
-        //from tf init
-        TextField from_tf = new TextField();
-
-        //pwd tf init
-        PasswordField pwd_tf = new PasswordField();
 
         //to tf init
         TextField to_tf = new TextField();
@@ -313,29 +308,22 @@ public class DocRController implements Initializable {
         TextField body_tf = new TextField();
 
         //add tf and cb to the grid +lables
-        grid.add(new Label("Votre adresse gmail"), 0, 0);
-        grid.add(from_tf, 1, 0);
-        grid.add(new Label("Votre mot de passe gmail"), 0, 1);
-        grid.add(pwd_tf, 1, 1);
-        grid.add(new Label("Adresse de destination"), 0, 2);
-        grid.add(to_tf, 1, 2);
-        grid.add(new Label("Objet de l'email"), 0, 3);
-        grid.add(object_tf, 1, 3);
-        grid.add(new Label("Contenu de l'email"), 0, 4);
-        grid.add(body_tf, 1, 4);
+        grid.add(new Label("Adresse de destination"), 0, 0);
+        grid.add(to_tf, 1, 0);
+        grid.add(new Label("Objet de l'email"), 0, 1);
+        grid.add(object_tf, 1, 1);
+        grid.add(new Label("Contenu de l'email"), 0, 2);
+        grid.add(body_tf, 1, 2);
         dialog.getDialogPane().setContent(grid);
         Optional<ButtonType> result = dialog.showAndWait();
         if (result.get() == sendButtonType) {
             DocumentService ds = new DocumentService();
-            String from = from_tf.getText();
-            String pwd = pwd_tf.getText();
             String to = to_tf.getText();
             String object = object_tf.getText();
             String body = body_tf.getText();
             try {
-                if (from != null && from.length() != 0 && pwd != null && pwd.length() != 0 && to != null && to.length() != 0
-                        && object != null && object.length() != 0 && body != null && body.length() != 0) {
-                    ds.sendDocViaEmail(doc, from, pwd, to, object, body);
+                if (to != null && to.length() != 0 && object != null && object.length() != 0 && body != null && body.length() != 0) {
+                    ds.sendDocViaEmail(doc, to, object, body, currentUser);
                 } else {
                     String title = "Erreur survenue lors de l'envoi";
                     String header = "Veuillez remplir tous les champs";

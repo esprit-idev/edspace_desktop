@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.news.AllNewsController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.news.AllNewsController">
    <children>
-      <Pane fx:id="paneId" layoutX="256.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="213.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;" stylesheets="@../../css/styles.css">
+      <Pane fx:id="paneId" layoutX="256.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="213.0" prefWidth="838.0" style="-fx-background-color: #F4F6F9;" stylesheets="@../../css/styles.css">
          <children>
-            <Label layoutX="37.0" layoutY="87.0" text="Liste des publication" textFill="#1c2424">
+            <Label layoutX="37.0" layoutY="87.0" text="Liste des publications" textFill="#1c2424">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -46,7 +46,7 @@
             </Button>
          </children>
       </Pane>
-      <ScrollPane layoutX="253.0" layoutY="213.0" prefHeight="527.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="213.0">
+      <ScrollPane layoutX="259.0" layoutY="213.0" prefHeight="436.0" prefWidth="846.0" style="-fx-background-color: #F4F6F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="213.0">
          <content>
             <TilePane fx:id="tilePaneId" hgap="5.0" prefColumns="3" prefHeight="634.0" prefRows="3" prefWidth="777.0" style="-fx-background-color: #F4F6F9;" vgap="5.0">
                <padding>
@@ -55,7 +55,7 @@
             </TilePane>
          </content>
       </ScrollPane>
-      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="649.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -95,7 +95,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getUsers" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Utilisateurs">
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getUsers" onMouseClicked="#getUsers" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Utilisateurs">
                <graphic>
                   <ImageView fx:id="users_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -143,7 +143,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#displayClubs" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Clubs universitaires">
+            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#displayClubs" onMouseClicked="#displayClubs" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Clubs universitaires">
                <graphic>
                   <ImageView fx:id="club_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -167,7 +167,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getForum" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Forum">
+            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getForum" onMouseClicked="#getForum" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Forum">
                <graphic>
                   <ImageView fx:id="forum_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -191,7 +191,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Déconnexion">
+            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Déconnexion">
                <graphic>
                   <ImageView fx:id="signOut_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

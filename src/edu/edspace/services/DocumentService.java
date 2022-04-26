@@ -22,8 +22,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -133,7 +131,7 @@ public class DocumentService {
     }
 
     public void apercuDocument(Document doc) {
-        
+
         if (doc.getUrl() == null) {
             File fic = new File(Statics.myDocs + doc.getNom());
             try {
@@ -144,7 +142,7 @@ public class DocumentService {
         } else {
             try {
                 File ficConverti = new File("C:/Users/MeriamBI/Desktop/testpdfhtml/" + doc.getNom() + ".pdf");
-                if(!ficConverti.exists()){
+                if (!ficConverti.exists()) {
                     convertUrlToPdf(doc.getNom(), doc.getUrl());
                 }
                 Desktop.getDesktop().open(ficConverti);
@@ -153,10 +151,10 @@ public class DocumentService {
             }
         }
     }
-    
-    public void convertUrlToPdf(String filename,String url) throws InterruptedException, IOException {
+
+    public void convertUrlToPdf(String filename, String url) throws InterruptedException, IOException {
         Process wkhtml; // Create uninitialized process
-        String command = "wkhtmltopdf "+url+" C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; // Desired command
+        String command = "wkhtmltopdf " + url + " C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; // Desired command
         //to_change
         wkhtml = Runtime.getRuntime().exec(command); // Start process
         IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
@@ -171,7 +169,6 @@ public class DocumentService {
         } else {
             Files.copy(Paths.get(Statics.myDocs + doc.getNom()), Paths.get(chosenDir + "/" + doc.getNom()));
         }
-
     }
 
     public List<Document> filterByOwner(String owner) {
@@ -241,7 +238,7 @@ public class DocumentService {
         return myList;
     }
 
-    public void sendDocViaEmail(Document doc, String from, String password, String to, String object, String body) throws AddressException, MessagingException {
+    public void sendDocViaEmail(Document doc, String to, String object, String body,String cuUser) throws AddressException, MessagingException {
         // Get a Properties object
         Properties props = System.getProperties();
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
@@ -252,6 +249,8 @@ public class DocumentService {
         props.put("mail.smtp.ssl.required", "true");
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        String from = "edspace2.plateforme@gmail.com"; //to_change with destination email
+        String password = "edspace123"; //to_change with current user email pwd
         Session session = Session.getDefaultInstance(props,
                 new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -267,27 +266,31 @@ public class DocumentService {
         message.setSubject(object);
         //create MimeBodyPart object and set your message text     
         BodyPart messageBodyPart1 = new MimeBodyPart();
-        if (doc.getUrl() == null) {
-            messageBodyPart1.setText(body + "\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*to_change with current username*/);
-        } else {
-            messageBodyPart1.setText(body + "\n" + doc.getUrl() + "\nCe document est envoyé depuis la plateforme EDSPACE par " + "Anas Houissa"/*to_change with current username*/);
-        }
+        multipart.addBodyPart(messageBodyPart1);
+        messageBodyPart1.setText(body + "\nCe document est envoyé depuis la plateforme EDSPACE par " + cuUser);
 
         //create new MimeBodyPart object and set DataHandler object to this object      
         MimeBodyPart messageBodyPart2 = new MimeBodyPart();
-
+        String filepath;
+        String filename=doc.getNom();
         if (doc.getUrl() == null) {
-            String filepath = Statics.myDocs + doc.getNom();
-            DataSource source = new FileDataSource(filepath);
-            messageBodyPart2.setDataHandler(new DataHandler(source));
-            messageBodyPart2.setFileName(filepath);
-            //create Multipart object and add MimeBodyPart objects to this object      
-
-            if (doc.getUrl() == null) {
-                multipart.addBodyPart(messageBodyPart2);
+            filepath = Statics.myDocs + filename;
+        } else {
+            filename=filename+".pdf";
+            filepath = "C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename;
+            try {
+                File ficConverti = new File(filepath);
+                if (!ficConverti.exists()) {
+                    convertUrlToPdf(doc.getNom(), doc.getUrl());
+                }
+            } catch (InterruptedException | IOException ex) {
+                ex.printStackTrace();
             }
         }
-        multipart.addBodyPart(messageBodyPart1);
+        DataSource source = new FileDataSource(filepath);
+        messageBodyPart2.setDataHandler(new DataHandler(source));
+        messageBodyPart2.setFileName(filename);
+        multipart.addBodyPart(messageBodyPart2);
 
         //set the multiplart object to the message object  
         message.setContent(multipart);
@@ -306,7 +309,7 @@ public class DocumentService {
             pst.setInt(1, docId);
             ResultSet rs = pst.executeQuery();
             rs.next();
-            
+
             d.setId(rs.getInt("id"));
             d.setMatiere(rs.getString("matiere_id"));
             d.setNiveau(rs.getString("niveau_id"));

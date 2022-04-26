@@ -14,31 +14,47 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.matiere.MatieresListController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="649.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.matiere.MatieresListController">
    <children>
-      <Pane layoutX="252.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="800.0">
+      <Pane layoutX="252.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="843.0">
          <children>
             <Label layoutX="39.0" layoutY="35.0" text="Liste des matières">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <ComboBox fx:id="filtreN_cb" layoutX="295.0" layoutY="139.0" prefHeight="25.0" prefWidth="135.0" promptText="Filtrer par niveau" />
-            <Label fx:id="reinitialiser_label" layoutX="444.0" layoutY="143.0" onMouseClicked="#reinitialiserFiltre" text="Réinitialiser" />
-            <Button fx:id="update_btn" layoutX="647.0" layoutY="139.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#updateMatiere" text="Modifier" />
-            <Button fx:id="delete_btn" layoutX="714.0" layoutY="139.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#deleteMatiere" text="Supprimer" />
-            <TableView fx:id="table" layoutX="14.0" layoutY="176.0" prefHeight="383.0" prefWidth="772.0">
+            <ComboBox fx:id="filtreN_cb" layoutX="311.0" layoutY="170.0" prefHeight="25.0" prefWidth="135.0" promptText="Filtrer par niveau" style="-fx-background-color: #e9e9e9; -fx-background-radius: 10;" />
+            <Label fx:id="reinitialiser_label" layoutX="460.0" layoutY="174.0" onMouseClicked="#reinitialiserFiltre" text="Réinitialiser" />
+            <Button fx:id="update_btn" layoutX="645.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#updateMatiere" style="-fx-background-color: #7EBCF7; -fx-background-radius: 10;" text="Modifier" textFill="#e9e9e9" />
+            <Button fx:id="delete_btn" layoutX="712.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#deleteMatiere" style="-fx-background-color: #FA5550; -fx-background-radius: 10;" text="Supprimer" textFill="#e9e9e9" />
+            <TableView fx:id="table" layoutX="60.0" layoutY="231.0" prefHeight="391.0" prefWidth="724.0" style="-fx-background-color: transparent;" stylesheets="@../../css/style_table.css">
               <columns>
-                <TableColumn fx:id="mat_col" prefWidth="369.0" text="Matière" />
-                <TableColumn fx:id="niv_col" prefWidth="402.0" text="Niveau" />
+                <TableColumn fx:id="mat_col" prefWidth="360.0" text="Matière" />
+                <TableColumn fx:id="niv_col" prefWidth="359.0" text="Niveau" />
               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
-            <TextField fx:id="matiere_tf" layoutX="210.0" layoutY="92.0" promptText="Nom de la matière" />
-            <ComboBox fx:id="niveau_cb" layoutX="368.0" layoutY="92.0" prefWidth="150.0" promptText="Niveau concerné" />
-            <Button fx:id="ajouter_btn" layoutX="535.0" layoutY="92.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#addMatiere" text="Ajouter" />
+            <TextField fx:id="matiere_tf" layoutX="226.0" layoutY="123.0" promptText="Nom de la matière" style="-fx-background-radius: 10;">
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding></TextField>
+            <ComboBox fx:id="niveau_cb" layoutX="384.0" layoutY="123.0" prefWidth="150.0" promptText="Niveau concerné" style="-fx-background-color: #e9e9e9; -fx-background-radius: 10;" />
+            <Button fx:id="ajouter_btn" layoutX="551.0" layoutY="123.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#addMatiere" style="-fx-background-color: #1C2424; -fx-background-radius: 10;" text="Ajouter" textFill="#e9e9e9" />
+            <ImageView fx:id="warning_iv" fitHeight="23.0" fitWidth="23.0" layoutX="193.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../../../images/warning_red.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="error_l" layoutX="233.0" layoutY="90.0" text="Veuillez remplir tous les champs pour effectuer l'ajout!" textFill="#f25353" visible="false">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <VBox alignment="TOP_CENTER" layoutY="-2.0" prefHeight="578.0" prefWidth="256.0" style="-fx-background-color: #1C2424;">
+      <VBox alignment="TOP_CENTER" prefHeight="649.0" prefWidth="256.0" style="-fx-background-color: #1C2424;">
          <children>
             <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                <image>

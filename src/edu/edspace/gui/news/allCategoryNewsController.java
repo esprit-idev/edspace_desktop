@@ -115,7 +115,7 @@ public class allCategoryNewsController implements Initializable{
         return oblistC;
     }
     @FXML
-    private void addMatiere(MouseEvent event) {
+    private void addCat(MouseEvent event) {
         String nomCat = nomTextField.getText();
         if (nomCat != null && nomCat.length() != 0) {
             CategoryNews m = new CategoryNews(nomCat);
@@ -227,7 +227,6 @@ private void displayClubs(ActionEvent event) {
 
 @FXML
 private void getUsers(ActionEvent event) {
-    
     try {
         //instance mtaa el crud
         //redirection
