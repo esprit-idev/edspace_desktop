@@ -48,6 +48,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 /**
@@ -96,6 +97,12 @@ public class AddDocController implements Initializable {
     private ImageView matierew_iv;
     @FXML
     private ImageView niveauw_iv;
+    @FXML
+    private ToggleGroup group;
+    @FXML
+    private Text txt;
+    @FXML
+    private ImageView warning_iv;
 
     /**
      * Initializes the controller class.
@@ -211,12 +218,8 @@ public class AddDocController implements Initializable {
                 showAlert(Alert.AlertType.ERROR, title, header, content);
             }
         } else {
-            Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
-            System.out.println(doc.toString());
-            String title = "Erreur survenue lors de l'ajout";
-            String header = "Veuillez remplir tous les champs";
-            String content = "Aucun champs ne doit être vide";
-            showAlert(Alert.AlertType.WARNING, title, header, content);
+            txt.setVisible(true);
+            warning_iv.setVisible(true);
         }
     }
 
@@ -287,11 +290,15 @@ public class AddDocController implements Initializable {
 
         File fileBack = new File("images/back_grey.png");
         Image backI = new Image(fileBack.toURI().toString());
+        
+        File fileWarning = new File("images/warning_red.png");
+        Image warningI = new Image(fileWarning.toURI().toString());
 
         logo_iv.setImage(logoI);
         home_iv.setImage(homeI);
         out_iv.setImage(outI);
         back_iv.setImage(backI);
+        warning_iv.setImage(warningI);
     }
 
     @FXML

@@ -171,7 +171,6 @@ public class DocumentService {
         } else {
             Files.copy(Paths.get(Statics.myDocs + doc.getNom()), Paths.get(chosenDir + "/" + doc.getNom()));
         }
-
     }
 
     public List<Document> filterByOwner(String owner) {

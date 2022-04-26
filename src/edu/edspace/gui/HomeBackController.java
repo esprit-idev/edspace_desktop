@@ -304,7 +304,6 @@ public class HomeBackController implements Initializable {
     }
 
     @FXML
-
     private void getForum(MouseEvent event) {
         try {
             //instance mtaa el crud

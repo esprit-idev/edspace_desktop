@@ -148,6 +148,7 @@ public class DocRController implements Initializable {
         DocumentFavorisService dfs = new DocumentFavorisService();
         if (isPinned(doc)) {
             dfs.unpinDocument(fave);
+            rootPane.getChildren().remove(vbox);
         } else {
             dfs.pinDocument(fave);
         }

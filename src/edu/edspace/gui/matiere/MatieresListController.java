@@ -483,7 +483,6 @@ public class MatieresListController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
-            
         } catch (IOException ex) {
             ex.printStackTrace();
         }
