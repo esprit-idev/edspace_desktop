@@ -140,7 +140,7 @@ public class ThreadService {
                 if (t.getQuestion().contains(" ")){
                     
                         String my_new_str = t.getQuestion().replace(" ", "+");
-                Desktop.getDesktop().browse(new URI("https://www.google.com/search?q="+t.getQuestion()));
+                Desktop.getDesktop().browse(new URI("https://www.google.com/search?q="+ my_new_str));
                 }
                 else {
                     Desktop.getDesktop().browse(new URI("https://www.google.com/search?q="+t.getQuestion()));
