@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="649.0" prefWidth="1094.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.matiere.MatieresListController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="649.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.matiere.MatieresListController">
    <children>
       <Pane layoutX="252.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="843.0">
          <children>
@@ -54,7 +54,7 @@
             </Label>
          </children>
       </Pane>
-      <VBox alignment="TOP_CENTER" layoutY="-2.0" prefHeight="655.0" prefWidth="256.0" style="-fx-background-color: #1C2424;">
+      <VBox alignment="TOP_CENTER" prefHeight="649.0" prefWidth="256.0" style="-fx-background-color: #1C2424;">
          <children>
             <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -45,7 +45,7 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <VBox alignment="TOP_CENTER" layoutY="-2.0" prefHeight="655.0" prefWidth="256.0" style="-fx-background-color: #1C2424;">
+      <VBox alignment="TOP_CENTER" prefHeight="649.0" prefWidth="256.0" style="-fx-background-color: #1C2424;">
          <children>
             <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                <image>
