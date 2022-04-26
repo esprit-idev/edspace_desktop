@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -12,6 +13,8 @@ import java.util.logging.Logger;
 import java.io.File;
 import java.io.IOException;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,6 +41,7 @@ import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
 
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 
 
 public class AddNewsController implements Initializable{
@@ -45,8 +49,6 @@ public class AddNewsController implements Initializable{
 	private TextField titleField;
 	@FXML
 	private TextField descriptionField;
-	@FXML
-	private DatePicker dateField;
 	@FXML
 	private TextField authorField;
 	@FXML
@@ -128,13 +130,10 @@ public class AddNewsController implements Initializable{
     @FXML
     private Label imageError;
     @FXML
-    private Label dateError;
-    @FXML
     private Label categoryError;
     @FXML
     private void chooseImage(){
         FileChooser fileChooser = new FileChooser();
-
         //Set extension filter
         FileChooser.ExtensionFilter extFilterjpg
                 = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
@@ -150,20 +149,57 @@ public class AddNewsController implements Initializable{
     @FXML
     private void save(MouseEvent event){
         connection = MyConnection.getInstance().getCnx();
-       
-		String title = titleField.getText();
+        titleField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> arg0, String newValue, String oldValue) {
+                if(oldValue.isEmpty()){
+                    titleError.setVisible(true);
+                }else{
+                    titleError.setVisible(false);
+                } 
+            }});
+        descriptionField.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> arg0, String newValue, String oldValue) {
+                    if(oldValue.isEmpty()){
+                        descriptionError.setVisible(true);
+                    }else{
+                        descriptionError.setVisible(false);
+                    } 
+                }});
+        authorField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> arg0, String newValue, String oldValue) {
+                if(oldValue.isEmpty()){
+                            authorError.setVisible(true);
+                }else{
+                            authorError.setVisible(false);
+                } 
+            }});
+        chooseFileBtn.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> arg0, String newValue, String oldValue) {
+                if(oldValue.isEmpty()){
+                        fileError.setVisible(true);
+                }else{
+                        fileError.setVisible(false);
+                } 
+            }});
+        
+        String title =titleField.getText();
 		String description = descriptionField.getText();
         String author = authorField.getText();
-		String datePub = String.valueOf(dateField.getValue());
+		//String datePub = String.valueOf(dateField.getValue());
         int ext =  chooseFileBtn.getText().lastIndexOf(File.separator);
         String image = chooseFileBtn.getText().substring(ext+1);
         String file = chooseFileBtn.getText();
-        
+        String datePub = new SimpleDateFormat("dd/MM/yy").format(new Date());
+
          CategoryNews categoryField = categoryNameField.getSelectionModel().getSelectedItem();
          Integer categoryName;
          if(categoryField !=null){
             categoryName = categoryField.getId();
-            if (title.isEmpty() || description.isEmpty() || datePub.isEmpty() || author.isEmpty() || categoryName == null || image.isEmpty() || chooseFileBtn.getText().isEmpty()) {
+            if (title.isEmpty() || description.isEmpty() || datePub.isEmpty() || author.isEmpty() || categoryNameField.getSelectionModel().getSelectedItem() == null || image.isEmpty() || chooseFileBtn.getText().isEmpty()) {
                 showError();
             }else {
                     try {
@@ -182,13 +218,28 @@ public class AddNewsController implements Initializable{
             showError();
          }
     }
+    
     private void showError(){
+        if(titleField.getText().isEmpty()){
             titleError.setVisible(true);
+
+        }
+        if(descriptionField.getText().isEmpty()){
             descriptionError.setVisible(true);
+
+        }
+        if(authorField.getText().isEmpty()){
             authorError.setVisible(true);
+        }
+        if(chooseFileBtn.getText().isEmpty()){
             fileError.setVisible(true);
+        }
+            
+        if(categoryNameField.getSelectionModel().getSelectedItem()== null){
             categoryError.setVisible(true);
-            dateError.setVisible(true);
+        }else{
+            categoryError.setVisible(false);
+        }
     }
     @FXML
     public void cancel(MouseEvent event){

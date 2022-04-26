@@ -90,7 +90,19 @@ public class AddEmploiController implements Initializable {
     @FXML 
     private Button btnEmploi;
     private List<CategoryEmploi> categories = new ArrayList();
-
+    //control saisie variables
+    @FXML
+    private Label titleError;
+    @FXML
+    private Label descriptionError;
+    @FXML
+    private Label authorError;
+    @FXML
+    private Label fileError;
+    @FXML
+    private Label imageError;
+    @FXML
+    private Label categoryError;
     //choose image and set its path
     @FXML
     private void chooseImage(){
@@ -126,10 +138,7 @@ public class AddEmploiController implements Initializable {
          if(categoryField !=null){
             categoryName = categoryField.getId();
             if (title.isEmpty() || description.isEmpty() || datePub.isEmpty() || categoryName.toString().isEmpty() || image.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Please fill the fields");
-                alert.showAndWait();
+                showError();
             } 
             else 
                 {
@@ -145,13 +154,29 @@ public class AddEmploiController implements Initializable {
                     
             }
          }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please select a category");
-            alert.showAndWait();
+            showError();
          }
             
 		
+    }
+    private void showError(){
+        if(titleField.getText().isEmpty()){
+            titleError.setVisible(true);
+
+        }
+        if(descriptionField.getText().isEmpty()){
+            descriptionError.setVisible(true);
+
+        }
+        if(chooseFileBtn.getText().isEmpty()){
+            fileError.setVisible(true);
+        }
+            
+        if(categoryNameFieldBox.getSelectionModel().getSelectedItem()== null){
+            categoryError.setVisible(true);
+        }else{
+            categoryError.setVisible(false);
+        }
     }
     private ObservableList<CategoryEmploi> fillComboBox(){
         ObservableList<CategoryEmploi> allcat = FXCollections.observableArrayList();
