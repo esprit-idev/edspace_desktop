@@ -27,6 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -91,12 +92,15 @@ public class NewTopicController implements Initializable {
     private ImageView signOut_iv;
     @FXML
     private Pane pnlOverview;
+    @FXML
+    private Text error;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         initImages();
         previous.setOnAction(e->{
            FXMLLoader loader = new FXMLLoader(getClass().getResource("listTopics.fxml"));
@@ -113,6 +117,10 @@ public class NewTopicController implements Initializable {
 
     @FXML
     private void addTopic(ActionEvent event) {
+        if(topicField.getText().length()==0){
+            error.setVisible(true);
+        }
+        else{
         TopicService topicService = new TopicService();
         ThreadType t = new ThreadType();
         
@@ -134,7 +142,7 @@ public class NewTopicController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }}
 
     @FXML
     private void handleClicks(ActionEvent event) {

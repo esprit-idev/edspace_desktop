@@ -62,6 +62,7 @@ public class FrontHomeController implements Initializable {
     private Button clubs_btn;
     @FXML
     private AnchorPane rootPane;
+    private int admin = 0;
 
     /**
      * Initializes the controller class.
@@ -130,15 +131,31 @@ public class FrontHomeController implements Initializable {
 
     @FXML
     private void getForum(MouseEvent event) {
-        try {
+        if (this.admin == 0){
+                try {
+            
             //instance mtaa el crud
             //redirection
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/FrontThread.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
             Parent root = loader.load();
             forum_iv.getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+            }
+        else if(this.admin ==1) {
+             try {
+            
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+            Parent root = loader.load();
+            forum_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        }
+        
     }
 
     @FXML
