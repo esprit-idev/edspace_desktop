@@ -5,6 +5,7 @@
 package edu.edspace.gui.Clubs;
 
 import edu.edspace.entities.ClubPub;
+import edu.edspace.gui.news.allCategoryNewsController;
 import edu.edspace.services.ClubPubService;
 import edu.edspace.services.ClubService;
 import edu.edspace.utils.MyConnection;
@@ -37,6 +38,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -120,7 +122,7 @@ public class ClubRubriqueAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initImages();
-
+        
     }
 
     @FXML
@@ -205,6 +207,7 @@ public class ClubRubriqueAdminController implements Initializable {
 
     @FXML
     private void getNewsView(MouseEvent event) {
+       
     }
 
     @FXML

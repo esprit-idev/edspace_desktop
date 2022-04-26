@@ -45,6 +45,7 @@ public class NewThreadController implements Initializable {
     @FXML
     private Button save;
     int user = 1;
+    int admin = 0;
 
     /**
      * Initializes the controller class.
@@ -64,7 +65,18 @@ public class NewThreadController implements Initializable {
     private ImageView profile_iv;
     public void update(Thread t){
         previous.setOnAction(e->{
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+            if(this.admin == 1){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
         try {
             
             Parent root = loader.load();
@@ -73,7 +85,8 @@ public class NewThreadController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       });
+                        }
+        });
         System.out.println(t.getId());
         tfQuestion.setText(t.getQuestion());
         save.setText("Update");
@@ -81,7 +94,8 @@ public class NewThreadController implements Initializable {
             t.setQuestion(tfQuestion.getText());
             ThreadService threadService = new ThreadService();
             threadService.modifierThread(t, t.getId());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+            if(this.admin == 1){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
                try {
                    Parent root = loader.load();
                    
@@ -89,6 +103,18 @@ public class NewThreadController implements Initializable {
                } catch (IOException ex) {
                    Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
                }
+            }
+            else {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
+               try {
+                   Parent root = loader.load();
+                   
+                   tfQuestion.getScene().setRoot(root);
+               } catch (IOException ex) {
+                   Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+            }
+            
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thread");
         alert.setContentText("Thread updated successfuly!");
@@ -102,7 +128,18 @@ public class NewThreadController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         previous.setOnAction(e->{
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+            if(this.admin == 1){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
         try {
             
             Parent root = loader.load();
@@ -111,7 +148,8 @@ public class NewThreadController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       });
+                        }
+        });
         TopicService topics = new TopicService();
         List<ThreadType> ts = topics.listTopics();
         for(int i = 0; i<ts.size();i++){

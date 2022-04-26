@@ -31,11 +31,11 @@
                   <Image url="@../../../../../images/logo1.png" />
                </image>
             </ImageView>
-            <TextField fx:id="nom_tf" layoutX="367.0" layoutY="245.0" prefHeight="25.0" prefWidth="353.0" text="Saisissez un nom" />
-            <ComboBox fx:id="niveau_cb" layoutX="367.0" layoutY="303.0" prefHeight="25.0" prefWidth="165.0" promptText="Choisissez un niveau" />
-            <ComboBox fx:id="matiere_cb" layoutX="555.0" layoutY="303.0" prefHeight="25.0" prefWidth="165.0" promptText="Choisissez une matière" />
-            <Button fx:id="chooseFile_btn" layoutX="367.0" layoutY="369.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#chooseFile" prefHeight="25.0" prefWidth="353.0" text="Choisissez un fichier" />
-            <Button fx:id="add_btn" layoutX="439.0" layoutY="430.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#addDoc" prefHeight="25.0" prefWidth="209.0" text="Ajouter le document" />
+            <TextField fx:id="nom_tf" layoutX="367.0" layoutY="245.0" prefHeight="25.0" prefWidth="367.0" promptText="Saisissez un nom" />
+            <ComboBox fx:id="niveau_cb" layoutX="367.0" layoutY="303.0" prefHeight="25.0" prefWidth="174.0" promptText="Choisissez un niveau" />
+            <ComboBox fx:id="matiere_cb" layoutX="555.0" layoutY="303.0" prefHeight="25.0" prefWidth="174.0" promptText="Choisissez une matière" />
+            <Button fx:id="chooseFile_btn" layoutX="365.0" layoutY="369.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#chooseFile" prefHeight="25.0" prefWidth="367.0" text="Choisissez un fichier" />
+            <Button fx:id="add_btn" layoutX="446.0" layoutY="429.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#addDoc" prefHeight="25.0" prefWidth="209.0" text="Ajouter le document" />
             <Label layoutX="423.0" layoutY="106.0" text="Ajouter un document" textFill="#e9e9e9">
                <font>
                   <Font name="System Bold" size="24.0" />
@@ -44,17 +44,32 @@
             <RadioButton fx:id="attachFile_rb" layoutX="407.0" layoutY="194.0" mnemonicParsing="false" onAction="#checkRadio" selected="true" text="Attacher un fichier" textFill="#e9e9e9">
                <toggleGroup>
                   <ToggleGroup fx:id="group" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="insertUrl_rb" layoutX="561.0" layoutY="194.0" mnemonicParsing="false" onAction="#checkRadio" text="Saisir une URL" textFill="#e9e9e9">
-               <toggleGroup>
-                  <ToggleGroup fx:id="group" />
-               </toggleGroup>
-            </RadioButton>
-            <TextField fx:id="url_tf" prefHeight="25.0" prefWidth="353.0" text="Saisissez une URL" visible="false" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="insertUrl_rb" layoutX="561.0" layoutY="194.0" mnemonicParsing="false" onAction="#checkRadio" text="Saisir une URL" textFill="#e9e9e9" toggleGroup="$group" />
+            <TextField fx:id="url_tf" layoutX="367.0" layoutY="369.0" prefHeight="25.0" prefWidth="367.0" promptText="Saisissez une URL" visible="false" />
             <ImageView fx:id="back_iv" fitHeight="30.0" fitWidth="30.0" layoutX="44.0" layoutY="44.0" onMouseClicked="#getCentre" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../images/back_grey.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="nomw_iv" fitHeight="17.0" fitWidth="17.0" layoutX="705.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../../../images/warning_red.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="filew_iv" fitHeight="17.0" fitWidth="17.0" layoutX="705.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../../../images/warning_red.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="matierew_iv" fitHeight="17.0" fitWidth="17.0" layoutX="688.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../../../images/warning_red.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="niveauw_iv" fitHeight="17.0" fitWidth="17.0" layoutX="493.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../../../images/warning_red.png" />
                </image>
             </ImageView>
          </children>

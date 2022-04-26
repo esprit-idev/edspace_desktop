@@ -203,6 +203,22 @@ public class ClubPubService {
     }
 
     public void notifMessage() {
+        String req = "SELECT club_id FROM `club_pub` ORDER BY id DESC LIMIT 1;";
+        int clubid = 0;
+        try {
+
+            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                clubid = rs.getInt(1); //set id from req result
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        ClubService cb=new ClubService();
+        
         //Obtain only one instance of the SystemTray object
         SystemTray tray = SystemTray.getSystemTray();
 
@@ -221,7 +237,7 @@ public class ClubPubService {
         } catch (AWTException ex) {
         }
 
-        trayIcon.displayMessage("EdSpace", "Publication envoyé", MessageType.INFO);
+        trayIcon.displayMessage("EdSpace", "Le club "+cb.getClubName(clubid)+" a une publication en attente.", MessageType.INFO);
     }
 
     public void sharefb(String pubId, String clubId) {
@@ -299,7 +315,7 @@ public class ClubPubService {
     }
 
     public String getpubDesc(int pubId) {
-        String desc ="";
+        String desc = "";
         String req = "select pub_description from club_pub where id=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
@@ -312,5 +328,19 @@ public class ClubPubService {
             System.out.println(ex.getMessage());
         }
         return desc;
+    }
+
+    public int getPubsNB() {
+        int nb = 0;
+        String req = "select COUNT(*) from club_pub";
+        try {
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            nb = rs.getInt("COUNT(*)");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return nb;
     }
 }
