@@ -32,34 +32,23 @@ public class MainClass extends Application {
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        try {
-            if(Session.getUsername()==null){
+          try {
+           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+        // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml"));
+           Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Message/AllMessages.fxml"));
+//Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Message/AllMessages.fxml"));          
+//Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+          // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/FrontHome.fxml")); //new front
 
-            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
-
-           //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
-           //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/FrontHome.fxml")); //new front
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeFront.fxml")); //old front
             Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
             primaryStage.setTitle("EdSpace");
-            File fileLogo = new File("images/graduate_grey.png");
-            Image logoI = new Image(fileLogo.toURI().toString());
-            primaryStage.getIcons().add(logoI);
+            //change this to your own path or comment it to not cause problems
+            //primaryStage.getIcons().add(new Image("E:\\Webprojects\\PIDEV\\edspace_desktop\\images\\graduate.png"));
             primaryStage.show();
-        }
-        else{
-       // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
-
-            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
-
-            Scene scene = new Scene(parent);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        }
-           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
-
-           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+        
         } catch (IOException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
         }
