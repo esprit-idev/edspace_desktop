@@ -5,6 +5,7 @@
 package edu.edspace.gui;
 
 import edu.edspace.services.ThreadService;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -55,7 +57,7 @@ public class FrontThreadController implements Initializable {
     @FXML
     private ImageView profile_iv;
     @FXML
-    private Hyperlink previous;
+    private ImageView previous;
     @FXML
     private VBox vmain;
 
@@ -68,7 +70,8 @@ public class FrontThreadController implements Initializable {
     final List<edu.edspace.entities.Thread> th = new ArrayList();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        previous.setOnAction(e->{
+        initImages();
+        previous.setOnMouseClicked(e->{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontHome.fxml"));
                try {
                    Parent root1 = loader.load();
@@ -203,6 +206,49 @@ public class FrontThreadController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public void initImages() {
+        File fileLogo = new File("images/logo1.png");
+        Image logoI = new Image(fileLogo.toURI().toString());
+        
+        File fileHome = new File("images/home_grey.png");
+        Image homeI = new Image(fileHome.toURI().toString());
+        
+        File fileTab = new File("images/announcement_grey.png");
+        Image tabI = new Image(fileTab.toURI().toString());
+        
+        File fileLevel = new File("images/level_grey.png");
+        Image levelI = new Image(fileLevel.toURI().toString());
+        
+        File fileClass = new File("images/class-management_grey.png");
+        Image classI = new Image(fileClass.toURI().toString());
+        
+        File fileBook = new File("images/book_grey.png");
+        Image bookI = new Image(fileBook.toURI().toString());
+        
+        File fileForum = new File("images/forum2_grey.png");
+        Image forumI = new Image(fileForum.toURI().toString());
+        
+        File fileOffre = new File("images/briefcase_grey.png");
+        Image offreI = new Image(fileOffre.toURI().toString());
+        
+        File fileDocs = new File("images/file_grey.png");
+        Image docsI = new Image(fileDocs.toURI().toString());
+
+        File fileUsers = new File("images/users_grey.png");
+        Image usersI = new Image(fileUsers.toURI().toString());
+        
+        File fileClub = new File("images/org_grey.png");
+        Image clubI = new Image(fileClub.toURI().toString());
+
+        File fileOut = new File("images/logout_grey.png");
+        Image outI = new Image(fileOut.toURI().toString());
+        
+        File fileReport = new File("images/report_red.png");
+        Image reportI = new Image(fileReport.toURI().toString());
+        
+        logo_iv.setImage(logoI);
+        previous.setImage(homeI);
     }
     
 }
