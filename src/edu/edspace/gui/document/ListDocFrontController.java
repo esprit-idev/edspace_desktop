@@ -143,7 +143,7 @@ public class ListDocFrontController implements Initializable {
                 DocRController docRController = fXMLLoader.getController();
                 docRController.setData(docs.get(i));
 
-                if (column == 5) {
+                if (column == 4) {
                     column = 0;
                     row++;
                 }

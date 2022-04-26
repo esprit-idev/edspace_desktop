@@ -45,6 +45,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -118,6 +119,10 @@ public class MatieresListController implements Initializable {
     private TextField matiere_tf;
     @FXML
     private Button ajouter_btn;
+    @FXML
+    private ImageView warning_iv;
+    @FXML
+    private Label error_l;
 
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
@@ -155,15 +160,23 @@ public class MatieresListController implements Initializable {
         String nomMat = matiere_tf.getText();
         String niveau = niveau_cb.getValue();
         if (nomMat != null && nomMat.length() != 0 && niveau != null && niveau.length() != 0) {
-            Matiere m = new Matiere(nomMat, niveau);
             MatiereService ms = new MatiereService();
-            ms.ajouterMatiere(m);
-            refreshTable();
+            if (ms.findMatiereById(nomMat)) {
+                String title = "etette";
+                String header = "qljdb";
+                String content = "ldjbc";
+                showAlert(AlertType.WARNING, title, header, content);
+            } else {
+                Matiere m = new Matiere(nomMat, niveau);
+                ms.ajouterMatiere(m);
+                warning_iv.setVisible(false);
+                error_l.setVisible(false);
+                refreshTable();
+            }
         } else {
-            String title = "Erreur survenue lors de l'ajout";
-            String header = "Veuillez remplir tous les champs";
-            String content = "Aucun champs ne doit être vide";
-            showAlert(AlertType.WARNING, title, header, content);
+            error_l.setText("Veuillez remplir tous les champs pour effectuer l'ajout!");
+            warning_iv.setVisible(true);
+            error_l.setVisible(true);
         }
     }
 
@@ -202,10 +215,10 @@ public class MatieresListController implements Initializable {
             cb.setValue(matiere.getNiveau());
 
             //add tf and cb to the grid +lables
-            grid.add(new Label("Nom de la matière:"), 0, 0);
-            grid.add(tf, 1, 0);
-            grid.add(new Label("Niveau concerné:"), 0, 1);
-            grid.add(cb, 1, 1);
+            grid.add(new Label("Nom de la matière:"), 0, 1);
+            grid.add(tf, 1, 1);
+            grid.add(new Label("Niveau concerné:"), 0, 2);
+            grid.add(cb, 1, 2);
             dialog.getDialogPane().setContent(grid);
             Optional<ButtonType> result = dialog.showAndWait();
             if (result.get() == saveButtonType) {
@@ -218,6 +231,8 @@ public class MatieresListController implements Initializable {
                         Matiere newMat = new Matiere(tf.getText(), cb.getValue());
                         MatiereService ms = new MatiereService();
                         ms.modifierMatiere(newMat, matiere.getId());
+                        warning_iv.setVisible(false);
+                        error_l.setVisible(false);
                         refreshTable();
                     } else {
                         String title = "Erreur survenue lors de la mise à jour";
@@ -226,10 +241,9 @@ public class MatieresListController implements Initializable {
                         showAlert(AlertType.ERROR, title, header, content);
                     }
                 } else {
-                    String title = "Erreur survenue lors de la mise à jour";
-                    String header = "Veuillez remplir tous les champs";
-                    String content = "Aucun champs ne doit être vide";
-                    showAlert(AlertType.WARNING, title, header, content);
+                    error_l.setText("Veuillez remplir tous les champs pour effectuer la MÀJ!");
+                    warning_iv.setVisible(true);
+                    error_l.setVisible(true);
                 }
             }
         } else { //si aucune matière sélectionnée à partir du tableau
@@ -392,6 +406,9 @@ public class MatieresListController implements Initializable {
 
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
+        
+        File fileWarning = new File("images/warning_red.png");
+        Image warningI = new Image(fileWarning.toURI().toString());
 
         logo_iv.setImage(logoI);
         home_iv.setImage(homeI);
@@ -405,6 +422,7 @@ public class MatieresListController implements Initializable {
         forum_iv.setImage(forumI);
         centre_iv.setImage(docsI);
         signOut_iv.setImage(outI);
+        warning_iv.setImage(warningI);
     }
 
     //SIDEBAR
@@ -460,7 +478,7 @@ public class MatieresListController implements Initializable {
             ex.printStackTrace();
         }
     }
-    
+
     @FXML
     private void displayClubs(MouseEvent event) {
         try {
@@ -476,14 +494,13 @@ public class MatieresListController implements Initializable {
 
     @FXML
     private void getUsers(MouseEvent event) {
-        
+
         try {
             //instance mtaa el crud
             //redirection
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
-            
         } catch (IOException ex) {
             ex.printStackTrace();
         }
