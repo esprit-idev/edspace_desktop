@@ -283,7 +283,16 @@ public class AllNewsController implements Initializable{
             ex.printStackTrace();
         }
         
-    }    
+    }
+    @FXML
+    private void logout(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			
+		}
+    }        
     @FXML
     private void handleClicks(ActionEvent event) {
     }

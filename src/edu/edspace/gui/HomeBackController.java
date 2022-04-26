@@ -125,10 +125,10 @@ public class HomeBackController implements Initializable {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @FXML
     private void getCatNewsView(MouseEvent event) {
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/allCategoryNews.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allCategoryNews.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
@@ -156,7 +156,7 @@ public class HomeBackController implements Initializable {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @FXML
     private void getDashboardView(MouseEvent event) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
@@ -165,7 +165,6 @@ public class HomeBackController implements Initializable {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     @FXML
     private void getAllMatieresView(MouseEvent event) {
         try {
@@ -176,7 +175,6 @@ public class HomeBackController implements Initializable {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     /**
      * Initializes the controller class.
      */
@@ -289,7 +287,6 @@ public class HomeBackController implements Initializable {
         centre_iv.setImage(docsI);
         signOut_iv.setImage(outI);
     }
-
     @FXML
     private void displayClubs(ActionEvent event) {
         try {
@@ -302,9 +299,7 @@ public class HomeBackController implements Initializable {
             ex.printStackTrace();
         }
     }
-
     @FXML
-
     private void getForum(MouseEvent event) {
         try {
             //instance mtaa el crud
@@ -317,10 +312,8 @@ public class HomeBackController implements Initializable {
         }
         
     }
-    
     @FXML
     private void getUsers(ActionEvent event) {
-        
         try {
             //instance mtaa el crud
             //redirection
@@ -333,6 +326,5 @@ public class HomeBackController implements Initializable {
         }
 
     }
-
 
 }

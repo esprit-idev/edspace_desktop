@@ -6,7 +6,9 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -20,6 +22,8 @@ import edu.edspace.services.EmploiCategoryService;
 import edu.edspace.services.EmploiService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -96,8 +100,6 @@ public class AddEmploiController implements Initializable {
     @FXML
     private Label descriptionError;
     @FXML
-    private Label authorError;
-    @FXML
     private Label fileError;
     @FXML
     private Label imageError;
@@ -124,11 +126,38 @@ public class AddEmploiController implements Initializable {
     //add button method
     @FXML
     public void save(MouseEvent event){
+        titleField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> arg0, String newValue, String oldValue) {
+                if(oldValue.isEmpty()){
+                    titleError.setVisible(true);
+                }else{
+                    titleError.setVisible(false);
+                } 
+            }});
+        descriptionField.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> arg0, String newValue, String oldValue) {
+                    if(oldValue.isEmpty()){
+                        descriptionError.setVisible(true);
+                    }else{
+                        descriptionError.setVisible(false);
+                    } 
+                }});
+        chooseFileBtn.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> arg0, String newValue, String oldValue) {
+                if(oldValue.isEmpty()){
+                        fileError.setVisible(true);
+                }else{
+                        fileError.setVisible(false);
+                } 
+            }});
         MyConnection.getInstance().getCnx();
        
 		String title = titleField.getText();
 		String description = descriptionField.getText();
-		String datePub = String.valueOf(dateField.getValue());
+        String datePub = new SimpleDateFormat("dd/MM/yy").format(new Date());
         int ext =  chooseFileBtn.getText().lastIndexOf(File.separator);
         String image = chooseFileBtn.getText().substring(ext+1);
         String file = chooseFileBtn.getText();
@@ -140,17 +169,16 @@ public class AddEmploiController implements Initializable {
             if (title.isEmpty() || description.isEmpty() || datePub.isEmpty() || categoryName.toString().isEmpty() || image.isEmpty()) {
                 showError();
             } 
-            else 
-                {
-                    try {
+            else {
+                try {
                         Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image),StandardCopyOption.REPLACE_EXISTING);
-                     }catch (IOException ex) {
-                          Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
-                      }
-                    Emploi p = new Emploi(title, description,categoryName.toString(),datePub,image);
-                    EmploiService newsService = new EmploiService();
-                    newsService.addEmploi(p);
-                    getEmploiView(event);
+                    }catch (IOException ex) {
+                        Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                Emploi p = new Emploi(title, description,categoryName.toString(),datePub,image);
+                EmploiService newsService = new EmploiService();
+                newsService.addEmploi(p);
+                getEmploiView(event);
                     
             }
          }else{
@@ -162,11 +190,9 @@ public class AddEmploiController implements Initializable {
     private void showError(){
         if(titleField.getText().isEmpty()){
             titleError.setVisible(true);
-
         }
         if(descriptionField.getText().isEmpty()){
             descriptionError.setVisible(true);
-
         }
         if(chooseFileBtn.getText().isEmpty()){
             fileError.setVisible(true);
@@ -259,6 +285,15 @@ private void getDashboardView(MouseEvent event){
         rootPane.getChildren().setAll(pane);
     } catch (IOException ex) {
         Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+@FXML
+private void logout(MouseEvent event){
+    try {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+        rootPane.getChildren().setAll(pane);
+    } catch (IOException ex) {
+        
     }
 }
 @FXML

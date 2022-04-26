@@ -384,7 +384,28 @@ private void getUsers(ActionEvent event) {
 			Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
 		}
     }
-    
+    @FXML
+    private void logout(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			
+		}
+    }
+    @FXML
+    private void getForum(MouseEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+            Parent root = loader.load();
+            forum_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+    }         
     @FXML
     private void getAllMatieresView(MouseEvent event) {
         try {
