@@ -33,7 +33,7 @@
                   <Image url="@../../../../../images/logo1.png" />
                </image>
             </ImageView>
-            <Pane layoutX="301.0" layoutY="144.0" style="-fx-background-color: #e9e9e9; -fx-background-radius: 20; -fx-border-color: #54b48c; -fx-border-radius: 20; -fx-border-width: 3;">
+            <Pane layoutX="298.0" layoutY="156.0" style="-fx-background-color: #e9e9e9; -fx-background-radius: 20; -fx-border-color: #54b48c; -fx-border-radius: 20; -fx-border-width: 3;">
                <children>
                   <TextField fx:id="nom_tf" layoutX="58.0" layoutY="96.0" prefHeight="25.0" prefWidth="367.0" promptText="Saisissez un nom" style="-fx-background-radius: 10;">
                      <padding>
@@ -61,7 +61,15 @@
                      </toggleGroup>
                   </RadioButton>
                   <RadioButton fx:id="insertUrl_rb" layoutX="252.0" layoutY="45.0" mnemonicParsing="false" onAction="#checkRadio" text="Saisir une URL" textFill="#1c2424" toggleGroup="$group" />
-                  <TextField fx:id="url_tf" layoutX="58.0" layoutY="220.0" prefHeight="25.0" prefWidth="367.0" promptText="Saisissez une URL" visible="false" />
+                  <TextField fx:id="url_tf" layoutX="58.0" layoutY="220.0" prefHeight="25.0" prefWidth="367.0" promptText="Saisissez une URL" style="-fx-background-radius: 10;" visible="false">
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </padding></TextField>
+                  <ImageView fx:id="docw_iv" fitHeight="15.0" fitWidth="15.0" layoutX="399.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../../../../../images/warning_red.png" />
+                     </image>
+                  </ImageView>
                </children>
                <padding>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
@@ -77,32 +85,17 @@
                   <Image url="@../../../../../images/back_grey.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="nomw_iv" fitHeight="17.0" fitWidth="17.0" layoutX="705.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="filew_iv" fitHeight="17.0" fitWidth="17.0" layoutX="700.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../../../../images/warning_red.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="filew_iv" fitHeight="17.0" fitWidth="17.0" layoutX="705.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../../../../../images/warning_red.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="matierew_iv" fitHeight="17.0" fitWidth="17.0" layoutX="688.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../../../../../images/warning_red.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="niveauw_iv" fitHeight="17.0" fitWidth="17.0" layoutX="493.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../../../../../images/warning_red.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="txt" fill="#f25353" layoutX="452.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez remplir tous les champs!" visible="false" wrappingWidth="235.0">
+            <Text fx:id="txt" fill="#f25353" layoutX="458.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez remplir tous les champs!" visible="false" wrappingWidth="235.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <ImageView fx:id="warning_iv" fitHeight="30.0" fitWidth="30.0" layoutX="411.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="warning_iv" fitHeight="23.0" fitWidth="23.0" layoutX="420.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../../../../images/warning_red.png" />
                </image>

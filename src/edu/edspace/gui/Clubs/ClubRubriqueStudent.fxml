@@ -12,65 +12,60 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="649.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubRubriqueStudentController">
+<AnchorPane id="AnchorPane" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubRubriqueStudentController">
    <children>
-      <ScrollPane fx:id="scroll" prefHeight="649.0" prefWidth="1087.0">
+      <ScrollPane fx:id="scroll" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;">
          <content>
-            <VBox prefHeight="649.0" prefWidth="1087.0">
+            <VBox prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;">
                <children>
                   <AnchorPane prefHeight="91.0" prefWidth="800.0">
                      <children>
-                        <Label fx:id="clubName_l" alignment="CENTER" layoutY="-3.0" prefHeight="91.0" prefWidth="800.0" text="Sopark">
+                        <Label fx:id="clubName_l" alignment="CENTER" layoutX="285.0" prefHeight="91.0" prefWidth="525.0" text="Sopark" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="31.0" />
                            </font>
                         </Label>
                         <Label fx:id="clubId" layoutX="7.0" layoutY="15.0" text="Label" visible="false" />
-                        <ImageView fx:id="ClubListIV" fitHeight="33.0" fitWidth="33.0" layoutX="19.0" layoutY="32.0" onMouseClicked="#ClubList" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="ClubListIV" fitHeight="33.0" fitWidth="33.0" layoutX="82.0" layoutY="29.0" onMouseClicked="#ClubList" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../images/back.png" />
+                              <Image url="@../../../../../images/back_grey.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="home_iv" fitHeight="40.0" fitWidth="40.0" layoutX="780.0" layoutY="29.0" onMouseClicked="#getHome" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="home_iv" fitHeight="40.0" fitWidth="40.0" layoutX="984.0" layoutY="26.0" onMouseClicked="#getHome" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../images/home65.png" />
+                              <Image url="@../../../../../images/home_grey.png" />
                            </image>
                         </ImageView>
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="91.0" prefWidth="800.0" styleClass="roundimg" stylesheets="@../../css/clubsCss.css">
                      <children>
-                        <Group layoutX="299.0">
-                           <children>
-                              <ImageView fx:id="clubPic" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </Group>
+                        <Group layoutX="299.0" />
+                        <ImageView fx:id="clubPic" fitHeight="150.0" fitWidth="200.0" layoutX="445.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefWidth="800.0">
                      <children>
-                        <Label fx:id="clubDesc" alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="774.0" text="Updating property file: E:\Webprojects\PIDEV\edspace_desktop\build\built-jar.propertiesCompiling 3 source files to E:\Webprojects\PIDEV\edspace_desktop\build\classesCopying 1 file to E:\Webprojects\PIDEV\edspace_desktop\build\classes" textAlignment="CENTER" wrapText="true">
+                        <Label fx:id="clubDesc" alignment="CENTER" contentDisplay="CENTER" layoutX="173.0" prefHeight="54.0" prefWidth="709.0" text="Updating property file: E:\Webprojects\PIDEV\edspace_desktop\build\built-jar.propertiesCompiling 3 source files to E:\Webprojects\PIDEV\edspace_desktop\build\classesCopying 1 file to E:\Webprojects\PIDEV\edspace_desktop\build\classes" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <padding>
-                              <Insets left="20.0" right="20.0" top="20.0" />
+                              <Insets top="20.0" />
                            </padding>
                         </Label>
                      </children>
                   </AnchorPane>
-                  <GridPane fx:id="pubs" prefWidth="1043.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <VBox.margin>
-                        <Insets left="60.0" />
-                     </VBox.margin>
-                  </GridPane>
+                  <AnchorPane prefWidth="200.0">
+                     <children>
+                        <GridPane fx:id="pubs" layoutX="231.0" layoutY="18.0" prefHeight="23.0" prefWidth="600.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
-               <padding>
-                  <Insets left="130.0" />
-               </padding>
             </VBox>
          </content>
       </ScrollPane>

@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="main" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="pub-item" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubPubItemController">
+<AnchorPane id="AnchorPane" fx:id="main" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="pub-item" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubPubHangRefItemController">
    <children>
       <VBox layoutY="21.0">
          <children>
@@ -70,16 +70,6 @@
                </VBox.margin>
                <children>
                   <Label fx:id="pubDate" prefHeight="47.0" prefWidth="362.0" text="Publié le 121/151/4545">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="30.0" fitWidth="27.0" layoutX="489.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../images/heart.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="l_likes" layoutX="520.0" layoutY="15.0" prefHeight="17.0" prefWidth="68.0" text="n likes">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

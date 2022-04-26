@@ -7,6 +7,7 @@ package edu.edspace.gui.Clubs;
 import edu.edspace.entities.Club;
 import edu.edspace.entities.Session;
 import edu.edspace.services.ClubPubService;
+import edu.edspace.services.ClubService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
 import java.io.File;
@@ -74,8 +75,9 @@ public class ClubItemController implements Initializable {
         try {
             //instance mtaa el crud
             //redirection
-            String currentUserClubId="2"; //to_change
-            if (currentUserClubId.equals(club.getClubId())) {
+            ClubService cb=new ClubService();
+            String currentResponsableClubId=String.valueOf(cb.getUserClubID(Session.getId())); //to_change
+            if (currentResponsableClubId.equals(club.getClubId())) {
                 System.out.println("oui");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubRubriqueResponsable.fxml"));
                 Parent root = loader.load();

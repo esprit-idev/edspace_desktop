@@ -20,6 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,7 +39,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
-
 /**
  * FXML Controller class
  *
@@ -54,8 +55,9 @@ public class ClubListStudentController implements Initializable {
     private ImageView home_iv1;
     @FXML
     private ComboBox<String> filter_cb;
-  
+
     private List<ClubCategory> categories = new ArrayList();
+    private ObservableList<String> categoriesList;
 
     /**
      * Initializes the controller class.
@@ -65,8 +67,35 @@ public class ClubListStudentController implements Initializable {
         // TODO
         MyConnection.getInstance().getCnx();
         initImages();
-        filter_cb.setItems(catsList());
-        filter_cb.setPromptText("Toutes les catégories");
+        categoriesList = catsList();
+        categoriesList.add("Toutes les catégories");
+        filter_cb.setItems(categoriesList);
+        filter_cb.setValue("Toutes les catégories");
+        showClubs();
+        filter_cb.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent arg0) {
+                if (filter_cb.getValue().equals("Toutes les catégories")) {
+                    showClubs();
+                } else {
+                    showFiltredClubs(filter_cb.getValue());
+                }
+            }
+        });
+    }
+
+    @FXML
+    private void getHome(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/FrontHome.fxml"));
+            Parent root = loader.load();
+            grid.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void showClubs() {
         ClubService cb = new ClubService();
         clubs = cb.displayClub();
         int colu = 0;
@@ -93,20 +122,38 @@ public class ClubListStudentController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
 
-    @FXML
-    private void getHome(MouseEvent event) {
+    public void showFiltredClubs(String clubName) {
+        grid.getChildren().clear();
+        ClubService cb = new ClubService();
+        clubs = cb.displayClubFiltredByName(clubName);
+        int colu = 0;
+        int row = 0;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/FrontHome.fxml"));
-            Parent root = loader.load();
-            grid.getScene().setRoot(root);
+            for (int i = 0; i < clubs.size(); i++) {
+
+                FXMLLoader fxml = new FXMLLoader();
+                fxml.setLocation(getClass().getResource("/edu/edspace/gui/Clubs/ClubItem.fxml"));
+
+                AnchorPane anchorPane = fxml.load();//child
+
+                ClubItemController clubItemController = fxml.getController();
+                clubItemController.setData(clubs.get(i));
+
+                if (colu == 2) {
+                    colu = 0;
+                    row++;
+                }
+
+                grid.add(anchorPane, colu++, row);
+                GridPane.setMargin(anchorPane, new Insets(10));
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
-    
+
     public void initImages() {
 
         File fileHome = new File("images/home_grey.png");

@@ -9,8 +9,10 @@ import edu.edspace.services.ClubPubService;
 import edu.edspace.services.ClubService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
@@ -20,16 +22,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -41,6 +49,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -56,7 +65,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
 import javax.swing.ImageIcon;
@@ -118,6 +129,12 @@ public class ClubRubriqueResponsableController implements Initializable {
     private ImageView addClubdesc;
     @FXML
     private ImageView ClubListIV;
+    @FXML
+    private ImageView home_iv;
+    @FXML
+    private Slider slider;
+    @FXML
+    private Label timer;
 
     /**
      * Initializes the controller class.
@@ -129,8 +146,79 @@ public class ClubRubriqueResponsableController implements Initializable {
     }
 
     public void initData(int clubid) {
+        if (String.valueOf(slider.getValue()).contains(".")) {
+            timer.setText(String.valueOf(slider.getValue()).split(".0")[0] + " S restantes");
+
+        } else {
+            timer.setText(String.valueOf(slider.getValue()) + " S restantes");
+
+        }
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(
+                    ObservableValue<? extends Number> observableValue,
+                    Number oldValue,
+                    Number newValue) {
+                timer.setText(String.valueOf(newValue.intValue()) + " S restantes");
+
+            }
+        });
+
+        ClubPubService cb = new ClubPubService();
+        // badges
+        if (cb.displayHangingClubPubs(clubid).isEmpty()) {
+            badgeEnAttente.setVisible(false);
+        } else {
+            badgeEnAttente.setText(String.valueOf(cb.displayHangingClubPubs(clubid).size()));
+        }
+        if (cb.displayRefusedClubPubs(clubid).isEmpty()) {
+            badgeRefused.setVisible(false);
+        } else {
+            badgeRefused.setText(String.valueOf(cb.displayRefusedClubPubs(clubid).size()));
+        }
+        //display hanging pubs
+        refusedIcon.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubRefusedPubsInterface.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root, 625, 500);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                ClubRefusedPubsInterfaceController clubRefusedPubsInterfaceController = loader.getController();
+                clubRefusedPubsInterfaceController.initData(clubid);
+                stage.initStyle(StageStyle.UTILITY);
+                stage.show();
+                stage.setOnCloseRequest(events -> {
+                    pubs.getChildren().clear();
+                    initData(clubid);
+                });
+            } catch (IOException ex) {
+                Logger.getLogger(ClubRubriqueAdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        //display hanging pubs
+        enattenteIcon.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubHangingPubsInterface.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root, 625, 500);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                ClubHangingPubsInterfaceController clubHangingPubsInterfaceController = loader.getController();
+                clubHangingPubsInterfaceController.initData(clubid);
+                stage.initStyle(StageStyle.UTILITY);
+                stage.show();
+                stage.setOnCloseRequest(events -> {
+                    pubs.getChildren().clear();
+                    initData(clubid);
+                });
+            } catch (IOException ex) {
+                Logger.getLogger(ClubRubriqueAdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         //set icons color
-        Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.rgb(250, 250, 250)));
+        Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.rgb(28, 36, 36)));
         ColorAdjust bright = new ColorAdjust(0, 1, 1, 1);
         lighting.setContentInput(bright);
         lighting.setSurfaceScale(0.0);
@@ -138,13 +226,14 @@ public class ClubRubriqueResponsableController implements Initializable {
         refusedIcon.setEffect(lighting);
         addpicIV.setEffect(lighting);
         addClubdesc.setEffect(lighting);
-        MyConnection.getInstance().getCnx();
-        ClubPubService cb = new ClubPubService();
+
         pubsList = cb.displayPostedClubPubs(clubid);
         int colu = 0;
         int row = 0;
         if (pubsList.isEmpty()) {
             Label l = new Label("Pas de publications.");
+            l.setTextFill(Color.WHITE);
+
             pubs.add(l, colu++, row);
         } else {
             try {
@@ -185,22 +274,23 @@ public class ClubRubriqueResponsableController implements Initializable {
             alert.showAndWait();
         } else {
             //add file
-            String fileName = uniqueFilename();
+            String fileName = null;
             String fileSelceted = "";
             String typefile = "";
             int indexs = pubFileSelected.getText().lastIndexOf('.');
             if (indexs > 0) {
-                fileName += "." + pubFileSelected.getText().substring(indexs + 1);
+                fileName = uniqueFilename() + "." + pubFileSelected.getText().substring(indexs + 1);
+                fileSelceted = pubFileSelected.getText();
+                typefile = URLConnection.guessContentTypeFromName(fileSelceted);
+                try {
+                    Files.copy(Paths.get(fileSelceted), Paths.get(Statics.ClubPubsFile + fileName));
+                } catch (IOException ex) {
+                    Logger.getLogger(ClubAddController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            fileSelceted = pubFileSelected.getText();
-            typefile = URLConnection.guessContentTypeFromName(fileSelceted);
-            try {
-                Files.copy(Paths.get(fileSelceted), Paths.get(Statics.ClubPubsFile + fileName));
-            } catch (IOException ex) {
-                Logger.getLogger(ClubAddController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
             //add img
-            String imgName = uniqueFilename();
+            String imgName = null;
             String imgSelceted = "";
             String typeImg = "";
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -212,15 +302,17 @@ public class ClubRubriqueResponsableController implements Initializable {
             ClubPubService cb = new ClubPubService();
             int index = pubimgSelected.getText().lastIndexOf('.');
             if (index > 0) {
-                imgName += "." + pubimgSelected.getText().substring(index + 1);
+
+                imgName = uniqueFilename() + "." + pubimgSelected.getText().substring(index + 1);
+                imgSelceted = pubimgSelected.getText();
+                typeImg = URLConnection.guessContentTypeFromName(imgSelceted);
+                try {
+                    Files.copy(Paths.get(imgSelceted), Paths.get(Statics.ClubPubsPic + imgName));
+                } catch (IOException ex) {
+                    Logger.getLogger(ClubAddController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            imgSelceted = pubimgSelected.getText();
-            typeImg = URLConnection.guessContentTypeFromName(imgSelceted);
-            try {
-                Files.copy(Paths.get(imgSelceted), Paths.get(Statics.ClubPubsPic + imgName));
-            } catch (IOException ex) {
-                Logger.getLogger(ClubAddController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
             //add pub
             ClubPub pub = new ClubPub(pubdesc_et.getText(), imgName, fileName, null, clubid, clubid);
             cb.ajouterPubClub(pub);
@@ -251,10 +343,36 @@ public class ClubRubriqueResponsableController implements Initializable {
 
     @FXML
     private void displayPubenAttente(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ClubHangingPubsInterface.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            ClubHangingPubsInterfaceController clubHangingPubsInterfaceController = loader.getController();
+            clubHangingPubsInterfaceController.initData(clubid);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ClubRubriqueAdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void displayPubRefused(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ClubRefusedPubsInterface.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            ClubRefusedPubsInterfaceController clubRefusedPubsInterfaceController = loader.getController();
+            clubRefusedPubsInterfaceController.initData(clubid);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ClubRubriqueAdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -478,20 +596,25 @@ public class ClubRubriqueResponsableController implements Initializable {
         File fileAtt = new File("src/images/enattente.png");
         Image attI = new Image(fileAtt.toURI().toString());
 
-        File fileBack = new File("images/back.png");
+        File fileBack = new File("images/back_grey.png");
         Image backI = new Image(fileBack.toURI().toString());
-        
+
         File fileEdit = new File("images/edit.png");
         Image editI = new Image(fileEdit.toURI().toString());
-        
-        File fileImage = new File("images/add-photo_grey.png");
+
+        File fileImage = new File("images/add-photo.png");
         Image imageI = new Image(fileImage.toURI().toString());
-        
+
+        File fileHome = new File("images/home_grey.png");
+        Image h = new Image(fileHome.toURI().toString());
+
+        home_iv.setImage(h);
         refusedIcon.setImage(refusedI);
         enattenteIcon.setImage(attI);
         ClubListIV.setImage(backI);
         addClubdesc.setImage(editI);
         addpicIV.setImage(imageI);
+
     }
 
     @FXML
@@ -503,5 +626,68 @@ public class ClubRubriqueResponsableController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private String getmicTExt(String duree) {
+        String s = "";
+        try {
+            String command = "py C:\\Users\\anash\\Desktop\\speechScript.py " + duree;
+            Process p = Runtime.getRuntime().exec(command);
+            try {
+                // Start a new java process 
+
+                // Read and print the standard output stream of the process 
+                try ( BufferedReader input
+                        = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+                    String line;
+                    while ((line = input.readLine()) != null) {
+                        s = line;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+        }
+        return s;
+    }
+
+    @FXML
+    private void rec(ActionEvent event) {
+        new Thread(new Runnable() {
+            public void run() {
+                if (pubdesc_et.getText().length() != 0) {
+                    pubdesc_et.setText(pubdesc_et.getText() + " " + getmicTExt(timer.getText()));
+
+                } else {
+                    pubdesc_et.setText(getmicTExt(timer.getText()));
+                }
+            }
+        }).start();
+
+        Timer timers = new Timer();
+
+        timers.scheduleAtFixedRate(new TimerTask() {
+            int i = Integer.parseInt(timer.getText().split(" S")[0]);
+
+            public void run() {
+                new Thread(new Runnable() {
+                    public void run() {
+                        Platform.runLater(() -> {
+                            timer.setText(i + " S restantes");
+                            i--;
+
+                            if (i < 0) {
+                                timers.cancel();
+                                timer.setText(String.valueOf(Math.round(slider.getValue())) + " S restantes");
+                            }
+                        });
+                    }
+                }).start();
+
+            }
+
+        }, 0, 1000);
+
     }
 }

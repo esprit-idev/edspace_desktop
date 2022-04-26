@@ -4,7 +4,10 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -14,27 +17,48 @@
    <children>
       <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.6" prefWidth="1087.2" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="446.0" layoutY="61.0" prefHeight="54.0" prefWidth="122.0" text="Forum" textFill="#54b48c">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="475.0" layoutY="61.0" prefHeight="70.0" prefWidth="183.0" text="Forum" textAlignment="CENTER" textFill="#54b48c">
                <font>
-                  <Font name="System Bold" size="36.0" />
+                  <Font name="System Bold" size="47.0" />
                </font>
             </Label>
-            <Text fx:id="tquestion" fill="WHITE" layoutX="189.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="514.9181518554688">
+            <Text fx:id="tquestion" fill="WHITE" layoutX="189.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="514.9181518554688">
                <font>
                   <Font name="System Bold" size="33.0" />
                </font>
             </Text>
-            <ScrollPane fx:id="sp" layoutX="230.0" layoutY="175.0" prefHeight="370.0" prefWidth="664.0" style="-fx-background-radius: 5;">
+            <ScrollPane fx:id="sp" layoutX="235.0" layoutY="211.0" prefHeight="370.0" prefWidth="664.0" style="-fx-background-radius: 5;">
                <content>
                   <VBox fx:id="vbox" prefHeight="366.0" prefWidth="662.0" style="-fx-padding: 10; -fx-spacing: 10; -fx-background-radius: 20;" />
                </content>
             </ScrollPane>
-            <Hyperlink fx:id="previous" layoutX="876.0" layoutY="79.0" text="&lt;- Previous" textFill="#54b48c">
+            <Hyperlink fx:id="previous" layoutX="926.0" layoutY="111.0" text="&lt;- Previous" textFill="#54b48c">
                <font>
                   <Font name="System Bold" size="19.0" />
                </font></Hyperlink>
-            <TextField fx:id="tfReponse" layoutX="528.0" layoutY="131.0" prefHeight="44.0" prefWidth="302.0" promptText="You have to something to say ?" style="-fx-background-radius: 20;" />
-            <Button fx:id="addBtn" layoutX="830.0" layoutY="135.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="61.0" style="-fx-background-color: #54b48c; -fx-background-radius: 7;" text="Save" textFill="WHITE" />
+            <TextField fx:id="tfReponse" layoutX="527.0" layoutY="167.0" prefHeight="44.0" prefWidth="302.0" promptText="You have to something to say ?" style="-fx-background-radius: 20;" />
+            <Button fx:id="addBtn" layoutX="829.0" layoutY="171.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="61.0" style="-fx-background-color: #54b48c; -fx-background-radius: 7;" text="Save" textFill="WHITE" />
+            <Text fx:id="error" fill="RED" layoutX="567.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You forgot to add a reply before saving" visible="false">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="logo_iv" fitHeight="54.0" fitWidth="183.0" layoutX="475.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+            <Separator layoutX="455.0" layoutY="129.0" prefHeight="3.0" prefWidth="223.0" />
+            <ImageView fx:id="pdf" fitHeight="22.0" fitWidth="21.0" layoutX="870.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/pdf.png" />
+               </image></ImageView>
+            <ImageView fx:id="google" fitHeight="22.0" fitWidth="21.0" layoutX="829.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/google.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="bad" fill="RED" layoutX="527.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have entered a bad word" visible="false">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>

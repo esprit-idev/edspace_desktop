@@ -57,7 +57,9 @@ public class ClubRubriqueStudentController implements Initializable {
     private int clubid;
     @FXML
     private ImageView ClubListIV;
-    
+    @FXML
+    private ImageView home_iv;
+
     /**
      * Initializes the controller class.
      */
@@ -65,11 +67,11 @@ public class ClubRubriqueStudentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         initImages();
-    }    
-    
+    }
+
     public void initData(int clubid) {
         //set icons color
-        Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.rgb(250, 250, 250)));
+        Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.rgb(28, 36, 36)));
         ColorAdjust bright = new ColorAdjust(0, 1, 1, 1);
         lighting.setContentInput(bright);
         lighting.setSurfaceScale(0.0);
@@ -80,17 +82,18 @@ public class ClubRubriqueStudentController implements Initializable {
         int row = 0;
         if (pubsList.isEmpty()) {
             Label l = new Label("Pas de publications.");
+            l.setTextFill(Color.WHITE);
             pubs.add(l, colu++, row);
         } else {
             try {
                 for (int i = 0; i < pubsList.size(); i++) {
 
                     FXMLLoader fxml = new FXMLLoader();
-                    fxml.setLocation(getClass().getResource("/edu/edspace/gui/Clubs/ClubPubItem.fxml"));
+                    fxml.setLocation(getClass().getResource("/edu/edspace/gui/Clubs/ClubPubStudentItem.fxml"));
 
                     AnchorPane anchorPane = fxml.load();//child
-                    ClubPubItemController clubPubItemController = fxml.getController();
-                    clubPubItemController.setData(pubsList.get(i), clubName_l.getText(),
+                    ClubPubStudentItemController clubPubStudentItemController = fxml.getController();
+                    clubPubStudentItemController.setData(pubsList.get(i), clubName_l.getText(),
                             clubPic.getImage().getUrl()
                     );
                     if (colu == 1) {
@@ -105,9 +108,8 @@ public class ClubRubriqueStudentController implements Initializable {
                 ex.printStackTrace();
             }
         }
-
     }
-    
+
     public void setClubid(int clubid) {
         this.clubid = clubid;
     }
@@ -123,7 +125,7 @@ public class ClubRubriqueStudentController implements Initializable {
     public void setClubDesc(String clubDesc) {
         this.clubDesc.setText(clubDesc);
     }
-    
+
     @FXML
     private void ClubList(MouseEvent event) {
         try {
@@ -136,14 +138,19 @@ public class ClubRubriqueStudentController implements Initializable {
             ex.printStackTrace();
         }
     }
-    
+
     private void initImages() {
-        File fileBack = new File("images/back.png");
+        File fileBack = new File("images/back_grey.png");
         Image backI = new Image(fileBack.toURI().toString());
-        
+
         ClubListIV.setImage(backI);
+
+        File fileHome = new File("images/home_grey.png");
+        Image h = new Image(fileHome.toURI().toString());
+
+        home_iv.setImage(h);
     }
-    
+
     @FXML
     private void getHome(MouseEvent event) {
         try {
@@ -154,5 +161,5 @@ public class ClubRubriqueStudentController implements Initializable {
             ex.printStackTrace();
         }
     }
-    
+
 }

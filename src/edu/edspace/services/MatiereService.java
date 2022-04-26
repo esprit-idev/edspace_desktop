@@ -41,7 +41,7 @@ public class MatiereService {
         return getMatieresList(req);
     }
 
-    public void modifierMatiere(Matiere matiere,String oldId) {
+    public void modifierMatiere(Matiere matiere, String oldId) {
         String req = "update matiere set id=?, niveau_id=? WHERE id=?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
@@ -68,10 +68,10 @@ public class MatiereService {
     }
 
     public List<Matiere> filterByNiveau(String niveau) {
-        String req = "select * from matiere where niveau_id='"+niveau+"'"; //requete select from db
+        String req = "select * from matiere where niveau_id='" + niveau + "'"; //requete select from db
         return getMatieresList(req);
     }
-    
+
     public List<Matiere> getMatieresList(String req) {
         List<Matiere> myList = new ArrayList<>();
         try {
@@ -91,4 +91,21 @@ public class MatiereService {
         }
         return myList;
     }
+
+    public boolean findMatiereById(String matiereId) {
+        boolean exist=false;
+        String req = "select * from matiere where id=?"; //requete select from db
+        try {
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+            pst.setString(1, matiereId);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                exist=true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return exist;
+    }
+
 }
