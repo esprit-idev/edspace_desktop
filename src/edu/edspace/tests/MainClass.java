@@ -43,6 +43,7 @@ public class MainClass extends Application {
 
 
 
+<<<<<<< Updated upstream
            /* if(Session.getUsername()==null){
 
             Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));*/
@@ -50,6 +51,13 @@ public class MainClass extends Application {
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/FrontHome.fxml")); //new front
 
+=======
+           
+
+            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+
+           //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+>>>>>>> Stashed changes
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeFront.fxml")); //old front
             Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
@@ -58,6 +66,10 @@ public class MainClass extends Application {
             //primaryStage.getIcons().add(new Image("E:\\Webprojects\\PIDEV\\edspace_desktop\\images\\graduate.png"));
             primaryStage.show();
         
+
+           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+
+           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
         }
