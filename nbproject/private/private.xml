@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubPubAdminItemController.java</file>
             <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubRubriqueResponsableController.java</file>
             <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubListAdminController.java</file>
@@ -37,15 +38,23 @@
             <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubRubriqueAdminController.java</file>
             <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/services/ClubPubService.java</file>
 =======
+=======
+>>>>>>> 37915e053190c55a47c9d00b4229209f60724a4f
             <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/services/MatiereService.java</file>
+            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/HomeBackController.java</file>
             <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/DocRController.java</file>
+            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/tests/MainClass.java</file>
             <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/utils/Statics.java</file>
             <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/FaveDocsController.java</file>
             <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/AddDocController.java</file>
             <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/matiere/MatieresListController.java</file>
             <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/services/DocumentService.java</file>
+<<<<<<< HEAD
 >>>>>>> 7c6bbc199549c1f12a21192c938c94f758930405
 >>>>>>> 475e5783b42f805c0f9ef84b1a52934f2c3c9296
+=======
+            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/ListDocFrontController.java</file>
+>>>>>>> 37915e053190c55a47c9d00b4229209f60724a4f
         </group>
     </open-files>
 </project-private>
