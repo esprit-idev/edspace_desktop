@@ -25,54 +25,36 @@ import java.io.IOException;
  */
 public class MainClass extends Application {
 
-
-
-    public static void main(String[] args){
-       launch(args);
+    public static void main(String[] args) {
+        launch(args);
     }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-          try {
-           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
-        // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml"));
-           Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
-            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Message/AllMessages.fxml"));
-//Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Message/AllMessages.fxml"));          
-//Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
-          // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/FrontHome.fxml")); //new front
-
-
-
-<<<<<<< Updated upstream
-           /* if(Session.getUsername()==null){
-
-            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));*/
-
+        try {
+            if(Session.getUsername()==null){
+            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/FrontHome.fxml")); //new front
-
-=======
-           
-
-            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
-
-           //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
->>>>>>> Stashed changes
-           //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeFront.fxml")); //old front
             Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
             primaryStage.setTitle("EdSpace");
-            //change this to your own path or comment it to not cause problems
-            //primaryStage.getIcons().add(new Image("E:\\Webprojects\\PIDEV\\edspace_desktop\\images\\graduate.png"));
+            File fileLogo = new File("images/graduate_grey.png");
+            Image logoI = new Image(fileLogo.toURI().toString());
+            primaryStage.getIcons().add(logoI);
             primaryStage.show();
-        
+        }
+        else{
+            Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
 
-           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
-
-           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+            Scene scene = new Scene(parent);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
         } catch (IOException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
+
 }
