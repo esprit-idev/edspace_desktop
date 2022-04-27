@@ -6,6 +6,20 @@ package edu.edspace.entities;
 
 public class Niveau {
     private String id;
+      private int nbClasse;
+
+    public int getNbClasse() {
+        return nbClasse;
+    }
+
+    /*public void setNbClasse(int nbClasse) {
+        this.nbClasse = nbClasse;
+    }*/
+    
+    public void setNbClasse(int nbClasse) {
+        this.nbClasse = nbClasse;
+    }
+    
 
     public Niveau(String id) {
         this.id = id;
@@ -19,11 +33,12 @@ public class Niveau {
         this.id = id;
     }
 
-	@Override
-	public String toString() {
-		return "Niveau [id=" + id + "]";
-	}
+    @Override
+    public String toString() {
+        return "Niveau{" + "id=" + id + ", nbClasse=" + nbClasse + '}';
+    }
 
+	
 	public Niveau() {
 	}
 }

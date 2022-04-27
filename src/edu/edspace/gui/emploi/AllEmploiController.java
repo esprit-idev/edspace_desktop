@@ -136,7 +136,6 @@ public class AllEmploiController implements Initializable{
                         up.setI(nw.getId());
                         up.settitle(nw.getTitle());
                         up.setContent(nw.getContent());
-                        up.setDate(nw.getDate());
                         up.setIm(nw.getImage());
                         rootPane.getChildren().setAll(panel);
                     } catch (IOException e) {
@@ -244,8 +243,7 @@ private void getForum(MouseEvent event) {
 		} catch (IOException ex) {
 			Logger.getLogger(AllEmploiController.class.getName()).log(Level.SEVERE, null, ex);
 		}
-    }
-    
+    }   
     @FXML
     private void getAllMatieresView(MouseEvent event) {
         try {
@@ -265,7 +263,15 @@ private void getForum(MouseEvent event) {
 			
 		}
     }
-
+    @FXML
+    private void logout(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			
+		}
+    }
     public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());

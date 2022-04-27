@@ -22,7 +22,7 @@
                         <Insets bottom="5.0" left="20.0" top="-14.0" />
                      </HBox.margin>
                   </Circle>
-                  <Label fx:id="clubName_l" prefHeight="30.0" prefWidth="442.0" text="Spark">
+                  <Label fx:id="clubName_l" prefHeight="30.0" prefWidth="435.0" text="Spark">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -30,20 +30,20 @@
                         <Insets left="10.0" top="-5.0" />
                      </HBox.margin>
                   </Label>
-                  <ImageView fx:id="refuseBtn" accessibleRole="BUTTON" fitHeight="22.0" fitWidth="21.0" onMouseClicked="#refusePub" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="refuseBtn" accessibleRole="BUTTON" fitHeight="37.0" fitWidth="40.0" onMouseClicked="#refusePub" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets top="-7.0" />
                      </HBox.margin>
                      <image>
                         <Image url="@../../../../images/refuse.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="acceptBtn" fitHeight="21.0" fitWidth="29.0" onMouseClicked="#acceptPub" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="acceptBtn" fitHeight="32.0" fitWidth="35.0" onMouseClicked="#acceptPub" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../images/accept.png" />
                      </image>
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets left="5.0" right="3.0" top="-5.0" />
                      </HBox.margin>
                   </ImageView>
                </children>

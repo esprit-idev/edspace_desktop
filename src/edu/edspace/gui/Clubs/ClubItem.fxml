@@ -11,12 +11,15 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="361.0" prefWidth="378.0" styleClass="club-item" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubItemController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="63.0" layoutY="8.0" prefHeight="215.0" prefWidth="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" layoutX="63.0" layoutY="8.0" prefWidth="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="club_name_label" alignment="CENTER" prefHeight="49.0" prefWidth="453.0" text="ClubName" textAlignment="CENTER">
+            <Label fx:id="club_name_label" alignment="CENTER" prefHeight="49.0" prefWidth="453.0" text="ClubName" textAlignment="CENTER" textFill="#1c2424">
                <font>
                   <Font name="Cambria Bold" size="26.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </Label>
             <Label fx:id="clubId" text="Label" visible="false" />
             <ImageView fx:id="club_img" fitHeight="115.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
@@ -38,9 +41,9 @@
                   <Font name="Cambria Bold" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="btn_consult" mnemonicParsing="false" onAction="#consultClub" styleClass="buttonclt" text="Consult">
+            <Button fx:id="btn_consult" mnemonicParsing="false" onAction="#consultClub" style="-fx-background-color: #54b48c;" styleClass="buttonclt" text="Consult">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <VBox.margin>
                   <Insets top="10.0" />

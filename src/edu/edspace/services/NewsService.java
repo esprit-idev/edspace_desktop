@@ -109,6 +109,7 @@ public class NewsService {
 
     public List<News> AllNewsforFilter(String req){
         List<News> listNews = new ArrayList<>();
+        listNews.clear();
         try {
 			// String query all publications 
 			query = req ;

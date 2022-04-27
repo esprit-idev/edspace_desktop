@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.news.allCategoryNewsController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.news.allCategoryNewsController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="649.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -166,7 +166,7 @@
             </Button>
          </children>
       </VBox>
-      <StackPane layoutX="258.0" prefHeight="576.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
+      <StackPane layoutX="258.0" prefHeight="649.0" prefWidth="831.0" style="-fx-background-color: #02030A;">
          <children>
             <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;">
                <children>
@@ -188,7 +188,7 @@
                      </image>
                   </ImageView>
                   <TextField fx:id="nomTextField" layoutX="258.0" layoutY="130.0" promptText="Nom de la categorie" />
-                  <Button fx:id="add_btn" layoutX="438.0" layoutY="130.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#addMatiere" text="Ajouter" />
+                  <Button fx:id="add_btn" layoutX="438.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#addCat" text="Ajouter" />
                   <Button fx:id="modify1" layoutX="592.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#deleteCategory" prefHeight="25.0" prefWidth="80.0" text="Supprimer" />
                </children>
             </Pane>

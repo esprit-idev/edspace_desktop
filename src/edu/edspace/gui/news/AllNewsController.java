@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,9 +24,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -133,6 +137,9 @@ public class AllNewsController implements Initializable{
                 modifButton = cd.modifBtn;
                 delButton = cd.getDeleteButton();
                 delButton.setOnMouseClicked((MouseEvent event)->{
+                    ButtonType saveButtonType = new ButtonType("Supprimer", ButtonData.OK_DONE);
+                    Alert alert = new Alert(AlertType.WARNING,"",saveButtonType);
+                    alert.setContentText("Vous voulez vraiment supprime cette article?");
                     newsService.deleteNews(nw.getId());
                     getNewsView(event);
                 });
@@ -145,7 +152,6 @@ public class AllNewsController implements Initializable{
                         up.settitle(nw.getTitle());
                         up.setContent(nw.getContent());
                         up.setowner(nw.getOwner());
-                        up.setDate(nw.getDate());
                         up.setIm(nw.getImage());
                         rootPane.getChildren().setAll(panel);
                     } catch (IOException e) {
@@ -258,7 +264,7 @@ public class AllNewsController implements Initializable{
             //redirection
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
             Parent root = loader.load();
-            club_iv.getScene().setRoot(root);
+            forum_iv.getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -277,7 +283,16 @@ public class AllNewsController implements Initializable{
             ex.printStackTrace();
         }
         
-    }    
+    }
+    @FXML
+    private void logout(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			
+		}
+    }        
     @FXML
     private void handleClicks(ActionEvent event) {
     }
