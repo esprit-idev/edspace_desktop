@@ -17,6 +17,8 @@ import edu.edspace.entities.News;
 import edu.edspace.services.NewsCategoryService;
 import edu.edspace.services.NewsService;
 import edu.edspace.utils.MyConnection;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,10 +30,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -67,6 +71,8 @@ public class AllNewsController implements Initializable{
     @FXML
     private ImageView signOut_iv;
     @FXML
+    private ImageView emptyIcon; 
+    @FXML
     private AnchorPane rootPane;
     @FXML
     private Button btnAddNews;
@@ -98,18 +104,51 @@ public class AllNewsController implements Initializable{
     private Button btnNews;
     @FXML
     private Button btnCatNews;
-
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button btnSearch;
     Connection connection = null;
-    private List<News> newsList = new ArrayList<>();   
+    private NewsService newsService = new NewsService();
+    private List<News> newsList = newsService.AllNews();   
     private List<CategoryNews> catList = new ArrayList<>();
+    List<News> filteredList = new ArrayList<>();
 
-
-    public void initData(){
-        NewsService newsService = new NewsService();
-        newsList = newsService.AllNews();
+    @FXML
+    public void search(MouseEvent event){
         NewsCategoryService cnews = new NewsCategoryService();
         catList = cnews.AllCatsNames();
-        //System.out.println(catList);
+        String searchWord = searchField.getText().toLowerCase();
+        if(searchWord.isEmpty()){
+            filteredList.clear();   
+            System.out.println(newsList);
+            tilePaneId.getChildren().clear();
+            initPane(newsList, catList);
+        }else{
+            filteredList = newsService.SearchPbulications(searchWord);
+            if(filteredList == null && filteredList.isEmpty()){
+                File file = new File("images/empty-folder.png");
+                Image notFound = new Image(file.toURI().toString());
+                emptyIcon.setImage(notFound);
+                emptyIcon.setVisible(true);
+                System.out.println(notFound);
+                newsList = newsService.AllNews();
+            }else{
+                System.out.println(filteredList);
+                newsList.clear();
+                tilePaneId.getChildren().clear();
+                //newsList = filteredList;
+                initPane(filteredList, catList);
+                newsList = newsService.AllNews();
+            }
+            
+        }
+        
+        //initData();
+    }
+    public void initData(){
+        NewsCategoryService cnews = new NewsCategoryService();
+        catList = cnews.AllCatsNames();
        // check if list is empty
         if(newsList == null && newsList.isEmpty()){
             Label label = new Label();

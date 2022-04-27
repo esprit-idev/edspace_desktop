@@ -138,5 +138,7 @@ public class News {
     public String toString() {
         return "Publication News{" + "id=" + id + ", Title=" + title + ", owner=" + owner + ", date=" + date+ ", content=" + content +"\n" + "categoryName=" + categoryName + ", image=" + image + '}' + "\n";
     }
-    
+    public int incrementLikes(){
+        return likes = likes+1;
+     }
 }

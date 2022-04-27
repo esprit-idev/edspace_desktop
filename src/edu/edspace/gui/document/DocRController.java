@@ -324,6 +324,16 @@ public class DocRController implements Initializable {
             try {
                 if (to != null && to.length() != 0 && object != null && object.length() != 0 && body != null && body.length() != 0) {
                     ds.sendDocViaEmail(doc, to, object, body, currentUser);
+                    String title = "Envoi email";
+                    String header = "Le document a été envoyé avec succès!";
+                    final Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    File doneFile = new File("images/done.png");
+                    Image doneI = new Image(doneFile.toURI().toString());
+                    alert.setGraphic(new ImageView(doneI));
+                    alert.setTitle(title);
+                    alert.setHeaderText(header);
+                    alert.setResizable(true);
+                    alert.showAndWait();
                 } else {
                     String title = "Erreur survenue lors de l'envoi";
                     String header = "Veuillez remplir tous les champs";

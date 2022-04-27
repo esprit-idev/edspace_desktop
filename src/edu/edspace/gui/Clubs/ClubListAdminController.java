@@ -36,6 +36,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -70,7 +71,7 @@ import javax.swing.text.AbstractDocument.Content;
  * @author anash
  */
 public class ClubListAdminController implements Initializable {
-
+    
     @FXML
     private HBox hboxa;
     @FXML
@@ -145,7 +146,7 @@ public class ClubListAdminController implements Initializable {
     private TableColumn<Club, String> tab_res;
     @FXML
     private TableColumn<Club, String> tab_action;
-
+    
     ObservableList<Club> clubList = FXCollections.observableArrayList();
     ObservableList<String> students = FXCollections.observableArrayList();
     ObservableList<String> categories = FXCollections.observableArrayList();
@@ -165,7 +166,7 @@ public class ClubListAdminController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+        
         ClubPubService cps = new ClubPubService();
         pubNB = cps.getPubsNB();
         Timer timer = new Timer();
@@ -182,12 +183,12 @@ public class ClubListAdminController implements Initializable {
             }
         };
         timer.schedule(myTask, 1000, 1000);
-
+        
         initImages();
         tab_desc.setCellFactory(WRAPPING_CELL_FACTORY);
         ClubCategService cb = new ClubCategService();
         categories.add("-- Club Categories --");
-
+        
         c_cat.setItems(categories);
         c_cat.setValue("-- Club Categories --");
         filter_cat_combo.setItems(categories);
@@ -209,11 +210,11 @@ public class ClubListAdminController implements Initializable {
             categories.add(clubcat.getCategorie());
         }
         c_cat.setItems(categories);
-
+        
         students.add("-- Club Responsable --");
         c_respo.setItems(students);
         c_respo.setValue("-- Club Responsable --");
-
+        
         ClubService c = new ClubService();
         studentsList = c.listStudentNotResponsable();
         for (User user : studentsList) {
@@ -238,16 +239,16 @@ public class ClubListAdminController implements Initializable {
         search_tf.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals("")) {
                 showClubs();
-
+                
             } else {
                 showClubsFiltredByName(newValue);
-
+                
             }
-
+            
         });
         showClubs();
     }
-
+    
     public void showClubsFiltredByName(String nom) {
         ClubService cb = new ClubService();
         cb.getClubsByName(clubList, tab, nom);
@@ -266,40 +267,40 @@ public class ClubListAdminController implements Initializable {
                     if (empty) {
                         setGraphic(null);
                         setText(null);
-
+                        
                     } else {
-
+                        
                         ImageView deleteIcon = new ImageView(new Image(new File("src/images/del.png").toURI().toString()));
                         ImageView editIcon = new ImageView(new Image(new File("src/images/edit.png").toURI().toString()));
                         ImageView consultIcon = new ImageView(new Image(new File("src/images/consult.png").toURI().toString()));
-
+                        
                         deleteIcon.setFitHeight(30);
                         deleteIcon.setFitWidth(30);
-
+                        
                         editIcon.setFitHeight(30);
                         editIcon.setFitWidth(30);
-
+                        
                         consultIcon.setFitHeight(30);
                         consultIcon.setFitWidth(30);
-
-                        Lighting lighting1 = new Lighting(new Light.Distant(45, 90, Color.rgb(55, 180, 98)));
+                        
+                        Lighting lighting1 = new Lighting(new Light.Distant(45, 90, Color.rgb(84, 180, 140)));
                         ColorAdjust bright1 = new ColorAdjust(0, 1, 1, 1);
                         lighting1.setContentInput(bright1);
                         lighting1.setSurfaceScale(0.0);
                         consultIcon.setEffect(lighting1);
-
+                        
                         Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.rgb(250, 90, 90)));
                         ColorAdjust bright = new ColorAdjust(0, 1, 1, 1);
                         lighting.setContentInput(bright);
                         lighting.setSurfaceScale(0.0);
                         deleteIcon.setEffect(lighting);
-
+                        
                         Lighting lighting2 = new Lighting(new Light.Distant(45, 90, Color.rgb(20, 100, 120)));
                         ColorAdjust bright2 = new ColorAdjust(0, 1, 1, 1);
                         lighting2.setContentInput(bright2);
                         lighting2.setSurfaceScale(0.0);
                         editIcon.setEffect(lighting2);
-
+                        
                         consultIcon.setOnMouseClicked((MouseEvent event) -> {
                             try {
                                 Club selectedClub = tab.getSelectionModel().getSelectedItem();
@@ -351,7 +352,7 @@ public class ClubListAdminController implements Initializable {
                                     alertz.setContentText("Le club n'a pas été supprimé");
                                     alertz.showAndWait();
                                 }
-
+                                
                             }
                         });
                         editIcon.setOnMouseClicked((MouseEvent event) -> {
@@ -385,34 +386,34 @@ public class ClubListAdminController implements Initializable {
                                         c_cat.setValue("-- Club Categories --");
                                         c_respo.setValue("-- Club Responsable --");
                                         btnAnnulerModif.setVisible(false);
-
+                                        
                                     }
                                 });
                             }
                         }
                         );
-
-                        HBox managebtn = new HBox(editIcon, deleteIcon, consultIcon);
-                        //  managebtn.setStyle("-fx-alignment:center");
-                        HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
-                        HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
+                        
+                        HBox managebtn = new HBox(consultIcon, editIcon, deleteIcon);
+                        managebtn.setAlignment(Pos.CENTER);
                         HBox.setMargin(consultIcon, new Insets(2, 3, 0, 2));
-
+                        HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 7));
+                        HBox.setMargin(editIcon, new Insets(2, 3, 0, 7));
+                        
                         setGraphic(managebtn);
-
+                        
                         setText(null);
-
+                        
                     }
                 }
-
+                
             };
-
+            
             return cell;
         };
         tab_action.setCellFactory(cellFactory);
         tab.setItems(clubList);
     }
-
+    
     public void showClubs() {
         ClubService cb = new ClubService();
         cb.getClubs(clubList, tab);
@@ -431,40 +432,40 @@ public class ClubListAdminController implements Initializable {
                     if (empty) {
                         setGraphic(null);
                         setText(null);
-
+                        
                     } else {
-
+                        
                         ImageView deleteIcon = new ImageView(new Image(new File("src/images/del.png").toURI().toString()));
                         ImageView editIcon = new ImageView(new Image(new File("src/images/edit.png").toURI().toString()));
                         ImageView consultIcon = new ImageView(new Image(new File("src/images/consult.png").toURI().toString()));
-
+                        
                         deleteIcon.setFitHeight(30);
                         deleteIcon.setFitWidth(30);
-
+                        
                         editIcon.setFitHeight(30);
                         editIcon.setFitWidth(30);
-
+                        
                         consultIcon.setFitHeight(30);
                         consultIcon.setFitWidth(30);
-
+                        
                         Lighting lighting1 = new Lighting(new Light.Distant(45, 90, Color.rgb(55, 180, 98)));
                         ColorAdjust bright1 = new ColorAdjust(0, 1, 1, 1);
                         lighting1.setContentInput(bright1);
                         lighting1.setSurfaceScale(0.0);
                         consultIcon.setEffect(lighting1);
-
+                        
                         Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.rgb(250, 90, 90)));
                         ColorAdjust bright = new ColorAdjust(0, 1, 1, 1);
                         lighting.setContentInput(bright);
                         lighting.setSurfaceScale(0.0);
                         deleteIcon.setEffect(lighting);
-
+                        
                         Lighting lighting2 = new Lighting(new Light.Distant(45, 90, Color.rgb(20, 100, 120)));
                         ColorAdjust bright2 = new ColorAdjust(0, 1, 1, 1);
                         lighting2.setContentInput(bright2);
                         lighting2.setSurfaceScale(0.0);
                         editIcon.setEffect(lighting2);
-
+                        
                         consultIcon.setOnMouseClicked((MouseEvent event) -> {
                             try {
                                 Club selectedClub = tab.getSelectionModel().getSelectedItem();
@@ -516,7 +517,7 @@ public class ClubListAdminController implements Initializable {
                                     alertz.setContentText("Le club n'a pas été supprimé");
                                     alertz.showAndWait();
                                 }
-
+                                
                             }
                         });
                         editIcon.setOnMouseClicked((MouseEvent event) -> {
@@ -550,34 +551,34 @@ public class ClubListAdminController implements Initializable {
                                         c_cat.setValue("-- Club Categories --");
                                         c_respo.setValue("-- Club Responsable --");
                                         btnAnnulerModif.setVisible(false);
-
+                                        
                                     }
                                 });
                             }
                         }
                         );
-
+                        
                         HBox managebtn = new HBox(editIcon, deleteIcon, consultIcon);
                         //  managebtn.setStyle("-fx-alignment:center");
                         HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
                         HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
                         HBox.setMargin(consultIcon, new Insets(2, 3, 0, 2));
-
+                        
                         setGraphic(managebtn);
-
+                        
                         setText(null);
-
+                        
                     }
                 }
-
+                
             };
-
+            
             return cell;
         };
         tab_action.setCellFactory(cellFactory);
         tab.setItems(clubList);
     }
-
+    
     public void showFiltredClubs(String catName) {
         ClubService cb = new ClubService();
         cb.getClubsByCatName(clubList, tab, catName);
@@ -596,40 +597,40 @@ public class ClubListAdminController implements Initializable {
                     if (empty) {
                         setGraphic(null);
                         setText(null);
-
+                        
                     } else {
-
+                        
                         ImageView deleteIcon = new ImageView(new Image(new File("src/images/del.png").toURI().toString()));
                         ImageView editIcon = new ImageView(new Image(new File("src/images/edit.png").toURI().toString()));
                         ImageView consultIcon = new ImageView(new Image(new File("src/images/consult.png").toURI().toString()));
-
+                        
                         deleteIcon.setFitHeight(30);
                         deleteIcon.setFitWidth(30);
-
+                        
                         editIcon.setFitHeight(30);
                         editIcon.setFitWidth(30);
-
+                        
                         consultIcon.setFitHeight(30);
                         consultIcon.setFitWidth(30);
-
+                        
                         Lighting lighting1 = new Lighting(new Light.Distant(45, 90, Color.rgb(55, 180, 98)));
                         ColorAdjust bright1 = new ColorAdjust(0, 1, 1, 1);
                         lighting1.setContentInput(bright1);
                         lighting1.setSurfaceScale(0.0);
                         consultIcon.setEffect(lighting1);
-
+                        
                         Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.rgb(250, 90, 90)));
                         ColorAdjust bright = new ColorAdjust(0, 1, 1, 1);
                         lighting.setContentInput(bright);
                         lighting.setSurfaceScale(0.0);
                         deleteIcon.setEffect(lighting);
-
+                        
                         Lighting lighting2 = new Lighting(new Light.Distant(45, 90, Color.rgb(20, 100, 120)));
                         ColorAdjust bright2 = new ColorAdjust(0, 1, 1, 1);
                         lighting2.setContentInput(bright2);
                         lighting2.setSurfaceScale(0.0);
                         editIcon.setEffect(lighting2);
-
+                        
                         consultIcon.setOnMouseClicked((MouseEvent event) -> {
                             try {
                                 Club selectedClub = tab.getSelectionModel().getSelectedItem();
@@ -681,7 +682,7 @@ public class ClubListAdminController implements Initializable {
                                     alertz.setContentText("Le club n'a pas été supprimé");
                                     alertz.showAndWait();
                                 }
-
+                                
                             }
                         });
                         editIcon.setOnMouseClicked((MouseEvent event) -> {
@@ -715,39 +716,39 @@ public class ClubListAdminController implements Initializable {
                                         c_cat.setValue("-- Club Categories --");
                                         c_respo.setValue("-- Club Responsable --");
                                         btnAnnulerModif.setVisible(false);
-
+                                        
                                     }
                                 });
                             }
                         }
                         );
-
+                        
                         HBox managebtn = new HBox(editIcon, deleteIcon, consultIcon);
                         //  managebtn.setStyle("-fx-alignment:center");
                         HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
                         HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
                         HBox.setMargin(consultIcon, new Insets(2, 3, 0, 2));
-
+                        
                         setGraphic(managebtn);
-
+                        
                         setText(null);
-
+                        
                     }
                 }
-
+                
             };
-
+            
             return cell;
         };
         tab_action.setCellFactory(cellFactory);
         tab.setItems(clubList);
-
+        
     }
-
+    
     @FXML
     private void handleClicks(ActionEvent event) {
     }
-
+    
     @FXML
     private void getNewsView(MouseEvent event) {
         try {
@@ -757,7 +758,7 @@ public class ClubListAdminController implements Initializable {
             ex.printStackTrace();
         }
     }
-
+    
     @FXML
     private void displayClubs(ActionEvent event) {
         try {
@@ -770,14 +771,14 @@ public class ClubListAdminController implements Initializable {
             ex.printStackTrace();
         }
     }
-
+    
     @FXML
     private void addClub(ActionEvent event) {
         ClubService cb = new ClubService();
-
+        
         if (addbtn.getText().toUpperCase().equals("AJOUTER")) {
             if (c_respo.getValue().equals("-- Club Responsable --") || c_cat.getValue().equals("-- Club Categories --") || c_name_tf.getText().isEmpty() || c_desc_tf.getText().isEmpty()) {
-
+                
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.initStyle(StageStyle.UTILITY);
                 alert.setTitle("Error");
@@ -793,7 +794,7 @@ public class ClubListAdminController implements Initializable {
                     alert.setContentText("Le nom du club est déja utilisé");
                     alert.showAndWait();
                 } else {
-
+                    
                     Club club = new Club();
                     club.setClubName(c_name_tf.getText());
                     club.setClubDesc(c_desc_tf.getText());
@@ -818,11 +819,11 @@ public class ClubListAdminController implements Initializable {
                             c_respo.setItems(students);
                             showClubs();
                             c_respo.setValue("-- Club Responsable --");
-
+                            
                             c_name_tf.setText("");
                             c_cat.setValue("-- Club Categories --");
                             c_desc_tf.setText("");
-
+                            
                         }
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -837,7 +838,7 @@ public class ClubListAdminController implements Initializable {
         } else {
             Club selectedClub = tab.getSelectionModel().getSelectedItem();
             if (c_respo.getValue().equals("-- Club Responsable --") || c_cat.getValue().equals("-- Club Categories --") || c_name_tf.getText().isEmpty() || c_desc_tf.getText().isEmpty()) {
-
+                
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.initStyle(StageStyle.UTILITY);
                 alert.setTitle("Error");
@@ -877,7 +878,7 @@ public class ClubListAdminController implements Initializable {
                             c_respo.setItems(students);
                             showClubs();
                             c_respo.setValue("-- Club Responsable --");
-
+                            
                             c_name_tf.setText("");
                             c_cat.setValue("-- Club Categories --");
                             c_desc_tf.setText("");
@@ -894,50 +895,50 @@ public class ClubListAdminController implements Initializable {
                         alert.showAndWait();
                     }
                 }
-
+                
             }
-
+            
         }
-
+        
     }
-
+    
     public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
-
+        
         File fileHome = new File("images/stats_grey.png");
         Image homeI = new Image(fileHome.toURI().toString());
-
+        
         File fileTab = new File("images/announcement_grey.png");
         Image tabI = new Image(fileTab.toURI().toString());
-
+        
         File fileLevel = new File("images/level_grey.png");
         Image levelI = new Image(fileLevel.toURI().toString());
-
+        
         File fileClass = new File("images/class-management_grey.png");
         Image classI = new Image(fileClass.toURI().toString());
-
+        
         File fileBook = new File("images/book_grey.png");
         Image bookI = new Image(fileBook.toURI().toString());
-
+        
         File fileForum = new File("images/forum2_grey.png");
         Image forumI = new Image(fileForum.toURI().toString());
-
+        
         File fileOffre = new File("images/briefcase_grey.png");
         Image offreI = new Image(fileOffre.toURI().toString());
-
+        
         File fileDocs = new File("images/file_grey.png");
         Image docsI = new Image(fileDocs.toURI().toString());
-
+        
         File fileUsers = new File("images/users_grey.png");
         Image usersI = new Image(fileUsers.toURI().toString());
-
+        
         File fileClub = new File("images/org_grey.png");
         Image clubI = new Image(fileClub.toURI().toString());
-
+        
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
-
+        
         logo_iv.setImage(logoI);
         home_iv.setImage(homeI);
         tabaff_iv.setImage(tabI);
@@ -951,10 +952,10 @@ public class ClubListAdminController implements Initializable {
         centre_iv.setImage(docsI);
         signOut_iv.setImage(outI);
     }
-
+    
     public static final Callback<TableColumn<Club, String>, TableCell<Club, String>> WRAPPING_CELL_FACTORY
             = new Callback<TableColumn<Club, String>, TableCell<Club, String>>() {
-
+        
         @Override
         public TableCell<Club, String> call(TableColumn<Club, String> param) {
             TableCell<Club, String> tableCell = new TableCell<Club, String>() {
@@ -963,9 +964,9 @@ public class ClubListAdminController implements Initializable {
                     if (item == getItem()) {
                         return;
                     }
-
+                    
                     super.updateItem(item, empty);
-
+                    
                     if (item == null) {
                         super.setText(null);
                         super.setGraphic(null);

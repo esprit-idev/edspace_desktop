@@ -32,20 +32,6 @@
                            </font>
                         </Label>
                         <Label fx:id="clubId" layoutX="7.0" layoutY="15.0" text="Label" visible="false" />
-                        <Button fx:id="btndisplayPubenAttente" layoutX="824.0" layoutY="19.0" mnemonicParsing="false" onAction="#displayPubenAttente" prefHeight="70.0" prefWidth="65.0" styleClass="buttoncltLight" stylesheets="@../../css/clubsCss.css" />
-                        <Button fx:id="badgeEnAttente" layoutX="875.0" layoutY="77.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="26.0" styleClass="badge" stylesheets="@../../css/clubsCss.css" text="1" textFill="WHITE" />
-                        <Button fx:id="btndisplayPubRefused" layoutX="740.0" layoutY="20.0" mnemonicParsing="false" onAction="#displayPubRefused" prefHeight="70.0" prefWidth="65.0" styleClass="buttoncltLight" stylesheets="@../../css/clubsCss.css" />
-                        <Button fx:id="badgeRefused" layoutX="791.0" layoutY="78.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" styleClass="badge" stylesheets="@../../css/clubsCss.css" text="1" textFill="WHITE" />
-                        <ImageView fx:id="refusedIcon" fitHeight="39.0" fitWidth="42.0" layoutX="750.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../images/refused.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="enattenteIcon" fitHeight="39.0" fitWidth="37.0" layoutX="836.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../images/enattente.png" />
-                           </image>
-                        </ImageView>
                         <ImageView fx:id="ClubListIV" fitHeight="33.0" fitWidth="33.0" layoutX="70.0" layoutY="30.0" onMouseClicked="#ClubList" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../images/back_grey.png" />
@@ -71,17 +57,31 @@
                               </ImageView>
                            </children>
                         </Group>
+                        <Button fx:id="btndisplayPubRefused" layoutX="978.0" layoutY="52.0" mnemonicParsing="false" onAction="#displayPubRefused" prefHeight="60.0" prefWidth="52.0" styleClass="buttoncltLight" stylesheets="@../../css/clubsCss.css" />
+                        <Button fx:id="badgeRefused" layoutX="968.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" styleClass="badge" stylesheets="@../../css/clubsCss.css" text="1" textFill="WHITE" />
+                        <ImageView fx:id="refusedIcon" fitHeight="32.0" fitWidth="33.0" layoutX="986.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/refused.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="79.0" prefWidth="957.0">
                      <children>
-                        <Label fx:id="clubDesc" alignment="CENTER" contentDisplay="CENTER" layoutX="182.0" layoutY="7.0" prefHeight="54.0" prefWidth="715.0" text="Updating property file: E:\Webprojects\PIDEV\edspace_desktop\build\built-jar.propertiesCompiling 3 source files to E:\Webprojects\PIDEV\edspace_desktop\build\classesCopying 1 file to E:\Webprojects\PIDEV\edspace_desktop\build\classes" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                        <Label fx:id="clubDesc" alignment="CENTER" contentDisplay="CENTER" layoutX="114.0" prefHeight="67.0" prefWidth="840.0" text="Updating property file: E:\Webprojects\PIDEV\edspace_desktop\build\built-jar.propertiesCompiling 3 source files to E:\Webprojects\PIDEV\edspace_desktop\build\classesCopying 1 file to E:\Webprojects\PIDEV\edspace_desktop\build\classes" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <padding>
                               <Insets left="20.0" right="20.0" top="20.0" />
                            </padding>
                         </Label>
-                        <Button fx:id="clubdescbtn" layoutX="901.0" layoutY="41.0" mnemonicParsing="false" onAction="#changeClubDesc" prefHeight="24.0" prefWidth="25.0" styleClass="camera" stylesheets="@../../css/clubsCss.css" textFill="#1c2424" />
-                        <ImageView fx:id="addClubdesc" fitHeight="17.0" fitWidth="19.0" layoutX="903.0" layoutY="44.0" onMouseClicked="#editclubDesc" pickOnBounds="true" preserveRatio="true">
+                        <Button fx:id="clubdescbtn" layoutX="850.0" mnemonicParsing="false" onAction="#changeClubDesc" prefHeight="24.0" prefWidth="25.0" styleClass="camera" stylesheets="@../../css/clubsCss.css" textFill="#1c2424" />
+                        <Button fx:id="btndisplayPubenAttente" layoutX="979.0" layoutY="-11.0" mnemonicParsing="false" onAction="#displayPubenAttente" prefHeight="60.0" prefWidth="52.0" styleClass="buttoncltLight" stylesheets="@../../css/clubsCss.css" />
+                        <Button fx:id="badgeEnAttente" layoutX="966.0" layoutY="-23.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="26.0" styleClass="badge" stylesheets="@../../css/clubsCss.css" text="1" textFill="WHITE" />
+                        <ImageView fx:id="enattenteIcon" fitHeight="32.0" fitWidth="33.0" layoutX="987.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/enattente.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="addClubdesc" fitHeight="17.0" fitWidth="19.0" layoutX="853.0" layoutY="4.0" onMouseClicked="#editclubDesc" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../images/edit.png" />
                            </image>
@@ -90,17 +90,31 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="279.0" prefWidth="1074.0">
                      <children>
-                        <TextArea fx:id="pubdesc_et" layoutX="231.0" prefHeight="115.0" prefWidth="590.0" wrapText="true" />
-                        <Button fx:id="publier_btn" layoutX="749.0" layoutY="230.0" mnemonicParsing="false" onAction="#addPub" prefHeight="30.0" prefWidth="70.0" text="Publier" />
-                        <Button fx:id="btnPubImg" layoutX="749.0" layoutY="129.0" mnemonicParsing="false" onAction="#SelectPubImg" prefHeight="30.0" prefWidth="70.0" text="Image" />
-                        <Button fx:id="btnPubFile" layoutX="749.0" layoutY="181.0" mnemonicParsing="false" onAction="#SelectPubFile" prefHeight="30.0" prefWidth="70.0" text="Fichier" />
+                        <TextField fx:id="pubFileSelected" editable="false" layoutX="352.0" layoutY="181.0" prefHeight="30.0" prefWidth="468.0" style="-fx-background-radius: 10;" />
+                        <TextArea fx:id="pubdesc_et" layoutX="208.0" prefHeight="115.0" prefWidth="613.0" style="-fx-background-radius: 10;" stylesheets="@../../css/clubsCss.css" wrapText="true" />
+                        <Button fx:id="publier_btn" layoutX="750.0" layoutY="230.0" mnemonicParsing="false" onAction="#addPub" prefHeight="28.0" prefWidth="70.0" style="-fx-background-color: #54b48c; -fx-background-radius: 10;" text="Publier" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Button fx:id="btnPubFile" layoutX="749.0" layoutY="182.0" mnemonicParsing="false" onAction="#SelectPubFile" prefHeight="28.0" prefWidth="70.0" style="-fx-background-radius: 10; -fx-background-color: #54b48c;" text="Fichier" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
                         <ButtonBar layoutX="209.0" layoutY="178.0" prefHeight="40.0" prefWidth="200.0" />
-                        <TextField fx:id="pubimgSelected" editable="false" layoutX="352.0" layoutY="129.0" prefHeight="30.0" prefWidth="398.0" />
-                        <TextField fx:id="pubFileSelected" editable="false" layoutX="352.0" layoutY="181.0" prefHeight="30.0" prefWidth="398.0" />
-                        <Button layoutX="44.0" layoutY="22.0" mnemonicParsing="false" onAction="#rec" text="Record" />
-                        <Slider fx:id="slider" blockIncrement="1.0" layoutX="28.0" layoutY="78.0" max="10.0" min="4.0" value="5.0" />
-                        <Text fill="WHITE" layoutX="98.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée:" />
-                        <Label fx:id="timer" layoutX="109.0" layoutY="26.0" prefHeight="17.0" prefWidth="110.0" text="Label" textFill="WHITE" />
+                        <TextField fx:id="pubimgSelected" editable="false" layoutX="352.0" layoutY="129.0" prefHeight="30.0" prefWidth="470.0" style="-fx-background-radius: 10;" />
+                        <Button layoutX="93.0" layoutY="10.0" mnemonicParsing="false" onAction="#rec" prefHeight="26.0" prefWidth="26.0" style="-fx-background-radius: 100;" />
+                        <Slider fx:id="slider" blockIncrement="1.0" layoutX="34.0" layoutY="49.0" max="10.0" min="4.0" value="5.0" />
+                        <Text fill="WHITE" layoutX="32.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée:" />
+                        <Label fx:id="timer" layoutX="77.0" layoutY="75.0" prefHeight="17.0" prefWidth="110.0" text="Label" textFill="WHITE" />
+                        <Button fx:id="btnPubImg" layoutX="751.0" layoutY="130.0" mnemonicParsing="false" onAction="#SelectPubImg" prefHeight="28.0" prefWidth="70.0" style="-fx-background-radius: 10; -fx-background-color: #54b48c;" text="Image" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="93.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/mic.png" />
+                           </image>
+                        </ImageView>
                      </children>
                      <VBox.margin>
                         <Insets top="30.0" />

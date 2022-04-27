@@ -168,11 +168,11 @@
             </Button>
          </children>
       </VBox>
-      <ScrollPane fx:id="scrolla" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="833.0" styleClass="bgwhite" stylesheets="@../../css/clubsCss.css">
+      <ScrollPane fx:id="scrolla" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="833.0" styleClass="bgwhite" stylesheets="@../../css/clubsCss.css">
          <content>
             <VBox prefWidth="830.0" styleClass="bgwhite">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="785.0" text="Clubs universitaires" textAlignment="CENTER" textFill="#a19a9a">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="785.0" text="Clubs universitaires" textAlignment="CENTER" textFill="#131414">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -182,20 +182,23 @@
                   </Label>
                   <AnchorPane prefHeight="67.0" prefWidth="785.0" styleClass="bgwhite">
                      <children>
-                        <ComboBox fx:id="filter_cat_combo" layoutX="175.0" layoutY="21.0" prefHeight="25.0" prefWidth="213.0" />
+                        <ComboBox fx:id="filter_cat_combo" layoutX="175.0" layoutY="21.0" prefHeight="25.0" prefWidth="213.0" style="-fx-background-radius: 10;" />
                         <Label layoutX="50.0" layoutY="20.0" prefHeight="27.0" prefWidth="154.0" text="Filter par categorie" />
                         <Label layoutX="452.0" layoutY="20.0" prefHeight="27.0" prefWidth="154.0" text="Chercher un club" />
-                        <TextField fx:id="search_tf" layoutX="555.0" layoutY="21.0" promptText="Nom du club" />
+                        <TextField fx:id="search_tf" layoutX="555.0" layoutY="21.0" promptText="Nom du club" style="-fx-background-radius: 10;" />
                      </children>
                   </AnchorPane>
                   <VBox>
                      <children>
                         <AnchorPane>
                            <children>
-                              <Label fx:id="addlabel" text="Ajouter un club">
+                              <Label fx:id="addlabel" text="Ajouter un club" textFill="#54b48c">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
                               </Label>
                               <Button fx:id="btnAnnulerModif" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="603.0" layoutY="4.0" mnemonicParsing="false" text="Annuler la modification" textAlignment="CENTER" visible="false" />
                            </children>
@@ -209,7 +212,7 @@
                                           <Insets bottom="10.0" left="10.0" top="10.0" />
                                        </padding>
                                     </Label>
-                                    <TextField fx:id="c_name_tf" prefHeight="25.0" prefWidth="132.0">
+                                    <TextField fx:id="c_name_tf" prefHeight="25.0" prefWidth="132.0" style="-fx-background-radius: 10;">
                                        <VBox.margin>
                                           <Insets left="10.0" />
                                        </VBox.margin>
@@ -223,7 +226,7 @@
                                           <Insets bottom="10.0" left="10.0" top="10.0" />
                                        </padding>
                                     </Label>
-                                    <ComboBox fx:id="c_cat" prefHeight="25.0" prefWidth="212.0">
+                                    <ComboBox fx:id="c_cat" prefHeight="25.0" prefWidth="212.0" style="-fx-background-radius: 10;">
                                        <VBox.margin>
                                           <Insets bottom="10.0" left="10.0" />
                                        </VBox.margin>
@@ -240,7 +243,7 @@
                                           <Insets bottom="10.0" left="10.0" top="10.0" />
                                        </padding>
                                     </Label>
-                                    <ComboBox fx:id="c_respo" prefHeight="25.0" prefWidth="281.0">
+                                    <ComboBox fx:id="c_respo" prefHeight="25.0" prefWidth="281.0" style="-fx-background-radius: 10;">
                                        <VBox.margin>
                                           <Insets bottom="10.0" left="10.0" />
                                        </VBox.margin>
@@ -264,10 +267,13 @@
                                     <Insets bottom="10.0" left="10.0" right="30.0" />
                                  </VBox.margin>
                               </TextArea>
-                              <Button fx:id="addbtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addClub" prefHeight="34.0" prefWidth="111.0" text="Ajouter" textAlignment="CENTER">
+                              <Button fx:id="addbtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addClub" prefHeight="34.0" prefWidth="111.0" style="-fx-background-color: #54b48c;" styleClass="buttonclt" stylesheets="@../../css/clubsCss.css" text="Ajouter" textAlignment="CENTER">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="320.0" />
                                  </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
                               </Button>
                            </children>
                         </VBox>

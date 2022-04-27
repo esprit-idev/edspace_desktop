@@ -92,7 +92,7 @@ public class statics {
         return total.toString(); 
     }
     //number of classes 
-    public int numberOfClasses(){
+    public String numberOfClasses(){
         try {
             query = "Select count(*) from classe";
             resultSet = connection.createStatement().executeQuery(query);
@@ -102,7 +102,7 @@ public class statics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return total; 
+        return total.toString(); 
     }
     //number of niveau
     public String numberOfNiveau(){
@@ -118,7 +118,7 @@ public class statics {
         return total.toString(); 
     }
     // number of matiere 
-    public int numberOfMatiere(){
+    public String numberOfMatiere(){
         try {
             query = "Select count(*) from matiere";
             resultSet = connection.createStatement().executeQuery(query);
@@ -128,12 +128,12 @@ public class statics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return total; 
+        return total.toString(); 
     }
     //number of documents
-    public int numberOfDocuments(){
+    public String numberOfDocuments(){
         try {
-            query = "Select count(*) from documents";
+            query = "Select count(*) from document";
             resultSet = connection.createStatement().executeQuery(query);
             while(resultSet.next()){
                 total = resultSet.getInt(1);
@@ -141,7 +141,7 @@ public class statics {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return total; 
+        return total.toString(); 
     }
     //number of Threads 
     public int numberOfThreads(){

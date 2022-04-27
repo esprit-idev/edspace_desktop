@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="main" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="pub-item" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubPubHangRefItemController">
+<AnchorPane id="AnchorPane" fx:id="main" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" style="-fx-background-radius: 30; -fx-background-color: #dbdbdb;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Clubs.ClubPubHangRefItemController">
    <children>
       <VBox layoutY="21.0">
          <children>
@@ -54,9 +53,12 @@
                      <VBox.margin>
                         <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Label>
                   <ImageView fx:id="pubImg" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
-                  <Hyperlink fx:id="pubfile" onAction="#openPubFile" prefWidth="513.0" text="Hyperlink" underline="true" visible="false">
+                  <Hyperlink fx:id="pubfile" alignment="CENTER_RIGHT" contentDisplay="RIGHT" onAction="#openPubFile" prefHeight="23.0" prefWidth="582.0" text="Hyperlink" textAlignment="RIGHT" underline="true" visible="false">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
@@ -69,9 +71,9 @@
                   <Insets left="20.0" />
                </VBox.margin>
                <children>
-                  <Label fx:id="pubDate" prefHeight="47.0" prefWidth="362.0" text="Publié le 121/151/4545">
+                  <Label fx:id="pubDate" layoutY="4.0" prefHeight="47.0" prefWidth="362.0" text="Publié le 121/151/4545">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="10.0" />
                      </font>
                   </Label>
                </children>
@@ -79,8 +81,4 @@
          </children>
       </VBox>
    </children>
-   <stylesheets>
-      <URL value="@../../css/clubsCss.css" />
-      <URL value="@../../css/clubsCss.css" />
-   </stylesheets>
 </AnchorPane>

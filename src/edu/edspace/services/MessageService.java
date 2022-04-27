@@ -102,6 +102,69 @@ public class MessageService {
 		
 		return list;
 	}
+        
+        
+        public List<Message> listeMyMessageClasse(int c){
+		List<Message> list=new ArrayList<>();
+		
+		try {
+			String req = "select * from Message where user_id=?"; 
+			PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
+            pst.setInt(1, c);
+            ClasseService ns=new ClasseService();
+            MessageService us=new MessageService();
+          
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+            	
+            	Message m=new Message();
+            	m.setId(rs.getInt("id"));
+            	m.setContent(rs.getString("content"));
+            	Date d1 = new Date(rs.getDate("post_date").getTime());
+            	m.setPostDate(d1);
+            	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
+            	m.setUser(us.getuser(rs.getInt("classe_id")));
+            	System.out.println(m);
+            	list.add(m);
+            }
+		}catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+		
+		return list;
+	}
+        
+        
+        
+        public List<Message> listeOtherMessageClasse(int c){
+		List<Message> list=new ArrayList<>();
+		
+		try {
+			String req = "select * from Message where user_id<>?"; 
+			PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
+            pst.setInt(1, c);
+            ClasseService ns=new ClasseService();
+            MessageService us=new MessageService();
+          
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+            	
+            	Message m=new Message();
+            	m.setId(rs.getInt("id"));
+            	m.setContent(rs.getString("content"));
+            	Date d1 = new Date(rs.getDate("post_date").getTime());
+            	m.setPostDate(d1);
+            	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
+            	m.setUser(us.getuser(rs.getInt("classe_id")));
+            	System.out.println(m);
+            	list.add(m);
+            }
+		}catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+		
+		return list;
+	}
 	
 	
 	
@@ -143,7 +206,7 @@ public class MessageService {
 		return i;
 	}
 	
-	
+	///::::::::::::: bad words detector:::::::::::///
 	
 	public String[] mots(){
 		String[] l = null;
@@ -202,6 +265,61 @@ public class MessageService {
 		System.out.println(text);
 		return m;
 	}
+	///////////////////////////////////////////
+	
+	
+	
+	//:::::::::::::::::::::::search message::::
+	/*public boolean mots1(String s1,String s2){
+		String[] l1 = null;
+	
+		
+			 
+
+	        	   l1=s1.split(" ");
+	        	   String[] l2=s2.split("(?!^)");
+	        	   for (int i =0; i<l1.length;i++) {
+	        		   if(l1[i].toUpperCase().contains(s2.toUpperCase())) {
+	        			   return true;
+	        		   }
+	        		   
+	        	   }
+	        	   return false;
+	        	   
+	        	  //System.out.println(l[1]+" "+l[2]);
+	        	   
+	 
+		
+	}*/
+        
+        public boolean mots1(String s1,String s2){
+		String[] l1 = null;
+	
+		
+			 
+
+	        	   l1=s1.split(" ");
+	        	   String[] l2=s2.split("(?!^)");
+	        	   for (int i =0; i<l1.length;i++) {
+	        		   if(l1[i].toUpperCase().contains(s2.toUpperCase())) {
+	        			   return true;
+	        		   }
+	        		   
+	        	   }
+	        	   return false;
+	        	   
+	        	  //System.out.println(l[1]+" "+l[2]);
+	        	   
+	 
+		
+	}
+	
+	////////////////function which u give it a label it and make it hidden
+	public boolean find(String s1,String s2) {
+		return(s1.contains(s2));
+		
+	};
+	
 	
 	
 }
