@@ -31,7 +31,7 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Dashboard" textFill="#e7e5e5">
+            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#dashboard" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Dashboard" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="home_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,7 +46,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnNews" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getNewsView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Tableau d'affichage" textFill="#e7e5e5">
+            <Button fx:id="btnNews" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getNewsView" onMouseClicked="#getNewsView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Tableau d'affichage" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="tabaff_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -58,7 +58,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Utilisateurs" textFill="#e7e5e5">
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getUsers" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Utilisateurs" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="users_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -70,7 +70,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Niveaux d'études" textFill="#e7e5e5">
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getNiveau" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Niveaux d'études" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="niveaux_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -82,7 +82,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="254.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Classes" textFill="#e7e5e5">
+            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getClasses" prefHeight="42.0" prefWidth="254.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Classes" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="classe_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -94,7 +94,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Matières" textFill="#e7e5e5">
+            <Button fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getMatieres" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Matières" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="matieres_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -118,7 +118,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnEmploi" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Offres d'emploi" textFill="#e7e5e5">
+            <Button fx:id="btnEmploi" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getOffre" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Offres d'emploi" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="offre_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -130,7 +130,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Forum" textFill="#e7e5e5">
+            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getForum" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Forum" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="forum_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -142,7 +142,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout2" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Centre de partage" textFill="#e7e5e5">
+            <Button fx:id="btnSignout2" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getdocs" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Centre de partage" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="centre_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -154,7 +154,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Déconnexion" textFill="#e7e5e5">
+            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Déconnexion" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="signOut_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
