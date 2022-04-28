@@ -30,9 +30,9 @@
                         <Insets left="10.0" top="-5.0" />
                      </HBox.margin>
                   </Label>
-                  <ImageView fx:id="deleteBtn" accessibleRole="BUTTON" fitHeight="46.0" fitWidth="21.0" onMouseClicked="#deletepub" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="deleteBtn" accessibleRole="BUTTON" fitHeight="32.0" fitWidth="34.0" onMouseClicked="#deletepub" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets right="10.0" top="-5.0" />
                      </HBox.margin>
                      <image>
                         <Image url="@../../../../images/del.png" />
@@ -47,6 +47,9 @@
                      <VBox.margin>
                         <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
                   </Label>
                   <ImageView fx:id="pubImg" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
                </children>
@@ -54,7 +57,7 @@
             <Line startX="600.0" stroke="#434242" />
             <Label fx:id="pubDate" prefHeight="47.0" prefWidth="362.0" text="Publié le 121/151/4545">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="10.0" />
                </font>
                <VBox.margin>
                   <Insets left="20.0" />

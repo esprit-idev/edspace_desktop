@@ -15,10 +15,13 @@ import edu.edspace.entities.News;
 import edu.edspace.gui.document.ListDocFrontController;
 import edu.edspace.services.NewsCategoryService;
 import edu.edspace.services.NewsService;
+import edu.edspace.services.statics;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -78,15 +81,36 @@ public class FrontNewsController implements Initializable {
         }
     }
     private void initPane(List<News> news,List<CategoryNews>cc) {
+        statics statics = new statics();
         Iterator<News> it = news.iterator();
         while (it.hasNext()) {
             News nw = it.next();
             try{
-            FXMLLoader fXMLLoader = new FXMLLoader();
+                FXMLLoader fXMLLoader = new FXMLLoader();
                 fXMLLoader.setLocation(getClass().getResource("/edu/edspace/gui/news/cardFront.fxml"));
                 AnchorPane pane = fXMLLoader.load();
                 CardFrontController cd = fXMLLoader.getController();
                 cd.setData(nw);
+                pane.setOnMouseClicked(new EventHandler<Event>() {
+                    @Override
+                    public void handle(Event arg0) {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/news/frontNewsDetail.fxml"));
+                            AnchorPane panel = loader.load();
+                            FrontNewsDetail fdetail = loader.getController();
+                            fdetail.setI(nw.getId());
+                            fdetail.settitle(nw.getTitle());
+                            fdetail.setContent(nw.getContent());
+                            fdetail.setIm(nw.getImage());
+                            fdetail.setLikes(statics.numberOfLikes(nw.getId()));
+                            rootPane.getChildren().setAll(panel);
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } 
+                    }
+                    
+                });
                 tilePane.getChildren().addAll(pane);
                 
             } catch (IOException ex) {

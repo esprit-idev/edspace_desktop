@@ -7,6 +7,7 @@ package edu.edspace.gui.document;
 import edu.edspace.entities.Document;
 import edu.edspace.entities.Matiere;
 import edu.edspace.entities.Niveau;
+import edu.edspace.entities.Session;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
 import edu.edspace.services.NiveauService;
@@ -18,6 +19,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,11 +42,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 /**
@@ -67,8 +71,6 @@ public class AddDocController implements Initializable {
     @FXML
     private RadioButton attachFile_rb;
     @FXML
-    private ToggleGroup group;
-    @FXML
     private RadioButton insertUrl_rb;
     @FXML
     private TextField url_tf;
@@ -78,6 +80,8 @@ public class AddDocController implements Initializable {
     private ImageView home_iv;
     @FXML
     private ImageView logo_iv;
+    @FXML
+    private ImageView docw_iv;
 
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
@@ -85,6 +89,17 @@ public class AddDocController implements Initializable {
     private AnchorPane rootPane;
     @FXML
     private ImageView back_iv;
+
+    private String owner = Session.getUsername() + " " + Session.getPrenom();
+
+    @FXML
+    private ImageView filew_iv;
+    @FXML
+    private ToggleGroup group;
+    @FXML
+    private Text txt;
+    @FXML
+    private ImageView warning_iv;
 
     /**
      * Initializes the controller class.
@@ -95,6 +110,26 @@ public class AddDocController implements Initializable {
         MyConnection.getInstance().getCnx();
         initImages();
         initDisplay();
+
+        final ToggleGroup group = new ToggleGroup();
+        insertUrl_rb.setToggleGroup(group);
+        attachFile_rb.setToggleGroup(group);
+        group.selectedToggleProperty().addListener(
+                (ObservableValue<? extends Toggle> ov, Toggle oldTog,
+                        Toggle newTog) -> {
+                    docw_iv.setVisible(false);
+                    txt.setVisible(false);
+                    warning_iv.setVisible(false);
+                    if (attachFile_rb.isSelected()) {
+                        chooseFile_btn.setVisible(true);
+                        url_tf.setVisible(false);
+
+                    } else {
+                        chooseFile_btn.setVisible(false);
+                        url_tf.setVisible(true);
+                    }
+                });
+
     }
 
     private void initDisplay() {
@@ -156,25 +191,38 @@ public class AddDocController implements Initializable {
                 String header = "Un document avec le même nom existe déjà";
                 String content = "Veuillez choisir un autre nom";
                 showAlert(Alert.AlertType.ERROR, title, header, content);
+            } catch (NoSuchFileException ex) {
+                filew_iv.setVisible(true);
             } catch (IOException ex) {
-                Logger.getLogger(AddDocController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
 
         } else {
             url = url_tf.getText();
         }
-        String owner = "Anas Houissa"; //to_change
+        //String owner = "Anas Houissa"; //to_change 
         String insert_date = new SimpleDateFormat("dd/MM/yy").format(new Date());
-        if (insertUrl_rb.isSelected() && isValid(url) == false) {
-            String title = "Erreur survenue lors de l'ajout";
-            String header = "URL invalide";
-            String content = "Veuillez saisir une URL valide exemple:'https://www.google.com/'";
-            showAlert(Alert.AlertType.ERROR, title, header, content);
-        } else if (docName != null && docName.length() != 0 && niveau != null && niveau.length() != 0 && matiere != null && matiere.length() != 0) {
+        if (attachFile_rb.isSelected() && chooseFile_btn.getText().equals("Choisissez un fichier")) {
+            txt.setVisible(true);
+            warning_iv.setVisible(true);
+            docw_iv.setVisible(true);
+        } else if (insertUrl_rb.isSelected() && ((url != null && url.equals("")) || isValid(url) == false)) {
+            txt.setVisible(true);
+            warning_iv.setVisible(true);
+            docw_iv.setVisible(true);
+        } else if ((insertUrl_rb.isSelected() || attachFile_rb.isSelected()) && docName != null && docName.length() != 0 && niveau != null && niveau.length() != 0 && matiere != null && matiere.length() != 0) {
             Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
             DocumentService ds = new DocumentService();
             try {
+                System.out.println(chooseFile_btn.getText());
                 ds.ajouterDocument(doc);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/ListDocFront.fxml"));
+                    Parent root = loader.load();
+                    rootPane.getScene().setRoot(root);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             } catch (FileAlreadyExistsException ex) {
                 System.out.println(ex.getMessage());
                 String title = "Erreur survenue lors de l'ajout";
@@ -183,12 +231,8 @@ public class AddDocController implements Initializable {
                 showAlert(Alert.AlertType.ERROR, title, header, content);
             }
         } else {
-            Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
-            System.out.println(doc.toString());
-            String title = "Erreur survenue lors de l'ajout";
-            String header = "Veuillez remplir tous les champs";
-            String content = "Aucun champs ne doit être vide";
-            showAlert(Alert.AlertType.WARNING, title, header, content);
+            txt.setVisible(true);
+            warning_iv.setVisible(true);
         }
     }
 
@@ -198,8 +242,7 @@ public class AddDocController implements Initializable {
             chooseFile_btn.setVisible(true);
             url_tf.setVisible(false);
 
-        }
-        if (insertUrl_rb.isSelected()) {
+        } else {
             chooseFile_btn.setVisible(false);
             url_tf.setVisible(true);
         }
@@ -210,8 +253,10 @@ public class AddDocController implements Initializable {
         /* Try creating a valid URL */
         try {
             new URL(url).toURI();
+            System.out.println("valide");
             return true;
         } catch (Exception e) {
+            System.out.println("invalide");
             return false;
         }
     }
@@ -261,10 +306,15 @@ public class AddDocController implements Initializable {
         File fileBack = new File("images/back_grey.png");
         Image backI = new Image(fileBack.toURI().toString());
 
+        File fileWarning = new File("images/warning_red.png");
+        Image warningI = new Image(fileWarning.toURI().toString());
+
         logo_iv.setImage(logoI);
         home_iv.setImage(homeI);
         out_iv.setImage(outI);
         back_iv.setImage(backI);
+        warning_iv.setImage(warningI);
+        docw_iv.setImage(warningI);
     }
 
     @FXML
@@ -285,7 +335,7 @@ public class AddDocController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(AddDocController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 

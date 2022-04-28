@@ -81,15 +81,15 @@ public class ClasseService {
 	}
 	
 	
-	public void supprimerClasse(Classe classe) {
+	public void supprimerClasse(int classe) {
         String req = "delete from classe where id = ?";
         try {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-            pst.setInt(1, classe.getId());
+            pst.setInt(1, classe);
             
-            modifClasse(listUserClasse(classe.getId()));
+            modifClasse(listUserClasse(classe));
         	MessageService ms=new MessageService();
-            modifMessage(ms.listeMessageClasse(classe.getId()));
+            modifMessage(ms.listeMessageClasse(classe));
             
             pst.executeUpdate();
             
@@ -175,6 +175,10 @@ List<User> list=new ArrayList<>();
 	            while (rs.next()) {
 	            	User c=new User();
 	            	c.setId(rs.getInt("id"));
+                        c.setUsername(rs.getString("username"));
+                        c.setPrenom(rs.getString("prenom"));
+                        c.setEmail(rs.getString("email"));
+                        c.setRoles(rs.getString("roles"));
 	            	list.add(c);
 	            }
 			}catch (SQLException ex) {
@@ -184,6 +188,36 @@ List<User> list=new ArrayList<>();
 			return list;
 			
 		}
+                
+                
+                
+                
+                		public List<User> listUserNoClasse(int id){
+List<User> list=new ArrayList<>();
+			
+			try {
+				String req = "select * from user where classe_id<>?"; 
+				 PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+				 pst.setInt(1,id);
+		            ResultSet rs = pst.executeQuery();
+	            while (rs.next()) {
+	            	User c=new User();
+	            	c.setId(rs.getInt("id"));
+                        c.setUsername(rs.getString("username"));
+                        c.setPrenom(rs.getString("prenom"));
+                        c.setEmail(rs.getString("email"));
+                        c.setRoles(rs.getString("roles"));
+	            	list.add(c);
+	            }
+			}catch (SQLException ex) {
+	            System.out.println(ex.getMessage());
+	        }
+			
+			return list;
+			
+		}
+                
+                
 		
 		public void modifClasse(List<User> l) {
 			
@@ -204,6 +238,48 @@ List<User> list=new ArrayList<>();
 			
 			
 		}
+                
+                /*public void modifNiveau(List<Classe> l) {
+			
+			for (Classe temp : l) {
+			 String req = "update classe set niveau_id=? WHERE id=?";
+				try {
+					PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+					pst.setNull(1, Types.INTEGER);
+					pst.setInt(2, temp.getId());
+			         pst.executeUpdate();
+			            System.out.println("Classe modifié");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		
+				
+			
+			
+		}
+*/
+                
+                public void modifNiveau(List<Classe> l) {
+			
+			for (Classe temp : l) {
+			 String req = "update classe set niveau_id=? WHERE id=?";
+				try {
+					PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+					pst.setNull(1, Types.INTEGER);
+					pst.setInt(2, temp.getId());
+			         pst.executeUpdate();
+			            System.out.println("Classe modifié");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		
+				
+			
+			
+		}
+                
 		
 		public void modifMessage(List<Message> l) {
 			for (Message temp : l) {
@@ -221,5 +297,6 @@ List<User> list=new ArrayList<>();
 			
 		}
 	
+                
 
 }

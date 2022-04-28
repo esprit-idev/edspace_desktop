@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,8 @@ import edu.edspace.entities.News;
 import edu.edspace.services.NewsCategoryService;
 import edu.edspace.services.NewsService;
 import edu.edspace.utils.MyConnection;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,11 +26,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -63,6 +71,8 @@ public class AllNewsController implements Initializable{
     @FXML
     private ImageView signOut_iv;
     @FXML
+    private ImageView emptyIcon; 
+    @FXML
     private AnchorPane rootPane;
     @FXML
     private Button btnAddNews;
@@ -94,18 +104,51 @@ public class AllNewsController implements Initializable{
     private Button btnNews;
     @FXML
     private Button btnCatNews;
-
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button btnSearch;
     Connection connection = null;
-    private List<News> newsList = new ArrayList<>();   
+    private NewsService newsService = new NewsService();
+    private List<News> newsList = newsService.AllNews();   
     private List<CategoryNews> catList = new ArrayList<>();
+    List<News> filteredList = new ArrayList<>();
 
-
-    public void initData(){
-        NewsService newsService = new NewsService();
-        newsList = newsService.AllNews();
+    @FXML
+    public void search(MouseEvent event){
         NewsCategoryService cnews = new NewsCategoryService();
         catList = cnews.AllCatsNames();
-        //System.out.println(catList);
+        String searchWord = searchField.getText().toLowerCase();
+        if(searchWord.isEmpty()){
+            filteredList.clear();   
+            System.out.println(newsList);
+            tilePaneId.getChildren().clear();
+            initPane(newsList, catList);
+        }else{
+            filteredList = newsService.SearchPbulications(searchWord);
+            if(filteredList == null && filteredList.isEmpty()){
+                File file = new File("images/empty-folder.png");
+                Image notFound = new Image(file.toURI().toString());
+                emptyIcon.setImage(notFound);
+                emptyIcon.setVisible(true);
+                System.out.println(notFound);
+                newsList = newsService.AllNews();
+            }else{
+                System.out.println(filteredList);
+                newsList.clear();
+                tilePaneId.getChildren().clear();
+                //newsList = filteredList;
+                initPane(filteredList, catList);
+                newsList = newsService.AllNews();
+            }
+            
+        }
+        
+        //initData();
+    }
+    public void initData(){
+        NewsCategoryService cnews = new NewsCategoryService();
+        catList = cnews.AllCatsNames();
        // check if list is empty
         if(newsList == null && newsList.isEmpty()){
             Label label = new Label();
@@ -133,6 +176,9 @@ public class AllNewsController implements Initializable{
                 modifButton = cd.modifBtn;
                 delButton = cd.getDeleteButton();
                 delButton.setOnMouseClicked((MouseEvent event)->{
+                    ButtonType saveButtonType = new ButtonType("Supprimer", ButtonData.OK_DONE);
+                    Alert alert = new Alert(AlertType.WARNING,"",saveButtonType);
+                    alert.setContentText("Vous voulez vraiment supprime cette article?");
                     newsService.deleteNews(nw.getId());
                     getNewsView(event);
                 });
@@ -145,7 +191,6 @@ public class AllNewsController implements Initializable{
                         up.settitle(nw.getTitle());
                         up.setContent(nw.getContent());
                         up.setowner(nw.getOwner());
-                        up.setDate(nw.getDate());
                         up.setIm(nw.getImage());
                         rootPane.getChildren().setAll(panel);
                     } catch (IOException e) {
@@ -228,7 +273,26 @@ public class AllNewsController implements Initializable{
 			Logger.getLogger(allCategoryNewsController.class.getName()).log(Level.SEVERE, null, ex);
 		}
     }
-    
+    @FXML
+    private void getNiveauView(MouseEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml")); 
+            Parent root = loader.load(); 
+            rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {
+			ex.printStackTrace(); 
+		}
+    }
+    @FXML
+    private void getClassesView(MouseEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml")); 
+            Parent root = loader.load(); 
+            rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {
+			ex.printStackTrace(); 
+		}
+    }           
     @FXML
     private void getAllMatieresView(MouseEvent event) {
         try {
@@ -238,7 +302,55 @@ public class AllNewsController implements Initializable{
         } catch (IOException ex) {
             Logger.getLogger(AllNewsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
+    @FXML
+    private void displayClubs(ActionEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    @FXML
+    private void getForum(MouseEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+            Parent root = loader.load();
+            forum_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    @FXML
+    private void getUsers(ActionEvent event) {
+        
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    @FXML
+    private void logout(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			
+		}
+    }        
     @FXML
     private void handleClicks(ActionEvent event) {
     }

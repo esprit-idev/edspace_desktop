@@ -58,6 +58,9 @@ public class ClubPubAdminItemController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        File delf = new File("src/images/del.png");
+        Image delim = new Image(delf.toURI().toString());
+        deleteBtn.setImage(delim);
         Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.rgb(250, 90, 90)));
         ColorAdjust bright = new ColorAdjust(0, 1, 1, 1);
         lighting.setContentInput(bright);

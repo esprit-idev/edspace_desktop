@@ -27,6 +27,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -42,6 +48,7 @@ public class NewThreadController implements Initializable {
     @FXML
     private Button save;
     int user = 1;
+    int admin = 0;
 
     /**
      * Initializes the controller class.
@@ -51,9 +58,51 @@ public class NewThreadController implements Initializable {
     private Label ftopic;
     @FXML
     private Hyperlink previous;
+    @FXML
+    private AnchorPane rootPane;
+    @FXML
+    private ImageView out_iv;
+    @FXML
+    private ImageView logo_iv;
+    @FXML
+    private ImageView profile_iv;
+    @FXML
+    private Text error1;
+    @FXML
+    private Text error2;
+    @FXML
+    private Text bad;
+    String[] tab = {"Shit","Zah"};
+    public boolean checkForBadWords(String t){
+        boolean valid = false;
+        
+        for(int i = 0; i<tab.length;i++){
+            if(t.toUpperCase().indexOf(tab[i].toUpperCase())>=0){
+                valid = true;
+                
+                
+                 break;
+            }
+            else{
+                valid = false;
+            }
+        }
+       return valid;
+    }
     public void update(Thread t){
         previous.setOnAction(e->{
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+            if(this.admin == 1){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
         try {
             
             Parent root = loader.load();
@@ -62,15 +111,28 @@ public class NewThreadController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       });
+                        }
+        });
         System.out.println(t.getId());
         tfQuestion.setText(t.getQuestion());
         save.setText("Update");
         save.setOnAction(e->{
+            if(tfQuestion.getText().length()==0){
+                error1.setVisible(true);
+            }
+                else{
+                 if(checkForBadWords(tfQuestion.getText())==true){
+                 bad.setVisible(true);
+                       tfQuestion.setText(null);
+                       tfQuestion.setBorder(Border.stroke(Color.RED));
+                       tfQuestion.setPromptText("Replace the question");
+            }
+                else{
             t.setQuestion(tfQuestion.getText());
             ThreadService threadService = new ThreadService();
             threadService.modifierThread(t, t.getId());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+            if(this.admin == 1){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
                try {
                    Parent root = loader.load();
                    
@@ -78,11 +140,23 @@ public class NewThreadController implements Initializable {
                } catch (IOException ex) {
                    Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
                }
+            }
+            else {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
+               try {
+                   Parent root = loader.load();
+                   
+                   tfQuestion.getScene().setRoot(root);
+               } catch (IOException ex) {
+                   Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+            }
+            
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thread");
         alert.setContentText("Thread updated successfuly!");
         alert.showAndWait();
-        });
+            }}});
         
         topic.setVisible(false);
         ftopic.setVisible(false);
@@ -91,7 +165,18 @@ public class NewThreadController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         previous.setOnAction(e->{
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+            if(this.admin == 1){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
         try {
             
             Parent root = loader.load();
@@ -100,7 +185,8 @@ public class NewThreadController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       });
+                        }
+        });
         TopicService topics = new TopicService();
         List<ThreadType> ts = topics.listTopics();
         for(int i = 0; i<ts.size();i++){
@@ -113,6 +199,28 @@ public class NewThreadController implements Initializable {
 
     @FXML
     private void addThread(ActionEvent event) {
+        if(tfQuestion.getText().length()== 0 && topic.getSelectionModel().getSelectedItem() == null){
+            error1.setVisible(true);
+            error2.setVisible(true);
+        }else if(tfQuestion.getText().length()== 0 && topic.getSelectionModel().getSelectedItem() != null){
+            error1.setVisible(true);
+            error2.setVisible(false);
+        }
+        else if(topic.getSelectionModel().getSelectedItem() == null && (tfQuestion.getText().length()!=0)){
+            error1.setVisible(false);
+            error2.setVisible(true);
+        }
+       
+        else {
+            error1.setVisible(false);
+            error2.setVisible(false);
+            if(checkForBadWords(tfQuestion.getText())==true){
+                 bad.setVisible(true);
+                       tfQuestion.setText(null);
+                       tfQuestion.setBorder(Border.stroke(Color.RED));
+                       tfQuestion.setPromptText("Replace the question");
+            }
+            else{
         ThreadService threadService = new ThreadService();
         Thread t = new Thread();
         t.setQuestion(tfQuestion.getText());
@@ -124,7 +232,8 @@ public class NewThreadController implements Initializable {
         alert.setTitle("Thread");
         alert.setContentText("Thread inserted successfuly!");
         alert.showAndWait();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        if(this.admin==1){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             
             Parent root = loader.load();
@@ -133,6 +242,27 @@ public class NewThreadController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }
+        else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            topic.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+            }
+    }}
+
+    @FXML
+    private void logout(MouseEvent event) {
+    }
+
+    @FXML
+    private void getProfile(MouseEvent event) {
     }
     
 }

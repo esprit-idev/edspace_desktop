@@ -55,12 +55,13 @@ public class ClubPubItemAdminAcceptRefuseController implements Initializable {
     private ImageView pubImg;
     @FXML
     private Label pubDate;
-    private ClubPub clubPub;
     @FXML
     private ImageView refuseBtn;
     @FXML
     private ImageView acceptBtn;
     private int pubid;
+        private ClubPub clubPub;
+
 
     /**
      * Initializes the controller class.

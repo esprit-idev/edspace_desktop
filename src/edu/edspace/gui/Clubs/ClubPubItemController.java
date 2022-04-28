@@ -67,12 +67,20 @@ public class ClubPubItemController implements Initializable {
     private AnchorPane main;
     @FXML
     private Hyperlink pubfile;
+    @FXML
+    private Label l_likes;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        File editf = new File("src/images/edit.png");
+        Image editim = new Image(editf.toURI().toString());
+        File delf = new File("src/images/del.png");
+        Image delim = new Image(delf.toURI().toString());
+        deleteBtn.setImage(delim);
+        editBtn.setImage(editim);
         Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.rgb(250, 90, 90)));
         ColorAdjust bright = new ColorAdjust(0, 1, 1, 1);
         lighting.setContentInput(bright);
@@ -88,6 +96,7 @@ public class ClubPubItemController implements Initializable {
 
     public void setData(ClubPub clubPub, String clubName, String clubPicture) {
         this.clubPub = clubPub;
+        ClubPubService cps = new ClubPubService();
         clubName_l.setText(clubName.toUpperCase().split("RUBRIQUE CLUB")[1].toUpperCase());
         pubDate.setText("Publie le " + clubPub.getPubDate());
         pubDesc.setText(Jsoup.parse(clubPub.getPubDesc()).text());
@@ -106,6 +115,7 @@ public class ClubPubItemController implements Initializable {
         File file2 = new File(Statics.ClubPubsPic + clubPub.getPubImage());
         Image imagePub = new Image(file2.toURI().toString());
         pubImg.setImage(imagePub);
+        l_likes.setText(String.valueOf(cps.countLikesPerPub(getPubid())) + " Likes");
     }
 
     @FXML
@@ -155,7 +165,7 @@ public class ClubPubItemController implements Initializable {
         grid.setPadding(new Insets(20, 150, 10, 10));
         //nom tf init
         TextArea tf = new TextArea();
-        tf.setText(cps.getpubDesc(getPubid()));
+        tf.setText(Jsoup.parse(cps.getpubDesc(getPubid())).text());
 
         //add tf and cb to the grid +lables
         grid.add(new Label("Description:"), 0, 0);

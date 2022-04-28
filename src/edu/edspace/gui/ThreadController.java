@@ -22,6 +22,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import edu.edspace.entities.Thread;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -35,6 +36,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -58,13 +64,65 @@ public class ThreadController implements Initializable {
     private Button addBtn;
     @FXML
     private Hyperlink previous;
-    private int admin = 1;
+    private int admin =0 ;
     final List<Reponse> re = new ArrayList();
+    @FXML
+    private AnchorPane rootPane;
+    @FXML
+    private Text error;
+    @FXML
+    private ImageView logo_iv;
+    @FXML
+    private ImageView pdf;
+    @FXML
+    private ImageView google;
+    String[] tab = {"Shit","Zah"};
+    @FXML
+    private Text bad;
+    public boolean checkForBadWords(String t){
+        boolean valid = false;
+        
+        for(int i = 0; i<tab.length;i++){
+            if(t.toUpperCase().indexOf(tab[i].toUpperCase())>=0){
+                valid = true;
+                
+                
+                 break;
+            }
+            else{
+                valid = false;
+            }
+        }
+       return valid;
+    }
     
     public void setThread(String te, int id){
-        
+        google.setOnMouseClicked(e->{
+            ThreadService threadService= new ThreadService();
+            Thread the = new Thread();
+            the.setQuestion(tquestion.getText());
+            threadService.search(the);
+        });
+        pdf.setOnMouseClicked(e->{
+            ThreadService threadService= new ThreadService();
+            Thread the = new Thread();
+            the.setQuestion(tquestion.getText());
+            threadService.searchPDF(the);
+        });
+        initImages();
         previous.setOnAction(e->{
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+            if(this.admin == 1){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
         try {
             
             Parent root = loader.load();
@@ -73,7 +131,8 @@ public class ThreadController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       });
+                        }
+        });
         this.thread = te;
         this.id=id;
         
@@ -90,8 +149,20 @@ public class ThreadController implements Initializable {
        //tquestion.setText(thread.getQuestion());
        if(reps.size() == 0){
            sp.setContent(new Text("Empty"));
-           addBtn.setOnAction(e->{
-               
+           
+       }
+       addBtn.setOnAction(e->{
+               if(tfReponse.getText().length()==0)
+               {
+                   error.setVisible(true);
+               }
+               else{
+                    if(checkForBadWords(tfReponse.getText())==true){
+                       bad.setVisible(true);
+                       tfReponse.setText(null);
+                       tfReponse.setBorder(Border.stroke(Color.RED));
+                       tfReponse.setPromptText("Replace the answer");
+            }else{
               reponseService.addReponse(new Reponse(tfReponse.getText(),this.id,1));
               FXMLLoader loader = new FXMLLoader(getClass().getResource("Thread.fxml"));
                try {
@@ -102,8 +173,7 @@ public class ThreadController implements Initializable {
                } catch (IOException ex) {
                    Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
                }
-           });
-       }
+           }}});
        for(int i = 0; i<reps.size();i++){
            
            int q = i;
@@ -140,6 +210,7 @@ public class ThreadController implements Initializable {
                Optional<ButtonType> action = a.showAndWait();
                if(action.get() == ButtonType.OK){
                    reponseService.deleteReponse(re.get(q));
+                   if(this.admin==1){
                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Thread.fxml"));
                try {
                    Parent root1 = loader.load();
@@ -151,12 +222,29 @@ public class ThreadController implements Initializable {
                }
                     
                }
+               }
+               else {
+                   FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
+               try {
+                   Parent root1 = loader.load();
+                   ThreadController TC = loader.getController();
+                   TC.setThread(this.thread,this.id);
+                  addBtn.getScene().setRoot(root1);
+               } catch (IOException ex) {
+                   Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+               }
                });
             vbox.getChildren().add(b);
            sp.setContent(vbox);
            
            addBtn.setOnAction(e->{
-               
+               if(checkForBadWords(tfReponse.getText())==true){
+                       bad.setVisible(true);
+                       tfReponse.setText(null);
+                       tfReponse.setBorder(Border.stroke(Color.RED));
+                       tfReponse.setPromptText("Replace the answer");
+            }else{
               reponseService.addReponse(new Reponse(tfReponse.getText(),this.id,1));
               FXMLLoader loader = new FXMLLoader(getClass().getResource("Thread.fxml"));
                try {
@@ -167,6 +255,7 @@ public class ThreadController implements Initializable {
                } catch (IOException ex) {
                    Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
                }
+           }
            });
            }
     }}
@@ -176,7 +265,9 @@ public class ThreadController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        initImages();
         previous.setOnAction(e->{
+            if(this.admin==1){
            FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             
@@ -186,8 +277,71 @@ public class ThreadController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+            }
+            else{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            }
        });
        }
+    public void initImages() {
+        File fileLogo = new File("images/logo1.png");
+        Image logoI = new Image(fileLogo.toURI().toString());
+        
+        File fileHome = new File("images/home_grey.png");
+        Image homeI = new Image(fileHome.toURI().toString());
+        
+        File fileTab = new File("images/announcement_grey.png");
+        Image tabI = new Image(fileTab.toURI().toString());
+        
+        File fileLevel = new File("images/level_grey.png");
+        Image levelI = new Image(fileLevel.toURI().toString());
+        
+        File fileClass = new File("images/class-management_grey.png");
+        Image classI = new Image(fileClass.toURI().toString());
+        
+        File fileBook = new File("images/book_grey.png");
+        Image bookI = new Image(fileBook.toURI().toString());
+        
+        File fileForum = new File("images/forum2_grey.png");
+        Image forumI = new Image(fileForum.toURI().toString());
+        
+        File fileOffre = new File("images/briefcase_grey.png");
+        Image offreI = new Image(fileOffre.toURI().toString());
+        
+        File fileDocs = new File("images/file_grey.png");
+        Image docsI = new Image(fileDocs.toURI().toString());
+
+        File fileUsers = new File("images/users_grey.png");
+        Image usersI = new Image(fileUsers.toURI().toString());
+        
+        File fileClub = new File("images/org_grey.png");
+        Image clubI = new Image(fileClub.toURI().toString());
+
+        File fileOut = new File("images/logout_grey.png");
+        Image outI = new Image(fileOut.toURI().toString());
+        
+        File fileReport = new File("images/report_red.png");
+        Image reportI = new Image(fileReport.toURI().toString());
+        
+        File filePdf = new File("images/pdf.png");
+        Image pdfl = new Image(filePdf.toURI().toString());
+        
+        File fileg = new File("images/google.png");
+        Image gl = new Image(fileg.toURI().toString());
+        
+        logo_iv.setImage(logoI);
+        pdf.setImage(pdfl);
+        google.setImage(gl);
+        //previous.setImage(homeI);
+    }
     }    
     
 
