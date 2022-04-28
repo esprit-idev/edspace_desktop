@@ -3,15 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubPubAdminItemController.java</file>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/tests/MainClass.java</file>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubRubriqueResponsableController.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubCategoriesListController.java</file>
             <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubListAdminController.java</file>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubPubHangRefItemController.java</file>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/css/clubsCss.css</file>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubPubItemController.java</file>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubHangingPubsInterfaceController.java</file>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubRefusedPubsInterfaceController.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/HomeBackController.java</file>
             <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubRubriqueAdminController.java</file>
         </group>
     </open-files>

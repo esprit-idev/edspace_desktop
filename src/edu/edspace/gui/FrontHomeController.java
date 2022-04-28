@@ -190,6 +190,12 @@ public class FrontHomeController implements Initializable {
 
     @FXML
     private void logout(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			
+		}
     }
 
     @FXML

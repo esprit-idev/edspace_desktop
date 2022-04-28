@@ -6,8 +6,10 @@ package edu.edspace.gui;
 
 import edu.edspace.entities.CategoryEmploi;
 import edu.edspace.entities.CategoryNews;
+import edu.edspace.entities.News;
 import edu.edspace.services.EmploiCategoryService;
 import edu.edspace.services.NewsCategoryService;
+import edu.edspace.services.NewsService;
 import edu.edspace.services.statics;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
@@ -20,14 +22,22 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -36,6 +46,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -55,8 +66,6 @@ public class HomeBackController implements Initializable {
     private Button btnMenus;
     @FXML
     private Button btnMatiere;
-
-    private Button btnSettings;
     @FXML
     private Button btnEmploi;
     @FXML
@@ -98,6 +107,22 @@ public class HomeBackController implements Initializable {
     @FXML
     private ImageView search_iv;
     @FXML
+    private ImageView niveauImg;
+    @FXML
+    private ImageView classImg;
+    @FXML
+    private ImageView matiereImg;
+    @FXML
+    private ImageView docImg;
+    @FXML
+    private ImageView newsarrowImg;
+    @FXML
+    private ImageView emploiarrowImg;
+    @FXML
+    private ImageView studentarrowImg;
+    @FXML
+    private ImageView clubarrowImg;
+    @FXML
     private Label pubNum;
     @FXML
     private Label empNum;
@@ -108,13 +133,33 @@ public class HomeBackController implements Initializable {
     @FXML
     private Label niveauNum;
     @FXML
+    private Label classeNum;
+    @FXML
+    private Label matiereNum;
+    @FXML
+    private Label documentNum;
+    @FXML
     private PieChart pieChart;
+    @FXML
+    private BarChart<String,Integer> barChart;
+    @FXML
+    private CategoryAxis xAxis;
+    @FXML
+    private NumberAxis yAxis;
     @FXML
     private PieChart pieChartEmp;
     private List<CategoryNews> categories = new ArrayList<CategoryNews>();
     private List<CategoryEmploi> categoriesEmpl = new ArrayList<CategoryEmploi>();
     @FXML
     private Button btnClubs;
+    @FXML
+    private Button viewNewsBtn;
+    @FXML
+    private Button viewEmploiBtn;
+    @FXML
+    private Button viewEtudiantBtn;
+    @FXML
+    private Button viewClubsBtn;
 
     @FXML
     private void getNewsView(MouseEvent event) {
@@ -195,6 +240,9 @@ public class HomeBackController implements Initializable {
         studentNum.setText(sc.numberOfStudents("[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"));
         clubNum.setText(sc.numberOfClubs());
         niveauNum.setText(sc.numberOfNiveau());
+        classeNum.setText(sc.numberOfClasses());
+        matiereNum.setText(sc.numberOfMatiere());
+        documentNum.setText(sc.numberOfDocuments());
         //setting the two different pie charts
         ObservableList<PieChart.Data> pieDataNews = FXCollections.observableArrayList(pieDataNews());
         ObservableList<PieChart.Data> pieDataEmpl = FXCollections.observableArrayList(pieDataEmploi());
@@ -202,6 +250,14 @@ public class HomeBackController implements Initializable {
         pieChart.setTitle("N Publications Par Categorie");
         pieChartEmp.setData(pieDataEmpl);
         pieChartEmp.setTitle("N Offres Par Categorie");
+        barChart.setTitle("Nombre des Intéractions Par Publication");
+        pieChart.setAnimated(true);
+        XYChart.Series<String,Integer> seriesData = barChartNews();
+        xAxis.setLabel("Titres");
+        yAxis.setLabel("J aimes");
+        barChart.getData().addAll(seriesData);
+        barChart.setAnimated(true);
+       // barChart.setbar
     }
 
     //observable list of pichart data, filled with category names and their corresponding publications number
@@ -231,7 +287,19 @@ public class HomeBackController implements Initializable {
         }
         return allcat;
     }
-
+    private XYChart.Series<String,Integer> barChartNews() {
+        statics sc = new statics();
+        NewsService newsService = new NewsService();
+        List<News> newsList = newsService.AllNews();
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+        for(int i=0; i < newsList.size(); i++){
+            String titles = newsList.get(i).getTitle();
+            int likes = sc.numberOfLikes(newsList.get(i).getId());
+            System.out.println(likes);
+            series.getData().add(new XYChart.Data<>(titles,likes));
+        }
+        return series;
+    }
     @FXML
     private void handleClicks(ActionEvent event) {
 
@@ -286,6 +354,31 @@ public class HomeBackController implements Initializable {
         forum_iv.setImage(forumI);
         centre_iv.setImage(docsI);
         signOut_iv.setImage(outI);
+
+        //statics images don't copy them please
+        File fileniv = new File("images/level_grey_big.png");
+        Image nivI = new Image(fileniv.toURI().toString());
+        niveauImg.setImage(nivI);
+
+        File filemat = new File("images/book_grey_big.png");
+        Image matI = new Image(filemat.toURI().toString());
+        matiereImg.setImage(matI);
+
+        File fileclass= new File("images/briefcase_grey_big.png");
+        Image classsI = new Image(fileclass.toURI().toString());
+        classImg.setImage(classsI);
+
+        File filedoc= new File("images/file_grey_doc.png");
+        Image docssI = new Image(filedoc.toURI().toString());
+        docImg.setImage(docssI);
+
+        File filearrow= new File("images/arrow.png");
+        Image arrowI = new Image(filearrow.toURI().toString());
+        newsarrowImg.setImage(arrowI);
+        emploiarrowImg.setImage(arrowI);
+        studentarrowImg.setImage(arrowI);
+        clubarrowImg.setImage(arrowI);
+        
     }
     @FXML
     private void displayClubs(ActionEvent event) {
@@ -318,7 +411,6 @@ public class HomeBackController implements Initializable {
             //instance mtaa el crud
             //redirection
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
-
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
