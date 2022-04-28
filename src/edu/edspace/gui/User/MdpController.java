@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.edspace.gui;
+package edu.edspace.gui.User;
 
+import edu.edspace.services.MailService;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -34,6 +36,8 @@ public class MdpController implements Initializable {
     private ImageView log;
     @FXML
     private Button mdpOublier;
+    @FXML
+    private TextField email;
 
     /**
      * Initializes the controller class.
@@ -44,20 +48,26 @@ public class MdpController implements Initializable {
         Image logoI = new Image(fileLogo.toURI().toString());
         log.setImage(logoI);
         // TODO
+        
     }    
 
     @FXML
     private void mdpOublier(ActionEvent event) {
-        
+       FXMLLoader blog_parent = new FXMLLoader(getClass().getResource("CodeTest.fxml"));
         try {
-            Parent blog_parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
-        Scene blog_scene = new Scene(blog_parent);
-        Stage app_stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+           
+            Parent root1 = blog_parent.load();
+                   CodeTestController TC = blog_parent.getController();
+                   TC.codereset(email.getText());
+                   
+                  mdpOublier.getScene().setRoot(root1);
+       // Scene blog_scene = new Scene(blog_parent);
+       /// Stage app_stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         
-        app_stage.setScene(blog_scene);
-        app_stage.show();
+       // app_stage.setScene(blog_scene);
+       // app_stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(AllStudentsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MdpController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

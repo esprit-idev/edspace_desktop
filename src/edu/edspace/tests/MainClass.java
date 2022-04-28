@@ -34,6 +34,8 @@ import edu.edspace.services.AdminService;
 
 import edu.edspace.services.MailService;
 import edu.edspace.services.ClasseService;
+import edu.edspace.services.ExcelFileService;
+
 
 
 
@@ -52,6 +54,12 @@ public class MainClass extends Application {
 
     public static void main(String[] args){
        launch(args);
+      // ExportService E = new ExportService();
+       //E.export(tableView);
+     //  ExcelFileService E = new ExcelFileService();
+       //E.generateExcel();
+       
+       
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -87,10 +95,10 @@ public class MainClass extends Application {
 
             Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
-            primaryStage.show();*/
+          //  primaryStage.show();*/
         } catch (IOException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
+    } 
 }
