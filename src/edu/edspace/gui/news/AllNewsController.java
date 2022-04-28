@@ -273,7 +273,26 @@ public class AllNewsController implements Initializable{
 			Logger.getLogger(allCategoryNewsController.class.getName()).log(Level.SEVERE, null, ex);
 		}
     }
-    
+    @FXML
+    private void getNiveauView(MouseEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml")); 
+            Parent root = loader.load(); 
+            rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {
+			ex.printStackTrace(); 
+		}
+    }
+    @FXML
+    private void getClassesView(MouseEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml")); 
+            Parent root = loader.load(); 
+            rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {
+			ex.printStackTrace(); 
+		}
+    }           
     @FXML
     private void getAllMatieresView(MouseEvent event) {
         try {

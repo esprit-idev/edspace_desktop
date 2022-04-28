@@ -32,6 +32,11 @@
                   <Font name="Segoe UI Bold" size="43.0" />
                </font>
             </Text>
+            <ImageView fx:id="arrow_iv" fitHeight="32.0" fitWidth="32.0" layoutX="50.0" layoutY="39.0" onMouseClicked="#getTabAff" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../images/back_grey.png" />
+               </image>
+            </ImageView>
             <ImageView fx:id="home_iv" fitHeight="37.0" fitWidth="46.0" layoutX="993.0" layoutY="39.0" onMouseClicked="#getHome" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../images/home_grey.png" />
@@ -39,12 +44,12 @@
             </ImageView>
             <ScrollPane fx:id="scroll" layoutX="5.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="1080.0" style="-fx-background-color: #1C2424;">
                <content>
-                  <TilePane fx:id="tilePane" alignment="TOP_CENTER" hgap="10.0" prefHeight="636.0" prefWidth="1075.0" style="-fx-background-color: #1C2424;" vgap="5.0">
+                  <TilePane fx:id="tilePane" alignment="TOP_CENTER" hgap="10.0" prefHeight="1000.0" prefWidth="1075.0" style="-fx-background-color: #1C2424;" vgap="5.0">
                      <padding>
                         <Insets left="5.0" />
                      </padding>
                      <children>
-                        <VBox prefHeight="495.0" prefWidth="618.0">
+                        <VBox prefHeight="1020.0" prefWidth="618.0">
                            <children>
                               <Label fx:id="title" text="Label" textFill="WHITE" VBox.vgrow="ALWAYS">
                                  <font>
@@ -75,7 +80,7 @@
                                  <children>
                                     <HBox minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="285.0">
                                        <children>
-                                          <Button fx:id="shareButton" mnemonicParsing="false" style="-fx-background-color: #1C2424;" text="share" textFill="WHITE">
+                                          <Button fx:id="shareButton" mnemonicParsing="false" onMouseClicked="#openBrowser" style="-fx-background-color: #1C2424;" text="share" textFill="WHITE">
                                              <graphic>
                                                 <ImageView fx:id="shareImage" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>

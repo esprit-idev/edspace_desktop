@@ -193,7 +193,9 @@ public class AddNewsController implements Initializable{
         int ext =  chooseFileBtn.getText().lastIndexOf(File.separator);
         String image = chooseFileBtn.getText().substring(ext+1);
         String file = chooseFileBtn.getText();
-        String datePub = new SimpleDateFormat("dd/MM/yy").format(new Date());
+        SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");
+        Date date = new Date();
+        String datePub = formatter.format(date);
 
          CategoryNews categoryField = categoryNameField.getSelectionModel().getSelectedItem();
          Integer categoryName;

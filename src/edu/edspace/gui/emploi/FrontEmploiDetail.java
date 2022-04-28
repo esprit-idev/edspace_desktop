@@ -1,4 +1,4 @@
-package edu.edspace.gui.news;
+package edu.edspace.gui.emploi;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,9 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
-import edu.edspace.entities.News;
-import edu.edspace.services.NewsService;
-import edu.edspace.services.statics;
+import edu.edspace.entities.Emploi;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
 import javafx.fxml.FXML;
@@ -25,10 +23,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import twitter4j.Twitter;
 
-public class FrontNewsDetail implements Initializable {
-
+public class FrontEmploiDetail implements Initializable{
     @FXML
     private Label title;
     @FXML
@@ -44,39 +40,28 @@ public class FrontNewsDetail implements Initializable {
     @FXML
     private ImageView shareImage;
     @FXML
-    private ImageView likeImage;
-    @FXML
-    private Label numberOfLikes;
-    @FXML
     private Button shareButton;
     @FXML
-    private Button likeButton;
-    @FXML
     private AnchorPane rootPane;
-    private News nw;
+    Emploi emp;
     Integer id;
     String imagef;
-    NewsService newsService = new NewsService();
-    News newss = null;
     Integer likes;
-    /* */ 
-    
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         MyConnection.getInstance().getCnx();
-        initImages();
+        initImages();        
     }
-    @FXML
-    private void clickLike(MouseEvent event){
-        System.out.println(id);
-        statics statics = new statics();
-        likes = statics.numberOfLikes(id);
-        System.out.println(likes);
-        System.out.println(newss);
-        likes = likes +1;
-        System.out.print(likes);
-        newsService.updateLikes(likes, newsService.findById(id).getId());
-        numberOfLikes.setText(likes.toString());
+    public void setData(Emploi news){
+        this.emp= news;
+        title.setText(news.getTitle());
+        content.setText(news.getContent());
+        File f = new File(Statics.myPubImages + news.getImage());
+        Image i = new Image(f.toURI().toString());
+        image.setImage(i);
+        image.setPreserveRatio(true);
+        image.fitWidthProperty().bind(rootPane.widthProperty());
+        image.fitHeightProperty().bind(rootPane.heightProperty());
     }
     @FXML
     private void openBrowser(MouseEvent event) throws URISyntaxException{
@@ -89,20 +74,6 @@ public class FrontNewsDetail implements Initializable {
             e.printStackTrace();
         }
     }
-    public void setData(News news){
-        this.nw= news;
-        title.setText(news.getTitle());
-        content.setText(news.getContent());
-        File f = new File(Statics.myPubImages + nw.getImage());
-        Image i = new Image(f.toURI().toString());
-        image.setImage(i);
-        image.setPreserveRatio(true);
-        image.fitWidthProperty().bind(rootPane.widthProperty());
-        image.fitHeightProperty().bind(rootPane.heightProperty());
-        Integer likes = newss.getLikes();
-        newss = news;
-        numberOfLikes.setText(likes.toString());
-    }
     public void setI(int i){
         id= i;
     }
@@ -112,19 +83,20 @@ public class FrontNewsDetail implements Initializable {
     public void setContent(String title){
         content.setText(title);
     }
-    public void setLikes(Integer l){
-        numberOfLikes.setText(l.toString());
-    }
-    // public void setowner(String title){
-    //     authorField.setText(title);
-    // }
-    // public void setDate(String date){
-    //     dateField.setValue(LocalDate.parse(date));
-    // }
     public void setIm(String imag){
         Path f = Paths.get(Statics.myPubImages + imag);
         Image imagev = new Image(f.toUri().toString());
         image.setImage(imagev);
+    }
+    @FXML
+    private void getEmploiView(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/emploi/frontEmploi.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     @FXML
     private void getHome(MouseEvent event) {
@@ -134,16 +106,6 @@ public class FrontNewsDetail implements Initializable {
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
             ex.getMessage();
-        }
-    }
-    @FXML
-    private void getTabAff(MouseEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/news/frontNews.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
     private void initImages(){
@@ -156,11 +118,8 @@ public class FrontNewsDetail implements Initializable {
         File fileshare = new File("images/share_green.png");
         Image share = new Image(fileshare.toURI().toString());
         shareImage.setImage(share);
-        File filelike = new File("images/heart.png");
-        Image like = new Image(filelike.toURI().toString());
-        likeImage.setImage(like);
         File filearrow = new File("images/back_grey.png");
         Image arrowI = new Image(filearrow.toURI().toString());
         arrow_iv.setImage(arrowI);
-    }    
+    }     
 }

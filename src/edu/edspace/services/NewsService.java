@@ -215,4 +215,26 @@ public void updateLikes(int likes, int id){
         System.out.println(ex.getMessage());
     }
 }
+public List<News> LimitAllNews(){
+    List<News> listNews = new ArrayList<>();
+    try {
+        // String query all publications 
+        query = "SELECT publication_news.*, categorie_news.category_name as catName FROM publication_news JOIN categorie_news on publication_news.category_name_id = categorie_news.id limit 3" ;
+        resultSet = connection.createStatement().executeQuery(query);
+        while (resultSet.next()) {
+            News pub = new News();
+            pub.setId(resultSet.getInt(1));
+            pub.setCategoryName(resultSet.getString("catName"));
+            pub.setDate(resultSet.getString(3));
+            pub.setTitle(resultSet.getString(4));
+            pub.setOwner(resultSet.getString(5));
+            pub.setImage(resultSet.getString(6));
+            pub.setContent(resultSet.getString(10));
+            listNews.add(pub);
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return listNews;
+}
 }

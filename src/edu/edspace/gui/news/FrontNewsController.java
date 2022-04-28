@@ -92,7 +92,6 @@ public class FrontNewsController implements Initializable {
                 CardFrontController cd = fXMLLoader.getController();
                 cd.setData(nw);
                 pane.setOnMouseClicked(new EventHandler<Event>() {
-                    FrontNewsDetail fdetail = new FrontNewsDetail();
                     @Override
                     public void handle(Event arg0) {
                         try {

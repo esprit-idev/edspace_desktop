@@ -7,6 +7,7 @@ package edu.edspace.gui;
 import edu.edspace.entities.CategoryEmploi;
 import edu.edspace.entities.CategoryNews;
 import edu.edspace.entities.News;
+import edu.edspace.gui.news.AccordianNewsController;
 import edu.edspace.services.EmploiCategoryService;
 import edu.edspace.services.NewsCategoryService;
 import edu.edspace.services.NewsService;
@@ -17,18 +18,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,15 +36,17 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.util.Duration;
+
 
 /**
  * FXML Controller class
@@ -160,66 +160,11 @@ public class HomeBackController implements Initializable {
     private Button viewEtudiantBtn;
     @FXML
     private Button viewClubsBtn;
-
     @FXML
-    private void getNewsView(MouseEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    private Accordion accordion;
     @FXML
-    private void getCatNewsView(MouseEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allCategoryNews.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML
-    private void getAllDocsView(MouseEvent event) {
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocsList.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML
-    private void getEmploiView(MouseEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    @FXML
-    private void getDashboardView(MouseEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    @FXML
-    private void getAllMatieresView(MouseEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    private TitledPane titledPane;
+   
     /**
      * Initializes the controller class.
      */
@@ -257,7 +202,29 @@ public class HomeBackController implements Initializable {
         yAxis.setLabel("J aimes");
         barChart.getData().addAll(seriesData);
         barChart.setAnimated(true);
-       // barChart.setbar
+
+       /* init the accordian */
+       NewsService newsService = new NewsService();
+       List<News> news = newsService.LimitAllNews();
+       Iterator<News> it = news.iterator();
+       while (it.hasNext()) {
+           News nw = it.next();
+       try{
+            FXMLLoader fXMLLoader = new FXMLLoader();
+            fXMLLoader.setLocation(getClass().getResource("/edu/edspace/gui/news/accordianNews.fxml"));
+            HBox pane = fXMLLoader.load();
+            AccordianNewsController cd = fXMLLoader.getController();
+            cd.setData(nw);
+            TitledPane titlepanee = new TitledPane();
+            titlepanee.setGraphic(pane); 
+            // titledPane.setGraphic(pane);
+            accordion.getPanes().add(titlepanee);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     }
 
     //observable list of pichart data, filled with category names and their corresponding publications number
@@ -295,7 +262,6 @@ public class HomeBackController implements Initializable {
         for(int i=0; i < newsList.size(); i++){
             String titles = newsList.get(i).getTitle();
             int likes = sc.numberOfLikes(newsList.get(i).getId());
-            System.out.println(likes);
             series.getData().add(new XYChart.Data<>(titles,likes));
         }
         return series;
@@ -380,6 +346,66 @@ public class HomeBackController implements Initializable {
         clubarrowImg.setImage(arrowI);
         
     }
+    //sidebar
+    @FXML
+    private void getNewsView(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML
+    private void getCatNewsView(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allCategoryNews.fxml"));
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void getAllDocsView(MouseEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocsList.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void getEmploiView(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML
+    private void getDashboardView(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+            rootPane.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML
+    private void getAllMatieresView(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     @FXML
     private void displayClubs(ActionEvent event) {
         try {
@@ -418,5 +444,24 @@ public class HomeBackController implements Initializable {
         }
 
     }
-
+    @FXML
+    private void getNiveauView(MouseEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml")); 
+            Parent root = loader.load(); 
+            rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {
+			ex.printStackTrace(); 
+		}
+    }
+    @FXML
+    private void getClassesView(MouseEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml")); 
+            Parent root = loader.load(); 
+            rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {
+			ex.printStackTrace(); 
+		}
+    } 
 }
