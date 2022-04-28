@@ -125,7 +125,7 @@ public class AllNewsController implements Initializable{
             tilePaneId.getChildren().clear();
             initPane(newsList, catList);
         }else{
-            filteredList = newsService.SearchPbulications(searchWord);
+            filteredList = newsService.SearchPublications(searchWord);
             if(filteredList == null && filteredList.isEmpty()){
                 File file = new File("images/empty-folder.png");
                 Image notFound = new Image(file.toURI().toString());

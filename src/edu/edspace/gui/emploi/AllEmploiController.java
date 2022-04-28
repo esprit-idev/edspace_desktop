@@ -24,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -76,10 +77,15 @@ public class AllEmploiController implements Initializable{
     private AnchorPane rootPane;
     @FXML
     private TilePane tilePaneId;
-
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button btnSearch;
     private List<Emploi> emploisList = new ArrayList<>();
     private List<CategoryEmploi> catList = new ArrayList<>();
+    List<Emploi> filteredList = new ArrayList<>();
     Connection connection = null;
+    EmploiService emploiService = new EmploiService();
 
     //fxml methods
     @FXML
@@ -92,6 +98,33 @@ public class AllEmploiController implements Initializable{
 		}
     }
     //init method
+    @FXML
+    public void search(MouseEvent event){
+        EmploiCategoryService cnews = new EmploiCategoryService();
+        catList = cnews.AllCats();
+        String searchWord = searchField.getText().toLowerCase();
+        if(searchWord.isEmpty()){
+            filteredList.clear();   
+            System.out.println(emploisList);
+            tilePaneId.getChildren().clear();
+            initPane(emploisList, catList);
+        }else{
+            filteredList = emploiService.SearchPublications(searchWord);
+            if(filteredList == null || filteredList.isEmpty()){
+                emploisList = emploiService.AllEmplois();
+            }else{
+                System.out.println(filteredList);
+                emploisList.clear();
+                tilePaneId.getChildren().clear();
+                //newsList = filteredList;
+                initPane(filteredList, catList);
+                emploisList = emploiService.AllEmplois();
+            }
+            
+        }
+        
+        //initData();
+    }
     //setting data 
     public void initData(){
         EmploiService emploiService = new EmploiService();
