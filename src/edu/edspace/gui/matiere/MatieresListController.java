@@ -9,6 +9,7 @@ import edu.edspace.entities.Niveau;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
 import edu.edspace.services.NiveauService;
+import edu.edspace.services.UserService;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
 import java.io.IOException;
@@ -406,7 +407,7 @@ public class MatieresListController implements Initializable {
 
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
-        
+
         File fileWarning = new File("images/warning_red.png");
         Image warningI = new Image(fileWarning.toURI().toString());
 
@@ -438,7 +439,6 @@ public class MatieresListController implements Initializable {
 
     @FXML
     private void getAllDocsView(MouseEvent event) {
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocsList.fxml"));
             Parent root = loader.load();
@@ -458,11 +458,47 @@ public class MatieresListController implements Initializable {
         }
     }
 
+    //FORUM 
+    @FXML
+    private void getForum(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @FXML
     private void getDashboardView(MouseEvent event) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
             rootPane.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    //NIVEAU D’ETUDES 
+    @FXML
+    private void getNiveaux(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    //CLASSES 
+    @FXML
+    private void getClasses(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -480,10 +516,22 @@ public class MatieresListController implements Initializable {
     }
 
     @FXML
-    private void displayClubs(MouseEvent event) {
+    private void getUsers(MouseEvent event) {
         try {
             //instance mtaa el crud
             //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    //CLUBS UNIVERSITAIRES
+    @FXML
+    private void displayClubs(MouseEvent event) {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
@@ -493,17 +541,15 @@ public class MatieresListController implements Initializable {
     }
 
     @FXML
-    private void getUsers(MouseEvent event) {
-
+    private void getOut(MouseEvent event) {
+        UserService US = new UserService();
+        US.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
         try {
-            //instance mtaa el crud
-            //redirection
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
-
 }
