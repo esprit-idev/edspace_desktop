@@ -458,17 +458,6 @@ public class MatieresListController implements Initializable {
         }
     }
 
-    //categories offre
-    @FXML
-    private void getCatEmploiView(MouseEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allcategoryEmploi.fxml"));
-            rootPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     //FORUM 
     @FXML
     private void getForum(MouseEvent event) {
@@ -507,7 +496,7 @@ public class MatieresListController implements Initializable {
     @FXML
     private void getClasses(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
@@ -531,20 +520,9 @@ public class MatieresListController implements Initializable {
         try {
             //instance mtaa el crud
             //redirection
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    //news Category  
-    @FXML
-    private void getCatNewsView(MouseEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allCategoryNews.fxml"));
-            rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
