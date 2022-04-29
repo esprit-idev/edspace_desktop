@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="106.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.news.AccordianNewsController">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="107.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox prefHeight="106.0" prefWidth="343.0">
+         <children>
+            <Label fx:id="title" text="La Journée de la lecture à voix haute ">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="content" text="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard Mclintock, a Latin professor" wrapText="true">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children>
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+      </VBox>
+      <Label fx:id="date" alignment="CENTER_RIGHT" style="-fx-background-color: #ffc107; -fx-background-radius: 3;" text="2020-03-12">
+         <HBox.margin>
+            <Insets left="5.0" top="15.0" />
+         </HBox.margin>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <padding>
+            <Insets bottom="2.0" left="10.0" right="10.0" top="2.0" />
+         </padding>
+      </Label>
+   </children>
+</HBox>

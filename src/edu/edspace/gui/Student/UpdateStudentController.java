@@ -3,18 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.edspace.gui;
+package edu.edspace.gui.Student;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author YOOSURF
  */
-public class LogController implements Initializable {
+public class UpdateStudentController implements Initializable {
+
+    @FXML
+    private TextField upNomStu;
+    @FXML
+    private Button btnUpdateStu;
 
     /**
      * Initializes the controller class.
@@ -23,5 +32,9 @@ public class LogController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void UpdateStudent(ActionEvent event) {
+    }
     
 }

@@ -1,6 +1,8 @@
 
 package edu.edspace.entities;
 
+import edu.edspace.gui.Student.AllStudentsController;
+
 
 /**
  *
@@ -115,5 +117,20 @@ public class User {
     }
     public void setIsBanned(boolean isBanned){
         this.isBanned=isBanned ;
+    }
+    
+    //@Override
+    public int compareTo(User us) {
+        switch (AllStudentsController.compareVar) {
+            case "Nom":
+                return this.getUsername().compareTo(us.getUsername());
+            case "Prenom":
+                return this.getPrenom().compareTo(us.getPrenom());
+            case "Email":
+                return this.getEmail().compareTo(us.getEmail());
+            
+            default:
+                return 0;
+        }
     }
 }

@@ -181,7 +181,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#gerOut" prefHeight="42.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" stylesheets="@../style.css" text="Déconnexion" textFill="#e7e5e5">
+            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getOut" prefHeight="42.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" stylesheets="@../style.css" text="Déconnexion" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="signOut_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -16,6 +16,23 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+
+import edu.edspace.entities.Thread;
+import edu.edspace.entities.User;
+
+import edu.edspace.services.AdminService;
+
+import edu.edspace.services.MailService;
+import edu.edspace.services.ClasseService;
+import edu.edspace.services.ExcelFileService;
+
+
+
+
+import edu.edspace.services.StudentService;
+import edu.edspace.services.UserService;
+import edu.edspace.services.statics;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -25,9 +42,22 @@ import java.io.IOException;
  */
 public class MainClass extends Application {
 
+
+
+
+    public static void main(String[] args){
+       launch(args);
+      // ExportService E = new ExportService();
+       //E.export(tableView);
+     //  ExcelFileService E = new ExcelFileService();
+       //E.generateExcel();
+    }
+       
+/*
     public static void main(String[] args) {
         launch(args);
-    }
+
+    }*/
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -51,10 +81,22 @@ public class MainClass extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         }
+
+          /*  Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+
+           // Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+
+            Scene scene = new Scene(parent);
+            primaryStage.setScene(scene);
+          //  primaryStage.show();*/
+
         } catch (IOException ex) {
             Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
 
+    } 
 }
+
+    
+

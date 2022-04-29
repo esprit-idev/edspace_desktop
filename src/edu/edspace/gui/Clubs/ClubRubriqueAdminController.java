@@ -122,11 +122,7 @@ public class ClubRubriqueAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initImages();
-        
-    }
 
-    @FXML
-    private void handleClicks(ActionEvent event) {
     }
 
     public void initData(int clubid) {
@@ -205,24 +201,6 @@ public class ClubRubriqueAdminController implements Initializable {
 
     }
 
-    @FXML
-    private void getNewsView(MouseEvent event) {
-       
-    }
-
-    @FXML
-    private void displayClubs(ActionEvent event) {
-        try {
-            //instance mtaa el crud
-            //redirection
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
-            Parent root = loader.load();
-            club_iv.getScene().setRoot(root);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public void setClubid(int clubid) {
         this.clubid = clubid;
     }
@@ -234,7 +212,8 @@ public class ClubRubriqueAdminController implements Initializable {
     public void setClubDesc(String clubDesc) {
         this.clubDesc.setText(clubDesc);
     }
-            public void initImages() {
+
+    public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
 
@@ -303,7 +282,118 @@ public class ClubRubriqueAdminController implements Initializable {
     }
 
     @FXML
-    private void reload(MouseEvent event) {
+    private void dashboard(ActionEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
+    @FXML
+    private void getNewsView(ActionEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
+            club_iv.getScene().setRoot(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getUsers(ActionEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getMatieres(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml"));
+            Parent root = loader.load();
+            btnCustomers.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getOffre(ActionEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
+            club_iv.getScene().setRoot(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getdocs(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocsList.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getNewsView(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
+            club_iv.getScene().setRoot(pane);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void displayClubs(ActionEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+            Parent root = loader.load();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getForum(ActionEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+            Parent root = loader.load();
+            clubDesc.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getNiveau(ActionEvent event) {
+    }
+
+    @FXML
+    private void getClasses(ActionEvent event) {
+    }
+
+    @FXML
+    private void logout(ActionEvent event) {
+    }
 }

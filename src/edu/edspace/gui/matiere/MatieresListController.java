@@ -527,19 +527,6 @@ public class MatieresListController implements Initializable {
     }
 
     @FXML
-    private void displayClubs(MouseEvent event) {
-        try {
-            //instance mtaa el crud
-            //redirection
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    @FXML
     private void getUsers(MouseEvent event) {
         try {
             //instance mtaa el crud
@@ -565,7 +552,7 @@ public class MatieresListController implements Initializable {
 
     //CLUBS UNIVERSITAIRES
     @FXML
-    private void displayClubs(ActionEvent event) {
+    private void displayClubs(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
             Parent root = loader.load();
@@ -575,8 +562,8 @@ public class MatieresListController implements Initializable {
         }
     }
 
-    /*@FXML
-    private void getOut(ActionEvent event) {
+    @FXML
+    private void getOut(MouseEvent event) {
         UserService US = new UserService();
         US.logout();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
@@ -586,5 +573,5 @@ public class MatieresListController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }*/
+    }
 }

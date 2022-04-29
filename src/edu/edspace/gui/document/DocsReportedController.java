@@ -10,6 +10,7 @@ import edu.edspace.entities.Niveau;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
 import edu.edspace.services.NiveauService;
+import edu.edspace.services.UserService;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
 import java.io.IOException;
@@ -407,20 +408,8 @@ public class DocsReportedController implements Initializable {
         }
     }
 
-    //CLUBS UNIVERSITAIRES
     @FXML
-    private void displayClubs(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
-            Parent root = loader.load();
-            rootPane.getScene().setRoot(root);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    /*@FXML
-    private void getOut(ActionEvent event) {
+    private void getOut(MouseEvent event) {
         UserService US = new UserService();
         US.logout();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
@@ -430,5 +419,5 @@ public class DocsReportedController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }*/
+    }
 }

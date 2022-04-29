@@ -65,3 +65,8 @@
     -fx-background-color:#e2e2e2;
 
 }
+.staticBtn{
+}
+.staticBtn:hover{
+    -fx-background-color : #1C2424;
+}

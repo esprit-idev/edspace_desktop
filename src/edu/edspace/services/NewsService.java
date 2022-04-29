@@ -134,5 +134,107 @@ public List<News> filterByCat(int cat) {
     String req = "SELECT * from publication_news where category_name_id='"+cat+"'";
     return AllNewsforFilter(req);
 }
-
+public List<News> SearchPbulications(){
+    List<News> listNews = new ArrayList<>();
+    //listNews.clear();
+    try {
+        // String query all publications 
+        query = "select title from publication_news";
+        resultSet = connection.createStatement().executeQuery(query);
+        while (resultSet.next()) {
+            News pub = new News();
+            pub.setId(resultSet.getInt(1));
+            pub.setCategoryName(resultSet.getString(2));
+            pub.setDate(resultSet.getString(3));
+            pub.setTitle(resultSet.getString(4));
+            pub.setOwner(resultSet.getString(5));
+            pub.setImage(resultSet.getString(6));
+            pub.setContent(resultSet.getString(10));
+            listNews.add(pub);
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return listNews;
+}
+public List<News> SearchPbulications(String title){
+    List<News> listNews = new ArrayList<>();
+    //listNews.clear();
+    try {
+        // String query all publications 
+        query = "select * from publication_news where title ='"+title+"'";
+        resultSet = connection.createStatement().executeQuery(query);
+        while (resultSet.next()) {
+            News pub = new News();
+            pub.setId(resultSet.getInt(1));
+            pub.setCategoryName(resultSet.getString(2));
+            pub.setDate(resultSet.getString(3));
+            pub.setTitle(resultSet.getString(4));
+            pub.setOwner(resultSet.getString(5));
+            pub.setImage(resultSet.getString(6));
+            pub.setContent(resultSet.getString(10));
+            listNews.add(pub);
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return listNews;
+}
+public News findById(int id){
+    News news = new News();
+    //listNews.clear();
+    try {
+        // String query all publications 
+        query = "select * from publication_news where id ='"+id+"'";
+        resultSet = connection.createStatement().executeQuery(query);
+        while (resultSet.next()) {
+            News pub = new News();
+            pub.setId(resultSet.getInt(1));
+            pub.setCategoryName(resultSet.getString(2));
+            pub.setDate(resultSet.getString(3));
+            pub.setTitle(resultSet.getString(4));
+            pub.setOwner(resultSet.getString(5));
+            pub.setImage(resultSet.getString(6));
+            pub.setContent(resultSet.getString(10));
+            news = pub;
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return news;
+}
+public void updateLikes(int likes, int id){
+    try {
+        query = "update publication_news set likes=? WHERE id=?";
+        preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, likes);
+        preparedStatement.setInt(2, id);
+        preparedStatement.executeUpdate();
+        System.out.println("updated likes");
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+}
+public List<News> LimitAllNews(){
+    List<News> listNews = new ArrayList<>();
+    try {
+        // String query all publications 
+        query = "SELECT publication_news.*, categorie_news.category_name as catName FROM publication_news JOIN categorie_news on publication_news.category_name_id = categorie_news.id limit 3" ;
+        resultSet = connection.createStatement().executeQuery(query);
+        while (resultSet.next()) {
+            News pub = new News();
+            pub.setId(resultSet.getInt(1));
+            pub.setCategoryName(resultSet.getString("catName"));
+            pub.setDate(resultSet.getString(3));
+            pub.setTitle(resultSet.getString(4));
+            pub.setOwner(resultSet.getString(5));
+            pub.setImage(resultSet.getString(6));
+            pub.setContent(resultSet.getString(10));
+            listNews.add(pub);
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return listNews;
+}
 }

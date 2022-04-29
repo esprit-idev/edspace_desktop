@@ -27,6 +27,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -88,6 +90,25 @@ public class FrontEmploi implements Initializable {
                 AnchorPane pane = fXMLLoader.load();
                 CardFrontController cd = fXMLLoader.getController();
                 cd.setDataEmpl(nw);
+                pane.setOnMouseClicked(new EventHandler<Event>() {
+                    @Override
+                    public void handle(Event arg0) {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/emploi/frontEmploiDetails.fxml"));
+                            AnchorPane panel = loader.load();
+                            FrontEmploiDetail fdetail = loader.getController();
+                            fdetail.setI(nw.getId());
+                            fdetail.settitle(nw.getTitle());
+                            fdetail.setContent(nw.getContent());
+                            fdetail.setIm(nw.getImage());
+                            rootPane.getChildren().setAll(panel);
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } 
+                    }
+                    
+                });
                 tilePane.getChildren().addAll(pane);
                 
             } catch (IOException ex) {

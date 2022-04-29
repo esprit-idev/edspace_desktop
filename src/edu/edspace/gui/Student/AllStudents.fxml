@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -14,64 +15,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.AllAdminsController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="649.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.AllStudentsController">
    <children>
-      <Pane layoutX="698.0" layoutY="70.0" prefHeight="459.0" prefWidth="306.0" style="-fx-background-color: #FFFFFF;">
-         <children>
-            <Label layoutX="47.0" layoutY="67.0" text="Nom" />
-            <Label layoutX="39.0" layoutY="149.0" text="Prenom" />
-            <Label layoutX="46.0" layoutY="221.0" text="Email" />
-            <Label layoutX="45.0" layoutY="300.0" text="Mot de passe" />
-            <TextField fx:id="nomAdmin" layoutX="40.0" layoutY="90.0" prefHeight="25.0" prefWidth="203.0" promptText="Nom" />
-            <TextField fx:id="prenomAdmin" layoutX="40.0" layoutY="166.0" prefHeight="25.0" prefWidth="203.0" promptText="Prenom" />
-            <TextField fx:id="emailAdmin" layoutX="40.0" layoutY="243.0" prefHeight="25.0" prefWidth="203.0" promptText="Email" />
-            <TextField fx:id="mdpAdmin" layoutX="40.0" layoutY="317.0" prefHeight="25.0" prefWidth="203.0" promptText="Mot de passe" />
-            <Button fx:id="btnaddAdmin" layoutX="116.0" layoutY="374.0" mnemonicParsing="false" onAction="#Add" text="Ajouter" />
-            <Button fx:id="btnUpdate" layoutX="9.0" layoutY="421.0" mnemonicParsing="false" onAction="#Update">
-               <graphic>
-                  <ImageView fx:id="update" fitHeight="26.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../images/update.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Text fill="#38ae73" layoutX="101.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Formulaire">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Text>
-            <Text fx:id="msgemail" fill="RED" layoutX="104.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email non valide" visible="false" />
-            <Text fx:id="msgmin" fill="RED" layoutX="5.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Un mot de passe doit contenir au minimum 8 caractères" visible="false" />
-         </children>
-      </Pane>
-      <Pane layoutX="283.0" layoutY="70.0" prefHeight="459.0" prefWidth="399.0" style="-fx-background-color: #FFFFFF;">
-         <children>
-            <TableView fx:id="tableAdmin" layoutX="34.0" layoutY="66.0" onMouseClicked="#handleMouseAction" prefHeight="306.0" prefWidth="340.0" style="-fx-background-color: #FFFFFF;">
-              <columns>
-                <TableColumn fx:id="nom" prefWidth="93.0" text="Nom" />
-                <TableColumn fx:id="prenom" prefWidth="87.0" text="Prenom" />
-                  <TableColumn fx:id="email" prefWidth="157.0" text="Email" />
-                  <TableColumn fx:id="id" prefWidth="93.0" text="id" visible="false" />
-              </columns>
-            </TableView>
-            <Button fx:id="btndelete" layoutX="361.0" layoutY="414.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="31.0" prefWidth="26.0">
-               <graphic>
-                  <ImageView fx:id="delicon" fitHeight="37.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../images/delete.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </Pane>
-      <Label fx:id="gett" layoutX="468.0" layoutY="36.0" prefHeight="17.0" prefWidth="28.0" visible="false" />
-      <Text fill="#38ae73" layoutX="266.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les administrateurs ">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Text>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #1C2424;">
+      <Label fx:id="gett" contentDisplay="CENTER" layoutX="243.0" layoutY="542.0" prefHeight="17.0" prefWidth="73.0" textAlignment="CENTER" />
+      <VBox alignment="TOP_CENTER" prefHeight="649.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -79,8 +26,7 @@
                </image>
                <VBox.margin>
                   <Insets bottom="10.0" top="50.0" />
-               </VBox.margin>
-            </ImageView>
+               </VBox.margin></ImageView>
             <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Dashboard" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="home_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -111,7 +57,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#users" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Utilisateurs">
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getUsers" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Utilisateurs">
                <graphic>
                   <ImageView fx:id="users_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -207,7 +153,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Déconnexion">
+            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Dec" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Déconnexion">
                <graphic>
                   <ImageView fx:id="signOut_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -221,14 +167,73 @@
             </Button>
          </children>
       </VBox>
-      <Button fx:id="getStudent" layoutX="969.0" layoutY="18.0" mnemonicParsing="false" onAction="#getStudents">
-         <graphic>
-            <ImageView fx:id="stud" fitHeight="42.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../images/student.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <Text fill="#2cb28e" layoutX="295.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les étudiants " wrappingWidth="155.716796875">
+         <font>
+            <Font name="Calibri" size="26.0" />
+         </font>
+      </Text>
+      <Pane layoutX="785.0" layoutY="101.0" prefHeight="409.0" prefWidth="262.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <Label layoutX="54.0" layoutY="57.0" text="Nom" />
+            <Label layoutX="64.0" layoutY="127.0" text="Prenom" />
+            <Label layoutX="71.0" layoutY="196.0" text="Email" />
+            <Label layoutX="69.0" layoutY="274.0" text="Mot de passe" />
+            <TextField fx:id="nomStudent" layoutX="45.0" layoutY="74.0" prefHeight="25.0" prefWidth="191.0" />
+            <TextField fx:id="prenomStudent" layoutX="45.0" layoutY="144.0" prefHeight="25.0" prefWidth="191.0" />
+            <TextField fx:id="emailStudent" layoutX="45.0" layoutY="213.0" prefHeight="25.0" prefWidth="191.0" />
+            <TextField fx:id="mdpStudent" layoutX="45.0" layoutY="291.0" onKeyTyped="#test" prefHeight="25.0" prefWidth="191.0" />
+            <Button fx:id="btnAjout" layoutX="109.0" layoutY="345.0" mnemonicParsing="false" onAction="#btnajout" prefHeight="29.0" prefWidth="62.0" style="-fx-background-color: #F45F7F;" text="Ajouter" />
+            <Button fx:id="btnUpdate" layoutX="8.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnUpdate">
+               <graphic>
+                  <ImageView fx:id="update" fitHeight="27.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/update.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Text fill="#239a6b" layoutX="98.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Formulaire">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="msgnom" fill="RED" layoutX="57.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le champs est vide veuillez saisir un nom" visible="false" />
+            <Text fx:id="msgpre" fill="RED" layoutX="57.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le champs est vide veuillez saisir un prenom" visible="false" />
+            <Text fx:id="msgemvid" fill="RED" layoutX="54.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le champs est vide veuillez saisir un email" visible="false" />
+            <Text fx:id="msgmdpvid" fill="RED" layoutX="31.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le champs est vide veuillez saisir un mot de passe" visible="false" />
+            <Text fx:id="invalidmsg" fill="RED" layoutX="105.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="l'email doit etre valide " visible="false" />
+            <Text fx:id="msgmin" fill="RED" layoutX="26.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="le mot de passe doit contenir au moins 8 caractères" visible="false" />
+            <Text fill="#fc0000" layoutX="41.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="l'email deja existe dans la base de donnée" visible="false" />
+            <Text fx:id="testmsg" layoutX="69.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hello" visible="false" />
+         </children>
+      </Pane>
+      <Pane layoutX="318.0" layoutY="97.0" prefHeight="432.0" prefWidth="416.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <TableView fx:id="tableStudent" layoutX="19.0" layoutY="68.0" onMouseClicked="#handleMouseAction" prefHeight="314.0" prefWidth="377.0">
+              <columns>
+                <TableColumn fx:id="NStudent" prefWidth="85.0" text="Nom" />
+                <TableColumn fx:id="PStudent" prefWidth="133.0" text="Prenom" />
+                  <TableColumn fx:id="EStudent" prefWidth="158.0" text="Email" />
+              </columns>
+            </TableView>
+            <Button fx:id="btndel" layoutX="383.0" layoutY="389.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#del" prefHeight="29.0" prefWidth="26.0" style="-fx-background-color: #FFFFFF;" stylesheets="@style.css" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fx:id="icondelete" accessibleRole="BUTTON" fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnExport" layoutX="7.0" layoutY="397.0" mnemonicParsing="false" onAction="#ExportExcel" text="Export" />
+            <Button fx:id="pdf" layoutX="79.0" layoutY="397.0" mnemonicParsing="false" onAction="#ExportPdf" text="pdf" />
+            <TextField fx:id="search" layoutX="243.0" layoutY="40.0" promptText="recherche" />
+            <Text fill="#239a6b" layoutX="113.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des etudiants">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="sortCB" layoutX="11.0" layoutY="36.0" onAction="#sort" prefWidth="150.0" promptText="trier les etudiants par" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

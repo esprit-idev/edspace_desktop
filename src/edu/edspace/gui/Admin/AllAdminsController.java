@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.edspace.gui;
+package edu.edspace.gui.Admin;
 
+import edu.edspace.gui.Student.AllStudentsController;
+import com.itextpdf.text.DocumentException;
 import edu.edspace.entities.User;
-import static edu.edspace.gui.AllStudentsController.validate;
+import edu.edspace.gui.HomeBackController;
+import static edu.edspace.gui.Student.AllStudentsController.validate;
 import edu.edspace.services.AdminService;
+import edu.edspace.services.ExcelFileService;
+import edu.edspace.services.PDFService;
 import edu.edspace.services.StudentService;
+import edu.edspace.services.UserService;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -17,7 +23,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +34,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -131,13 +141,26 @@ public class AllAdminsController implements Initializable {
     private Text msgemail;
     @FXML
     private Text msgmin;
+    @FXML
+    private Button excelbtn;
+    @FXML
+    private Button pdfbtn;
+    @FXML
+    private TextField search;
+    @FXML
+    private ComboBox<String> sortCB;
 
     /**
      * Initializes the controller class.
      */
+    ObservableList<String> ss = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+         ss.add("Par nom");
+      ss.add("Par email");
+      sortCB.setItems(ss);
+      
         AdminService SS= new AdminService();
        SS.listAdmin() ;
          ObservableList<User> list = SS.listAdmin();
@@ -147,6 +170,25 @@ public class AllAdminsController implements Initializable {
         email.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
         id.setCellValueFactory(new PropertyValueFactory<User, String>("id"));
         tableAdmin.setItems(list);
+         
+         FilteredList<User> filteredData= new FilteredList<>(list,b->true);
+      search.textProperty().addListener((observable,oldValue,newValue)->{
+     filteredData.setPredicate(blogs->{
+     if(newValue.isEmpty()||  newValue==null){
+     return true;
+    }
+         String searchkeyword=newValue.toLowerCase();
+         if(blogs.getUsername().toLowerCase().indexOf(searchkeyword)> -1){
+         return true;
+               }else if (blogs.getPrenom().toLowerCase().indexOf(searchkeyword)> -1){
+        return true;
+        }else
+        return false;
+             });
+          });
+      SortedList<User>sortedData=new SortedList<>(filteredData);
+       sortedData.comparatorProperty().bind(tableAdmin.comparatorProperty());
+         tableAdmin.setItems(sortedData);
         
         /* File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
@@ -162,25 +204,24 @@ public class AllAdminsController implements Initializable {
 
     @FXML
     private void Add(ActionEvent event) {
-       Boolean error = false; 
-       
-       if (!validate(emailAdmin.getText())) {
-              //msgemvid.setVisible(false);
-                msgemail.setVisible(true);
-                error = true;
-            }
-       
-        if(nomAdmin.getText().equals("")) {
+       Boolean error = false;   
+        if(nomAdmin.getText().equals("")|| prenomAdmin.getText().equals("")|| emailAdmin.getText().equals("")) {
           Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Please Fill All DATA");
             alert.showAndWait();
         error = true;
         }
+       
         if (mdpAdmin.getText().length() < 8) {
             msgmin.setVisible(true);
             error = true;
         } 
+        if (!validate(emailAdmin.getText())) {
+              //msgemvid.setVisible(false);
+                msgemail.setVisible(true);
+                error = true;
+            }
         
         if (!error) {
     User stu = new User();
@@ -212,8 +253,7 @@ public class AllAdminsController implements Initializable {
 
     @FXML
     private void delete(ActionEvent event) {
-        int n = JOptionPane.showConfirmDialog(null,
-"DO YOU CONFIRM THE DELETION?","Confirm Dialog",JOptionPane.YES_NO_OPTION);
+        int n = JOptionPane.showConfirmDialog(null,"Êtes-vous sûr de vouloir supprimer?","Confirm Dialog",JOptionPane.YES_NO_OPTION);
 if(n == JOptionPane.YES_OPTION)
 {
 //****
@@ -245,6 +285,18 @@ if(n == JOptionPane.YES_OPTION)
 
     @FXML
     private void Update(ActionEvent event) {
+         Boolean error = false;   
+        if(nomAdmin.getText().equals("")|| prenomAdmin.getText().equals("")|| emailAdmin.getText().equals("")) {
+          Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please Fill All DATA");
+            alert.showAndWait();
+        error = true;
+        }
+        if (!error) {
+         int n = JOptionPane.showConfirmDialog(null,"Êtes-vous sûr de vouloir modifier","Confirm Dialog",JOptionPane.YES_NO_OPTION);
+if(n == JOptionPane.YES_OPTION)
+{
         User stu = new User();
     // stu.setId(Integer.parseInt(SId.getText()));
      stu.setPrenom(nomAdmin.getText());
@@ -261,7 +313,16 @@ if(n == JOptionPane.YES_OPTION)
         email.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
         tableAdmin.setItems(list); 
 
-    }
+    }}}
+   /* static int existe(User stu){
+  
+   if(emailAdmin.getText().equals(stu.getEmail())){
+       //System.out.println("La valeur recherchée n'existe pas");
+       return 0;}
+   else {
+       //retourner la position courante
+       return 1;}
+ }*/
    
 
      public void initImages() {
@@ -360,6 +421,46 @@ if(n == JOptionPane.YES_OPTION)
         } catch (IOException ex) {
             Logger.getLogger(HomeBackController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void exportExcel(ActionEvent event) {
+         ExcelFileService EX = new ExcelFileService();
+  // Stage primaryStage = null;
+  //  EX.start(primaryStage);
+    EX.generateExcelAdmin();
+    }
+
+    @FXML
+    private void exportPdf(ActionEvent event) {
+        
+        try {
+            PDFService PS = new PDFService();
+            try {
+                PS.liste_admins();
+            } catch (IOException ex) {
+                Logger.getLogger(AllStudentsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (DocumentException ex) {
+            Logger.getLogger(AllStudentsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void trier(ActionEvent event) {
+         AdminService SS = new AdminService();
+         if(sortCB.getValue().equals("Par nom")){
+            ObservableList<User> tri1=FXCollections.observableArrayList();
+            tri1=FXCollections.observableArrayList(SS.sortByNom());
+            tableAdmin.setItems(tri1);
+            
+        }
+        else if(sortCB.getValue().equals("Par email")){
+            ObservableList<User> tri2=FXCollections.observableArrayList();
+            tri2=FXCollections.observableArrayList(SS.sortByEmail());
+            tableAdmin.setItems(tri2);
+        }
+        
     }
 
     
