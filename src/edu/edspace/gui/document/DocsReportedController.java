@@ -103,6 +103,8 @@ public class DocsReportedController implements Initializable {
     private Button btnSignout3;
     @FXML
     private ImageView signOut_iv;
+    @FXML
+    private Label nodocs_l;
 
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
@@ -134,8 +136,11 @@ public class DocsReportedController implements Initializable {
         DocumentService ds = new DocumentService();
         docs = ds.listReportedDocs();
         if (docs.isEmpty()) {
-            //display "empty"
+            scroll.setVisible(false);
+            nodocs_l.setVisible(true);
         } else {
+            scroll.setVisible(true);
+            nodocs_l.setVisible(false);
             initGrid(docs);
         }
 
@@ -162,8 +167,11 @@ public class DocsReportedController implements Initializable {
                     }
                 }
                 if (docRep.isEmpty()) {
-                    //display "empty"
+                    scroll.setVisible(false);
+                    nodocs_l.setVisible(true);
                 } else {
+                    scroll.setVisible(true);
+                    nodocs_l.setVisible(false);
                     initGrid(docRep);
                 }
             }
@@ -220,43 +228,43 @@ public class DocsReportedController implements Initializable {
     public void initImages() {
         File fileLogo = new File("images/logo1.png");
         Image logoI = new Image(fileLogo.toURI().toString());
-        
+
         File fileHome = new File("images/stats_grey.png");
         Image homeI = new Image(fileHome.toURI().toString());
-        
+
         File fileTab = new File("images/announcement_grey.png");
         Image tabI = new Image(fileTab.toURI().toString());
-        
+
         File fileLevel = new File("images/level_grey.png");
         Image levelI = new Image(fileLevel.toURI().toString());
-        
+
         File fileClass = new File("images/class-management_grey.png");
         Image classI = new Image(fileClass.toURI().toString());
-        
+
         File fileBook = new File("images/book_grey.png");
         Image bookI = new Image(fileBook.toURI().toString());
-        
+
         File fileForum = new File("images/forum2_grey.png");
         Image forumI = new Image(fileForum.toURI().toString());
-        
+
         File fileOffre = new File("images/briefcase_grey.png");
         Image offreI = new Image(fileOffre.toURI().toString());
-        
+
         File fileDocs = new File("images/file_grey.png");
         Image docsI = new Image(fileDocs.toURI().toString());
 
         File fileUsers = new File("images/users_grey.png");
         Image usersI = new Image(fileUsers.toURI().toString());
-        
+
         File fileClub = new File("images/org_grey.png");
         Image clubI = new Image(fileClub.toURI().toString());
 
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
-        
+
         File fileReport = new File("images/report_red.png");
         Image reportI = new Image(fileReport.toURI().toString());
-        
+
         logo_iv.setImage(logoI);
         home_iv.setImage(homeI);
         tabaff_iv.setImage(tabI);

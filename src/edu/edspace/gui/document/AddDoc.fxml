@@ -18,7 +18,7 @@
    <children>
       <Pane prefHeight="649.0" prefWidth="1094.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="out_iv" fitHeight="30.0" fitWidth="30.0" layoutX="1012.0" layoutY="577.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="out_iv" fitHeight="30.0" fitWidth="30.0" layoutX="1012.0" layoutY="577.0" onMouseClicked="#getOut" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../images/logout_grey.png" />
                </image>

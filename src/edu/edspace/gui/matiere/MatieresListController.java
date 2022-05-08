@@ -163,10 +163,9 @@ public class MatieresListController implements Initializable {
         if (nomMat != null && nomMat.length() != 0 && niveau != null && niveau.length() != 0) {
             MatiereService ms = new MatiereService();
             if (ms.findMatiereById(nomMat)) {
-                String title = "etette";
-                String header = "qljdb";
-                String content = "ldjbc";
-                showAlert(AlertType.WARNING, title, header, content);
+                error_l.setText("Veuillez choisir un autre nom pour la matière!");
+            warning_iv.setVisible(true);
+            error_l.setVisible(true);
             } else {
                 Matiere m = new Matiere(nomMat, niveau);
                 ms.ajouterMatiere(m);

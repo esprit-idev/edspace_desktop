@@ -61,11 +61,12 @@ public class FaveDocsController implements Initializable {
     private GridPane grid;
     @FXML
     private ImageView back_iv;
+    @FXML
+    private Label nodocs_l;
 
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
-    private List<DocumentFavoris> faves = new ArrayList();
-    private List<Document> docs = new ArrayList();
+    List<Document>joinedList=new ArrayList<>();
 
     private int currentUserId = Session.getId();
 
@@ -90,11 +91,15 @@ public class FaveDocsController implements Initializable {
     private void initDisplay() {
         DocumentService ds = new DocumentService();
         DocumentFavorisService dfs = new DocumentFavorisService();
-        faves = dfs.listFaves(currentUserId);
-        if (faves.isEmpty()) {
-            //display "empty"
+        joinedList=dfs.listDocsFavesJoined(currentUserId);
+        System.out.println(joinedList);
+        if (joinedList.isEmpty()) {
+            scroll.setVisible(false);
+            nodocs_l.setVisible(true);
         } else {
-            initGrid(faves);
+            scroll.setVisible(true);
+            nodocs_l.setVisible(false);
+            initGrid(joinedList);
         }
         niveau_cb.setItems(niveauxList());
         niveau_cb.setPromptText("Tous les niveaux");
@@ -111,19 +116,23 @@ public class FaveDocsController implements Initializable {
             @Override
             public void changed(ObservableValue ov, String oldVal, String newVal) {
                 List<Document> filteredDocs = new ArrayList<>();
-                List<DocumentFavoris> filteredFaves = new ArrayList<>();
+                List<Document> filteredFaves = new ArrayList<>();
                 filteredDocs = ds.filterByNiveauMatiere(niveau_cb.getValue(), newVal);
                 for (int i = 0; i < filteredDocs.size(); i++) {
-                    for (int j = 0; j < faves.size(); j++) {
-                        if (filteredDocs.get(i).getId() == faves.get(j).getDocument_id()) {
-                            filteredFaves.add(faves.get(j));
+                    for (int j = 0; j < joinedList.size(); j++) {
+                        if (filteredDocs.get(i).getId() == joinedList.get(j).getId()) {
+                            filteredFaves.add(joinedList.get(j));
                         }
                     }
                 }
+
                 grid.getChildren().clear();
                 if (filteredFaves.isEmpty()) {
-                    //display "empty"
+                    scroll.setVisible(false);
+                    nodocs_l.setVisible(true);
                 } else {
+                    scroll.setVisible(true);
+                    nodocs_l.setVisible(false);
                     initGrid(filteredFaves);
                 }
 
@@ -131,20 +140,17 @@ public class FaveDocsController implements Initializable {
         });
     }
 
-    private void initGrid(List<DocumentFavoris> myFaves) {
+    private void initGrid(List<Document> myFaves) {
         int column = 0;
         int row = 0;
         for (int i = 0; i < myFaves.size(); i++) {
             try {
                 FXMLLoader fXMLLoader = new FXMLLoader();
-                fXMLLoader.setLocation(getClass().getResource("/edu/edspace/gui/document/DocR.fxml"));
+                fXMLLoader.setLocation(getClass().getResource("/edu/edspace/gui/document/DocRPinUnpin.fxml"));
                 AnchorPane anchorPane = fXMLLoader.load();
-                DocRController docRController = fXMLLoader.getController();
-                DocumentService ds = new DocumentService();
-                Document d = ds.findDocById(myFaves.get(i).getDocument_id());
-                docRController.setData(d);
-
-                if (column == 5) {
+                DocRPinUnpinController docRPinUnpinController = fXMLLoader.getController();
+                docRPinUnpinController.setData(myFaves.get(i));
+                if (column == 4) {
                     column = 0;
                     row++;
                 }

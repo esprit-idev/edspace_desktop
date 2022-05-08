@@ -26,6 +26,11 @@
             <ComboBox fx:id="niveau_cb" layoutX="185.0" layoutY="87.0" prefHeight="25.0" prefWidth="166.0" promptText="Choisissez un niveau" style="-fx-background-color: #e9e9e9; -fx-background-radius: 10;" />
             <ComboBox fx:id="matiere_cb" layoutX="362.0" layoutY="87.0" prefHeight="25.0" prefWidth="166.0" promptText="Choisissez une matière" style="-fx-background-color: #e9e9e9; -fx-background-radius: 10;" />
             <Label fx:id="reinitialiser_label" layoutX="554.0" layoutY="91.0" onMouseClicked="#reinitialiserFiltre" text="Réinitialiser" />
+            <Label fx:id="nodocs_l" layoutX="316.0" layoutY="315.0" text="Aucun document n'a été signalé!" textFill="#f25353" visible="false">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <ScrollPane fx:id="scroll" hbarPolicy="ALWAYS" layoutX="262.0" layoutY="163.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="826.0">

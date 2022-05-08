@@ -30,6 +30,11 @@
                   <Image url="@../../../../../images/home_grey.png" />
                </image>
             </ImageView>
+            <Label fx:id="nodocs_l" layoutX="450.0" layoutY="350.0" text="Aucun document n'a été épinglé!" textFill="#f25353" visible="false">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
             <ScrollPane fx:id="scroll" hbarPolicy="NEVER" layoutX="7.0" layoutY="178.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="1080.0" style="-fx-background-color: #1C2424;">
                <content>
                   <GridPane fx:id="grid" hgap="30.0" prefHeight="471.0" prefWidth="1066.0" style="-fx-background-color: #1C2424;" vgap="30.0">

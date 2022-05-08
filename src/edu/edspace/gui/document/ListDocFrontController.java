@@ -64,6 +64,8 @@ public class ListDocFrontController implements Initializable {
     private Button fave_btn;
     @FXML
     private ImageView fave_iv;
+    @FXML
+    private Label nodocs_l;
 
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
@@ -102,8 +104,11 @@ public class ListDocFrontController implements Initializable {
         DocumentService ds = new DocumentService();
         docs = ds.listDocs();
         if (docs.isEmpty()) {
-            //display "empty"
+            scroll.setVisible(false);
+            nodocs_l.setVisible(true);
         } else {
+            scroll.setVisible(true);
+            nodocs_l.setVisible(false);
             initGrid(docs);
         }
         niveau_cb.setItems(niveauxList());
@@ -123,8 +128,11 @@ public class ListDocFrontController implements Initializable {
                 docs = ds.filterByNiveauMatiere(niveau_cb.getValue(), newVal);
                 grid.getChildren().clear();
                 if (docs.isEmpty()) {
-                    //display "empty"
+                    scroll.setVisible(false);
+                    nodocs_l.setVisible(true);
                 } else {
+                    scroll.setVisible(true);
+                    nodocs_l.setVisible(false);
                     initGrid(docs);
                 }
 

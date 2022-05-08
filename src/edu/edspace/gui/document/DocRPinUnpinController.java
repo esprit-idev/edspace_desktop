@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ */
 package edu.edspace.gui.document;
 
 import edu.edspace.entities.Document;
@@ -49,7 +53,7 @@ import javax.mail.MessagingException;
  *
  * @author MeriamBI
  */
-public class DocRController implements Initializable {
+public class DocRPinUnpinController implements Initializable {
 
     @FXML
     private Label name_label;
@@ -147,6 +151,7 @@ public class DocRController implements Initializable {
         DocumentFavorisService dfs = new DocumentFavorisService();
         if (isPinned(doc)) {
             dfs.unpinDocument(fave);
+            rootPane.getChildren().remove(vbox);
         } else {
             dfs.pinDocument(fave);
         }
