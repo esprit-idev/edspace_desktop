@@ -92,7 +92,6 @@ public class FaveDocsController implements Initializable {
         DocumentService ds = new DocumentService();
         DocumentFavorisService dfs = new DocumentFavorisService();
         joinedList=dfs.listDocsFavesJoined(currentUserId);
-        System.out.println(joinedList);
         if (joinedList.isEmpty()) {
             scroll.setVisible(false);
             nodocs_l.setVisible(true);
