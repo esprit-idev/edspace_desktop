@@ -22,12 +22,14 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import edu.edspace.entities.Thread;
+import edu.edspace.services.MailService;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -76,9 +78,11 @@ public class ThreadController implements Initializable {
     private ImageView pdf;
     @FXML
     private ImageView google;
-    String[] tab = {"Shit","Zah"};
+    String[] tab = {"Shit","Zah","fk"};
     @FXML
     private Text bad;
+    @FXML
+    private ImageView home;
     public boolean checkForBadWords(String t){
         boolean valid = false;
         
@@ -110,6 +114,16 @@ public class ThreadController implements Initializable {
             threadService.searchPDF(the);
         });
         initImages();
+        home.setOnMouseClicked(e->{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontHome.fxml"));
+               try {
+                   Parent root1 = loader.load();
+                   home.getScene().setRoot(root1);
+               } catch (IOException ex) {
+                   Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+        });
+
         previous.setOnAction(e->{
             if(this.admin == 1){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
@@ -154,6 +168,7 @@ public class ThreadController implements Initializable {
        addBtn.setOnAction(e->{
                if(tfReponse.getText().length()==0)
                {
+                   
                    error.setVisible(true);
                }
                else{
@@ -238,16 +253,23 @@ public class ThreadController implements Initializable {
             vbox.getChildren().add(b);
            sp.setContent(vbox);
            
-           addBtn.setOnAction(e->{
+           addBtn.setOnMouseClicked(e->{
                if(checkForBadWords(tfReponse.getText())==true){
                        bad.setVisible(true);
                        tfReponse.setText(null);
                        tfReponse.setBorder(Border.stroke(Color.RED));
                        tfReponse.setPromptText("Replace the answer");
             }else{
-              reponseService.addReponse(new Reponse(tfReponse.getText(),this.id,1));
+              
+              reponseService.addReponse(new Reponse(tfReponse.getText(),this.id,6));
+              
+              Thread thread = threadService.getThread(id);
+              UserService us = new UserService();
+              User user = us.find(thread.getUser());
+              
               FXMLLoader loader = new FXMLLoader(getClass().getResource("Thread.fxml"));
                try {
+                   
                    Parent root1 = loader.load();
                    ThreadController TC = loader.getController();
                    TC.setThread(this.thread,this.id);
@@ -257,8 +279,11 @@ public class ThreadController implements Initializable {
                }
            }
            });
+           
            }
-    }}
+    }
+   
+    }
    
     /**
      * Initializes the controller class.
@@ -340,8 +365,9 @@ public class ThreadController implements Initializable {
         logo_iv.setImage(logoI);
         pdf.setImage(pdfl);
         google.setImage(gl);
-        //previous.setImage(homeI);
+        home.setImage(homeI);
     }
+
     }    
     
 
