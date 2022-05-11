@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.emploi.AllEmploiController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.emploi.AllEmploiController">
    <children>
-      <Pane fx:id="paneId" layoutX="257.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="213.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;" stylesheets="@../../css/styles.css">
+      <Pane fx:id="paneId" layoutX="257.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="213.0" prefWidth="830.0" style="-fx-background-color: #F4F6F9;" stylesheets="@../../css/styles.css">
          <children>
             <Label layoutX="37.0" layoutY="87.0" text="Liste des Offres D'Emploi">
                <font>
@@ -46,16 +46,16 @@
             </Button>
          </children>
       </Pane>
-      <ScrollPane layoutX="254.0" layoutY="213.0" prefHeight="527.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;">
+      <ScrollPane layoutX="257.0" layoutY="213.0" prefHeight="527.0" prefWidth="830.0" style="-fx-background-color: #F4F6F9;">
          <content>
-            <TilePane fx:id="tilePaneId" hgap="5.0" prefColumns="3" prefHeight="634.0" prefRows="3" prefWidth="777.0" style="-fx-background-color: #F4F6F9;" vgap="5.0">
+            <TilePane fx:id="tilePaneId" hgap="5.0" prefColumns="3" prefHeight="634.0" prefRows="3" prefWidth="787.0" style="-fx-background-color: #F4F6F9;" vgap="5.0">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </TilePane>
          </content>
       </ScrollPane>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="576.0" prefWidth="257.0" style="-fx-background-color: #1C2424;">
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="649.0" prefWidth="257.0" style="-fx-background-color: #1C2424;">
          <children>
             <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -65,7 +65,7 @@
                   <Insets bottom="10.0" top="50.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Dashboard" textFill="#e7e5e5">
+            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#getDashboardView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Dashboard" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="home_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -95,7 +95,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Utilisateurs">
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#getUsers" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Utilisateurs">
                <graphic>
                   <ImageView fx:id="users_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -131,7 +131,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Matières">
+            <Button fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#getAllMatieresView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Matières">
                <graphic>
                   <ImageView fx:id="matieres_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -143,7 +143,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Clubs universitaires">
+            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#displayClubs" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Clubs universitaires">
                <graphic>
                   <ImageView fx:id="club_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -167,7 +167,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Forum">
+            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#getForum" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Forum">
                <graphic>
                   <ImageView fx:id="forum_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -179,7 +179,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout2" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Centre de partage">
+            <Button fx:id="btnSignout2" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#getAllDocsView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Centre de partage">
                <graphic>
                   <ImageView fx:id="centre_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -191,7 +191,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Déconnexion">
+            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../../css/style.css" text="Déconnexion">
                <graphic>
                   <ImageView fx:id="signOut_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

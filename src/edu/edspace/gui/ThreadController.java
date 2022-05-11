@@ -6,6 +6,7 @@ package edu.edspace.gui;
 
 
 import edu.edspace.entities.Reponse;
+import edu.edspace.entities.Session;
 import edu.edspace.entities.User;
 import edu.edspace.services.ReponseService;
 import edu.edspace.services.ThreadService;
@@ -115,6 +116,17 @@ public class ThreadController implements Initializable {
         });
         initImages();
         home.setOnMouseClicked(e->{
+             if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontHome.fxml"));
                try {
                    Parent root1 = loader.load();
@@ -122,10 +134,10 @@ public class ThreadController implements Initializable {
                } catch (IOException ex) {
                    Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
                }
-        });
+        }});
 
         previous.setOnAction(e->{
-            if(this.admin == 1){
+            if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             

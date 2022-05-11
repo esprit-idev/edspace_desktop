@@ -6,8 +6,11 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,6 +22,8 @@ import edu.edspace.services.NewsCategoryService;
 import edu.edspace.services.NewsService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,6 +35,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -86,7 +92,20 @@ public class updateNewsController implements Initializable {
     private AnchorPane rootPane;
     @FXML
     private Button btnews;
-
+     //control saisie variables
+     @FXML
+     private Label titleError;
+     @FXML
+     private Label descriptionError;
+     @FXML
+     private Label authorError;
+     @FXML
+     private Label fileError;
+     @FXML
+     private Label imageError;
+     @FXML
+     private Label categoryError;
+     
     CardController cd = new CardController();
     private List<CategoryNews> categories = new ArrayList<CategoryNews>();
     CardController cdd = new CardController();
@@ -112,31 +131,65 @@ public class updateNewsController implements Initializable {
     }
     @FXML
     public void save(MouseEvent event){
+        titleField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> arg0, String newValue, String oldValue) {
+                if(oldValue.isEmpty()){
+                    titleError.setVisible(true);
+                }else{
+                    titleError.setVisible(false);
+                } 
+            }});
+        descriptionField.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> arg0, String newValue, String oldValue) {
+                    if(oldValue.isEmpty()){
+                        descriptionError.setVisible(true);
+                    }else{
+                        descriptionError.setVisible(false);
+                    } 
+                }});
+        authorField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> arg0, String newValue, String oldValue) {
+                if(oldValue.isEmpty()){
+                            authorError.setVisible(true);
+                }else{
+                            authorError.setVisible(false);
+                } 
+            }});
+        chooseFileBtn.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> arg0, String newValue, String oldValue) {
+                if(oldValue.isEmpty()){
+                        fileError.setVisible(true);
+                }else{
+                        fileError.setVisible(false);
+                } 
+            }});
         MyConnection.getInstance().getCnx();
 		String title = titleField.getText();
 		String description = descriptionField.getText();
         String author = authorField.getText();
-		String datePub = String.valueOf(dateField.getValue());
+        String datePub = new SimpleDateFormat("dd/MM/yy").format(new Date());
         int ext =  chooseFileBtn.getText().lastIndexOf(File.separator);
         image = chooseFileBtn.getText().substring(ext+1);
         String file = chooseFileBtn.getText();
-        try {
-           Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image));
-        }catch (IOException ex) {
-             Logger.getLogger(AddNewsController.class.getName()).log(Level.SEVERE, null, ex);
-         }
+
         CategoryNews catField = categoryNameField.getSelectionModel().getSelectedItem();
         Integer categoryName;
          if(catField != null){
              categoryName = catField.getId();
              if (title.isEmpty() || description.isEmpty() || datePub.isEmpty() || author.isEmpty() || categoryName == null || image.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Please fill the fields");
-                alert.showAndWait();
+                showError();
             } 
             else 
                 {
+                    try {
+                        Files.copy(Paths.get(file), Paths.get(Statics.myPubImages + image),StandardCopyOption.REPLACE_EXISTING);
+                     }catch (IOException ex) {
+                          Logger.getLogger(AddNewsController.class.getName()).log(Level.SEVERE, null, ex);
+                      }
                     News p = new News(title, author, description,categoryName.toString(),datePub,image);
                     NewsService newsService = new NewsService();
                     newsService.updateNews(p,id);
@@ -144,12 +197,31 @@ public class updateNewsController implements Initializable {
                     getNewsView(event);  
                 }    
             }else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Please fill the fields");
-                alert.showAndWait();
+                showError();
             }     
 		
+    }
+    private void showError(){
+        if(titleField.getText().isEmpty()){
+            titleError.setVisible(true);
+
+        }
+        if(descriptionField.getText().isEmpty()){
+            descriptionError.setVisible(true);
+
+        }
+        if(authorField.getText().isEmpty()){
+            authorError.setVisible(true);
+        }
+        if(chooseFileBtn.getText().isEmpty()){
+            fileError.setVisible(true);
+        }
+            
+        if(categoryNameField.getSelectionModel().getSelectedItem()== null){
+            categoryError.setVisible(true);
+        }else{
+            categoryError.setVisible(false);
+        }
     }
     @FXML
     public void cancel(MouseEvent event){
@@ -233,9 +305,6 @@ public class updateNewsController implements Initializable {
     public void setowner(String title){
         authorField.setText(title);
     }
-    public void setDate(String date){
-        dateField.setValue(LocalDate.parse(date));
-    }
     public void setIm(String imag){
         Path f = Paths.get(Statics.myPubImages + imag);
         chooseFileBtn.setText(f.toString());
@@ -315,7 +384,28 @@ private void getUsers(ActionEvent event) {
 			Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
 		}
     }
-    
+    @FXML
+    private void logout(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			
+		}
+    }
+    @FXML
+    private void getForum(MouseEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+            Parent root = loader.load();
+            forum_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+    }         
     @FXML
     private void getAllMatieresView(MouseEvent event) {
         try {

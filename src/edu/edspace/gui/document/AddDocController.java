@@ -11,6 +11,7 @@ import edu.edspace.entities.Session;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
 import edu.edspace.services.NiveauService;
+import edu.edspace.services.UserService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
 import java.io.File;
@@ -48,6 +49,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 /**
@@ -79,6 +81,8 @@ public class AddDocController implements Initializable {
     private ImageView home_iv;
     @FXML
     private ImageView logo_iv;
+    @FXML
+    private ImageView docw_iv;
 
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
@@ -88,14 +92,15 @@ public class AddDocController implements Initializable {
     private ImageView back_iv;
 
     private String owner = Session.getUsername() + " " + Session.getPrenom();
-    @FXML
-    private ImageView nomw_iv;
+
     @FXML
     private ImageView filew_iv;
     @FXML
-    private ImageView matierew_iv;
+    private ToggleGroup group;
     @FXML
-    private ImageView niveauw_iv;
+    private Text txt;
+    @FXML
+    private ImageView warning_iv;
 
     /**
      * Initializes the controller class.
@@ -106,14 +111,16 @@ public class AddDocController implements Initializable {
         MyConnection.getInstance().getCnx();
         initImages();
         initDisplay();
-        
+
         final ToggleGroup group = new ToggleGroup();
         insertUrl_rb.setToggleGroup(group);
         attachFile_rb.setToggleGroup(group);
         group.selectedToggleProperty().addListener(
                 (ObservableValue<? extends Toggle> ov, Toggle oldTog,
                         Toggle newTog) -> {
-                    System.out.println(group.getSelectedToggle().getUserData());
+                    docw_iv.setVisible(false);
+                    txt.setVisible(false);
+                    warning_iv.setVisible(false);
                     if (attachFile_rb.isSelected()) {
                         chooseFile_btn.setVisible(true);
                         url_tf.setVisible(false);
@@ -123,7 +130,7 @@ public class AddDocController implements Initializable {
                         url_tf.setVisible(true);
                     }
                 });
-        
+
     }
 
     private void initDisplay() {
@@ -185,9 +192,9 @@ public class AddDocController implements Initializable {
                 String header = "Un document avec le même nom existe déjà";
                 String content = "Veuillez choisir un autre nom";
                 showAlert(Alert.AlertType.ERROR, title, header, content);
-            } catch(NoSuchFileException ex){
+            } catch (NoSuchFileException ex) {
                 filew_iv.setVisible(true);
-            }catch (IOException ex) {
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
 
@@ -196,13 +203,27 @@ public class AddDocController implements Initializable {
         }
         //String owner = "Anas Houissa"; //to_change 
         String insert_date = new SimpleDateFormat("dd/MM/yy").format(new Date());
-        if (insertUrl_rb.isSelected() && isValid(url) == false && url.equals("")) {
-            filew_iv.setVisible(true);
-        } else if (docName != null && docName.length() != 0 && niveau != null && niveau.length() != 0 && matiere != null && matiere.length() != 0) {
+        if (attachFile_rb.isSelected() && chooseFile_btn.getText().equals("Choisissez un fichier")) {
+            txt.setVisible(true);
+            warning_iv.setVisible(true);
+            docw_iv.setVisible(true);
+        } else if (insertUrl_rb.isSelected() && ((url != null && url.equals("")) || isValid(url) == false)) {
+            txt.setVisible(true);
+            warning_iv.setVisible(true);
+            docw_iv.setVisible(true);
+        } else if ((insertUrl_rb.isSelected() || attachFile_rb.isSelected()) && docName != null && docName.length() != 0 && niveau != null && niveau.length() != 0 && matiere != null && matiere.length() != 0) {
             Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
             DocumentService ds = new DocumentService();
             try {
+                System.out.println(chooseFile_btn.getText());
                 ds.ajouterDocument(doc);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/ListDocFront.fxml"));
+                    Parent root = loader.load();
+                    rootPane.getScene().setRoot(root);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             } catch (FileAlreadyExistsException ex) {
                 System.out.println(ex.getMessage());
                 String title = "Erreur survenue lors de l'ajout";
@@ -211,12 +232,8 @@ public class AddDocController implements Initializable {
                 showAlert(Alert.AlertType.ERROR, title, header, content);
             }
         } else {
-            Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
-            System.out.println(doc.toString());
-            String title = "Erreur survenue lors de l'ajout";
-            String header = "Veuillez remplir tous les champs";
-            String content = "Aucun champs ne doit être vide";
-            showAlert(Alert.AlertType.WARNING, title, header, content);
+            txt.setVisible(true);
+            warning_iv.setVisible(true);
         }
     }
 
@@ -237,8 +254,10 @@ public class AddDocController implements Initializable {
         /* Try creating a valid URL */
         try {
             new URL(url).toURI();
+            System.out.println("valide");
             return true;
         } catch (Exception e) {
+            System.out.println("invalide");
             return false;
         }
     }
@@ -288,10 +307,15 @@ public class AddDocController implements Initializable {
         File fileBack = new File("images/back_grey.png");
         Image backI = new Image(fileBack.toURI().toString());
 
+        File fileWarning = new File("images/warning_red.png");
+        Image warningI = new Image(fileWarning.toURI().toString());
+
         logo_iv.setImage(logoI);
         home_iv.setImage(homeI);
         out_iv.setImage(outI);
         back_iv.setImage(backI);
+        warning_iv.setImage(warningI);
+        docw_iv.setImage(warningI);
     }
 
     @FXML
@@ -312,7 +336,20 @@ public class AddDocController implements Initializable {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(AddDocController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void getOut(MouseEvent event) {
+        UserService US = new UserService();
+        US.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+        try {
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 

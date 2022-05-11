@@ -15,6 +15,7 @@ import edu.edspace.entities.News;
 import edu.edspace.gui.document.ListDocFrontController;
 import edu.edspace.services.NewsCategoryService;
 import edu.edspace.services.NewsService;
+import edu.edspace.services.statics;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -80,6 +81,7 @@ public class FrontNewsController implements Initializable {
         }
     }
     private void initPane(List<News> news,List<CategoryNews>cc) {
+        statics statics = new statics();
         Iterator<News> it = news.iterator();
         while (it.hasNext()) {
             News nw = it.next();
@@ -90,7 +92,6 @@ public class FrontNewsController implements Initializable {
                 CardFrontController cd = fXMLLoader.getController();
                 cd.setData(nw);
                 pane.setOnMouseClicked(new EventHandler<Event>() {
-                    FrontNewsDetail fdetail = new FrontNewsDetail();
                     @Override
                     public void handle(Event arg0) {
                         try {
@@ -101,6 +102,7 @@ public class FrontNewsController implements Initializable {
                             fdetail.settitle(nw.getTitle());
                             fdetail.setContent(nw.getContent());
                             fdetail.setIm(nw.getImage());
+                            fdetail.setLikes(statics.numberOfLikes(nw.getId()));
                             rootPane.getChildren().setAll(panel);
                         } catch (IOException e) {
                             // TODO Auto-generated catch block

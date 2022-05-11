@@ -13,7 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.mindrot.jbcrypt.BCrypt;
@@ -106,7 +108,8 @@ public class StudentService {
             pst.setString(1, stu.getUsername());
             pst.setString(2 ,stu.getPrenom());
             pst.setString(3, stu.getEmail());
-            pst.setString(4, stu.getPassword());
+            pst.setString(4, BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)));
+            //pst.setString(4, stu.getPassword());
             pst.setBoolean(5, stu.getIsBanned());
             pst.setString(6, id);
             pst.executeUpdate();
@@ -176,5 +179,18 @@ public class StudentService {
         }
         return listStudent;
     }
+      
+       public List<User> sortByNom(){
+         List<User> users=listStudent();
+         List<User> resultat=users.stream().sorted(Comparator.comparing(User::getUsername)).collect(Collectors.toList());
+         return resultat;
+     }
+     
+     
+ public List<User> sortByEmail(){
+         List<User> users=listStudent();
+         List<User> resultat=users.stream().sorted(Comparator.comparing(User::getEmail)).collect(Collectors.toList());
+         return resultat;
+     }
       
 }

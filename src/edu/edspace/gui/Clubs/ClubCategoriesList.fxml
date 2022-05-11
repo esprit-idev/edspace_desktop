@@ -56,7 +56,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#users" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Utilisateurs" textFill="#e7e5e5">
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getUsers" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Utilisateurs" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="users_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -68,7 +68,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#niveau" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Niveaux d'études" textFill="#e7e5e5">
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getNiveau" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Niveaux d'études" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="niveaux_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -80,7 +80,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#classes" prefHeight="42.0" prefWidth="254.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Classes" textFill="#e7e5e5">
+            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getClasses" prefHeight="42.0" prefWidth="254.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Classes" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="classe_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -92,7 +92,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Matières" textFill="#e7e5e5">
+            <Button fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getMatieres" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Matières" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="matieres_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -116,7 +116,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnEmploi" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Offres d'emploi" textFill="#e7e5e5">
+            <Button fx:id="btnEmploi" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getOffre" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Offres d'emploi" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="offre_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -128,7 +128,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Forum" textFill="#e7e5e5">
+            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getForum" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Forum" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="forum_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -140,7 +140,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout2" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Centre de partage" textFill="#e7e5e5">
+            <Button fx:id="btnSignout2" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getdocs" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@style.css" text="Centre de partage" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="centre_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -152,7 +152,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" text="Déconnexion" textFill="#e7e5e5">
+            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" text="Déconnexion" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="signOut_iv" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -166,11 +166,11 @@
             </Button>
          </children>
       </VBox>
-      <ScrollPane fx:id="scrolla" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="833.0" styleClass="bgwhite" stylesheets="@../../css/clubsCss.css">
+      <ScrollPane fx:id="scrolla" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="833.0" styleClass="bgwhite" stylesheets="@../../css/clubsCss.css">
          <content>
             <VBox prefHeight="648.0" prefWidth="830.0" styleClass="bgwhite">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="785.0" text="Les catégories des clubs" textAlignment="CENTER" textFill="#a19a9a">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="785.0" text="Les catégories des clubs" textAlignment="CENTER" textFill="#1c2424">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -182,58 +182,84 @@
                      <children>
                         <AnchorPane prefHeight="30.0" prefWidth="719.0">
                            <children>
-                              <Label fx:id="addlabel" prefHeight="30.0" prefWidth="415.0" text="Ajouter une catégorie">
+                              <Label fx:id="addlabel" prefHeight="30.0" prefWidth="415.0" text="Ajouter une catégorie" textFill="#54b48c">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
                               </Label>
                               <Button fx:id="btnAnnulerModif" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="603.0" layoutY="4.0" mnemonicParsing="false" text="Annuler la modification" textAlignment="CENTER" visible="false" />
                            </children>
                         </AnchorPane>
-                        <HBox prefHeight="72.0" prefWidth="785.0">
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="830.0">
                            <children>
-                              <VBox prefHeight="388.0" prefWidth="200.0">
+                              <AnchorPane prefHeight="46.0" prefWidth="530.0">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="20.0" />
+                                 </HBox.margin>
                                  <children>
-                                    <Label text="Catégorie">
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" top="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <TextField fx:id="c_name_tf" prefHeight="25.0" prefWidth="263.0">
-                                       <VBox.margin>
-                                          <Insets left="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <Button fx:id="addbtn" mnemonicParsing="false" onAction="#addCategorie" prefHeight="25.0" prefWidth="89.0" text="Ajouter" textAlignment="CENTER">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </Button>
+                                    <HBox layoutX="71.0" prefHeight="42.0" prefWidth="530.0">
+                                       <children>
+                                          <Label text="Catégorie">
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" top="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="c_name_tf" prefHeight="25.0" prefWidth="263.0" style="-fx-background-radius: 10;">
+                                             <HBox.margin>
+                                                <Insets left="20.0" top="5.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Button fx:id="addbtn" mnemonicParsing="false" onAction="#addCategorie" prefHeight="32.0" prefWidth="89.0" style="-fx-background-color: #54b48c;" styleClass="buttonclt" stylesheets="@../../css/clubsCss.css" text="Ajouter" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="30.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </HBox>
                                  </children>
-                              </VBox>
+                              </AnchorPane>
                            </children>
+                           <opaqueInsets>
+                              <Insets top="20.0" />
+                           </opaqueInsets>
                         </HBox>
                      </children>
                   </VBox>
-                  <GridPane fx:id="grida" prefWidth="300.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints />
-                     </rowConstraints>
-                     <children>
-                        <TableView fx:id="tab" prefWidth="483.0">
-                           <columns>
-                              <TableColumn fx:id="tab_cat" prefWidth="165.0" resizable="false" text="Categorie" />
-                              <TableColumn fx:id="tab_action" prefWidth="179.0" resizable="false" text="Action" />
-                           </columns>
-                        </TableView>
-                     </children>
+                  <AnchorPane prefHeight="410.0" prefWidth="487.0">
                      <VBox.margin>
-                        <Insets right="500.0" />
+                        <Insets />
                      </VBox.margin>
-                  </GridPane>
+                     <children>
+                        <GridPane fx:id="grida" alignment="CENTER" layoutX="265.0" prefHeight="410.0" prefWidth="290.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints />
+                           </rowConstraints>
+                           <children>
+                              <TableView fx:id="tab" prefHeight="400.0" prefWidth="303.0">
+                                 <columns>
+                                    <TableColumn fx:id="tab_cat" prefWidth="165.0" resizable="false" text="Categorie" />
+                                    <TableColumn fx:id="tab_action" prefWidth="124.0" resizable="false" text="Action" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
                </children>
             </VBox>
          </content>

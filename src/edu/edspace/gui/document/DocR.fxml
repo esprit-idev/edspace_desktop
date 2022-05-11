@@ -16,7 +16,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" prefHeight="23.0" prefWidth="166.0" style="-fx-background-radius: 30; -fx-border-radius: 30;">
                <children>
-                  <ComboBox fx:id="more_cb" maxHeight="24.0" maxWidth="24.0" minHeight="24.0" minWidth="24.0" prefHeight="24.0" prefWidth="24.0" />
+                  <ComboBox fx:id="more_cb" maxHeight="24.0" maxWidth="24.0" minHeight="24.0" minWidth="24.0" prefHeight="24.0" prefWidth="24.0" style="-fx-background-color: transparent;" />
                </children>
             </HBox>
             <Label fx:id="name_label" alignment="TOP_LEFT" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" text="Nom doc" textAlignment="CENTER" textFill="#74aef9">

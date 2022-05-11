@@ -4,6 +4,7 @@
  */
 package edu.edspace.gui;
 
+import edu.edspace.entities.Session;
 import edu.edspace.entities.ThreadType;
 import edu.edspace.services.ThreadService;
 import edu.edspace.services.TopicService;
@@ -50,7 +51,7 @@ public class NewThreadController implements Initializable {
     @FXML
     private Button save;
     int user = 1;
-    int admin = 0;
+   
 
     /**
      * Initializes the controller class.
@@ -97,6 +98,17 @@ public class NewThreadController implements Initializable {
     public void update(Thread t){
         initImages();
         home.setOnMouseClicked(e->{
+             if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontHome.fxml"));
                try {
                    Parent root1 = loader.load();
@@ -104,9 +116,9 @@ public class NewThreadController implements Initializable {
                } catch (IOException ex) {
                    Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
                }
-        });
+        }});
         previous.setOnAction(e->{
-            if(this.admin == 1){
+            if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             
@@ -146,7 +158,7 @@ public class NewThreadController implements Initializable {
             t.setQuestion(tfQuestion.getText());
             ThreadService threadService = new ThreadService();
             threadService.modifierThread(t, t.getId());
-            if(this.admin == 1){
+            if(Session.getId()== t.getUser() || Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
                try {
                    Parent root = loader.load();
@@ -181,6 +193,17 @@ public class NewThreadController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         initImages();
         home.setOnMouseClicked(e->{
+             if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontHome.fxml"));
                try {
                    Parent root1 = loader.load();
@@ -188,9 +211,9 @@ public class NewThreadController implements Initializable {
                } catch (IOException ex) {
                    Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
                }
-        });
+        }});
         previous.setOnAction(e->{
-            if(this.admin == 1){
+            if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             
@@ -257,7 +280,7 @@ public class NewThreadController implements Initializable {
         alert.setTitle("Thread");
         alert.setContentText("Thread inserted successfuly!");
         alert.showAndWait();
-        if(this.admin==1){
+        if(Session.getId()== t.getUser() || Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             

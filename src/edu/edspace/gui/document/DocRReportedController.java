@@ -8,6 +8,7 @@ import edu.edspace.entities.Document;
 import edu.edspace.entities.Matiere;
 import edu.edspace.entities.Niveau;
 import edu.edspace.entities.Session;
+import edu.edspace.gui.HomeBackController;
 import edu.edspace.services.DocumentService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
@@ -18,15 +19,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -73,8 +80,8 @@ public class DocRReportedController implements Initializable {
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
     private Document doc;
-    
-    String currentUser = Session.getUsername()+" "+Session.getPrenom();
+
+    String currentUser = Session.getUsername() + " " + Session.getPrenom();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -101,7 +108,7 @@ public class DocRReportedController implements Initializable {
             doAction(doc);
         });*/
     }
-    
+
 //actions to be triggered when choosing selecting option from more_cb
     private void doAction(Document doc) {
         String selected = more_cb.getValue();
@@ -121,12 +128,12 @@ public class DocRReportedController implements Initializable {
         more_cb.setItems(optionsList(currentUser));
 
     }
-    
+
     private void apercuDoc(Document doc) {
         DocumentService ds = new DocumentService();
         ds.apercuDocument(doc);
     }
-    
+
     private void deleteDoc(Document doc) {
         String title = "Confirmation de la suppression";
         String header = "Êtes-vous sur de bien vouloir supprimer ce document?";
@@ -149,7 +156,7 @@ public class DocRReportedController implements Initializable {
             alert.close();
         }
     }
-    
+
     private void downloadDoc(Document doc) {
         String chosenDir = Statics.initDir;
         Stage stage = (Stage) rootPane.getScene().getWindow();
@@ -168,8 +175,8 @@ public class DocRReportedController implements Initializable {
             showAlert(Alert.AlertType.ERROR, title, header, content);
         }
     }
-    
-    private void ignoreReport(Document doc){
+
+    private void ignoreReport(Document doc) {
         String title = "";
         String header = "Êtes-vous sur de bien vouloir ignorer le signal de ce document?";
         String content = "Ce document figurera dans le centre de partage";
@@ -190,8 +197,8 @@ public class DocRReportedController implements Initializable {
             alert.close();
         }
     }
-    
-     //alert dialog sample
+
+    //alert dialog sample
     private void showAlert(Alert.AlertType alertType, String title, String header, String content) {
         final Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -200,7 +207,7 @@ public class DocRReportedController implements Initializable {
         alert.setResizable(true);
         alert.showAndWait();
     }
-    
+
     //list of niveaux in ObservableList
     private ObservableList<String> optionsList(String currentUser) {
         ObservableList<String> oblist = FXCollections.observableArrayList();

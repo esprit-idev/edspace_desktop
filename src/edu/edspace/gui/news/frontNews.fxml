@@ -36,7 +36,7 @@
             </ImageView>
             <ScrollPane fx:id="scroll" layoutX="7.0" layoutY="241.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="1080.0" style="-fx-background-color: #1C2424;">
                <content>
-                  <TilePane fx:id="tilePane" alignment="TOP_CENTER" hgap="10.0" prefHeight="636.0" prefWidth="1075.0" style="-fx-background-color: #1C2424;" vgap="5.0">
+                  <TilePane fx:id="tilePane" alignment="TOP_CENTER" hgap="10.0" prefHeight="1200.0" prefWidth="1075.0" style="-fx-background-color: #1C2424;" vgap="5.0">
                      <padding>
                         <Insets left="5.0" />
                      </padding>

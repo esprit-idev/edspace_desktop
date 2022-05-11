@@ -285,7 +285,7 @@ public class ClubRubriqueResponsableController implements Initializable {
                 try {
                     Files.copy(Paths.get(fileSelceted), Paths.get(Statics.ClubPubsFile + fileName));
                 } catch (IOException ex) {
-                    Logger.getLogger(ClubAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ClubRubriqueResponsableController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -309,7 +309,7 @@ public class ClubRubriqueResponsableController implements Initializable {
                 try {
                     Files.copy(Paths.get(imgSelceted), Paths.get(Statics.ClubPubsPic + imgName));
                 } catch (IOException ex) {
-                    Logger.getLogger(ClubAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ClubRubriqueResponsableController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -464,7 +464,7 @@ public class ClubRubriqueResponsableController implements Initializable {
                 cb.updateClubPic(imgName, clubid);
                 Files.copy(Paths.get(imgSelceted), Paths.get(Statics.ClubPic + imgName));
             } catch (IOException ex) {
-                Logger.getLogger(ClubAddController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ClubRubriqueResponsableController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -499,7 +499,7 @@ public class ClubRubriqueResponsableController implements Initializable {
                 Files.copy(Paths.get(imgSelceted), Paths.get(Statics.ClubPic + imgName));
                 initData(clubid);
             } catch (IOException ex) {
-                Logger.getLogger(ClubAddController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ClubRubriqueResponsableController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

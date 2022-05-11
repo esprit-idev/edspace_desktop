@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -14,10 +15,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="576.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.AllStudentsController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="649.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Student.AllStudentsController">
    <children>
       <Label fx:id="gett" contentDisplay="CENTER" layoutX="243.0" layoutY="542.0" prefHeight="17.0" prefWidth="73.0" textAlignment="CENTER" />
-      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="649.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -26,7 +27,7 @@
                <VBox.margin>
                   <Insets bottom="10.0" top="50.0" />
                </VBox.margin></ImageView>
-            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Dashboard" textFill="#e7e5e5">
+            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getDashboardView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Dashboard" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="home_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -44,7 +45,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnNews" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getNewsView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Tableau d'affichage">
+            <Button fx:id="btnNews" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getNewsView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Tableau d'affichage" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="tabaff_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -56,7 +57,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getUsers" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Utilisateurs">
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getUsers" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Utilisateurs" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="users_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -68,7 +69,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Niveaux d'études">
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getNiveauView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Niveaux d'études" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="niveaux_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -80,7 +81,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Classes">
+            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getClasseView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Classes" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="classe_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -92,7 +93,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnMatiere" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getAllMatieresView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Matières">
+            <Button fx:id="btnMatiere" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getAllMatieresView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Matières" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="matieres_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -104,7 +105,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Clubs universitaires">
+            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#displayClubs" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Clubs universitaires" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="club_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -116,7 +117,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnEmploi" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#getEmploiView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Offres d'emploi">
+            <Button fx:id="btnEmploi" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#getEmploiView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Offres d'emploi" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="offre_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -128,7 +129,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Forum">
+            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#getForum" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Forum" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="forum_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -140,7 +141,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnCentrePartage" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getAllDocsView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Centre de partage">
+            <Button fx:id="btnCentrePartage" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getAllDocsView" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Centre de partage" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="centre_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -152,7 +153,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Déconnexion">
+            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Dec" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../css/style.css" text="Déconnexion" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="signOut_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -171,7 +172,7 @@
             <Font name="Calibri" size="26.0" />
          </font>
       </Text>
-      <Pane layoutX="744.0" layoutY="101.0" prefHeight="409.0" prefWidth="262.0" style="-fx-background-color: #FFFFFF;">
+      <Pane layoutX="785.0" layoutY="101.0" prefHeight="409.0" prefWidth="262.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <Label layoutX="54.0" layoutY="57.0" text="Nom" />
             <Label layoutX="64.0" layoutY="127.0" text="Prenom" />
@@ -180,7 +181,7 @@
             <TextField fx:id="nomStudent" layoutX="45.0" layoutY="74.0" prefHeight="25.0" prefWidth="191.0" />
             <TextField fx:id="prenomStudent" layoutX="45.0" layoutY="144.0" prefHeight="25.0" prefWidth="191.0" />
             <TextField fx:id="emailStudent" layoutX="45.0" layoutY="213.0" prefHeight="25.0" prefWidth="191.0" />
-            <TextField fx:id="mdpStudent" layoutX="45.0" layoutY="291.0" prefHeight="25.0" prefWidth="191.0" />
+            <TextField fx:id="mdpStudent" layoutX="45.0" layoutY="291.0" onKeyTyped="#test" prefHeight="25.0" prefWidth="191.0" />
             <Button fx:id="btnAjout" layoutX="109.0" layoutY="345.0" mnemonicParsing="false" onAction="#btnajout" prefHeight="29.0" prefWidth="62.0" style="-fx-background-color: #F45F7F;" text="Ajouter" />
             <Button fx:id="btnUpdate" layoutX="8.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnUpdate">
                <graphic>
@@ -202,23 +203,19 @@
             <Text fx:id="invalidmsg" fill="RED" layoutX="105.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="l'email doit etre valide " visible="false" />
             <Text fx:id="msgmin" fill="RED" layoutX="26.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="le mot de passe doit contenir au moins 8 caractères" visible="false" />
             <Text fill="#fc0000" layoutX="41.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="l'email deja existe dans la base de donnée" visible="false" />
+            <Text fx:id="testmsg" layoutX="69.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hello" visible="false" />
          </children>
       </Pane>
-      <Pane layoutX="295.0" layoutY="97.0" prefHeight="417.0" prefWidth="416.0" style="-fx-background-color: #FFFFFF;">
+      <Pane layoutX="318.0" layoutY="97.0" prefHeight="432.0" prefWidth="416.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <TableView fx:id="tableStudent" layoutX="20.0" layoutY="52.0" onMouseClicked="#handleMouseAction" prefHeight="314.0" prefWidth="377.0">
+            <TableView fx:id="tableStudent" layoutX="19.0" layoutY="68.0" onMouseClicked="#handleMouseAction" prefHeight="314.0" prefWidth="377.0">
               <columns>
                 <TableColumn fx:id="NStudent" prefWidth="85.0" text="Nom" />
                 <TableColumn fx:id="PStudent" prefWidth="133.0" text="Prenom" />
                   <TableColumn fx:id="EStudent" prefWidth="158.0" text="Email" />
               </columns>
             </TableView>
-            <Text fill="#239a6b" layoutX="126.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des etudiants">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
-            <Button fx:id="btndel" layoutX="382.0" layoutY="375.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#del" prefHeight="29.0" prefWidth="26.0" style="-fx-background-color: #FFFFFF;" stylesheets="@style.css" textFill="#e7e5e5">
+            <Button fx:id="btndel" layoutX="383.0" layoutY="389.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#del" prefHeight="29.0" prefWidth="26.0" style="-fx-background-color: #FFFFFF;" stylesheets="@style.css" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="icondelete" accessibleRole="BUTTON" fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -227,6 +224,15 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button fx:id="btnExport" layoutX="7.0" layoutY="397.0" mnemonicParsing="false" onAction="#ExportExcel" text="Export" />
+            <Button fx:id="pdf" layoutX="79.0" layoutY="397.0" mnemonicParsing="false" onAction="#ExportPdf" text="pdf" />
+            <TextField fx:id="search" layoutX="243.0" layoutY="40.0" promptText="recherche" />
+            <Text fill="#239a6b" layoutX="113.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des etudiants">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="sortCB" layoutX="11.0" layoutY="36.0" onAction="#sort" prefWidth="150.0" promptText="trier les etudiants par" />
          </children>
       </Pane>
    </children>

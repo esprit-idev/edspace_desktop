@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.edspace.gui;
+package edu.edspace.gui.User;
 
+import edu.edspace.services.MailService;
+import edu.edspace.services.UserService;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -18,7 +20,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -34,6 +38,8 @@ public class MdpController implements Initializable {
     private ImageView log;
     @FXML
     private Button mdpOublier;
+    @FXML
+    private TextField email;
 
     /**
      * Initializes the controller class.
@@ -44,21 +50,37 @@ public class MdpController implements Initializable {
         Image logoI = new Image(fileLogo.toURI().toString());
         log.setImage(logoI);
         // TODO
+        
     }    
 
     @FXML
     private void mdpOublier(ActionEvent event) {
-        
+        UserService u = new UserService();
+       if(u.existence(email.getText())==0){
+           FXMLLoader blog_parent = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/CodeTest.fxml"));
         try {
-            Parent blog_parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
-        Scene blog_scene = new Scene(blog_parent);
-        Stage app_stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+           
+            Parent root1 = blog_parent.load();
+                   CodeTestController TC = blog_parent.getController();
+                   TC.codereset(email.getText());
+                   
+                  mdpOublier.getScene().setRoot(root1);
+       // Scene blog_scene = new Scene(blog_parent);
+       /// Stage app_stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         
-        app_stage.setScene(blog_scene);
-        app_stage.show();
+       // app_stage.setScene(blog_scene);
+       // app_stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(AllStudentsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MdpController.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }
+       else{
+           Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Email n'existe pas");
+        alert.setContentText("Verifier votre adresse mail!");
+        alert.showAndWait();
+       }
+       
     }
     
 }

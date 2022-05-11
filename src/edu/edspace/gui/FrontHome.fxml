@@ -111,7 +111,7 @@
             </Pane>
             <ImageView fx:id="out_iv" fitHeight="30.0" fitWidth="30.0" layoutX="1012.0" layoutY="577.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../images/logout_grey.png" />
+                  <Image url="@../../../../images/logout_grey.png" />
                </image>
             </ImageView>
             <ImageView fx:id="profile_iv" fitHeight="37.0" fitWidth="46.0" layoutX="1009.0" layoutY="36.0" onMouseClicked="#getProfile" pickOnBounds="true" preserveRatio="true">
