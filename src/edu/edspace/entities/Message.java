@@ -5,13 +5,14 @@
  */
 package edu.edspace.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author aa
  */
-public class Message {
+public class Message implements Serializable{
       
     private int id;
     private String content;

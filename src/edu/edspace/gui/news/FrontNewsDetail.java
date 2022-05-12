@@ -10,10 +10,13 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import edu.edspace.entities.News;
+import edu.edspace.entities.Session;
 import edu.edspace.services.NewsService;
 import edu.edspace.services.statics;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,8 +28,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-//import twitter4j.Twitter;
-
 public class FrontNewsDetail implements Initializable {
 
     @FXML
@@ -59,6 +60,7 @@ public class FrontNewsDetail implements Initializable {
     NewsService newsService = new NewsService();
     News newss = null;
     Integer likes;
+    int count = 0;
     /* */ 
     
     @Override
@@ -68,15 +70,23 @@ public class FrontNewsDetail implements Initializable {
     }
     @FXML
     private void clickLike(MouseEvent event){
-        System.out.println(id);
-        statics statics = new statics();
-        likes = statics.numberOfLikes(id);
-        System.out.println(likes);
-        System.out.println(newss);
-        likes = likes +1;
-        System.out.print(likes);
-        newsService.updateLikes(likes, newsService.findById(id).getId());
-        numberOfLikes.setText(likes.toString());
+        likeButton.setOnMousePressed(new EventHandler<Event>() {
+            @Override
+            public void handle(Event arg0) {
+                count ++;                
+            }
+        });
+      //  Session.getUsername();
+        if(count == 0){
+            System.out.print(count);
+            System.out.println(id);
+            statics statics = new statics();
+            likes = statics.numberOfLikes(id);
+            likes = likes +1;
+            newsService.updateLikes(likes, newsService.findById(id).getId());
+            numberOfLikes.setText(likes.toString());
+            System.out.print(count);
+        }
     }
     @FXML
     private void openBrowser(MouseEvent event) throws URISyntaxException{

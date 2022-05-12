@@ -1068,56 +1068,56 @@ public class ClubListAdminController implements Initializable {
 
     @FXML
     private void getNiveau(ActionEvent event) {
-                  try {
+        try {
 
-FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
 
-Parent root = loader.load();
+            Parent root = loader.load();
 
-club_iv.getScene().setRoot(root);
+            club_iv.getScene().setRoot(root);
 
-} catch (IOException ex) {
+        } catch (IOException ex) {
 
-ex.printStackTrace();
+            ex.printStackTrace();
 
-}
+        }
     }
 
     @FXML
     private void getClasses(ActionEvent event) {
-          try {
+        try {
 
-FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml"));
 
-Parent root = loader.load();
+            Parent root = loader.load();
 
-club_iv.getScene().setRoot(root);
+            club_iv.getScene().setRoot(root);
 
-} catch (IOException ex) {
+        } catch (IOException ex) {
 
-ex.printStackTrace();
+            ex.printStackTrace();
 
-}
+        }
     }
 
     @FXML
     private void logout(ActionEvent event) {
         UserService US = new UserService();
 
-US.logout();
+        US.logout();
 
-FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
 
-try {
+        try {
 
-Parent root = loader.load();
+            Parent root = loader.load();
 
-club_iv.getScene().setRoot(root);
+            club_iv.getScene().setRoot(root);
 
-} catch (IOException ex) {
+        } catch (IOException ex) {
 
-ex.printStackTrace();
+            ex.printStackTrace();
 
-}
+        }
     }
 }

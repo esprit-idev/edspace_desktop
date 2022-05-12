@@ -15,6 +15,7 @@ import edu.edspace.entities.Emploi;
 import edu.edspace.gui.news.CardController;
 import edu.edspace.services.EmploiCategoryService;
 import edu.edspace.services.EmploiService;
+import edu.edspace.services.UserService;
 import edu.edspace.gui.news.AllNewsController;
 import edu.edspace.utils.MyConnection;
 import javafx.event.ActionEvent;
@@ -24,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -32,7 +34,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-
+import java.awt.*;
 public class AllEmploiController implements Initializable{
 
     //fxml attributes
@@ -76,10 +78,15 @@ public class AllEmploiController implements Initializable{
     private AnchorPane rootPane;
     @FXML
     private TilePane tilePaneId;
-
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button btnSearch;
     private List<Emploi> emploisList = new ArrayList<>();
     private List<CategoryEmploi> catList = new ArrayList<>();
+    List<Emploi> filteredList = new ArrayList<>();
     Connection connection = null;
+    EmploiService emploiService = new EmploiService();
 
     //fxml methods
     @FXML
@@ -92,6 +99,33 @@ public class AllEmploiController implements Initializable{
 		}
     }
     //init method
+    @FXML
+    public void search(MouseEvent event){
+        EmploiCategoryService cnews = new EmploiCategoryService();
+        catList = cnews.AllCats();
+        String searchWord = searchField.getText().toLowerCase();
+        if(searchWord.isEmpty()){
+            filteredList.clear();   
+            System.out.println(emploisList);
+            tilePaneId.getChildren().clear();
+            initPane(emploisList, catList);
+        }else{
+            filteredList = emploiService.SearchPublications(searchWord);
+            if(filteredList == null || filteredList.isEmpty()){
+                emploisList = emploiService.AllEmplois();
+            }else{
+                System.out.println(filteredList);
+                emploisList.clear();
+                tilePaneId.getChildren().clear();
+                //newsList = filteredList;
+                initPane(filteredList, catList);
+                emploisList = emploiService.AllEmplois();
+            }
+            
+        }
+        
+        //initData();
+    }
     //setting data 
     public void initData(){
         EmploiService emploiService = new EmploiService();
@@ -126,6 +160,22 @@ public class AllEmploiController implements Initializable{
                 delButton = cd.getDeleteButton();
                 delButton.setOnMouseClicked((MouseEvent event)->{
                     emploiService.deleteOffer(nw.getId());
+
+                        /* notification */ 
+                 SystemTray tray = SystemTray.getSystemTray();
+                 //If the icon is a file
+                 java.awt.Image imagess = Toolkit.getDefaultToolkit().createImage("icon.png");
+                 TrayIcon trayIcon = new TrayIcon(imagess, "ADD");
+                 //Let the system resize the image if needed
+                 trayIcon.setImageAutoSize(true);
+                 //Set tooltip text for the tray icon
+                 trayIcon.setToolTip("System tray icon demo");
+                 try {
+                     tray.add(trayIcon);
+                 } catch (AWTException e) {
+                     System.out.println(e.getMessage());
+                 }
+                 trayIcon.displayMessage("Supprimer", "L'offre " + nw.getTitle() + "  a ete bien supprimer", TrayIcon.MessageType.INFO);
                     getEmploiView(event);
                 });
                 modifButton.setOnMouseClicked((MouseEvent event)->{
@@ -185,7 +235,7 @@ private void getUsers(ActionEvent event) {
     try {
         //instance mtaa el crud
         //redirection
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
         Parent root = loader.load();
         club_iv.getScene().setRoot(root);
     } catch (IOException ex) {
@@ -193,6 +243,17 @@ private void getUsers(ActionEvent event) {
     }
     
 }
+@FXML
+private void logout(MouseEvent event){
+    UserService US = new UserService();
+    US.logout();
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+    try {
+    Parent root = loader.load();
+    rootPane.getScene().setRoot(root); 
+    } catch (IOException ex) {		
+    }
+}  
 @FXML
 private void getForum(MouseEvent event) {
     try {
@@ -214,6 +275,27 @@ private void getForum(MouseEvent event) {
         } catch (IOException ex) {
             Logger.getLogger(AllEmploiController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    @FXML
+    private void getNiveaux(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void getClasses(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+    }   
     }
     @FXML
     private void getAllDocsView(MouseEvent event) {
@@ -258,15 +340,6 @@ private void getForum(MouseEvent event) {
     private void getCatEmploiView(MouseEvent event){
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allcategoryEmploi.fxml"));
-			rootPane.getChildren().setAll(pane);
-		} catch (IOException ex) {
-			
-		}
-    }
-    @FXML
-    private void logout(MouseEvent event){
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
 			rootPane.getChildren().setAll(pane);
 		} catch (IOException ex) {
 			

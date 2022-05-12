@@ -2,6 +2,7 @@
 package edu.edspace.entities;
 
 import edu.edspace.gui.Student.AllStudentsController;
+import java.io.Serializable;
 
 
 /**
@@ -9,7 +10,8 @@ import edu.edspace.gui.Student.AllStudentsController;
  * @author aa
  */
 
-public class User {
+public class User implements Serializable{
+  private static final long serialVersionUID = 1L;
 
     @Override
     public String toString() {

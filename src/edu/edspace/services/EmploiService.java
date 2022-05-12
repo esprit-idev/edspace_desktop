@@ -106,4 +106,51 @@ public class EmploiService {
             e.notify();
         }
     }
+    public List<Emploi> filterByCat(int cat) {
+        String req = "SELECT emploi.*, categorie_emploi.category_name as catName FROM emploi JOIN categorie_emploi ON emploi.category_name_id = categorie_emploi.id where categorie_emploi.id='"+cat+"'";
+        return AllNewsforFilter(req);
+    }
+    public List<Emploi> AllNewsforFilter(String req){
+        List<Emploi> listNews = new ArrayList<>();
+        try {
+			// String query all publications 
+			query = req ;
+            resultSet = connection.createStatement().executeQuery(query);
+			while (resultSet.next()) {
+				Emploi em = new Emploi();
+				em.setId(resultSet.getInt(1));
+                em.setCategoryName(resultSet.getString("catName"));
+                em.setTitle(resultSet.getString(3));
+                em.setContent(resultSet.getString(4));
+                em.setDate(resultSet.getString(5));
+                em.setImage(resultSet.getString(6));
+				listNews.add(em);
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+        return listNews;
+    }
+    public List<Emploi> SearchPublications(String title){
+        List<Emploi> listNews = new ArrayList<>();
+        //listNews.clear();
+        try {
+            // String query all publications 
+            query = "select * from emploi where title LIKE '%"+title+"%'";
+            resultSet = connection.createStatement().executeQuery(query);
+            while (resultSet.next()) {
+                Emploi em = new Emploi();
+				em.setId(resultSet.getInt(1));
+                em.setCategoryName(resultSet.getString(2));
+                em.setTitle(resultSet.getString(3));
+                em.setContent(resultSet.getString(4));
+                em.setDate(resultSet.getString(5));
+                em.setImage(resultSet.getString(6));
+                listNews.add(em);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listNews;
+    }
 }
