@@ -407,7 +407,7 @@ ex.printStackTrace();
     private void getClasses(ActionEvent event) {
         try {
 
-FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml"));
 
 Parent root = loader.load();
 
@@ -439,5 +439,9 @@ club_iv.getScene().setRoot(root);
 ex.printStackTrace();
 
 }
+    }
+
+    @FXML
+    private void reload(MouseEvent event) {
     }
 }

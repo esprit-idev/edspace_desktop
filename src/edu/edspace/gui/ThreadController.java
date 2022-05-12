@@ -6,6 +6,7 @@ package edu.edspace.gui;
 
 
 import edu.edspace.entities.Reponse;
+import edu.edspace.entities.Session;
 import edu.edspace.entities.User;
 import edu.edspace.services.ReponseService;
 import edu.edspace.services.ThreadService;
@@ -22,12 +23,14 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import edu.edspace.entities.Thread;
+import edu.edspace.services.MailService;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -40,6 +43,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -76,9 +80,11 @@ public class ThreadController implements Initializable {
     private ImageView pdf;
     @FXML
     private ImageView google;
-    String[] tab = {"Shit","Zah"};
+    String[] tab = {"Shit","Zah","fk"};
     @FXML
     private Text bad;
+    @FXML
+    private ImageView home;
     public boolean checkForBadWords(String t){
         boolean valid = false;
         
@@ -110,8 +116,29 @@ public class ThreadController implements Initializable {
             threadService.searchPDF(the);
         });
         initImages();
+        home.setOnMouseClicked(e->{
+             if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontHome.fxml"));
+               try {
+                   Parent root1 = loader.load();
+                   home.getScene().setRoot(root1);
+               } catch (IOException ex) {
+                   Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+        }});
+
         previous.setOnAction(e->{
-            if(this.admin == 1){
+            if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             
@@ -154,6 +181,7 @@ public class ThreadController implements Initializable {
        addBtn.setOnAction(e->{
                if(tfReponse.getText().length()==0)
                {
+                   
                    error.setVisible(true);
                }
                else{
@@ -163,7 +191,7 @@ public class ThreadController implements Initializable {
                        tfReponse.setBorder(Border.stroke(Color.RED));
                        tfReponse.setPromptText("Replace the answer");
             }else{
-              reponseService.addReponse(new Reponse(tfReponse.getText(),this.id,1));
+              reponseService.addReponse(new Reponse(tfReponse.getText(),this.id,Session.getId()));
               FXMLLoader loader = new FXMLLoader(getClass().getResource("Thread.fxml"));
                try {
                    Parent root1 = loader.load();
@@ -185,10 +213,14 @@ public class ThreadController implements Initializable {
            c.setCenterX(100);
            c.setCenterY(100);
            c.setRadius(15);
-           c.setStyle("-fx-stroke: red; -fx-fill: green;");
+           c.setStyle("-fx-background-image : url('images/account.png')");
            Reponse r = new Reponse();
            r = reps.get(i);
-           u.setText(String.valueOf("user "+r.getUser()));
+           UserService uss = new UserService();
+           User use = uss.find(r.getUser());
+           u.setText(String.valueOf(use.getUsername()));
+           HBox h = new HBox();
+           h.getChildren().addAll(c,u);
            t.setText(r.getReply());
            t.setEditable(false);
            t.setStyle("-fx-text-fill: black; -fx-background-color: #D2D2D2;-fx-border-radius: 10; -fx-background-radius: 10;");
@@ -197,7 +229,7 @@ public class ThreadController implements Initializable {
            td.setText(r.getReplyDate());
            td.setTextAlignment(TextAlignment.RIGHT);
            td.setStyle("-fx-padding: 50px;");
-           vbox.getChildren().addAll(u,c,t,td);
+           vbox.getChildren().addAll(h,t,td);
            if(this.admin == 1){
                Button b = new Button("delete");
                b.setOnAction(e->{
@@ -238,16 +270,23 @@ public class ThreadController implements Initializable {
             vbox.getChildren().add(b);
            sp.setContent(vbox);
            
-           addBtn.setOnAction(e->{
+           addBtn.setOnMouseClicked(e->{
                if(checkForBadWords(tfReponse.getText())==true){
                        bad.setVisible(true);
                        tfReponse.setText(null);
                        tfReponse.setBorder(Border.stroke(Color.RED));
                        tfReponse.setPromptText("Replace the answer");
             }else{
-              reponseService.addReponse(new Reponse(tfReponse.getText(),this.id,1));
+              
+              reponseService.addReponse(new Reponse(tfReponse.getText(),this.id,6));
+              
+              Thread thread = threadService.getThread(id);
+              UserService us = new UserService();
+              User user = us.find(thread.getUser());
+              
               FXMLLoader loader = new FXMLLoader(getClass().getResource("Thread.fxml"));
                try {
+                   
                    Parent root1 = loader.load();
                    ThreadController TC = loader.getController();
                    TC.setThread(this.thread,this.id);
@@ -257,8 +296,11 @@ public class ThreadController implements Initializable {
                }
            }
            });
+           
            }
-    }}
+    }
+   
+    }
    
     /**
      * Initializes the controller class.
@@ -337,11 +379,15 @@ public class ThreadController implements Initializable {
         File fileg = new File("images/google.png");
         Image gl = new Image(fileg.toURI().toString());
         
+        File fUser = new File("images/account.png");
+        Image fu = new Image(fUser.toURI().toString());
+        
         logo_iv.setImage(logoI);
         pdf.setImage(pdfl);
         google.setImage(gl);
-        //previous.setImage(homeI);
+        home.setImage(homeI);
     }
+
     }    
     
 

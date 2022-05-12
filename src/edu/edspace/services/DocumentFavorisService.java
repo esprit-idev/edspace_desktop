@@ -4,6 +4,7 @@
  */
 package edu.edspace.services;
 
+import edu.edspace.entities.Document;
 import edu.edspace.entities.DocumentFavoris;
 import edu.edspace.utils.MyConnection;
 import java.sql.PreparedStatement;
@@ -50,6 +51,33 @@ public class DocumentFavorisService {
             System.out.println(ex.getMessage());
         }
     }
+    
+    public List<Document> listDocsFavesJoined(int userId) {
+        String req ="select * from document inner join document_favoris on (document.id=document_favoris.document_id) where document_favoris.user_id="+userId;
+        List<Document> myList = new ArrayList<>();
+        try {
+            Statement st = MyConnection.getInstance().getCnx().createStatement();
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+            while (rs.next()) {
+                Document d = new Document();
+                d.setId(rs.getInt("id"));
+                d.setMatiere(rs.getString("matiere_id"));
+                d.setNiveau(rs.getString("niveau_id"));
+                d.setNom(rs.getString("nom"));
+                d.setDate_insert(rs.getString("date_insert"));
+                d.setProp(rs.getString("proprietaire"));
+                d.setType(rs.getString("type"));
+                d.setSignalements(rs.getInt("signalements"));
+                d.setUrl(rs.getString("url"));
+                myList.add(d);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return myList;
+    }
+    
+    
     
     public List<DocumentFavoris> listFaves(int user_id) {
         String req = "select * from document_favoris where user_id="+user_id; //requete select from db

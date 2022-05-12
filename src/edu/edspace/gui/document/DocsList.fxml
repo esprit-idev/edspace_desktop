@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -31,6 +32,11 @@
                </image>
             </ImageView>
             <Label fx:id="reinitialiser_label" layoutX="581.0" layoutY="91.0" onMouseClicked="#reinitialiserFiltre" text="Réinitialiser" />
+            <Label fx:id="nodocs_l" layoutX="316.0" layoutY="315.0" text="Aucun document n'a été ajouté!" textFill="#f25353" visible="false">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <ScrollPane fx:id="scroll" hbarPolicy="NEVER" layoutX="262.0" layoutY="163.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="826.0">
@@ -42,6 +48,9 @@
                <padding>
                   <Insets bottom="20.0" left="70.0" right="70.0" top="20.0" />
                </padding>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
             </GridPane>
          </content>
       </ScrollPane>
@@ -97,7 +106,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../style.css" text="Niveaux d'études" textFill="#e7e5e5">
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getNiveaux" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../style.css" text="Niveaux d'études" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="niveaux_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -109,7 +118,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../style.css" text="Classes" textFill="#e7e5e5">
+            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getClasses" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../style.css" text="Classes" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="classe_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -157,7 +166,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../style.css" text="Forum" textFill="#e7e5e5">
+            <Button fx:id="btnSignout1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getForum" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #1C2424;" stylesheets="@../style.css" text="Forum" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="forum_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -181,7 +190,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" stylesheets="@../style.css" text="Déconnexion" textFill="#e7e5e5">
+            <Button fx:id="btnSignout3" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" onMouseClicked="#getOut" prefHeight="42.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" stylesheets="@../style.css" text="Déconnexion" textFill="#e7e5e5">
                <graphic>
                   <ImageView fx:id="signOut_iv" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

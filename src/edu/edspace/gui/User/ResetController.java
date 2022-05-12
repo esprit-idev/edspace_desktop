@@ -55,7 +55,7 @@ public class ResetController implements Initializable {
              US.updatemdp(u, email);
         try {
             
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {

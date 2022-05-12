@@ -292,8 +292,6 @@ private void getNewsView(MouseEvent event) {
 @FXML
 private void getForum(MouseEvent event) {
     try {
-        //instance mtaa el crud
-        //redirection
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
         Parent root = loader.load();
         club_iv.getScene().setRoot(root);

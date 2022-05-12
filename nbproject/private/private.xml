@@ -3,41 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/Student/AllStudentsController.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/services/ExcelFileService.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/User/LoginController.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/utils/MyConnection.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/services/UserService.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/tests/MainClass.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/User/MdpController.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/services/StudentService.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/utils/Statics.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/services/MailService.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/Student/AddStudentController.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/services/DocumentService.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/Admin/AllAdminsController.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/HomeBackController.java</file>
-            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/User/ResetController.java</file>
-=======
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/src/edu/edspace/services/UserService.java</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/src/edu/edspace/entities/CategoryEmploi.java</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/src/edu/edspace/entities/Emploi.java</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/src/edu/edspace/services/NewsService.java</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/src/edu/edspace/services/EmploiService.java</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/build.xml</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/src/edu/edspace/services/DocumentService.java</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/src/edu/edspace/tests/MainClass.java</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/src/edu/edspace/entities/CategoryNews.java</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/src/edu/edspace/utils/MyConnection.java</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/src/edu/edspace/gui/AddStudentController.java</file>
-            <file>file:/C:/Users/eslem/Desktop/edspace_desktop/src/edu/edspace/services/MatiereService.java</file>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubCategoriesListController.java</file>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubListAdminController.java</file>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/HomeBackController.java</file>
-            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubRubriqueAdminController.java</file>
->>>>>>> 1419a7281373ba0332abdcd6d7fe1ad062f719fd
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/NewThreadController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/User/LoginController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ThreadListController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/entities/Session.java</file>
         </group>
     </open-files>
 </project-private>

@@ -11,6 +11,7 @@ import edu.edspace.entities.Session;
 import edu.edspace.services.DocumentService;
 import edu.edspace.services.MatiereService;
 import edu.edspace.services.NiveauService;
+import edu.edspace.services.UserService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
 import java.io.File;
@@ -332,6 +333,19 @@ public class AddDocController implements Initializable {
     private void getCentre(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/ListDocFront.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void getOut(MouseEvent event) {
+        UserService US = new UserService();
+        US.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+        try {
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
