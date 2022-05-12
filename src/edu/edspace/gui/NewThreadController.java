@@ -4,6 +4,7 @@
  */
 package edu.edspace.gui;
 
+import edu.edspace.entities.Session;
 import edu.edspace.entities.ThreadType;
 import edu.edspace.services.ThreadService;
 import edu.edspace.services.TopicService;
@@ -19,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import edu.edspace.entities.Thread;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +29,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -48,11 +51,12 @@ public class NewThreadController implements Initializable {
     @FXML
     private Button save;
     int user = 1;
-    int admin = 0;
+   
 
     /**
      * Initializes the controller class.
      */
+    
     ObservableList<String> Topics = FXCollections.observableArrayList();
     @FXML
     private Label ftopic;
@@ -73,6 +77,8 @@ public class NewThreadController implements Initializable {
     @FXML
     private Text bad;
     String[] tab = {"Shit","Zah"};
+    @FXML
+    private ImageView home;
     public boolean checkForBadWords(String t){
         boolean valid = false;
         
@@ -90,8 +96,29 @@ public class NewThreadController implements Initializable {
        return valid;
     }
     public void update(Thread t){
+        initImages();
+        home.setOnMouseClicked(e->{
+             if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontHome.fxml"));
+               try {
+                   Parent root1 = loader.load();
+                   home.getScene().setRoot(root1);
+               } catch (IOException ex) {
+                   Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+        }});
         previous.setOnAction(e->{
-            if(this.admin == 1){
+            if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             
@@ -131,7 +158,7 @@ public class NewThreadController implements Initializable {
             t.setQuestion(tfQuestion.getText());
             ThreadService threadService = new ThreadService();
             threadService.modifierThread(t, t.getId());
-            if(this.admin == 1){
+            if(Session.getId()== t.getUser() || Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
                try {
                    Parent root = loader.load();
@@ -164,8 +191,29 @@ public class NewThreadController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        initImages();
+        home.setOnMouseClicked(e->{
+             if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            previous.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+                else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontHome.fxml"));
+               try {
+                   Parent root1 = loader.load();
+                   home.getScene().setRoot(root1);
+               } catch (IOException ex) {
+                   Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+        }});
         previous.setOnAction(e->{
-            if(this.admin == 1){
+            if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             
@@ -232,7 +280,7 @@ public class NewThreadController implements Initializable {
         alert.setTitle("Thread");
         alert.setContentText("Thread inserted successfuly!");
         alert.showAndWait();
-        if(this.admin==1){
+        if(Session.getId()== t.getUser() || Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             
@@ -264,5 +312,54 @@ public class NewThreadController implements Initializable {
     @FXML
     private void getProfile(MouseEvent event) {
     }
-    
+    public void initImages() {
+        File fileLogo = new File("images/logo1.png");
+        Image logoI = new Image(fileLogo.toURI().toString());
+        
+        File fileHome = new File("images/home_grey.png");
+        Image homeI = new Image(fileHome.toURI().toString());
+        
+        File fileTab = new File("images/announcement_grey.png");
+        Image tabI = new Image(fileTab.toURI().toString());
+        
+        File fileLevel = new File("images/level_grey.png");
+        Image levelI = new Image(fileLevel.toURI().toString());
+        
+        File fileClass = new File("images/class-management_grey.png");
+        Image classI = new Image(fileClass.toURI().toString());
+        
+        File fileBook = new File("images/book_grey.png");
+        Image bookI = new Image(fileBook.toURI().toString());
+        
+        File fileForum = new File("images/forum2_grey.png");
+        Image forumI = new Image(fileForum.toURI().toString());
+        
+        File fileOffre = new File("images/briefcase_grey.png");
+        Image offreI = new Image(fileOffre.toURI().toString());
+        
+        File fileDocs = new File("images/file_grey.png");
+        Image docsI = new Image(fileDocs.toURI().toString());
+
+        File fileUsers = new File("images/users_grey.png");
+        Image usersI = new Image(fileUsers.toURI().toString());
+        
+        File fileClub = new File("images/org_grey.png");
+        Image clubI = new Image(fileClub.toURI().toString());
+
+        File fileOut = new File("images/logout_grey.png");
+        Image outI = new Image(fileOut.toURI().toString());
+        
+        File fileReport = new File("images/report_red.png");
+        Image reportI = new Image(fileReport.toURI().toString());
+        
+        File filePdf = new File("images/pdf.png");
+        Image pdfl = new Image(filePdf.toURI().toString());
+        
+        File fileg = new File("images/google.png");
+        Image gl = new Image(fileg.toURI().toString());
+        
+        logo_iv.setImage(logoI);
+        
+        home.setImage(homeI);
+    }
 }

@@ -182,7 +182,7 @@ public class LoginController implements Initializable {
     @FXML
     private void mdp(ActionEvent event) {
         try {
-            Parent blog_parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Mdp.fxml"));
+            Parent blog_parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/User/Mdp.fxml"));
             Scene blog_scene = new Scene(blog_parent);
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 

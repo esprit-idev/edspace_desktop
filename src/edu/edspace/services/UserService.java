@@ -121,7 +121,7 @@ public class UserService {
    public User getUser(String email){
         User stu = new User();
         try {
-             String req = "select * from user where email ="+email;
+             String req = "select * from user where email ='"+email+"'";
             Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
             ResultSet rs = st.executeQuery(req); //resultat de la requete
             
@@ -141,6 +141,30 @@ public class UserService {
         }
         return stu ;
     }
+    
+    public User find(int id){
+        User ad = new User();
+        try {
+            String req = "select * from user where id ='"+id+"'";
+            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+            
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                
+                ad.setId(rs.getInt("id")); //set id from req result
+                ad.setUsername(rs.getString("username")); 
+                ad.setPrenom(rs.getString("prenom")); 
+                ad.setEmail(rs.getString("email")); 
+                ad.setPassword(rs.getString("password")); 
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            
+        }
+        return ad ;
+    }
 
    public  int existence (String email){
         int f=0;
@@ -148,16 +172,19 @@ public class UserService {
             
             ObservableList<User> blogsList = FXCollections.observableArrayList();
             // Connection conn = getConnection();
-            String query = "select * from user ";
+            String query = "select * from user where email =  '"+email+"';";
             Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
             ResultSet rs = st.executeQuery(query);
-            
-            try{
+            if(rs.next() == false){
+                f= 1;
+            }
+            else f= 0;
+            /*try{
                 
                 User user;
                 while(rs.next()){
                     user = new User(rs.getString("id"), rs.getString("username"), rs.getString("prenom"),rs.getString("email"));
-                    blogsList.add(user);
+                    //blogsList.add(user);
                     
                     if(user.getEmail().equals(email)){                    
                         f=1;   
@@ -166,7 +193,7 @@ public class UserService {
                 
             }catch(Exception ex){
                 ex.printStackTrace();
-            }
+            }*/
             // System.out.println(f);
            
         }catch(SQLException ex){

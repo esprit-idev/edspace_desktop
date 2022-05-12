@@ -334,7 +334,7 @@ public class AllNewsController implements Initializable{
         try {
             //instance mtaa el crud
             //redirection
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
             Parent root = loader.load();
             club_iv.getScene().setRoot(root);
         } catch (IOException ex) {
@@ -345,7 +345,7 @@ public class AllNewsController implements Initializable{
     @FXML
     private void logout(MouseEvent event){
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
 			rootPane.getChildren().setAll(pane);
 		} catch (IOException ex) {
 			
