@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+<<<<<<< HEAD
+=======
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/NewThreadController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/User/LoginController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ThreadListController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/entities/Session.java</file>
+        </group>
+    </open-files>
+>>>>>>> f6ed9deba9df8ca9cfac5b8b408c7727c1d9f6ab
 </project-private>

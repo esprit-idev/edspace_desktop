@@ -6,6 +6,7 @@
 package edu.edspace.gui.User;
 
 import edu.edspace.services.MailService;
+import edu.edspace.services.UserService;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -53,7 +55,9 @@ public class MdpController implements Initializable {
 
     @FXML
     private void mdpOublier(ActionEvent event) {
-       FXMLLoader blog_parent = new FXMLLoader(getClass().getResource("CodeTest.fxml"));
+        UserService u = new UserService();
+       if(u.existence(email.getText())==0){
+           FXMLLoader blog_parent = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/CodeTest.fxml"));
         try {
            
             Parent root1 = blog_parent.load();
@@ -69,6 +73,14 @@ public class MdpController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(MdpController.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }
+       else{
+           Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Email n'existe pas");
+        alert.setContentText("Verifier votre adresse mail!");
+        alert.showAndWait();
+       }
+       
     }
     
 }

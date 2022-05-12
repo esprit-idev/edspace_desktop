@@ -26,6 +26,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -43,6 +44,8 @@ public class FrontNewsController implements Initializable {
     @FXML
     private TilePane tilePane;
     @FXML
+    private Button resetBtn;
+    @FXML
     private ComboBox<CategoryNews> category_cb;
     private List<CategoryNews> categories = new ArrayList<>();
     private List<News> newsList = new ArrayList<>();
@@ -51,7 +54,7 @@ public class FrontNewsController implements Initializable {
         NewsService newsService = new NewsService();
         newsList = newsService.AllNews();
         NewsCategoryService cnews = new NewsCategoryService();
-        categories = cnews.AllCatsNames();
+        categories = cnews.AllCats();
         //System.out.println(catList);
        // check if list is empty
         if(newsList == null && newsList.isEmpty()){
@@ -67,7 +70,7 @@ public class FrontNewsController implements Initializable {
                 public void changed(ObservableValue<? extends CategoryNews> cat, CategoryNews arg1,
                         CategoryNews arg2) {
                         newsList = newsService.filterByCat(category_cb.getValue().getId());
-                        System.out.println(newsList);
+                        //System.out.println(newsList);
                         System.out.println(category_cb.getValue().getId());
                         tilePane.getChildren().clear();
                         if(newsList.isEmpty()){
@@ -127,7 +130,16 @@ public class FrontNewsController implements Initializable {
         }
         return allcat;
     }
-
+    @FXML
+    private void reset(MouseEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/news/frontNews.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(FrontNewsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         initImages();

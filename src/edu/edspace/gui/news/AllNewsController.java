@@ -16,6 +16,7 @@ import edu.edspace.entities.CategoryNews;
 import edu.edspace.entities.News;
 import edu.edspace.services.NewsCategoryService;
 import edu.edspace.services.NewsService;
+import edu.edspace.services.UserService;
 import edu.edspace.utils.MyConnection;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -41,7 +42,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-
+import java.awt.*;
 
 public class AllNewsController implements Initializable{
     @FXML
@@ -125,7 +126,7 @@ public class AllNewsController implements Initializable{
             tilePaneId.getChildren().clear();
             initPane(newsList, catList);
         }else{
-            filteredList = newsService.SearchPbulications(searchWord);
+            filteredList = newsService.SearchPublications(searchWord);
             if(filteredList == null && filteredList.isEmpty()){
                 File file = new File("images/empty-folder.png");
                 Image notFound = new Image(file.toURI().toString());
@@ -180,6 +181,21 @@ public class AllNewsController implements Initializable{
                     Alert alert = new Alert(AlertType.WARNING,"",saveButtonType);
                     alert.setContentText("Vous voulez vraiment supprime cette article?");
                     newsService.deleteNews(nw.getId());
+                    /* notification */ 
+                    SystemTray tray = SystemTray.getSystemTray();
+                    //If the icon is a file
+                    java.awt.Image imagess = Toolkit.getDefaultToolkit().createImage("icon.png");
+                    TrayIcon trayIcon = new TrayIcon(imagess, "ADD");
+                    //Let the system resize the image if needed
+                    trayIcon.setImageAutoSize(true);
+                    //Set tooltip text for the tray icon
+                    trayIcon.setToolTip("System tray icon demo");
+                    try {
+                        tray.add(trayIcon);
+                    } catch (AWTException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    trayIcon.displayMessage("Suppression", "La publication " + nw.getTitle() + "  a ete bien supprimer", TrayIcon.MessageType.INFO);
                     getNewsView(event);
                 });
                 modifButton.setOnMouseClicked((MouseEvent event)->{
@@ -306,8 +322,7 @@ public class AllNewsController implements Initializable{
     @FXML
     private void displayClubs(ActionEvent event) {
         try {
-            //instance mtaa el crud
-            //redirection
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
             Parent root = loader.load();
             club_iv.getScene().setRoot(root);
@@ -330,25 +345,23 @@ public class AllNewsController implements Initializable{
     }
     @FXML
     private void getUsers(ActionEvent event) {
-        
         try {
-            //instance mtaa el crud
-            //redirection
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
             Parent root = loader.load();
             club_iv.getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
-        
+        } 
     }
     @FXML
     private void logout(MouseEvent event){
+        UserService US = new UserService();
+        US.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
-			rootPane.getChildren().setAll(pane);
-		} catch (IOException ex) {
-			
+        Parent root = loader.load();
+        rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {		
 		}
     }        
     @FXML

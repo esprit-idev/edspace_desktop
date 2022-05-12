@@ -13,6 +13,7 @@ import edu.edspace.services.EmploiCategoryService;
 import edu.edspace.services.EmploiService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -43,6 +44,8 @@ public class FrontEmploi implements Initializable {
     @FXML
     private TilePane tilePane;
     @FXML
+    private Button resetBtn;
+    @FXML
     private ComboBox<CategoryEmploi> category_cb;
     private List<CategoryEmploi> categories = new ArrayList<>();
     private List<Emploi> empsList = new ArrayList<>();
@@ -61,24 +64,27 @@ public class FrontEmploi implements Initializable {
             hBox.getChildren().addAll(label);
             tilePane.getChildren().addAll(hBox);
         }else{
-            category_cb.setItems(FXCollections.observableArrayList(fillComboBox()));
-            // category_cb.valueProperty().addListener(new ChangeListener<>() {
-            //     @Override
-            //     public void changed(ObservableValue<? extends CategoryNews> cat, CategoryNews arg1,
-            //             CategoryNews arg2) {
-            //             newsList = newsService.filterByCat(category_cb.getValue().getId());
-            //             System.out.println(newsList);
-            //             System.out.println(category_cb.getValue().getId());
-            //             tilePane.getChildren().clear();
-            //             if(newsList.isEmpty()){
-            //                 Label label = new Label();
-            //                 label.setText("Pas des nouvelles :( ");
-            //             }else
-            //             initPane(newsList, categories);
-            //     }
-            // });
+
             initPane(empsList,categories);
         }
+        category_cb.setItems(FXCollections.observableArrayList(fillComboBox()));
+        category_cb.setPromptText("Choisissez une categorie");
+        category_cb.valueProperty().addListener(new ChangeListener<>() {
+            @Override
+            public void changed(ObservableValue<? extends CategoryEmploi> cat, CategoryEmploi arg1,
+                    CategoryEmploi newVal) {
+                    empsList = eService.filterByCat(newVal.getId());
+                    System.out.println(empsList);
+                    //System.out.printlnempssList);
+                    System.out.println(category_cb.getValue().getId());
+                    tilePane.getChildren().clear();
+                    if(empsList.isEmpty()){
+                        Label label = new Label();
+                        label.setText("Pas des nouvelles :( ");
+                    }else
+                    initPane(empsList, categories);
+            }
+        });
     }
     private void initPane(List<Emploi> emps,List<CategoryEmploi>cc) {
         Iterator<Emploi> it = emps.iterator();
@@ -115,7 +121,18 @@ public class FrontEmploi implements Initializable {
                 Logger.getLogger(FrontEmploi.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }    
+    }
+    @FXML
+    private void reset(MouseEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/emploi/frontEmploi.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(FrontEmploi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
+
     private ObservableList<CategoryEmploi> fillComboBox(){
         ObservableList<CategoryEmploi> allcat = FXCollections.observableArrayList();
         EmploiCategoryService ns = new EmploiCategoryService();

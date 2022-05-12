@@ -20,6 +20,7 @@ import edu.edspace.entities.CategoryNews;
 import edu.edspace.entities.News;
 import edu.edspace.services.NewsCategoryService;
 import edu.edspace.services.NewsService;
+import edu.edspace.services.UserService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
 import javafx.beans.value.ChangeListener;
@@ -42,7 +43,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-
+import java.awt.*;
 public class updateNewsController implements Initializable {
     @FXML
     private ImageView logo_iv;
@@ -193,7 +194,22 @@ public class updateNewsController implements Initializable {
                     News p = new News(title, author, description,categoryName.toString(),datePub,image);
                     NewsService newsService = new NewsService();
                     newsService.updateNews(p,id);
-                    System.out.println(id);
+                    /* notification */ 
+                    SystemTray tray = SystemTray.getSystemTray();
+                    //If the icon is a file
+                    java.awt.Image imagess = Toolkit.getDefaultToolkit().createImage("icon.png");
+                    TrayIcon trayIcon = new TrayIcon(imagess, "ADD");
+                    //Let the system resize the image if needed
+                    trayIcon.setImageAutoSize(true);
+                    //Set tooltip text for the tray icon
+                    trayIcon.setToolTip("System tray icon demo");
+                    try {
+                        tray.add(trayIcon);
+                    } catch (AWTException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    trayIcon.displayMessage("Modification", "La publication " + p.getTitle() + "  a ete modifier", TrayIcon.MessageType.INFO);
+                   // System.out.println(id);
                     getNewsView(event);  
                 }    
             }else{
@@ -333,12 +349,9 @@ private void displayClubs(ActionEvent event) {
 }
 
 @FXML
-private void getUsers(ActionEvent event) {
-    
+private void getUsers(ActionEvent event) { 
     try {
-        //instance mtaa el crud
-        //redirection
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
         Parent root = loader.load();
         club_iv.getScene().setRoot(root);
     } catch (IOException ex) {
@@ -346,6 +359,17 @@ private void getUsers(ActionEvent event) {
     }
     
 }
+@FXML
+private void logout(MouseEvent event){
+    UserService US = new UserService();
+    US.logout();
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+    try {
+    Parent root = loader.load();
+    rootPane.getScene().setRoot(root); 
+    } catch (IOException ex) {		
+    }
+} 
 @FXML
     private void getCatNewsView(MouseEvent event) {
         try {
@@ -385,15 +409,6 @@ private void getUsers(ActionEvent event) {
 		}
     }
     @FXML
-    private void logout(MouseEvent event){
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
-			rootPane.getChildren().setAll(pane);
-		} catch (IOException ex) {
-			
-		}
-    }
-    @FXML
     private void getForum(MouseEvent event) {
         try {
             //instance mtaa el crud
@@ -416,4 +431,25 @@ private void getUsers(ActionEvent event) {
             Logger.getLogger(updateNewsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+@FXML
+private void getNiveaux(MouseEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+        Parent root = loader.load();
+        rootPane.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+}
+
+@FXML
+private void getClasses(MouseEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml"));
+        Parent root = loader.load();
+        rootPane.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+}   
+}
 }

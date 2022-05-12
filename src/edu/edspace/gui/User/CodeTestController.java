@@ -11,6 +11,7 @@ import edu.edspace.entities.User;
 import edu.edspace.services.MailService;
 import edu.edspace.services.UserService;
 import edu.edspace.utils.MyConnection;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -26,6 +27,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -38,13 +41,11 @@ public class CodeTestController implements Initializable {
     @FXML
     private TextField code1;
     @FXML
-    private TextField code2;
-    @FXML
-    private TextField code3;
-    @FXML
     private Button send;
     @FXML
     private AnchorPane rootPane;
+    @FXML
+    private ImageView log;
 
     /**
      * Initializes the controller class.
@@ -58,6 +59,9 @@ public class CodeTestController implements Initializable {
         // String c=code1.getText()+code2.getText()+code3.getText();
       
         // int n = Integer.parseInt(c);
+        File fileLogo = new File("images/logo2.png");
+        Image logoI = new Image(fileLogo.toURI().toString());
+        log.setImage(logoI);
           int min = 100;  
        int max = 900;  
 //Generate random int value from 200 to 400     
@@ -72,7 +76,7 @@ public class CodeTestController implements Initializable {
         send.setOnAction(e->{
             String c=code1.getText();
         if(c.equals(s)){
-             FXMLLoader blog_parent = new FXMLLoader(getClass().getResource("Reset.fxml"));
+             FXMLLoader blog_parent = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Reset.fxml"));
         try {
            
             Parent root1 = blog_parent.load();

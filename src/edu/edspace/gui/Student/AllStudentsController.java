@@ -10,6 +10,8 @@ import com.mysql.jdbc.Connection;
 import edu.edspace.entities.Session;
 import edu.edspace.entities.User;
 import edu.edspace.gui.HomeBackController;
+import edu.edspace.gui.news.AllNewsController;
+import edu.edspace.gui.news.allCategoryNewsController;
 import edu.edspace.services.ExcelFileService;
 import edu.edspace.services.PDFService;
 import edu.edspace.services.StudentService;
@@ -473,25 +475,7 @@ System.out.println("Password should contain at lest 3 special characters");
         alert.setResizable(true);
         alert.showAndWait();}
 
-    @FXML
-    private void handleClicks(ActionEvent event) {
-    }
-
-    @FXML
-    private void getNewsView(MouseEvent event) {
-    }
-
-    @FXML
-    private void getAllMatieresView(MouseEvent event) {
-    }
-
-    @FXML
-    private void getEmploiView(MouseEvent event) {
-    }
-
-    @FXML
-    private void getAllDocsView(MouseEvent event) {
-    }
+    
     
      public void initImages() {
         File fileLogo = new File("images/logo1.png");
@@ -547,7 +531,7 @@ System.out.println("Password should contain at lest 3 special characters");
     @FXML
     private void getUsers(ActionEvent event) {
          try {
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {
@@ -700,7 +684,7 @@ tableStudent.setItems(sortedData);
      
          UserService US = new UserService();
          US.logout();
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Login.fxml"));
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
          try {
          Parent root = loader.load();
          rootPane.getScene().setRoot(root);
@@ -709,6 +693,133 @@ tableStudent.setItems(sortedData);
      }
     }
 
+    @FXML
+    private void getDashboardView(ActionEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(allCategoryNewsController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+    }
+
+    private void getNewsView(ActionEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(AllNewsController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+    }
+
+    @FXML
+    private void getClasseView(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml")); 
+            Parent root = loader.load(); 
+            rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {
+			ex.printStackTrace(); 
+		}
+    }
+
+    @FXML
+    private void displayClubs(ActionEvent event) {
+         try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void getForum(ActionEvent event) {
+         try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+            Parent root = loader.load();
+            forum_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+@FXML
+    private void handleClicks(ActionEvent event) {
+    }
+
+    @FXML
+    private void getNewsView(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(AllNewsController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+    }
+
+    private void getAllMatieresView(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AllNewsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void getEmploiView(MouseEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(AllNewsController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+    }
+
+    @FXML
+    private void getAllDocsView(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocsList.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(allCategoryNewsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void getNiveauView(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml")); 
+            Parent root = loader.load(); 
+            rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {
+			ex.printStackTrace(); 
+		}
+    }
+
+    @FXML
+    private void getMatiereView(ActionEvent event) {
+        try { 
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml")); 
+
+            Parent root = loader.load(); 
+
+            rootPane.getScene().setRoot(root); 
+
+        } catch (IOException ex) { 
+
+            ex.printStackTrace(); 
+
+        } 
+    }
     
      
 
