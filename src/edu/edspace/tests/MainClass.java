@@ -64,8 +64,8 @@ public class MainClass extends Application {
         try {
             if(Session.getUsername()==null){
 
-            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
-           Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+           Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+           //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
            //Parent parent = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/FrontHome.fxml")); //new front
 
             Scene scene = new Scene(parent);

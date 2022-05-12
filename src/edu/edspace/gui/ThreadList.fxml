@@ -20,7 +20,7 @@
             <Font name="Berlin Sans FB" size="36.0" />
          </font>
       </Text>
-      <AnchorPane fx:id="rootPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="1060.4" style="-fx-background-color: #02030A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="rootPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="1068.0" style="-fx-background-color: #02030A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -174,7 +174,7 @@
             </VBox>
             <VBox layoutX="256.0" prefHeight="576.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Pane fx:id="pnlOverview" prefHeight="694.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;">
+                  <Pane fx:id="pnlOverview" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="812.0" style="-fx-background-color: #F4F6F9;">
                      <children>
                         <Label layoutX="57.0" layoutY="25.0" text="Forum" textFill="#54b48c">
                            <font>

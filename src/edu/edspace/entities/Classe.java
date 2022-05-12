@@ -6,13 +6,15 @@
 package edu.edspace.entities;
 
 import edu.edspace.services.ClasseService;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author aa
  */
-public class Classe {
+public class Classe implements Serializable{
+    private static final long serialVersionUID = 1L;
     private int id;
     private Niveau niveau;
     private String classe;

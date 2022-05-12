@@ -4,7 +4,10 @@
  */
 package edu.edspace.entities;
 
-public class Niveau {
+import java.io.Serializable;
+
+public class Niveau implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String id;
       private int nbClasse;
 

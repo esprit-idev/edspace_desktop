@@ -298,5 +298,31 @@ List<User> list=new ArrayList<>();
 		}
 	
                 
+                
+                public User getStudent(int id){
+        User stu = new User();
+        try {
+            String req = "select * from user where id ="+id;
+            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+            
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                
+                stu.setId(rs.getInt("id")); //set id from req result
+                stu.setUsername(rs.getString("username")); 
+                stu.setPrenom(rs.getString("prenom")); 
+                stu.setEmail(rs.getString("email")); 
+                stu.setClasse_id(rs.getInt("classe_id")); 
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            
+        }
+        return stu ;
+    }
+                
+                
 
 }

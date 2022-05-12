@@ -92,9 +92,9 @@ public class MessageService {
             	Date d1 = new Date(rs.getDate("post_date").getTime());
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
-            	m.setUser(us.getuser(rs.getInt("classe_id")));
+            	m.setUser(us.getuser(rs.getInt("user_id")));
             	System.out.println(m);
-            	list.add(m);
+            	list.add(switcher(m));
             }
 		}catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -123,9 +123,9 @@ public class MessageService {
             	Date d1 = new Date(rs.getDate("post_date").getTime());
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
-            	m.setUser(us.getuser(rs.getInt("classe_id")));
-            	System.out.println(m);
-            	list.add(m);
+            	m.setUser(us.getuser(rs.getInt("user_id")));
+            	System.out.println(switcher(m));
+            	list.add(switcher(m));
             }
 		}catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -215,7 +215,7 @@ public class MessageService {
 		try {
 			
 			pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-			 pst.setInt(1,41);
+			 pst.setInt(1,124);
 			 
 			 
 				String str;
