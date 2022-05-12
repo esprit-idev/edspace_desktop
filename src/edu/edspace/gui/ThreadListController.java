@@ -303,10 +303,6 @@ public class ThreadListController implements Initializable {
        
     }           
     @FXML
-    private void getAllMatieresView(MouseEvent event) {
-        
-    }
-    @FXML
     private void displayClubs(ActionEvent event) {
         try {
             //instance mtaa el crud
