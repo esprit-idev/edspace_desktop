@@ -1,19 +1,29 @@
 package edu.edspace.gui.news;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import edu.edspace.entities.CategoryNews;
+import edu.edspace.entities.Message;
 import edu.edspace.entities.News;
+import edu.edspace.gui.Message.JsonReader;
+import edu.edspace.services.ClasseService;
+import edu.edspace.services.MessageService;
 import edu.edspace.services.NewsCategoryService;
 import edu.edspace.services.NewsService;
 import edu.edspace.services.UserService;
@@ -42,9 +52,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import java.awt.*;
 
 public class AllNewsController implements Initializable{
+
     @FXML
     private ImageView logo_iv;
     @FXML
@@ -409,7 +425,6 @@ public class AllNewsController implements Initializable{
 
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
-        
         logo_iv.setImage(logoI);
         home_iv.setImage(homeI);
         tabaff_iv.setImage(tabI);
@@ -423,5 +438,4 @@ public class AllNewsController implements Initializable{
         centre_iv.setImage(docsI);
         signOut_iv.setImage(outI);
     }
-    
 }
