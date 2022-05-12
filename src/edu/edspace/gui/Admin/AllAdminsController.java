@@ -631,7 +631,6 @@ private void getForum(MouseEvent event) {
 
 //CENTRE DE PARTAGE 
 
-    @FXML 
 private void getAllDocsView(MouseEvent event) { 
 
         try { 
