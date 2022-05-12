@@ -57,19 +57,21 @@
                               </Label>
                               <HBox alignment="CENTER" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #1591a5;" styleClass="staticBtn" stylesheets="@../css/styles.css">
                                  <children>
-                                    <Button fx:id="viewNewsBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#getNewsView" style="-fx-background-color: #1591a5;" styleClass="staticBtn" stylesheets="@../css/styles.css" text="Voir plus" textFill="WHITE">
+                                    <Button fx:id="viewNewsBtn" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#getNewsView" style="-fx-background-color: #1591a5;" styleClass="staticBtn" stylesheets="@../css/styles.css" text="Voir plus" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
+                                       <graphic>
+                                          <ImageView fx:id="newsarrowImg" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../images/arrow.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </Button>
-                                    <ImageView fx:id="newsarrowImg" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../images/arrow.png" />
-                                       </image>
-                                    </ImageView>
                                  </children>
                               </HBox>
                            </children>
@@ -91,16 +93,21 @@
                               </Label>
                               <HBox alignment="CENTER" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #e5ad06;">
                                  <children>
-                                    <Button fx:id="viewEmploiBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#getEmploiView" style="-fx-background-color: #e5ad06;" text="Voir plus" textFill="WHITE">
+                                    <Button fx:id="viewEmploiBtn" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#getEmploiView" style="-fx-background-color: #e5ad06;" text="Voir plus" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <graphic>
+                                          <ImageView fx:id="emploiarrowImg" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../images/arrow.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </Button>
-                                    <ImageView fx:id="emploiarrowImg" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../images/arrow.png" />
-                                       </image>
-                                    </ImageView>
                                  </children>
                               </HBox>
                            </children>
@@ -122,16 +129,21 @@
                               </Label>
                               <HBox alignment="CENTER" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #24963e;">
                                  <children>
-                                    <Button fx:id="viewEtudiantBtn" alignment="CENTER" mnemonicParsing="false" onAction="#getUsers" style="-fx-background-color: #24963e;" text="Voir plus" textFill="WHITE">
+                                    <Button fx:id="viewEtudiantBtn" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#getUsers" style="-fx-background-color: #24963e;" text="Voir plus" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <graphic>
+                                          <ImageView fx:id="studentarrowImg" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../images/arrow.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </Button>
-                                    <ImageView fx:id="studentarrowImg" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../images/arrow.png" />
-                                       </image>
-                                    </ImageView>
                                  </children>
                               </HBox>
                            </children>
@@ -153,19 +165,21 @@
                               </Label>
                               <HBox alignment="CENTER" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #c6303e;">
                                  <children>
-                                    <Button fx:id="viewClubsBtn" alignment="CENTER" mnemonicParsing="false" onAction="#displayClubs" style="-fx-background-color: #c6303e;" text="Voir plus" textFill="WHITE">
+                                    <Button fx:id="viewClubsBtn" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#displayClubs" style="-fx-background-color: #c6303e;" text="Voir plus" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
+                                       <graphic>
+                                          <ImageView fx:id="clubarrowImg" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../images/arrow.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </Button>
-                                    <ImageView fx:id="clubarrowImg" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../images/arrow.png" />
-                                       </image>
-                                    </ImageView>
                                  </children>
                               </HBox>
                            </children>

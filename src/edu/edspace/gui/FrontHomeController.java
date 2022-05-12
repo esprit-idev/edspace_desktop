@@ -4,6 +4,7 @@
  */
 package edu.edspace.gui;
 
+import edu.edspace.services.UserService;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
 import java.io.IOException;
@@ -189,13 +190,15 @@ public class FrontHomeController implements Initializable {
     }
 
     @FXML
-    private void logout(MouseEvent event) {
+    private void logout(MouseEvent event){
+        UserService US = new UserService();
+        US.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
-			rootPane.getChildren().setAll(pane);
-		} catch (IOException ex) {
-			
-		}
+        Parent root = loader.load();
+        rootPane.getScene().setRoot(root); 
+        } catch (IOException ex) {		
+        }
     }
 
     @FXML

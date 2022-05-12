@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.edspace.gui;
+package edu.edspace.gui.Student;
 
 import edu.edspace.entities.User;
 import edu.edspace.services.StudentService;

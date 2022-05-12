@@ -8,6 +8,7 @@ import edu.edspace.entities.ClubPub;
 import edu.edspace.gui.news.allCategoryNewsController;
 import edu.edspace.services.ClubPubService;
 import edu.edspace.services.ClubService;
+import edu.edspace.services.UserService;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
 import java.io.IOException;
@@ -387,13 +388,56 @@ public class ClubRubriqueAdminController implements Initializable {
 
     @FXML
     private void getNiveau(ActionEvent event) {
+                  try {
+
+FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+
+Parent root = loader.load();
+
+club_iv.getScene().setRoot(root);
+
+} catch (IOException ex) {
+
+ex.printStackTrace();
+
+}
     }
 
     @FXML
     private void getClasses(ActionEvent event) {
+        try {
+
+FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+
+Parent root = loader.load();
+
+club_iv.getScene().setRoot(root);
+
+} catch (IOException ex) {
+
+ex.printStackTrace();
+
+}
     }
 
     @FXML
     private void logout(ActionEvent event) {
+        UserService US = new UserService();
+
+US.logout();
+
+FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+
+try {
+
+Parent root = loader.load();
+
+club_iv.getScene().setRoot(root);
+
+} catch (IOException ex) {
+
+ex.printStackTrace();
+
+}
     }
 }

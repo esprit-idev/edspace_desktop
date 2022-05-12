@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.edspace.gui;
+package edu.edspace.gui.User;
 
 import edu.edspace.entities.Session;
+import edu.edspace.gui.Student.AllStudentsController;
 import edu.edspace.services.UserService;
 import java.io.File;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import edu.edspace.utils.MyConnection;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -190,5 +192,8 @@ public class LoginController implements Initializable {
             Logger.getLogger(AllStudentsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+  
+    
 
 }

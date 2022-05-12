@@ -182,7 +182,7 @@ public class HomeBackController implements Initializable {
         statics sc = new statics();
         pubNum.setText(sc.numberOfPublications());
         empNum.setText(sc.numberOfOffreEmploi());
-        studentNum.setText(sc.numberOfStudents("[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"));
+        studentNum.setText(sc.numberOfStudents("[\"ROLE_STUDENT\"]"));
         clubNum.setText(sc.numberOfClubs());
         niveauNum.setText(sc.numberOfNiveau());
         classeNum.setText(sc.numberOfClasses());
@@ -254,6 +254,7 @@ public class HomeBackController implements Initializable {
         }
         return allcat;
     }
+    //XYChart.series method in order to fill the barchart with title as Xaxis and number of likes as yAxis
     private XYChart.Series<String,Integer> barChartNews() {
         statics sc = new statics();
         NewsService newsService = new NewsService();
@@ -436,7 +437,7 @@ public class HomeBackController implements Initializable {
         try {
             //instance mtaa el crud
             //redirection
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {

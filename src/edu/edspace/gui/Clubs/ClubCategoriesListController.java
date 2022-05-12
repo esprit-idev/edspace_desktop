@@ -7,6 +7,7 @@ package edu.edspace.gui.Clubs;
 import edu.edspace.entities.ClubCategory;
 import edu.edspace.services.ClubCategService;
 import edu.edspace.services.ClubPubService;
+import edu.edspace.services.UserService;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -490,13 +491,56 @@ public class ClubCategoriesListController implements Initializable {
 
     @FXML
     private void getNiveau(ActionEvent event) {
+                  try {
+
+FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+
+Parent root = loader.load();
+
+club_iv.getScene().setRoot(root);
+
+} catch (IOException ex) {
+
+ex.printStackTrace();
+
+}
     }
 
     @FXML
     private void getClasses(ActionEvent event) {
+          try {
+
+FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+
+Parent root = loader.load();
+
+club_iv.getScene().setRoot(root);
+
+} catch (IOException ex) {
+
+ex.printStackTrace();
+
+}
     }
 
     @FXML
     private void logout(ActionEvent event) {
+        UserService US = new UserService();
+
+US.logout();
+
+FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+
+try {
+
+Parent root = loader.load();
+
+club_iv.getScene().setRoot(root);
+
+} catch (IOException ex) {
+
+ex.printStackTrace();
+
+}
     }
 }
