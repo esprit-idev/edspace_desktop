@@ -43,6 +43,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -190,7 +191,7 @@ public class ThreadController implements Initializable {
                        tfReponse.setBorder(Border.stroke(Color.RED));
                        tfReponse.setPromptText("Replace the answer");
             }else{
-              reponseService.addReponse(new Reponse(tfReponse.getText(),this.id,1));
+              reponseService.addReponse(new Reponse(tfReponse.getText(),this.id,Session.getId()));
               FXMLLoader loader = new FXMLLoader(getClass().getResource("Thread.fxml"));
                try {
                    Parent root1 = loader.load();
@@ -212,10 +213,14 @@ public class ThreadController implements Initializable {
            c.setCenterX(100);
            c.setCenterY(100);
            c.setRadius(15);
-           c.setStyle("-fx-stroke: red; -fx-fill: green;");
+           c.setStyle("-fx-background-image : url('images/account.png')");
            Reponse r = new Reponse();
            r = reps.get(i);
-           u.setText(String.valueOf("user "+r.getUser()));
+           UserService uss = new UserService();
+           User use = uss.find(r.getUser());
+           u.setText(String.valueOf(use.getUsername()));
+           HBox h = new HBox();
+           h.getChildren().addAll(c,u);
            t.setText(r.getReply());
            t.setEditable(false);
            t.setStyle("-fx-text-fill: black; -fx-background-color: #D2D2D2;-fx-border-radius: 10; -fx-background-radius: 10;");
@@ -224,7 +229,7 @@ public class ThreadController implements Initializable {
            td.setText(r.getReplyDate());
            td.setTextAlignment(TextAlignment.RIGHT);
            td.setStyle("-fx-padding: 50px;");
-           vbox.getChildren().addAll(u,c,t,td);
+           vbox.getChildren().addAll(h,t,td);
            if(this.admin == 1){
                Button b = new Button("delete");
                b.setOnAction(e->{
@@ -373,6 +378,9 @@ public class ThreadController implements Initializable {
         
         File fileg = new File("images/google.png");
         Image gl = new Image(fileg.toURI().toString());
+        
+        File fUser = new File("images/account.png");
+        Image fu = new Image(fUser.toURI().toString());
         
         logo_iv.setImage(logoI);
         pdf.setImage(pdfl);
