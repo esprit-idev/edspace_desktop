@@ -541,7 +541,6 @@ ex.printStackTrace();
 
 //MATIERES 
 
-    @FXML 
   private void getAllMatieresView(MouseEvent event) { 
 
         try { 

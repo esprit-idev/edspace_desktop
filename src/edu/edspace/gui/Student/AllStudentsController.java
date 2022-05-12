@@ -762,7 +762,6 @@ tableStudent.setItems(sortedData);
 		}
     }
 
-    @FXML
     private void getAllMatieresView(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml"));
@@ -803,6 +802,23 @@ tableStudent.setItems(sortedData);
 		} catch (IOException ex) {
 			ex.printStackTrace(); 
 		}
+    }
+
+    @FXML
+    private void getMatiereView(ActionEvent event) {
+        try { 
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml")); 
+
+            Parent root = loader.load(); 
+
+            rootPane.getScene().setRoot(root); 
+
+        } catch (IOException ex) { 
+
+            ex.printStackTrace(); 
+
+        } 
     }
     
      

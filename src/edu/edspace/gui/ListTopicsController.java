@@ -356,7 +356,6 @@ public class ListTopicsController implements Initializable {
 		}
     }
 
-    @FXML
     private void getAllMatieresView(MouseEvent event) {
          try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml"));
