@@ -182,7 +182,7 @@ public class HomeBackController implements Initializable {
         statics sc = new statics();
         pubNum.setText(sc.numberOfPublications());
         empNum.setText(sc.numberOfOffreEmploi());
-        studentNum.setText(sc.numberOfStudents("[\"ROLE_STUDENT\",\"ROLE_RESPONSABLEC\"]"));
+        studentNum.setText(sc.numberOfStudents("[\"ROLE_STUDENT\"]"));
         clubNum.setText(sc.numberOfClubs());
         niveauNum.setText(sc.numberOfNiveau());
         classeNum.setText(sc.numberOfClasses());
@@ -254,6 +254,7 @@ public class HomeBackController implements Initializable {
         }
         return allcat;
     }
+    //XYChart.series method in order to fill the barchart with title as Xaxis and number of likes as yAxis
     private XYChart.Series<String,Integer> barChartNews() {
         statics sc = new statics();
         NewsService newsService = new NewsService();

@@ -12,8 +12,10 @@ import java.util.logging.Logger;
 
 import edu.edspace.entities.CategoryEmploi;
 import edu.edspace.services.EmploiCategoryService;
+import edu.edspace.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -215,8 +217,6 @@ public class AllCategoryEmploiController implements Initializable{
     @FXML
     private void getForum(MouseEvent event) {
         try {
-            //instance mtaa el crud
-            //redirection
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
             Parent root = loader.load();
             club_iv.getScene().setRoot(root);
@@ -254,7 +254,16 @@ public class AllCategoryEmploiController implements Initializable{
 			Logger.getLogger(AllCategoryEmploiController.class.getName()).log(Level.SEVERE, null, ex);
 		}
     }
-    
+    @FXML
+    private void displayClubs(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }    
     @FXML
     private void getAllMatieresView(MouseEvent event) {
         try {
@@ -265,6 +274,49 @@ public class AllCategoryEmploiController implements Initializable{
             Logger.getLogger(AllCategoryEmploiController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @FXML
+    private void getUsers(ActionEvent event) { 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    @FXML
+    private void logout(MouseEvent event){
+        UserService US = new UserService();
+        US.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+        try {
+        Parent root = loader.load();
+        rootPane.getScene().setRoot(root); 
+        } catch (IOException ex) {		
+        }
+    }
+    @FXML
+    private void getNiveaux(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void getClasses(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+    }   
+    }         
  //images init
  public void initImages() {
     File fileLogo = new File("images/logo1.png");

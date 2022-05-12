@@ -20,6 +20,7 @@ import edu.edspace.entities.Emploi;
 import edu.edspace.gui.news.CardController;
 import edu.edspace.services.EmploiCategoryService;
 import edu.edspace.services.EmploiService;
+import edu.edspace.services.UserService;
 import edu.edspace.utils.MyConnection;
 import edu.edspace.utils.Statics;
 import javafx.beans.value.ChangeListener;
@@ -44,7 +45,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
-
+import java.awt.*;
 public class AddEmploiController implements Initializable {
     @FXML
     private TextField titleField;
@@ -178,6 +179,22 @@ public class AddEmploiController implements Initializable {
                 Emploi p = new Emploi(title, description,categoryName.toString(),datePub,image);
                 EmploiService newsService = new EmploiService();
                 newsService.addEmploi(p);
+
+                 /* notification */ 
+                 SystemTray tray = SystemTray.getSystemTray();
+                 //If the icon is a file
+                 java.awt.Image imagess = Toolkit.getDefaultToolkit().createImage("icon.png");
+                 TrayIcon trayIcon = new TrayIcon(imagess, "ADD");
+                 //Let the system resize the image if needed
+                 trayIcon.setImageAutoSize(true);
+                 //Set tooltip text for the tray icon
+                 trayIcon.setToolTip("System tray icon demo");
+                 try {
+                     tray.add(trayIcon);
+                 } catch (AWTException e) {
+                     System.out.println(e.getMessage());
+                 }
+                 trayIcon.displayMessage("Ajout", "L'offre " + p.getTitle() + "  a ete bien ajouter", TrayIcon.MessageType.INFO);
                 getEmploiView(event);
                     
             }
@@ -288,21 +305,9 @@ private void getDashboardView(MouseEvent event){
     }
 }
 @FXML
-private void logout(MouseEvent event){
+private void getUsers(ActionEvent event) { 
     try {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/Login.fxml"));
-        rootPane.getChildren().setAll(pane);
-    } catch (IOException ex) {
-        
-    }
-}
-@FXML
-private void getUsers(ActionEvent event) {
-    
-    try {
-        //instance mtaa el crud
-        //redirection
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/AllAdmins.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
         Parent root = loader.load();
         club_iv.getScene().setRoot(root);
     } catch (IOException ex) {
@@ -310,6 +315,17 @@ private void getUsers(ActionEvent event) {
     }
     
 }
+@FXML
+private void logout(MouseEvent event){
+    UserService US = new UserService();
+    US.logout();
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+    try {
+    Parent root = loader.load();
+    rootPane.getScene().setRoot(root); 
+    } catch (IOException ex) {		
+    }
+}  
 @FXML
 private void getAllMatieresView(MouseEvent event) {
     try {
@@ -331,6 +347,27 @@ private void displayClubs(ActionEvent event) {
     } catch (IOException ex) {
         ex.printStackTrace();
     }
+}
+@FXML
+private void getNiveaux(MouseEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml"));
+        Parent root = loader.load();
+        rootPane.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+}
+
+@FXML
+private void getClasses(MouseEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml"));
+        Parent root = loader.load();
+        rootPane.getScene().setRoot(root);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+}   
 }
 @FXML
 private void handleClicks(ActionEvent event) {
