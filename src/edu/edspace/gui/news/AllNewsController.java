@@ -322,8 +322,7 @@ public class AllNewsController implements Initializable{
     @FXML
     private void displayClubs(ActionEvent event) {
         try {
-            //instance mtaa el crud
-            //redirection
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
             Parent root = loader.load();
             club_iv.getScene().setRoot(root);
@@ -346,17 +345,13 @@ public class AllNewsController implements Initializable{
     }
     @FXML
     private void getUsers(ActionEvent event) {
-        
         try {
-            //instance mtaa el crud
-            //redirection
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
             Parent root = loader.load();
             club_iv.getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
-        
+        } 
     }
     @FXML
     private void logout(MouseEvent event){
