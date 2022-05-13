@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package edu.edspace.gui.document;
+package edu.edspace.gui.Clubs;
 
 /**
  *
@@ -31,11 +31,11 @@ public class Client implements Runnable{
     public int port;
     public String serverAddr;
     public Socket socket;
-    public ListDocFrontController ui;
+    public ClubListStudentController ui;
     public ObjectInputStream In;
     public ObjectOutputStream Out;
 
-    public Client(ListDocFrontController ui) throws IOException {
+    public Client(ClubListStudentController ui) throws IOException {
         
         this.ui = ui;
         this.serverAddr = ui.serverAddr; this.port = ui.port;
