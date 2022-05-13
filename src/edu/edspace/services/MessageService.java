@@ -212,8 +212,6 @@ public class MessageService {
 			
 			pst = MyConnection.getInstance().getCnx().prepareStatement(req);
 			 pst.setInt(1,124);
-			 
-			 
 				String str;
 	           ResultSet rs = pst.executeQuery();
 	           while (rs.next()) {
@@ -250,7 +248,6 @@ public class MessageService {
 			String test=s;
 			for(String ss:mot) {
 			if(detector(s,ss)) {
-				
 				test="****";
 			}
 			}
