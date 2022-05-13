@@ -2,12 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package edu.edspace.gui.Message;
+package edu.edspace.gui;
 
 /**
  *
  * @author aa
  */
+import edu.edspace.gui.Message.*;
 import edu.edspace.entities.Message;
 import edu.edspace.gui.Classe.AllClassesController;
 import java.io.*;
@@ -25,22 +26,22 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javax.swing.table.DefaultTableModel;
-public class Client implements Runnable{
+public class ClientThread implements Runnable{
     
     public int port;
     public String serverAddr;
     public Socket socket;
-    public AllMessagesController ui;
+    public FrontThreadController ui;
     public ObjectInputStream In;
     public ObjectOutputStream Out;
 
-    public Client(AllMessagesController ui) throws IOException {
+    public ClientThread(FrontThreadController ui) throws IOException {
         
         this.ui = ui;
         this.serverAddr = ui.serverAddr; this.port = ui.port;
-        System.out.println(InetAddress.getLocalHost());
+
         socket = new Socket(InetAddress.getLocalHost(),2018);
-        System.out.println("test test");
+
          Out = new ObjectOutputStream(socket.getOutputStream());
         Out.flush();
         In = new ObjectInputStream(socket.getInputStream());
@@ -55,7 +56,7 @@ public class Client implements Runnable{
          while(keepRunning){
              try {
                  Message msg = (Message) In.readObject();
-                 System.out.println("Incoming : "+msg.toString());
+
                   
                  
                 int test=msg.getUser().getId();
@@ -106,10 +107,10 @@ ui.vbox.getChildren().add(hBox);
              }
                     
               catch (IOException ex) {
-                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
                  System.out.println(ex);
              } catch (ClassNotFoundException ex) {
-                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
              }
              
          }
@@ -124,7 +125,7 @@ ui.vbox.getChildren().add(hBox);
         try {
             Out.writeObject(msg);
             Out.flush();
-            System.out.println("Outgoing : "+msg.toString());
+
             
         } 
         catch (IOException ex) {

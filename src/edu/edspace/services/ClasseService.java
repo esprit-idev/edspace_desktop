@@ -325,4 +325,78 @@ List<User> list=new ArrayList<>();
                 
                 
 
+        public Classe checkexist(String classe, String niveau){
+             Classe c=new Classe();
+		 c.setId(-1);
+		 
+		 try {
+			 NiveauService ns=new NiveauService();
+			 String req = "select * from classe where classe= ? and niveau_id= ?";
+			 PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+			 pst.setString(1,classe);
+                         pst.setString(2,niveau);
+		
+	            ResultSet rs = pst.executeQuery();
+	            while (rs.next()) {
+	            	c.setId(rs.getInt("id"));
+	            	c.setClasse(rs.getString("classe"));
+	            	c.setNiveau(ns.getOneById(rs.getString("niveau_id")));
+	            }
+			}catch (SQLException ex) {
+	            System.out.println(ex.getMessage());
+	        }
+		 
+		 return c;
+            
+        }        
+        
+        
+            public User emailStudent(String email,int classe){
+        User stu = new User();
+        stu.setId(-1);
+            
+            
+           
+          List<User> l=  listUserNoClasse(classe);
+          
+         
+          
+          for (User temp : l) {
+              if(temp.getEmail().equals(email)){
+			stu.setId(temp.getId()); //set id from req result
+                
+                stu.setUsername(temp.getUsername()); 
+                stu.setPrenom(temp.getPrenom()); 
+                stu.setEmail(temp.getEmail()); 
+                stu.setClasse_id(classe);
+                 modifstudent(stu);
+			}
+          }
+            
+        
+
+        return stu ;
+    }
+ 
+            
+            
+            public void modifstudent(User u) {
+			
+			
+			 String req = "update user set classe_id=? WHERE id=?";
+				try {
+					PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+					pst.setInt(1, u.getClasse_id());
+					pst.setInt(2, u.getId());
+                                        System.out.println("etudiant ajouté");
+			         pst.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			
+		
+				
+			
+			
+		}
 }
