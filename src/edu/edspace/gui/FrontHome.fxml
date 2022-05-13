@@ -2,10 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
@@ -126,5 +129,28 @@
             </ImageView>
          </children>
       </Pane>
+      <Pane fx:id="pane1" layoutX="805.0" layoutY="188.0" prefHeight="335.0" prefWidth="221.0" style="-fx-background-color: grey;">
+         <children>
+            <TextField fx:id="text" layoutX="2.0" layoutY="299.0" onAction="#sendMessage" prefHeight="35.0" prefWidth="163.0" promptText="Write a message ..." />
+            <Button fx:id="location" layoutX="-69.0" layoutY="298.0" mnemonicParsing="false" onAction="#location" prefHeight="37.0" prefWidth="68.0" style="-fx-background-color: #54b48c;" text="Location" textFill="WHITE" />
+            <Button fx:id="send" layoutX="171.0" layoutY="298.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="37.0" prefWidth="49.0" style="-fx-background-color: #54b48c;" text="Send" textFill="WHITE" />
+            <ScrollPane fx:id="sp_main" prefHeight="297.0" prefWidth="234.0" style="-fx-background-color: grey;">
+               <content>
+                  <AnchorPane fx:id="anchor1" minHeight="0.0" minWidth="0.0" prefHeight="872.0" prefWidth="219.0" style="-fx-background-color: grey;">
+                     <children>
+                        <VBox fx:id="vbox" prefHeight="298.0" prefWidth="221.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <Button fx:id="chatgroupe" layoutX="-1.0" layoutY="-38.0" mnemonicParsing="false" onAction="#closechat" prefHeight="37.0" prefWidth="234.0" style="-fx-background-color: #54b48c;" text="Chat de classe" textFill="WHITE" />
+            <Button fx:id="translate" layoutX="-69.0" layoutY="259.0" mnemonicParsing="false" onAction="#translatem" prefHeight="37.0" prefWidth="68.0" style="-fx-background-color: #54b48c;" text="Translate" textFill="WHITE" />
+         </children>
+      </Pane>
+      <ImageView fx:id="logo_chat" fitHeight="44.0" fitWidth="43.0" layoutX="1034.0" layoutY="483.0" onMouseClicked="#open" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/chat1.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

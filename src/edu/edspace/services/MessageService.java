@@ -59,7 +59,6 @@ public class MessageService {
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
             	m.setUser(us.getuser(rs.getInt("classe_id")));
-            	System.out.println(m);
             	
             	list.add(m);
             }
@@ -93,7 +92,6 @@ public class MessageService {
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
             	m.setUser(us.getuser(rs.getInt("user_id")));
-            	System.out.println(m);
             	list.add(switcher(m));
             }
 		}catch (SQLException ex) {
@@ -124,7 +122,6 @@ public class MessageService {
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
             	m.setUser(us.getuser(rs.getInt("user_id")));
-            	System.out.println(switcher(m));
             	list.add(switcher(m));
             }
 		}catch (SQLException ex) {
@@ -156,7 +153,6 @@ public class MessageService {
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
             	m.setUser(us.getuser(rs.getInt("classe_id")));
-            	System.out.println(m);
             	list.add(m);
             }
 		}catch (SQLException ex) {
@@ -259,7 +255,6 @@ public class MessageService {
 		}
 		
 		m.setContent(text);
-		System.out.println(text);
 		return m;
 	}
 	///////////////////////////////////////////
