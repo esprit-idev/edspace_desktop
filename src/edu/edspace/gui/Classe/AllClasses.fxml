@@ -19,14 +19,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Classe.AllClassesController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Classe.AllClassesController">
    <children>
-      <StackPane layoutX="258.0" prefHeight="576.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
+      <StackPane layoutX="258.0" prefHeight="649.0" prefWidth="829.0" style="-fx-background-color: #02030A;">
          <children>
             <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" />
             <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" />
             <Pane fx:id="pnlMenus" prefHeight="200.0" prefWidth="200.0" />
-            <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;">
+            <Pane fx:id="pnlOverview" prefHeight="649.0" prefWidth="822.0" style="-fx-background-color: #F4F6F9;">
                <children>
                   <TextField fx:id="search1" layoutX="590.0" layoutY="47.0" onKeyReleased="#search" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #F4F6F9; -fx-border-color: #1C2424; -fx-border-radius: 2em;" />
                   <Label layoutX="57.0" layoutY="25.0" text="Classes :" textFill="#54b48c">
@@ -78,7 +78,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <ScrollPane layoutX="51.0" layoutY="202.0" prefHeight="308.0" prefWidth="597.0" stylesheets="@../../css/style.css">
+                  <ScrollPane layoutX="116.0" layoutY="229.0" prefHeight="308.0" prefWidth="597.0" stylesheets="@../../css/style.css">
                      <content>
                         <TableView fx:id="table" prefHeight="303.0" prefWidth="594.0">
                           <columns>
@@ -95,10 +95,10 @@
                         <Image url="@../../../../images/icons8_Search_52px.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="ajouter" layoutX="88.0" layoutY="164.0" mnemonicParsing="false" onAction="#AddClasse" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #54b48c;" text="Ajoiuter une classe" textFill="WHITE" />
-                  <Button fx:id="update" layoutX="291.0" layoutY="164.0" mnemonicParsing="false" onAction="#UpdateClasse" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #2a73ff;" text="Mise a jour" textFill="WHITE" />
-                  <Button fx:id="supprimer" layoutX="496.0" layoutY="164.0" mnemonicParsing="false" onAction="#DeleteClasse" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #de0000;" text="Supprimer" textFill="WHITE" />
-                  <Button fx:id="btnaddET" layoutX="276.0" layoutY="526.0" mnemonicParsing="false" onAction="#showAddet" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: #2a73ff;" text="Ajouter un etudiant" textFill="WHITE">
+                  <Button fx:id="ajouter" layoutX="145.0" layoutY="179.0" mnemonicParsing="false" onAction="#AddClasse" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #54b48c;" text="Ajouter une classe" textFill="WHITE" />
+                  <Button fx:id="update" layoutX="348.0" layoutY="179.0" mnemonicParsing="false" onAction="#UpdateClasse" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #2a73ff;" text="Mise a jour" textFill="WHITE" />
+                  <Button fx:id="supprimer" layoutX="553.0" layoutY="179.0" mnemonicParsing="false" onAction="#DeleteClasse" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #de0000;" text="Supprimer" textFill="WHITE" />
+                  <Button fx:id="btnaddET" layoutX="346.0" layoutY="554.0" mnemonicParsing="false" onAction="#showAddet" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: #2a73ff;" text="Ajouter un etudiant" textFill="WHITE">
                      <font>
                         <Font name="SansSerif Regular" size="14.0" />
                      </font>

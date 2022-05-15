@@ -18,9 +18,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Niveau.AllNiveauController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.Niveau.AllNiveauController">
       <children>
-      <StackPane layoutX="258.0" prefHeight="576.0" prefWidth="793.0" style="-fx-background-color: #02030A;">
+      <StackPane layoutX="258.0" prefHeight="649.0" prefWidth="833.0" style="-fx-background-color: #02030A;">
          <children>
             <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" />
             <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" />
@@ -77,7 +77,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <ScrollPane layoutX="146.0" layoutY="207.0" prefHeight="321.0" prefWidth="457.0" stylesheets="@style.css">
+                  <ScrollPane layoutX="188.0" layoutY="212.0" prefHeight="321.0" prefWidth="457.0" stylesheets="@style.css">
                      <content>
                         <VBox fx:id="pnItems" prefHeight="318.0" prefWidth="455.0" spacing="5.0" style="-fx-background-color: #F4F6F9;">
                            <padding>
@@ -102,7 +102,7 @@
                   <Button fx:id="supp" layoutX="485.0" layoutY="165.0" mnemonicParsing="false" onAction="#suppN" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: crimson;" text="Supprimer" textFill="WHITE" />
                   <Button fx:id="btnupdate" layoutX="300.0" layoutY="165.0" mnemonicParsing="false" onAction="#updateN" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #1E90FF;" text="Update" textFill="WHITE" />
                   <Button fx:id="btnajout" layoutX="117.0" layoutY="165.0" mnemonicParsing="false" onAction="#ajouterN" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #54b48c;" text="Ajouter" textFill="WHITE" />
-                  <Button fx:id="btnauto" layoutX="300.0" layoutY="528.0" mnemonicParsing="false" onAction="#activeAuto" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #2a73ff;" text="AUTOFILL" textFill="WHITE" />
+                  <Button fx:id="btnauto" layoutX="342.0" layoutY="545.0" mnemonicParsing="false" onAction="#activeAuto" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #2a73ff;" text="AUTOFILL" textFill="WHITE" />
                </children>
             </Pane>
          </children>
@@ -137,7 +137,7 @@
             <Button fx:id="annuler" layoutX="203.0" layoutY="239.0" mnemonicParsing="false" onAction="#cancelAuto" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: crimson;" text="Annuler" textFill="WHITE" />
          </children>
       </Pane>
-      <Pane fx:id="autopane" layoutX="410.0" layoutY="95.0" prefHeight="423.0" prefWidth="458.0" style="-fx-background-color: #e0e0e0;">
+      <Pane fx:id="autopane" layoutX="410.0" layoutY="95.0" prefHeight="423.0" prefWidth="458.0" style="-fx-background-color: #e0e0e0;" visible="false">
          <children>
             <Label layoutX="40.0" layoutY="87.0" text="Niveau :">
                <font>
