@@ -76,7 +76,7 @@ public class MessageService {
 		List<Message> list=new ArrayList<>();
 		
 		try {
-			String req = "select * from Message where classe_id=?"; 
+			String req = "select * from message where classe_id=?"; 
 			PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, c);
             ClasseService ns=new ClasseService();
@@ -93,7 +93,7 @@ public class MessageService {
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
             	m.setUser(us.getuser(rs.getInt("user_id")));
             	list.add(switcher(m));
-            }
+            }      
 		}catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

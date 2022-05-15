@@ -430,7 +430,7 @@ public class AllNiveauController implements Initializable {
      Nniveau.setText("");
              }
             if(valider.getText().equals("Ajouter")){
-                if(ns.getOneById(Nniveau.getText()).equals("-1")){
+                if(ns.getOneById(Nniveau.getText()).getId().equals("-1")){
                 Niveau temp=new Niveau(Nniveau.getText());
                 ns.ajouterNiveau(temp);
                 }else{

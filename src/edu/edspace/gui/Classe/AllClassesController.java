@@ -36,6 +36,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -183,6 +184,9 @@ public class AllClassesController implements Initializable {
     private Label texterreur;
             @FXML
     private TextField search1;
+            
+    @FXML
+    private ComboBox<String> combo;
     
         private ObservableList<String> items = FXCollections.observableArrayList();
      private ObservableList<String> items2 = FXCollections.observableArrayList();
@@ -260,12 +264,14 @@ row();
     ObservableList<Classe> n = FXCollections.observableArrayList();
     
     public void refresh(){
+        combo.valueProperty().set(null);
+        email="";
+        valideret.setDisable(true);
         panel2.setVisible(false);
         paneAU.setVisible(false);
         update.setDisable(true);
+        combo.setItems(list);
         btnaddET.setDisable(true);
-                emailET.setText("");
-        texterreur.setTextFill(Color.BLACK);
 //        pane1.setVisible(false);
                 supprimer.setDisable(true);
         MyConnection.getInstance().getCnx();
@@ -570,8 +576,6 @@ return true;
         paneAU.setVisible(false);
         btnaddET.setDisable(false);
         panel2.setVisible(false);
-        emailET.setText("");
-        texterreur.setTextFill(Color.BLACK);
     }
   
          public void initImages() {
@@ -629,36 +633,22 @@ return true;
     private void validerEt(ActionEvent event) {
         
         
-                    if (isValid(emailET.getText())){
-                texterreur.setText("Email valid!");
-        texterreur.setTextFill(Color.GREEN);
         
-        User x=cs.emailStudent(emailET.getText(), cClasse);
-        if(x.getId()==-1){
-            texterreur.setText("Email doesn't exist or already in this classe!");
-        texterreur.setTextFill(Color.RED);
-            
-        }
-        else{
-            texterreur.setText("Email valid!");
-        texterreur.setTextFill(Color.GREEN);
+        User x=cs.emailStudent(email, cClasse);
+
         refresh();
-        }
         
-        
-        
-        
-                    }
-        else{
-              texterreur.setText("Invalid email !");
-        texterreur.setTextFill(Color.RED);
-                }
+
         }
             
     
 
     @FXML
     private void showAddet(ActionEvent event) {
+        combo.setCache(false);
+        list =FXCollections.observableArrayList(cs.userToEmail(cs.listUserNoClasse(cClasse)));
+        combo.setItems(list);
+       // System.out.println(cs.userToEmail(cs.listUserNoClasse(cClasse))[0]);
         panel2.setVisible(true);
     }
     
@@ -710,5 +700,17 @@ public static boolean isValid(String email)
             }
         }
         return false;
+    }
+    
+    
+    ObservableList<String> list =FXCollections.observableArrayList(cs.userToEmail(cs.listUserNoClasse(cClasse)));
+    String email;
+    
+    @FXML
+    void selectEmail(ActionEvent event) {
+        email=combo.getValue();
+          valideret.setDisable(false);
+      
+
     }
 }
