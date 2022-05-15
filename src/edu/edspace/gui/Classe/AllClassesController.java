@@ -187,6 +187,8 @@ public class AllClassesController implements Initializable {
             
     @FXML
     private ComboBox<String> combo;
+    @FXML
+    private ComboBox<String> combo2;
     
         private ObservableList<String> items = FXCollections.observableArrayList();
      private ObservableList<String> items2 = FXCollections.observableArrayList();
@@ -264,7 +266,9 @@ row();
     ObservableList<Classe> n = FXCollections.observableArrayList();
     
     public void refresh(){
+        validerr.setDisable(true);
         combo.valueProperty().set(null);
+        combo2.valueProperty().set(null);
         email="";
         valideret.setDisable(true);
         panel2.setVisible(false);
@@ -421,7 +425,12 @@ row();
     private void AddClasse(ActionEvent event) {
         title.setText("AJOUTER UNE CLASSE");
         classeA.setText("");
-        niveauA.setText("");
+        selected="";
+         combo2.valueProperty().set(null);
+        listniveau =FXCollections.observableArrayList(cs.niveauToString(ns.listeNiveaux()));
+         combo2.setItems(listniveau);
+       // niveauA.setText("");
+       
          paneAU.setVisible(true);
     }
 
@@ -431,7 +440,15 @@ row();
         Classe x=new Classe();
         x=cs.getOneById(cClasse);
         classeA.setText(x.getClasse());
-        niveauA.setText(x.getNiveau().getId());
+                listniveau =FXCollections.observableArrayList(cs.niveauToString(ns.listeNiveaux()));
+                combo2.setItems(listniveau);
+                int i = 0;
+                
+
+              combo2.getSelectionModel().select(x.getNiveau().getId());
+            selected=combo2.getValue();
+        
+       // niveauA.setText(x.getNiveau().getId());
          paneAU.setVisible(true);
         
     }
@@ -487,19 +504,24 @@ return true;
     @FXML
     private void validerua(ActionEvent event) {
         
-        if(!Testvide(classeA.getText(),niveauA.getText())){
+        if(!Testvide(classeA.getText(),selected)){
             Classe x=new Classe();
             Niveau y=new Niveau();
-            y.setId(niveauA.getText());
+            y.setId(selected);
             x.setClasse(classeA.getText());
+            x.setId(id);
+            
             x.setNiveau(y);
         
         if(title.getText().equals("UPDATE CLASSE")){
-            if(!ns.getOneById(niveauA.getText()).getId().equals("-1")){
-            if(cs.getOneById(id).getId()==-1){
-            cs.modifierClasse(x);
+            
+            
+            
+            if(!cs.exist(classeA.getText(), selected)){
+                 cs.modifierClasse(x);
             }
-            else{
+            
+             else{
              Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
       alert.setTitle("Erreur");
       alert.setHeaderText("Classe deja exist");
@@ -511,27 +533,16 @@ return true;
     
         refresh();
             }
-            }}
-            else{                                   Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-      alert.setTitle("Erreur");
-      alert.setHeaderText("Niveau n'exist pas");
-
-               Optional<ButtonType> option = alert.showAndWait();
-                   if (option.get() == null) {
-                   }
-                   if (option.get() == ButtonType.OK) {
-    
-        refresh();
             }
-                
-            }
+           
             
         }
         
         else{
-            if (cs.checkexist(classeA.getText(),niveauA.getText()).getId()==-1){
+
+            if (cs.checkexist(classeA.getText(),selected).getId()==-1){
                 
-                if(!ns.getOneById(niveauA.getText()).getId().equals("-1")){
+                if(!ns.getOneById(selected).getId().equals("-1")){
             cs.ajouterClasse(x);
                 }
                 else{
@@ -711,6 +722,14 @@ public static boolean isValid(String email)
         email=combo.getValue();
           valideret.setDisable(false);
       
+
+    }
+    ObservableList<String> listniveau =FXCollections.observableArrayList(cs.niveauToString(ns.listeNiveaux()));
+    String selected;
+    @FXML
+    void selectNiveau(ActionEvent event) {
+                selected=combo2.getValue();
+          validerr.setDisable(false);
 
     }
 }
