@@ -192,6 +192,7 @@ public class AddNewsController implements Initializable{
 		//String datePub = String.valueOf(dateField.getValue());
         int ext =  chooseFileBtn.getText().lastIndexOf(File.separator);
         String image = chooseFileBtn.getText().substring(ext+1);
+        System.out.println(image);
         String file = chooseFileBtn.getText();
         SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");
         Date date = new Date();

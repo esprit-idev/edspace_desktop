@@ -34,7 +34,7 @@ public class PDFService {
        // a = sa.updateAdmin(a, id);
         //String message = "M/MME :" + a.getUsername() + " " + a.getPrenom();
 
-        String file_name = "C:\\Users\\21656\\Desktop\\liste_admins.pdf";
+        String file_name = "C:\\Users\\MeriamBI\\Desktop\\liste_admins.pdf";
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(file_name));
         document.open();
@@ -63,7 +63,7 @@ public class PDFService {
         document.add(table);
 
         document.close();
-         Desktop.getDesktop().open(new File("C:\\Users\\21656\\Desktop\\liste_admins.pdf"));
+         Desktop.getDesktop().open(new File("C:\\Users\\MeriamBI\\Desktop\\liste_admins.pdf"));
 
     }
      

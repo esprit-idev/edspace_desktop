@@ -199,7 +199,7 @@ public class FrontHomeController implements Initializable {
 
                 //instance mtaa el crud
                 //redirection
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/FrontThread.fxml"));
                 Parent root = loader.load();
                 forum_iv.getScene().setRoot(root);
             } catch (IOException ex) {
@@ -210,7 +210,7 @@ public class FrontHomeController implements Initializable {
 
                 //instance mtaa el crud
                 //redirection
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
                 Parent root = loader.load();
                 forum_iv.getScene().setRoot(root);
             } catch (IOException ex) {

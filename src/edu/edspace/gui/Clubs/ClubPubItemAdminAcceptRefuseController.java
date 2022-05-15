@@ -82,6 +82,7 @@ public class ClubPubItemAdminAcceptRefuseController implements Initializable {
     }
 
     public void setData(ClubPub clubPub, String clubName, String clubPicture) {
+        System.out.println(clubPicture);
         this.clubPub = clubPub;
         clubName_l.setText(clubName.toUpperCase());
         pubDate.setText("Publie le " + clubPub.getPubDate());
