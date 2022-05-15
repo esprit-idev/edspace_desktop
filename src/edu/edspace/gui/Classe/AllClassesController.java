@@ -162,8 +162,6 @@ public class AllClassesController implements Initializable {
     @FXML
     private TextField classeA;
     @FXML
-    private TextField niveauA;
-    @FXML
     private Button validerr;
     @FXML
     private Button annuler;
@@ -429,7 +427,6 @@ row();
          combo2.valueProperty().set(null);
         listniveau =FXCollections.observableArrayList(cs.niveauToString(ns.listeNiveaux()));
          combo2.setItems(listniveau);
-       // niveauA.setText("");
        
          paneAU.setVisible(true);
     }
@@ -447,8 +444,7 @@ row();
 
               combo2.getSelectionModel().select(x.getNiveau().getId());
             selected=combo2.getValue();
-        
-       // niveauA.setText(x.getNiveau().getId());
+
          paneAU.setVisible(true);
         
     }
