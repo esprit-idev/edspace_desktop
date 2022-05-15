@@ -95,6 +95,7 @@ public class ClubPubItemController implements Initializable {
     }
 
     public void setData(ClubPub clubPub, String clubName, String clubPicture) {
+        System.out.println(clubPub.getPubImage());
         this.clubPub = clubPub;
         ClubPubService cps = new ClubPubService();
         clubName_l.setText(clubName.toUpperCase().split("RUBRIQUE CLUB")[1].toUpperCase());

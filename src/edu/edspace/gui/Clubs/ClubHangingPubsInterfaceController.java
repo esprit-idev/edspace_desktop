@@ -64,10 +64,11 @@ public class ClubHangingPubsInterfaceController implements Initializable {
             for (int i = 0; i < pubsList.size(); i++) {
                 if (Session.getRoles().contains("RESPO")) {
                     try {
-                        FXMLLoader fxml = new FXMLLoader(getClass().getResource("ClubPubHangRefItem.fxml"));
+                        FXMLLoader fxml = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubPubHangRefItem.fxml"));
 
                         AnchorPane anchorPane = fxml.load();//child
                         ClubPubHangRefItemController clubPubHangRefItemController = fxml.getController();
+                        System.out.println(clubPic);
                         clubPubHangRefItemController.setData(pubsList.get(i), clubName,
                                 clubPic
                         );
@@ -83,7 +84,7 @@ public class ClubHangingPubsInterfaceController implements Initializable {
                     }
                 } else {
                     try {
-                        FXMLLoader fxml = new FXMLLoader(getClass().getResource("ClubPubItemAdminAcceptRefuse.fxml"));
+                        FXMLLoader fxml = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubPubItemAdminAcceptRefuse.fxml"));
 
                         AnchorPane anchorPane = fxml.load();//child
                         ClubPubItemAdminAcceptRefuseController clubPubItemAdminAcceptRefuseController = fxml.getController();

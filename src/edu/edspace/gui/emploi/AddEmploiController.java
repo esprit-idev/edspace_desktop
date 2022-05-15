@@ -120,6 +120,7 @@ public class AddEmploiController implements Initializable {
                 .addAll(extFilterjpg,extFilterpng);
         File file = fileChooser.showOpenDialog(null);
         if(file != null){
+            System.out.println(file.getAbsolutePath());
                 chooseFileBtn.setText(file.getAbsolutePath());
         }
     }
@@ -176,6 +177,8 @@ public class AddEmploiController implements Initializable {
                     }catch (IOException ex) {
                         Logger.getLogger(AddEmploiController.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                System.out.println(image);
+                System.out.println(Paths.get(file));
                 Emploi p = new Emploi(title, description,categoryName.toString(),datePub,image);
                 EmploiService newsService = new EmploiService();
                 newsService.addEmploi(p);
