@@ -11,6 +11,7 @@ import edu.edspace.gui.news.AccordianNewsController;
 import edu.edspace.services.EmploiCategoryService;
 import edu.edspace.services.NewsCategoryService;
 import edu.edspace.services.NewsService;
+import edu.edspace.services.UserService;
 import edu.edspace.services.statics;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
@@ -443,7 +444,18 @@ public class HomeBackController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
+    }
+    @FXML
+    private void getStudents(ActionEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Student/AllStudents.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     @FXML
     private void getNiveauView(MouseEvent event){
@@ -464,5 +476,17 @@ public class HomeBackController implements Initializable {
 		} catch (IOException ex) {
 			ex.printStackTrace(); 
 		}
-    } 
+    }
+    @FXML
+    private void logout(MouseEvent event){
+        UserService US = new UserService();
+        US.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+        try {
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root); 
+		}catch (IOException ex) {
+            System.out.print(ex.getMessage());	
+		}
+    }      
 }

@@ -196,7 +196,7 @@ List<User> list=new ArrayList<>();
 List<User> list=new ArrayList<>();
 			
 			try {
-				String req = "select * from user where classe_id<>?"; 
+				String req = "select * from user where classe_id <> ? or classe_id is null"; 
 				 PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
 				 pst.setInt(1,id);
 		            ResultSet rs = pst.executeQuery();
@@ -212,7 +212,7 @@ List<User> list=new ArrayList<>();
 			}catch (SQLException ex) {
 	            System.out.println(ex.getMessage());
 	        }
-			
+			System.out.println(list);
 			return list;
 			
 		}
@@ -359,10 +359,10 @@ List<User> list=new ArrayList<>();
            
           List<User> l=  listUserNoClasse(classe);
           
-         
+          
           
           for (User temp : l) {
-              if(temp.getEmail().equals(email)){
+                 if(temp.getEmail().equals(email)){
 			stu.setId(temp.getId()); //set id from req result
                 
                 stu.setUsername(temp.getUsername()); 
@@ -373,7 +373,7 @@ List<User> list=new ArrayList<>();
 			}
           }
             
-        
+
 
         return stu ;
     }
@@ -399,4 +399,17 @@ List<User> list=new ArrayList<>();
 			
 			
 		}
+            
+            
+            public String[] userToEmail(List<User> l){
+              String[] array = new String[l.size()];
+              int i =0;
+                for (User temp : l) {
+                    array[i]=temp.getEmail();
+                    i++;
+			System.out.println(temp);
+			}
+                return array;
+            }
+            
 }
