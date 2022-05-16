@@ -443,7 +443,6 @@ public class ClubRubriqueAdminController implements Initializable {
     @FXML
     private void displaylistClubs(ActionEvent event) {
         try {
-            System.out.println("noooooooooooooo");
             //instance mtaa el crud
             //redirection
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
