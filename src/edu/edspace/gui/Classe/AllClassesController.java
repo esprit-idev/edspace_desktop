@@ -520,7 +520,7 @@ return true;
              else{
              Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
       alert.setTitle("Erreur");
-      alert.setHeaderText("Classe deja exist");
+      alert.setHeaderText("Classe deja existe");
 
                Optional<ButtonType> option = alert.showAndWait();
                    if (option.get() == null) {
