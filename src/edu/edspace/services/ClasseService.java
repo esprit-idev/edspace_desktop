@@ -65,13 +65,15 @@ public class ClasseService {
 	
 	
 	public void modifierClasse(Classe classe) {
-		 String req = "update classe set niveau_id=?, classe=? WHERE id=?";
+		 String req = "update classe set niveau_id=? , classe=? WHERE id=?";
 		try {
 			NiveauService ns=new NiveauService();
 			PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
 			pst.setString(1, classe.getNiveau().getId());
+                        System.out.println(classe.getNiveau().getId());
 	         pst.setString(2, classe.getClasse());
 	         pst.setInt(3, classe.getId());
+                  System.out.println(pst.toString());
 	         pst.executeUpdate();
 	            System.out.println("Classe modifié");
 		} catch (SQLException e) {
@@ -101,6 +103,26 @@ public class ClasseService {
 	
 	
 	
+        
+        public boolean exist(String classe,String niveau){
+            		 try {
+			
+			 String req = "select * from classe where classe= ? and niveau_id=?";
+			 PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+			 pst.setString(1,classe);
+                          pst.setString(2,niveau);
+		
+	            ResultSet rs = pst.executeQuery();
+	            while (rs.next()) {
+	   return true;
+	            }
+			}catch (SQLException ex) {
+	            System.out.println(ex.getMessage());
+	        }
+            
+            
+            return false;
+        }
 	 public Classe getOneById(int id) {
 		 Classe c=new Classe();
 		 c.setId(-1);
@@ -120,7 +142,6 @@ public class ClasseService {
 			}catch (SQLException ex) {
 	            System.out.println(ex.getMessage());
 	        }
-		 
 		 return c;
 	 }
 	 
@@ -280,6 +301,27 @@ List<User> list=new ArrayList<>();
 			
 		}
                 
+                
+                public void modifNiveau2(List<Classe> l,String niveau) {
+			
+			for (Classe temp : l) {
+			 String req = "update classe set niveau_id=? WHERE id=?";
+				try {
+					PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+					pst.setString(1, niveau);
+					pst.setInt(2, temp.getId());
+			         pst.executeUpdate();
+			            System.out.println("Classe modifié");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		
+				
+			
+			
+		}
+                
 		
 		public void modifMessage(List<Message> l) {
 			for (Message temp : l) {
@@ -407,7 +449,16 @@ List<User> list=new ArrayList<>();
                 for (User temp : l) {
                     array[i]=temp.getEmail();
                     i++;
-			System.out.println(temp);
+			}
+                return array;
+            }
+            
+             public String[] niveauToString(List<Niveau> l){
+              String[] array = new String[l.size()];
+              int i =0;
+                for (Niveau temp : l) {
+                    array[i]=temp.getId();
+                    i++;
 			}
                 return array;
             }
