@@ -50,6 +50,7 @@ class ServerThread extends Thread {
     	    	server.handle(ID, msg);
             }
             catch(Exception ioe){  
+                System.out.println(ioe);
             	System.out.println(ID + " ERROR reading: " + ioe.getMessage());
                 server.remove(ID);
                 stop();

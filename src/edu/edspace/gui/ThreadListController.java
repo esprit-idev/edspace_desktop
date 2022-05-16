@@ -202,7 +202,8 @@ public class ThreadListController implements Initializable {
                Optional<ButtonType> action = a.showAndWait();
                if(action.get() == ButtonType.OK){
                    threadService.deleteThread(th.get(q));
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+                   if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
+                                  FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             Parent root = loader.load();
             del.getScene().setRoot(root);
@@ -210,6 +211,18 @@ public class ThreadListController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+                   }
+                   else{
+                       FXMLLoader loader = new FXMLLoader(getClass().getResource("FontThread.fxml"));
+        try {
+            Parent root = loader.load();
+            del.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                   }
+         
                     }
           
            });

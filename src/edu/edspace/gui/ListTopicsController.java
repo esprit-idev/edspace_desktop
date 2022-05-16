@@ -21,14 +21,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TextField;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -110,6 +116,12 @@ public class ListTopicsController implements Initializable {
     private VBox vmain;
     @FXML
     private Button topics;
+    @FXML
+    private TextField topicField;
+    @FXML
+    private Text error;
+    @FXML
+    private ImageView del;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initImages();
@@ -120,6 +132,28 @@ public class ListTopicsController implements Initializable {
        Topics.addAll(t.listTopics());
        System.out.println(Topics);
        table.setItems(Topics);
+      
+           
+           del.setOnMouseClicked(e->{
+               TopicService tp = new TopicService();
+                Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+               a.setTitle("Confirmation");
+               a.setHeaderText(null);
+               a.setContentText("Are you sure you want to delete" +table.getSelectionModel().getSelectedItem().getContent() );
+              
+               Optional<ButtonType> action = a.showAndWait();
+               if(action.get() == ButtonType.OK){
+               tp.deleteTopic(table.getSelectionModel().getSelectedItem());
+               FXMLLoader loader = new FXMLLoader(getClass().getResource("listTopics.fxml"));
+        try {
+            Parent root = loader.load();
+            del.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+               }
+           });
        
     }    
 
@@ -172,7 +206,6 @@ public class ListTopicsController implements Initializable {
         }
     }
 
-    @FXML
     private void addNewThread(ActionEvent event) {
         try {
             //instance mtaa el crud
@@ -225,6 +258,9 @@ public class ListTopicsController implements Initializable {
         File fileOut = new File("images/logout_grey.png");
         Image outI = new Image(fileOut.toURI().toString());
 
+        File fDel = new File("images/delete.png");
+        Image fDeli = new Image(fDel.toURI().toString());
+        
         logo_iv.setImage(logoI);
         home_iv.setImage(homeI);
         tabaff_iv.setImage(tabI);
@@ -237,6 +273,8 @@ public class ListTopicsController implements Initializable {
         forum_iv.setImage(forumI);
         centre_iv.setImage(docsI);
         signOut_iv.setImage(outI);
+        
+        del.setImage(fDeli);
     }
 
     @FXML
@@ -368,6 +406,50 @@ public class ListTopicsController implements Initializable {
 
     @FXML
     private void handleClicks(ActionEvent event) {
+    }
+
+    @FXML
+    private void addTopic(ActionEvent event) {
+        if(topicField.getText().length()==0){
+            error.setVisible(true);
+        }
+        else{
+        TopicService topicService = new TopicService();
+        ThreadType t = new ThreadType();
+        List<ThreadType> te = topicService.listTopics();
+        
+        ArrayList<String> tps = new ArrayList(); 
+        for(int i = 0; i<te.size();i++){
+            tps.add(te.get(i).getContent().toLowerCase());
+        }
+        
+        if(tps.contains(topicField.getText().toLowerCase())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Topic");
+        alert.setContentText("Topic déja existe!");
+        alert.showAndWait();
+        }else{
+             t.setContent(topicField.getText());
+        t.setDisplay(false);
+        
+        topicService.addTopic(t);
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Topic");
+        alert.setContentText("Topic ajouté avec success !");
+        alert.showAndWait();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("listTopics.fxml"));
+        try {
+            
+            Parent root = loader.load();
+            topicField.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+       
+    }
     }
     
     

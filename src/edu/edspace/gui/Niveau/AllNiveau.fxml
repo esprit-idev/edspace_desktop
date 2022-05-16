@@ -27,17 +27,17 @@
             <Pane fx:id="pnlMenus" prefHeight="200.0" prefWidth="200.0" />
             <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;">
                <children>
-                  <TextField fx:id="search" layoutX="590.0" layoutY="47.0" onKeyReleased="#find" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #F4F6F9; -fx-border-color: #1C2424; -fx-border-radius: 2em;" />
-                  <Label layoutX="57.0" layoutY="25.0" prefHeight="50.0" prefWidth="292.0" text="Niveaux d'études" textFill="#54b48c">
+                  <TextField fx:id="search" layoutX="590.0" layoutY="47.0" onKeyReleased="#find" prefHeight="27.0" prefWidth="183.0" promptText="Chercher un niveau..." style="-fx-background-color: #F4F6F9; -fx-border-color: #1C2424; -fx-border-radius: 2em;" />
+                  <Label layoutX="39" layoutY="35" prefHeight="50.0" prefWidth="292.0" text="Niveaux d'études" textFill="#54b48c">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="72.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="222.0" layoutY="72.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="92.0" prefWidth="119.0">
                            <children>
-                              <Label fx:id="nbNiveau" prefHeight="38.0" prefWidth="77.0" text="22000" textFill="#2a73ff">
+                              <Label fx:id="nbNiveau" text="22000" textFill="#2a73ff">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
                                  </font>
@@ -53,16 +53,6 @@
                                  </font>
                               </Label>
                               <Label prefHeight="18.0" prefWidth="123.0" text="nombre des classes" textFill="#1c2424" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="92.0" prefWidth="132.0">
-                           <children>
-                              <Label text="10" textFill="#fa5f7e">
-                                 <font>
-                                    <Font name="System Bold" size="26.0" />
-                                 </font>
-                              </Label>
-                              <Label text="nombre d'etudiants" textFill="#1c2424" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -87,7 +77,7 @@
                               <TableView fx:id="niveauTable" prefHeight="308.0" prefWidth="460.0">
                                 <columns>
                                   <TableColumn fx:id="niveau" prefWidth="228.0" text="niveau" />
-                                  <TableColumn fx:id="nbclasse" prefWidth="216.0" text="nomber de classes" />
+                                  <TableColumn fx:id="nbclasse" prefWidth="216.0" text="nombre de classes" />
                                 </columns>
                               </TableView>
                            </children>
@@ -99,15 +89,15 @@
                         <Image url="@../../../../images/icons8_Search_52px.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="supp" layoutX="485.0" layoutY="165.0" mnemonicParsing="false" onAction="#suppN" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: crimson;" text="Supprimer" textFill="WHITE" />
-                  <Button fx:id="btnupdate" layoutX="300.0" layoutY="165.0" mnemonicParsing="false" onAction="#updateN" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #1E90FF;" text="Update" textFill="WHITE" />
-                  <Button fx:id="btnajout" layoutX="117.0" layoutY="165.0" mnemonicParsing="false" onAction="#ajouterN" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #54b48c;" text="Ajouter" textFill="WHITE" />
+                  <Button fx:id="supp" layoutX="570.0" layoutY="165.0" mnemonicParsing="false" onAction="#suppN" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: crimson;" text="Supprimer" textFill="WHITE" />
+                  <Button fx:id="btnupdate" layoutX="358.0" layoutY="165.0" mnemonicParsing="false" onAction="#updateN" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #1E90FF;" text="Metter a jour" textFill="WHITE" />
+                  <Button fx:id="btnajout" layoutX="136.0" layoutY="165.0" mnemonicParsing="false" onAction="#ajouterN" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #54b48c;" text="Ajouter" textFill="WHITE" />
                   <Button fx:id="btnauto" layoutX="342.0" layoutY="545.0" mnemonicParsing="false" onAction="#activeAuto" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #2a73ff;" text="AUTOFILL" textFill="WHITE" />
                </children>
             </Pane>
          </children>
       </StackPane>
-      <Pane fx:id="updatepane" layoutX="471.0" layoutY="120.0" prefHeight="368.0" prefWidth="351.0" style="-fx-background-color: #e0e0e0;">
+      <Pane fx:id="updatepane" layoutX="498.0" layoutY="143.0" prefHeight="368.0" prefWidth="351.0" style="-fx-background-color: #e0e0e0;">
          <children>
             <Label layoutX="37.0" layoutY="151.0" text="Niveau :">
                <font>
@@ -164,7 +154,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Label layoutX="286.0" layoutY="87.0" text="Number de classes">
+            <Label layoutX="286.0" layoutY="87.0" text="Numbre de classes">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -174,12 +164,12 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <CheckBox fx:id="un" layoutX="31.0" layoutY="130.0" mnemonicParsing="false" text="1" />
-            <CheckBox fx:id="deux" layoutX="31.0" layoutY="160.0" mnemonicParsing="false" text="2" />
-            <CheckBox fx:id="trois" layoutX="31.0" layoutY="190.0" mnemonicParsing="false" text="3" />
-            <CheckBox fx:id="quatre" layoutX="31.0" layoutY="220.0" mnemonicParsing="false" text="4" />
-            <CheckBox fx:id="cinq" layoutX="31.0" layoutY="250.0" mnemonicParsing="false" text="5" />
-            <CheckBox fx:id="six" layoutX="31.0" layoutY="280.0" mnemonicParsing="false" text="6" />
+            <CheckBox fx:id="un" layoutX="31.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#active1" text="1" />
+            <CheckBox fx:id="deux" layoutX="31.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#active2" text="2" />
+            <CheckBox fx:id="trois" layoutX="31.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#active3" text="3" />
+            <CheckBox fx:id="quatre" layoutX="31.0" layoutY="220.0" mnemonicParsing="false" onMouseClicked="#active4" text="4" />
+            <CheckBox fx:id="cinq" layoutX="31.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#active5" text="5" />
+            <CheckBox fx:id="six" layoutX="31.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#active6" text="6" />
             <TextField fx:id="quatreN" layoutX="75.0" layoutY="214.0" prefHeight="25.0" prefWidth="46.0" />
             <TextField fx:id="cinqN" layoutX="75.0" layoutY="244.0" prefHeight="25.0" prefWidth="46.0" />
             <TextField fx:id="sixN" layoutX="75.0" layoutY="274.0" prefHeight="25.0" prefWidth="46.0" />

@@ -3,20 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/UserService.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/Student/AllStudentsController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/User/LoginController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/entities/Session.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/Admin/AllAdminsController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ThreadController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/StudentService.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ListTopicsController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/tests/MainClass.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/User/MdpController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/NewThreadController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/AdminService.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ThreadListController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/User/ResetController.java</file>
+<<<<<<< HEAD
+            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/Student/AllStudentsController.java</file>
+            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/Student/AllStudents.fxml</file>
+            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/services/StudentService.java</file>
+            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/services/ClubService.java</file>
+            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/User/CodeTest.fxml</file>
+            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/FrontHomeController.java</file>
+            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/User/Reset.fxml</file>
+            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/User/Mdp.fxml</file>
+            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/services/AdminService.java</file>
+            <file>file:/C:/Users/YOOSURF/Desktop/edspace_desktop/src/edu/edspace/gui/User/Login.fxml</file>
+=======
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/utils/Statics.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/news/CardController.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubRubriqueResponsableController.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubListAdminController.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubListStudentController.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/services/ThreadService.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/services/MessageService.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Message/Client.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/services/ClubService.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Message/TestController.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/Clubs/ClubRubriqueAdminController.java</file>
+            <file>file:/E:/Webprojects/PIDEV/edspace_desktop/src/edu/edspace/gui/FrontHomeController.java</file>
+>>>>>>> 1281a59f6592a7fff1682ecd069e418cd8f9427b
         </group>
     </open-files>
 </project-private>

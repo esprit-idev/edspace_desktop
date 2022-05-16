@@ -147,6 +147,10 @@ public class ClubService {
         String req = "delete from club where id = ?";
         try {
 
+            String req3 = "delete from club_pub WHERE club_id=" + clubId;
+            PreparedStatement pst3 = MyConnection.getInstance().getCnx().prepareStatement(req3); //instance of myconnection pour etablir la cnx
+            pst3.executeUpdate(); //pour exécuter la requete
+
             String req2 = "update user set club_id=?, roles=? WHERE club_id=" + clubId;
             PreparedStatement pst2 = MyConnection.getInstance().getCnx().prepareStatement(req2); //instance of myconnection pour etablir la cnx
             pst2.setString(1, null); //parameter1=index in request(req) and parameter2=data to pass (nom de la personne)
@@ -217,7 +221,7 @@ public class ClubService {
 
     public void getClubsByCatName(ObservableList<Club> clubList, TableView<Club> tab, String catName) {
         clubList.clear();
-          int catId=getCatId(catName);
+        int catId = getCatId(catName);
         try {
             String req = "select * from club WHERE club_categorie_id=" + catId + ";";
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req); //instance of myConnection pour etablir la cnx
@@ -448,6 +452,28 @@ public class ClubService {
         boolean exist = false;
         try {
             String req = "SELECT count(id) FROM club WHERE club_nom='" + clubName + "';";
+
+            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+            ResultSet rs = st.executeQuery(req); //resultat de la requete
+
+            //tant que rs has next get matiere and add it to the list
+            while (rs.next()) {
+                if (rs.getInt(1) > 0) {
+                    exist = true;
+
+                } else {
+                    exist = false;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return exist;
+    }
+     public boolean clubExistsEdit(String clubName,String clubID) {
+        boolean exist = false;
+        try {
+            String req = "SELECT count(id) FROM club WHERE club_nom='" + clubName + "' and id!=+"+clubID+";";
 
             Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
             ResultSet rs = st.executeQuery(req); //resultat de la requete
