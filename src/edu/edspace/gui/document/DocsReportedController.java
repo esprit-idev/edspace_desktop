@@ -37,6 +37,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 
 /**
  * FXML Controller class
@@ -56,7 +57,7 @@ public class DocsReportedController implements Initializable {
     @FXML
     private ScrollPane scroll;
     @FXML
-    private GridPane grid;
+    private TilePane grid;
     @FXML
     private ImageView logo_iv;
     @FXML
@@ -189,14 +190,13 @@ public class DocsReportedController implements Initializable {
 
                 DocRReportedController docRReportedController = fXMLLoader.getController();
                 docRReportedController.setData(docs.get(i));
-
+                /*
                 if (column == 3) {
                     column = 0;
                     row++;
                 }
-                grid.add(anchorPane, column++, row);
-
-                GridPane.setMargin(anchorPane, new Insets(10));
+                grid.add(anchorPane, column++, row);*/
+                grid.getChildren().addAll(anchorPane);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
