@@ -430,7 +430,10 @@ System.out.println("Password should contain at lest 3 special characters");
      StudentService SS = new StudentService();
    // SS.AjouterUser(stu);
     SS.ajouterStudent(stu);
-    
+     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("etudiant ajouté avec succés");
+            alert.showAndWait();
     SS.listStudent();
          ObservableList<User> list = SS.listStudent();
         
@@ -549,7 +552,6 @@ System.out.println("Password should contain at lest 3 special characters");
     
     }
     
-    @FXML
       public  void test(){
          
              // Specify the maximum number of letters in a password

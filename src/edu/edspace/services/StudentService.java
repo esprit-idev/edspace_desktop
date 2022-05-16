@@ -42,10 +42,10 @@ public class StudentService {
             pst.setString(5, stu.getPrenom()); 
             pst.setString(6, stu.getEmail().toLowerCase());
             
-         /*   String myPwd = "$2y"+BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)).substring(3);
-            pst.setString(7, myPwd);*/
+         String myPwd = "$2y"+BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)).substring(3);
+            pst.setString(7, myPwd);
            
-            pst.setString(7,BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)));
+           // pst.setString(7,BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)));
             pst.setBoolean(8 , false);
             pst.setString(9,null);
             pst.setString(10,"[\"ROLE_STUDENT\"]");
@@ -67,7 +67,9 @@ public class StudentService {
         pre.setString(3, u.getEmail());
 
        // pre.setString(4, u.getEmail().toLowerCase());
-        pre.setString(4, BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(13)));
+        String myPwd = "$2y"+BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(13)).substring(3);
+            pre.setString(4, myPwd);
+      //  pre.setString(4, BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(13)));
          pre.setString(5,"[\"ROLE_STUDENT\"]");
        // pre.setString(7, "a:0:{}");
         pre.executeUpdate();
