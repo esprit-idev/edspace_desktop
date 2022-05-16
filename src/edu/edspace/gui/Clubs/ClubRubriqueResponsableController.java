@@ -275,17 +275,7 @@ public class ClubRubriqueResponsableController implements Initializable {
         } else {
              // badges
         ClubPubService cb = new ClubPubService();
-        // badges
-        if (cb.displayHangingClubPubs(clubid).isEmpty()) {
-            badgeEnAttente.setVisible(false);
-        } else {
-            badgeEnAttente.setText(String.valueOf(cb.displayHangingClubPubs(clubid).size()));
-        }
-        if (cb.displayRefusedClubPubs(clubid).isEmpty()) {
-            badgeRefused.setVisible(false);
-        } else {
-            badgeRefused.setText(String.valueOf(cb.displayRefusedClubPubs(clubid).size()));
-        }
+       
             //add file
             String fileName = null;
             String fileSelceted = "";
@@ -332,7 +322,17 @@ public class ClubRubriqueResponsableController implements Initializable {
             pubFileSelected.setText("");
             initData(clubid);
             pubdesc_et.setText("");
-
+ // badges
+        if (cb.displayHangingClubPubs(clubid).isEmpty()) {
+            badgeEnAttente.setVisible(false);
+        } else {
+            badgeEnAttente.setText(String.valueOf(cb.displayHangingClubPubs(clubid).size()));
+        }
+        if (cb.displayRefusedClubPubs(clubid).isEmpty()) {
+            badgeRefused.setVisible(false);
+        } else {
+            badgeRefused.setText(String.valueOf(cb.displayRefusedClubPubs(clubid).size()));
+        }
         }
 
     }
@@ -644,7 +644,7 @@ public class ClubRubriqueResponsableController implements Initializable {
     private String getmicTExt(String duree) {
         String s = "";
         try {
-            String command = "python C:\\Users\\MeriamBI\\Desktop\\speechScript.py " + duree;
+            String command = "python C:\\Users\\anash\\Desktop\\speechScript.py " + duree;
             Process p = Runtime.getRuntime().exec(command);
             try {
                 // Start a new java process 
