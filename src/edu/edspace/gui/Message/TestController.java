@@ -100,7 +100,7 @@ public Thread clientThread;
         initImages();
        setmes();
             
-               try{
+         /*      try{
     
     
                 client = new Client(this);
@@ -112,7 +112,7 @@ public Thread clientThread;
                 System.out.println(ex);
             }
        
- 
+ */
 
        
        setmes();

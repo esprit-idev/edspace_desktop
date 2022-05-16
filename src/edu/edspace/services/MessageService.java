@@ -59,7 +59,6 @@ public class MessageService {
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
             	m.setUser(us.getuser(rs.getInt("classe_id")));
-            	System.out.println(m);
             	
             	list.add(m);
             }
@@ -77,7 +76,7 @@ public class MessageService {
 		List<Message> list=new ArrayList<>();
 		
 		try {
-			String req = "select * from Message where classe_id=?"; 
+			String req = "select * from message where classe_id=?"; 
 			PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, c);
             ClasseService ns=new ClasseService();
@@ -93,9 +92,8 @@ public class MessageService {
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
             	m.setUser(us.getuser(rs.getInt("user_id")));
-            	System.out.println(m);
             	list.add(switcher(m));
-            }
+            }      
 		}catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -124,7 +122,6 @@ public class MessageService {
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
             	m.setUser(us.getuser(rs.getInt("user_id")));
-            	System.out.println(switcher(m));
             	list.add(switcher(m));
             }
 		}catch (SQLException ex) {
@@ -156,7 +153,6 @@ public class MessageService {
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
             	m.setUser(us.getuser(rs.getInt("classe_id")));
-            	System.out.println(m);
             	list.add(m);
             }
 		}catch (SQLException ex) {
@@ -259,7 +255,6 @@ public class MessageService {
 		}
 		
 		m.setContent(text);
-		System.out.println(text);
 		return m;
 	}
 	///////////////////////////////////////////

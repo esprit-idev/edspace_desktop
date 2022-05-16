@@ -2,12 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package edu.edspace.gui.Message;
+package edu.edspace.gui.document;
 
 /**
  *
  * @author aa
  */
+import edu.edspace.gui.Message.*;
 import edu.edspace.entities.Message;
 import edu.edspace.gui.Classe.AllClassesController;
 import java.io.*;
@@ -30,17 +31,15 @@ public class Client implements Runnable{
     public int port;
     public String serverAddr;
     public Socket socket;
-    public AllMessagesController ui;
+    public ListDocFrontController ui;
     public ObjectInputStream In;
     public ObjectOutputStream Out;
 
-    public Client(AllMessagesController ui) throws IOException {
+    public Client(ListDocFrontController ui) throws IOException {
         
         this.ui = ui;
         this.serverAddr = ui.serverAddr; this.port = ui.port;
-        System.out.println(InetAddress.getLocalHost());
         socket = new Socket(InetAddress.getLocalHost(),2018);
-        System.out.println("test test");
          Out = new ObjectOutputStream(socket.getOutputStream());
         Out.flush();
         In = new ObjectInputStream(socket.getInputStream());

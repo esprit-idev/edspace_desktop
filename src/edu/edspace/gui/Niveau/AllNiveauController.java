@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -429,9 +430,19 @@ public class AllNiveauController implements Initializable {
      Nniveau.setText("");
              }
             if(valider.getText().equals("Ajouter")){
+                if(ns.getOneById(Nniveau.getText()).getId().equals("-1")){
                 Niveau temp=new Niveau(Nniveau.getText());
                 ns.ajouterNiveau(temp);
+                }else{
+                                                  Alert alert = new Alert(AlertType.ERROR);
+
+alert.setTitle("Error niveau");
+alert.setHeaderText("Niveau already exist!");
+
+alert.showAndWait();
+                }
                  Nniveau.setText("");
+                
             }
              
                          refresh();
@@ -445,7 +456,7 @@ alert.setTitle("Error niveau");
 alert.setHeaderText("Niveau must start with a number ,'"+ Nniveau.getText().charAt(0)+"' is a letter");
 
 alert.showAndWait();
-		            System.out.println("'"+ Nniveau.getText().charAt(0)+"' is a letter");
+		          //  System.out.println("'"+ Nniveau.getText().charAt(0)+"' is a letter");
 		         }
     }
             Nniveau.setText("");
@@ -535,19 +546,42 @@ return true;
     
     @FXML
     private void find(KeyEvent event) {
-       // System.out.println("test");
-        String s=search.getText();
-        MessageService ms=new MessageService();
         
-        niveauTable.getItems().stream()
-    .filter(item -> ms.mots1(item.getId(),s ))
-    .findAny()
-    .ifPresent(item -> {
-        niveauTable.getSelectionModel().select(item);
-        niveauTable.scrollTo(item);
-    });
+        
+        
+                String s = search.getText();
+NiveauService ns=new NiveauService();
+        niveauTable.getItems().clear();
+        
+        List<Niveau> c =ns.listeNiveaux() ;
+        for (int i = 0; i < c.size(); i++) {
+            if (kelma(c.get(i).getId(), s)) {
+                n.addAll(c.get(i));
+            }
+        }
+                
+        niveau.setCellValueFactory(new PropertyValueFactory<Niveau,String>("id"));
+        nbclasse.setCellValueFactory(new PropertyValueFactory<Niveau,Integer>("nbClasse"));
+        niveauTable.setItems(n);
+
     }
     
+    
+    public boolean kelma(String s1, String s2) {
+        String[] l1 = null;
+
+        l1 = s1.split(" ");
+        String[] l2 = s2.split("(?!^)");
+        for (int i = 0; i < l1.length; i++) {
+            if (l1[i].toUpperCase().contains(s2.toUpperCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+  
     
              public void initImages() {
         File fileLogo = new File("images/logo1.png");

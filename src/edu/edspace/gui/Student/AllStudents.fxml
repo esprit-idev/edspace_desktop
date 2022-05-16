@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -181,7 +182,6 @@
             <TextField fx:id="nomStudent" layoutX="45.0" layoutY="74.0" prefHeight="25.0" prefWidth="191.0" />
             <TextField fx:id="prenomStudent" layoutX="45.0" layoutY="144.0" prefHeight="25.0" prefWidth="191.0" />
             <TextField fx:id="emailStudent" layoutX="45.0" layoutY="213.0" prefHeight="25.0" prefWidth="191.0" />
-            <TextField fx:id="mdpStudent" layoutX="45.0" layoutY="291.0" onKeyTyped="#test" prefHeight="25.0" prefWidth="191.0" />
             <Button fx:id="btnAjout" layoutX="109.0" layoutY="345.0" mnemonicParsing="false" onAction="#btnajout" prefHeight="29.0" prefWidth="62.0" style="-fx-background-color: #F45F7F;" text="Ajouter" />
             <Button fx:id="btnUpdate" layoutX="8.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnUpdate">
                <graphic>
@@ -204,6 +204,7 @@
             <Text fx:id="msgmin" fill="RED" layoutX="26.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="le mot de passe doit contenir au moins 8 caractères" visible="false" />
             <Text fill="#fc0000" layoutX="41.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="l'email deja existe dans la base de donnée" visible="false" />
             <Text fx:id="testmsg" layoutX="69.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hello" visible="false" />
+            <PasswordField fx:id="mdpStudent" layoutX="53.0" layoutY="297.0" />
          </children>
       </Pane>
       <Pane layoutX="318.0" layoutY="97.0" prefHeight="432.0" prefWidth="416.0" style="-fx-background-color: #FFFFFF;">

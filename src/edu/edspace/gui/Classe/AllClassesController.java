@@ -24,6 +24,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,6 +36,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -45,9 +47,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -158,8 +162,6 @@ public class AllClassesController implements Initializable {
     @FXML
     private TextField classeA;
     @FXML
-    private TextField niveauA;
-    @FXML
     private Button validerr;
     @FXML
     private Button annuler;
@@ -173,7 +175,21 @@ public class AllClassesController implements Initializable {
     private Pane panel2;
     @FXML
     private Button btnaddET;
+    @FXML
+    private TextField emailET;
     
+        @FXML
+    private Label texterreur;
+            @FXML
+    private TextField search1;
+            
+    @FXML
+    private ComboBox<String> combo;
+    @FXML
+    private ComboBox<String> combo2;
+    
+        private ObservableList<String> items = FXCollections.observableArrayList();
+     private ObservableList<String> items2 = FXCollections.observableArrayList();
    String idet;
     /**
      * Initializes the controller class.
@@ -183,7 +199,7 @@ public class AllClassesController implements Initializable {
         initImages();
         refresh();
 row();
-        btnaddET.setVisible(false);
+        btnaddET.setVisible(true);
           
           
         
@@ -192,8 +208,7 @@ row();
     
     
     
-    private ObservableList<String> items = FXCollections.observableArrayList();
-     private ObservableList<String> items2 = FXCollections.observableArrayList();
+
     
     int cClasse;
     
@@ -216,25 +231,10 @@ row();
                     supprimer.setDisable(false);
                      update.setDisable(false);
                      btnaddET.setDisable(false);
-                     listeET.setItems(items);
-                     List<User> list=new ArrayList<>();
-                     list.addAll(cs.listUserClasse(cClasse));
-                     for (User temp : list) {
-                         System.out.println(temp);
-            items.add(temp.getUsername()+" "+temp.getPrenom());
-        }
-                     
-                               listeet2.setItems(items2);
-                     List<User> list2=new ArrayList<>();
-                    
-                      list2.addAll(cs.listUserClasse(cClasse));
-                     for (User temp : list2) {
-                         System.out.println(temp);
-            items2.add(temp.getEmail());
-        }
+                    // listeET.setItems(items);
                      
                      
-                      pane1.setVisible(true);
+                   //   pane1.setVisible(true);
                     id=table.getItems().get(myIndex).getId();
                     
                   
@@ -250,28 +250,6 @@ row();
         
         
         
-        listeet2.setCellFactory(tv ->{
-           // TableRow<Classe> myRow=new TableRow<>();
-            ListCell<String> myRow= new ListCell<>();
-           
-             
-            
-           
-            myRow.setOnMouseClicked(event ->{
-                if(event.getClickCount()==1 && (!myRow.isEmpty())){
-                    myIndex2=listeet2.getSelectionModel().getSelectedIndex();
-                    idet=listeet2.getItems().get(myIndex2);
-                    System.out.println(idet);
-                   // System.out.println(String.valueOf(niveauTable.getItems().get(myIndex).getId()));
-                    valideret.setDisable(false);
-           
-                    
-                  
-                    
-                }
-            });
-            return myRow;
-        });
                 
               //  .setRowFactory();
               
@@ -286,9 +264,15 @@ row();
     ObservableList<Classe> n = FXCollections.observableArrayList();
     
     public void refresh(){
+        validerr.setDisable(true);
+        combo.valueProperty().set(null);
+        combo2.valueProperty().set(null);
+        email="";
+        valideret.setDisable(true);
         panel2.setVisible(false);
         paneAU.setVisible(false);
         update.setDisable(true);
+        combo.setItems(list);
         btnaddET.setDisable(true);
 //        pane1.setVisible(false);
                 supprimer.setDisable(true);
@@ -439,7 +423,11 @@ row();
     private void AddClasse(ActionEvent event) {
         title.setText("AJOUTER UNE CLASSE");
         classeA.setText("");
-        niveauA.setText("");
+        selected="";
+         combo2.valueProperty().set(null);
+        listniveau =FXCollections.observableArrayList(cs.niveauToString(ns.listeNiveaux()));
+         combo2.setItems(listniveau);
+       
          paneAU.setVisible(true);
     }
 
@@ -449,7 +437,14 @@ row();
         Classe x=new Classe();
         x=cs.getOneById(cClasse);
         classeA.setText(x.getClasse());
-        niveauA.setText(x.getNiveau().getId());
+                listniveau =FXCollections.observableArrayList(cs.niveauToString(ns.listeNiveaux()));
+                combo2.setItems(listniveau);
+                int i = 0;
+                
+
+              combo2.getSelectionModel().select(x.getNiveau().getId());
+            selected=combo2.getValue();
+
          paneAU.setVisible(true);
         
     }
@@ -505,22 +500,76 @@ return true;
     @FXML
     private void validerua(ActionEvent event) {
         
-        if(!Testvide(classeA.getText(),niveauA.getText())){
+        if(!Testvide(classeA.getText(),selected)){
             Classe x=new Classe();
             Niveau y=new Niveau();
-            y.setId(niveauA.getText());
+            y.setId(selected);
             x.setClasse(classeA.getText());
+            x.setId(id);
+            
             x.setNiveau(y);
         
         if(title.getText().equals("UPDATE CLASSE")){
             
             
-            cs.modifierClasse(x);
+            
+            if(!cs.exist(classeA.getText(), selected)){
+                 cs.modifierClasse(x);
+            }
+            
+             else{
+             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Erreur");
+      alert.setHeaderText("Classe deja exist");
+
+               Optional<ButtonType> option = alert.showAndWait();
+                   if (option.get() == null) {
+                   }
+                   if (option.get() == ButtonType.OK) {
+    
+        refresh();
+            }
+            }
            
             
-        }else{
+        }
+        
+        else{
+
+            if (cs.checkexist(classeA.getText(),selected).getId()==-1){
+                
+                if(!ns.getOneById(selected).getId().equals("-1")){
             cs.ajouterClasse(x);
+                }
+                else{
+                                                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Erreur");
+      alert.setHeaderText("Niveau n'exist pas");
+
+               Optional<ButtonType> option = alert.showAndWait();
+                   if (option.get() == null) {
+                   }
+                   if (option.get() == ButtonType.OK) {
+    
+    
+            }
+                    
+                }
             
+            }
+            else{
+                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Erreur");
+      alert.setHeaderText("Classe deja exist");
+
+               Optional<ButtonType> option = alert.showAndWait();
+                   if (option.get() == null) {
+                   }
+                   if (option.get() == ButtonType.OK) {
+    
+    
+            }
+            }
         }
          refresh();
         }
@@ -532,6 +581,8 @@ return true;
     @FXML
     private void annulerr(ActionEvent event) {
         paneAU.setVisible(false);
+        btnaddET.setDisable(false);
+        panel2.setVisible(false);
     }
   
          public void initImages() {
@@ -587,14 +638,94 @@ return true;
 
     @FXML
     private void validerEt(ActionEvent event) {
-    }
+        
+        
+        
+        User x=cs.emailStudent(email, cClasse);
+
+        refresh();
+        
+
+        }
+            
+    
 
     @FXML
     private void showAddet(ActionEvent event) {
+        combo.setCache(false);
+        list =FXCollections.observableArrayList(cs.userToEmail(cs.listUserNoClasse(cClasse)));
+        combo.setItems(list);
+       // System.out.println(cs.userToEmail(cs.listUserNoClasse(cClasse))[0]);
         panel2.setVisible(true);
     }
     
+public static boolean isValid(String email)
+    {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                            "[a-zA-Z0-9_+&*-]+)*@" +
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                            "A-Z]{2,7}$";
+                              
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
 
 
+
+@FXML
+    private void search(KeyEvent event) {
+        String s = search1.getText();
+
+        table.getItems().clear();
+       // ChequierCrud cc = new ChequierCrud();
+        List<Classe> c = cs.listeClasses();
+        for (int i = 0; i < c.size(); i++) {
+            if (mot(c.get(i).getClasse(), s)) {
+                n.addAll(c.get(i));
+            }
+        }
+   
+        
+                niveau.setCellValueFactory(new PropertyValueFactory<Classe,String>("idn"));
+        classe.setCellValueFactory(new PropertyValueFactory<Classe,String>("classe"));
+        nbetudaint.setCellValueFactory(new PropertyValueFactory<Classe,String>("nbet"));
+        idclasse.setCellValueFactory(new PropertyValueFactory<Classe,String>("id"));
+        
+        table.setItems(n);
+    }
     
+    public boolean mot(String s1, String s2) {
+        String[] l1 = null;
+
+        l1 = s1.split(" ");
+        String[] l2 = s2.split("(?!^)");
+        for (int i = 0; i < l1.length; i++) {
+            if (l1[i].toUpperCase().contains(s2.toUpperCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+    ObservableList<String> list =FXCollections.observableArrayList(cs.userToEmail(cs.listUserNoClasse(cClasse)));
+    String email;
+    
+    @FXML
+    void selectEmail(ActionEvent event) {
+        email=combo.getValue();
+          valideret.setDisable(false);
+      
+
+    }
+    ObservableList<String> listniveau =FXCollections.observableArrayList(cs.niveauToString(ns.listeNiveaux()));
+    String selected;
+    @FXML
+    void selectNiveau(ActionEvent event) {
+                selected=combo2.getValue();
+          validerr.setDisable(false);
+
+    }
 }

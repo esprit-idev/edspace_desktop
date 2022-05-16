@@ -170,26 +170,18 @@
          <content>
             <VBox prefHeight="648.0" prefWidth="830.0" styleClass="bgwhite">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="785.0" text="Les catégories des clubs" textAlignment="CENTER" textFill="#1c2424">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="347.0" text="Les catégories des clubs" textAlignment="CENTER" textFill="#54b48c">
                      <font>
-                        <Font name="System Bold" size="28.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="20.0" />
+                        <Insets bottom="10.0" top="30.0" />
                      </VBox.margin>
                   </Label>
                   <VBox>
                      <children>
                         <AnchorPane prefHeight="30.0" prefWidth="719.0">
                            <children>
-                              <Label fx:id="addlabel" prefHeight="30.0" prefWidth="415.0" text="Ajouter une catégorie" textFill="#54b48c">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="10.0" />
-                                 </padding>
-                              </Label>
                               <Button fx:id="btnAnnulerModif" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="603.0" layoutY="4.0" mnemonicParsing="false" text="Annuler la modification" textAlignment="CENTER" visible="false" />
                            </children>
                         </AnchorPane>

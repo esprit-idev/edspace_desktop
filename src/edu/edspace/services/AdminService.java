@@ -39,9 +39,9 @@ public class AdminService {
             pst.setString(4, ad.getUsername()); 
             pst.setString(5, ad.getPrenom()); 
             pst.setString(6, ad.getEmail());
-           /*  String myPwd = "$2y"+BCrypt.hashpw(ad.getPassword(), BCrypt.gensalt(13)).substring(3);
-            pst.setString(7, myPwd);*/
-            pst.setString(7,BCrypt.hashpw(ad.getPassword(), BCrypt.gensalt(13)));
+           String myPwd = "$2y"+BCrypt.hashpw(ad.getPassword(), BCrypt.gensalt(13)).substring(3);
+            pst.setString(7, myPwd);
+           // pst.setString(7,BCrypt.hashpw(ad.getPassword(), BCrypt.gensalt(13)));
             pst.setBoolean(8 , false);
             pst.setString(9,null);
             pst.setString(10,"[\"ROLE_ADMIN\"]");
@@ -87,7 +87,9 @@ public class AdminService {
             pst.setString(1, ad.getUsername());
             pst.setString(2 ,ad.getPrenom());
             pst.setString(3, ad.getEmail());
-            pst.setString(4, BCrypt.hashpw(ad.getPassword(), BCrypt.gensalt(13)));
+             String myPwd = "$2y"+BCrypt.hashpw(ad.getPassword(), BCrypt.gensalt(13)).substring(3);
+            pst.setString(4, myPwd);
+           // pst.setString(4, BCrypt.hashpw(ad.getPassword(), BCrypt.gensalt(13)));
             //pst.setString(4, ad.getPassword());
             pst.setBoolean(5, ad.getIsBanned());
             pst.setString(6, id);

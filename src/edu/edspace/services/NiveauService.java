@@ -82,17 +82,20 @@ public class NiveauService {
         public void modifierNiveau(String id, String id2) {
 			 String req = "update niveau set id=? WHERE id=?";
 		try {
+                    ClasseService cs=new ClasseService();
+                                     List<Classe> x=cs.listeClassesByNiveau(id);
+                                     cs.modifNiveau(x);
 			PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
 			pst.setString(1, id2);
 	         pst.setString(2, id);
                  
-                 	             ClasseService cs=new ClasseService();
-                 List<Classe> x=cs.listeClassesByNiveau(id);
+                 	             
+ pst.executeUpdate();
                  	           
-	                cs.modifNiveau(cs.listeClassesByNiveau(id));
+	                cs.modifNiveau2(x,id2);
 	           
                  
-	         pst.executeUpdate();
+	        
 	            System.out.println("Niveau modifié");
                     Niveau v=new Niveau(id2);
                     

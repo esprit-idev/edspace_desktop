@@ -36,17 +36,10 @@ public class Client implements Runnable{
     public ObjectOutputStream Out;
 
     public Client(ClubListStudentController ui) throws IOException {
-        System.out.println("test test");
-        System.out.println("test test");
-        System.out.println("test test");
-        System.out.println("test test");
-        System.out.println("test test");
         
         this.ui = ui;
         this.serverAddr = ui.serverAddr; this.port = ui.port;
-        System.out.println(InetAddress.getLocalHost());
         socket = new Socket(InetAddress.getLocalHost(),2018);
-        System.out.println("test test");
          Out = new ObjectOutputStream(socket.getOutputStream());
         Out.flush();
         In = new ObjectInputStream(socket.getInputStream());
