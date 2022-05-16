@@ -40,6 +40,8 @@ public class Statics {
    public static final String FileSheet="C:\\Users\\MeriamBI\\Desktop\\abonnementDetails.Xls";
    public static final String myDocs="C:/Users/eslem/Desktop/edspace_symfony/public/documents/";
    public static final String ClubPic = "C:/Users/eslem/Desktop/edspace_symfony/public/ClubPictures/";
+       // public static final String ClubPic = "E:/Webprojects/PIDEV/edspace_symfony/public/ClubPictures/";
+
    public static final String ClubPubsPic = "C:/Users/eslem/Desktop/edspace_symfony/public/PubPictures/";
    public static final String ClubPubsFile = "C:/Users/eslem/Desktop/edspace_symfony/public/PubFiles/";
    public static final String myPubImages="C:/Users/eslem/Desktop/edspace_symfony/public/images/";
