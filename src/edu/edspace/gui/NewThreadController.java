@@ -50,7 +50,7 @@ public class NewThreadController implements Initializable {
     private TextField tfQuestion;
     @FXML
     private Button save;
-    int user = 1;
+    
    
 
     /**
@@ -61,7 +61,7 @@ public class NewThreadController implements Initializable {
     @FXML
     private Label ftopic;
     @FXML
-    private Hyperlink previous;
+    private ImageView previous;
     @FXML
     private AnchorPane rootPane;
     @FXML
@@ -117,7 +117,7 @@ public class NewThreadController implements Initializable {
                    Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
                }
         }});
-        previous.setOnAction(e->{
+        previous.setOnMouseClicked(e->{
             if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
@@ -142,7 +142,7 @@ public class NewThreadController implements Initializable {
         });
         System.out.println(t.getId());
         tfQuestion.setText(t.getQuestion());
-        save.setText("Update");
+        save.setText("Modifier");
         save.setOnAction(e->{
             if(tfQuestion.getText().length()==0){
                 error1.setVisible(true);
@@ -212,7 +212,7 @@ public class NewThreadController implements Initializable {
                    Logger.getLogger(ThreadListController.class.getName()).log(Level.SEVERE, null, ex);
                }
         }});
-        previous.setOnAction(e->{
+        previous.setOnMouseClicked(e->{
             if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
@@ -272,7 +272,7 @@ public class NewThreadController implements Initializable {
         ThreadService threadService = new ThreadService();
         Thread t = new Thread();
         t.setQuestion(tfQuestion.getText());
-        t.setUser(this.user);
+        t.setUser(Session.getId());
         int content =Integer.parseInt((topic.getSelectionModel().getSelectedItem()).substring(0, topic.getSelectionModel().getSelectedItem().indexOf("-")));
         t.setThreadType(content);
         threadService.addThread(t);
@@ -280,7 +280,7 @@ public class NewThreadController implements Initializable {
         alert.setTitle("Thread");
         alert.setContentText("Thread inserted successfuly!");
         alert.showAndWait();
-        if(Session.getId()== t.getUser() || Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
+        if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             
@@ -358,8 +358,10 @@ public class NewThreadController implements Initializable {
         File fileg = new File("images/google.png");
         Image gl = new Image(fileg.toURI().toString());
         
+        File bacj = new File("images/back_grey.png");
+        Image back = new Image(bacj.toURI().toString());
         logo_iv.setImage(logoI);
-        
+        previous.setImage(back);
         home.setImage(homeI);
     }
 }
