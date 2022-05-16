@@ -175,7 +175,7 @@ public class ReponseService {
 "                                          <a href='#' style='display:block; color: #ff6f6f; font-weight: bold; text-decoration: none;'>\n" +
 "                                            "+us.getPrenom()+" "+us.getUsername()+
 "                                          </a>\n" +
-"                                          <span>\n" + r.getReply()+
+"                                          <span>\n" + r.getReply()+ " <br> <a style='display:block; color: #ff6f6f; font-weight: bold; text-decoration: none;' href =\"http://127.0.0.1:8000/thread/show/"+r.getThread()+ "\"> Click here to check it out </a>"+
 "                                          </span>\n" +
 "                                        </div>\n" +
 "                                      </td>\n" +

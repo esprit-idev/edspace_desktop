@@ -238,7 +238,10 @@ public class AllAdminsController implements Initializable {
        
    // SS.AjouterUser(stu);
     SS.ajouterAdmin(stu);
-    
+     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("administrateur ajouté avec succés");
+            alert.showAndWait();
     SS.listAdmin() ;
          ObservableList<User> list = SS.listAdmin();
         

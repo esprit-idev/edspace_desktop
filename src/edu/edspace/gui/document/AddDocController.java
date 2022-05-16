@@ -20,6 +20,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -86,6 +87,7 @@ public class AddDocController implements Initializable {
 
     private List<Matiere> mats = new ArrayList();
     private List<Niveau> niveaux = new ArrayList();
+    private List<Document> docs = new ArrayList();
     @FXML
     private AnchorPane rootPane;
     @FXML
@@ -111,7 +113,6 @@ public class AddDocController implements Initializable {
         MyConnection.getInstance().getCnx();
         initImages();
         initDisplay();
-
         final ToggleGroup group = new ToggleGroup();
         insertUrl_rb.setToggleGroup(group);
         attachFile_rb.setToggleGroup(group);
@@ -170,7 +171,16 @@ public class AddDocController implements Initializable {
 
     @FXML
     private void addDoc(MouseEvent event) {
+        boolean valid = true;
+        boolean exist=false;
         String docName = nom_tf.getText();
+        if (!docName.matches("[a-zA-Z0-9 ]*")) {
+            valid=false;
+            String title = "Erreur survenue lors de l'ajout";
+            String header = "Nom invalide";
+            String content = "Veuillez choisir un nom contenant que des chiffres et des lettres";
+            showAlert(Alert.AlertType.ERROR, title, header, content);
+        }
         String niveau = niveau_cb.getValue();
         String matiere = matiere_cb.getValue();
         String file = null;
@@ -184,18 +194,34 @@ public class AddDocController implements Initializable {
             }
             file = chooseFile_btn.getText();
             type = URLConnection.guessContentTypeFromName(file);
-            try {
-                Files.copy(Paths.get(file), Paths.get(Statics.myDocs + docName));
-            } catch (FileAlreadyExistsException ex) {
-                System.out.println(ex.getMessage());
+            DocumentService ds = new DocumentService();
+            docs = ds.listDocs();
+            for (int i = 0; i < docs.size(); i++) {
+                if (docs.get(i).getNom().equals(docName)) {
+                    valid = false;
+                    exist=true;
+                }
+            }
+            if (valid == true && exist==false) {
+                try {
+                    Files.copy(Paths.get(file), Paths.get(Statics.myDocs + docName));
+                }catch(NoSuchFileException ex){
+                    ex.printStackTrace();
+                } 
+                catch(InvalidPathException ex){
+                    ex.printStackTrace();
+                }
+                catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                catch(RuntimeException ex){
+                    ex.printStackTrace();
+                }
+            } else if(exist==true){
                 String title = "Erreur survenue lors de l'ajout";
                 String header = "Un document avec le même nom existe déjà";
                 String content = "Veuillez choisir un autre nom";
                 showAlert(Alert.AlertType.ERROR, title, header, content);
-            } catch (NoSuchFileException ex) {
-                filew_iv.setVisible(true);
-            } catch (IOException ex) {
-                ex.printStackTrace();
             }
 
         } else {
@@ -214,9 +240,13 @@ public class AddDocController implements Initializable {
         } else if ((insertUrl_rb.isSelected() || attachFile_rb.isSelected()) && docName != null && docName.length() != 0 && niveau != null && niveau.length() != 0 && matiere != null && matiere.length() != 0) {
             Document doc = new Document(signal, docName, insert_date, owner, url, niveau, matiere, type);
             DocumentService ds = new DocumentService();
+
             try {
                 System.out.println(chooseFile_btn.getText());
-                ds.ajouterDocument(doc);
+                System.out.println(valid);
+                if (valid == true) {
+                    ds.ajouterDocument(doc);
+                }
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/ListDocFront.fxml"));
                     Parent root = loader.load();
@@ -339,7 +369,7 @@ public class AddDocController implements Initializable {
             ex.printStackTrace();
         }
     }
-    
+
     @FXML
     private void getOut(MouseEvent event) {
         UserService US = new UserService();
