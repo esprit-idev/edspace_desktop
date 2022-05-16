@@ -23,7 +23,7 @@ public class Statics {
    // public static HSSFSheet Docs;*/
      
      
-/*
+
    //eslem's pc 
    public static final String FileSheet="C:\\Users\\MeriamBI\\Desktop\\abonnementDetails.Xls";
    public static final String myDocs="C:/Users/eslem/Desktop/edspace_symfony/public/documents/";
@@ -32,6 +32,6 @@ public class Statics {
    public static final String ClubPubsFile = "C:/Users/eslem/Desktop/edspace_symfony/public/PubFiles/";
    public static final String myPubImages="C:/Users/eslem/Desktop/edspace_symfony/public/images/";
    public static final String initDir="C:/Users/eslem/Desktop";
-   public static final String convertedDir="C:/Users/eslem/Desktop/testpdfhtml/";*/
+   public static final String convertedDir="C:/Users/eslem/Desktop/testpdfhtml/";
 }
 
