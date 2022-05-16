@@ -12,7 +12,7 @@
       <Label fx:id="title" layoutX="9.0" layoutY="250.0" text="title" />
       <Label fx:id="category" layoutX="8.0" layoutY="268.0" text="category" />
       <Button fx:id="modifBtn" layoutX="4.0" layoutY="291.0" mnemonicParsing="false" onMouseClicked="#updateMatiere" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #A6D9F7; -fx-background-radius: 10; -fx-font-weight: bold;" text="Modifier" textFill="#312f2f" />
-      <Button fx:id="deleteBtn" layoutX="124.0" layoutY="291.0" mnemonicParsing="false" onMouseClicked="#delete" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #FA5550; -fx-background-radius: 10; -fx-font-weight: bold;" text="Supprimer" textFill="#312f2f" />
+      <Button fx:id="deleteBtn" layoutX="124.0" layoutY="291.0" mnemonicParsing="false" onMouseClicked="#delete" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #FA5550; -fx-background-radius: 10; -fx-font-weight: bold;" text="Supprimer" textFill="WHITE" />
    </children>
    <effect>
       <GaussianBlur radius="15.19" />

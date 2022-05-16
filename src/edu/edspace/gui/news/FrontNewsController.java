@@ -243,9 +243,6 @@ public class FrontNewsController implements Initializable {
     catch(Exception ex){
         System.out.println(ex);
     }
-
-
-    setmes();
 //  setOthermes(); 
 }
 

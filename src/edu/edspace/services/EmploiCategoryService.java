@@ -67,8 +67,6 @@ public class EmploiCategoryService {
     }
 
     //delete
-
-
     public void deleteCat(int id){
         try {
             query = "DELETE FROM `categorie_emploi` WHERE id= ? ";
@@ -79,5 +77,19 @@ public class EmploiCategoryService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    public boolean findByCatName(String cat){
+        boolean exist = false;
+        try {
+            // String query all publications 
+            query = "SELECT category_name FROM `categorie_emploi` where category_name like '"+cat+"'";
+            resultSet = connection.createStatement().executeQuery(query);
+            if(resultSet.next()) {
+                exist = true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return exist;
     }
 }

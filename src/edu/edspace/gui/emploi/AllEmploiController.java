@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.sql.Connection;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -23,7 +24,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -159,24 +162,32 @@ public class AllEmploiController implements Initializable{
                 modifButton = cd.modifBtn;
                 delButton = cd.getDeleteButton();
                 delButton.setOnMouseClicked((MouseEvent event)->{
-                    emploiService.deleteOffer(nw.getId());
-
+                    //alert
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Supprimer la catégorie");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Etes vous sur de vouloir supprimer la publication " + nw.getTitle()+ " ?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if(result.get()== ButtonType.OK){
+                        emploiService.deleteOffer(nw.getId());
                         /* notification */ 
-                 SystemTray tray = SystemTray.getSystemTray();
-                 //If the icon is a file
-                 java.awt.Image imagess = Toolkit.getDefaultToolkit().createImage("icon.png");
-                 TrayIcon trayIcon = new TrayIcon(imagess, "ADD");
-                 //Let the system resize the image if needed
-                 trayIcon.setImageAutoSize(true);
-                 //Set tooltip text for the tray icon
-                 trayIcon.setToolTip("System tray icon demo");
-                 try {
-                     tray.add(trayIcon);
-                 } catch (AWTException e) {
-                     System.out.println(e.getMessage());
-                 }
-                 trayIcon.displayMessage("Supprimer", "L'offre " + nw.getTitle() + "  a ete bien supprimer", TrayIcon.MessageType.INFO);
-                    getEmploiView(event);
+                        SystemTray tray = SystemTray.getSystemTray();
+                        //If the icon is a file
+                        java.awt.Image imagess = Toolkit.getDefaultToolkit().createImage("icon.png");
+                        TrayIcon trayIcon = new TrayIcon(imagess, "ADD");
+                        //Let the system resize the image if needed
+                        trayIcon.setImageAutoSize(true);
+                        //Set tooltip text for the tray icon
+                        trayIcon.setToolTip("System tray icon demo");
+                        try {
+                            tray.add(trayIcon);
+                        } catch (AWTException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        trayIcon.displayMessage("Supprimer", "L'offre " + nw.getTitle() + "  a ete bien supprimer", TrayIcon.MessageType.INFO);
+                            getEmploiView(event);
+                    }
+
                 });
                 modifButton.setOnMouseClicked((MouseEvent event)->{
                     try {

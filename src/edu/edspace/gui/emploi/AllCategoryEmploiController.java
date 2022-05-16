@@ -118,8 +118,15 @@ public class AllCategoryEmploiController implements Initializable{
         if (nomCat != null && nomCat.length() != 0) {
             CategoryEmploi c = new CategoryEmploi(nomCat);
             EmploiCategoryService cs = new EmploiCategoryService();
-            cs.addCat(c);
-            refreshTable();
+            if(cs.findByCatName(nomCat)){
+                Alert al = new Alert(Alert.AlertType.ERROR);
+                al.setContentText("Choisir un autre nom pour la categorie");
+                al.showAndWait();
+            }else{
+                cs.addCat(c);
+                refreshTable();
+            }
+
         } else {
             showAlert();
         }
@@ -164,8 +171,15 @@ public class AllCategoryEmploiController implements Initializable{
                 
             if (tf.getText() != null && tf.getText().length() != 0) {
                 EmploiCategoryService es = new EmploiCategoryService();
-                        es.updateCat(tf.getText(),category.getId());;
-                        refreshTable();
+                if(es.findByCatName(tf.getText())){
+                    Alert al = new Alert(Alert.AlertType.ERROR);
+                    al.setContentText("Choisir un autre nom pour la categorie");
+                    al.showAndWait();
+                }else{
+                    es.updateCat(tf.getText(),category.getId());;
+                    refreshTable();
+                }
+
             } else {
                 showAlert();
              }
