@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.FrontThreadController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.FrontThreadController">
    <children>
       <AnchorPane fx:id="rootPane" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1117.6" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -44,12 +44,12 @@
                         <VBox fx:id="vmain" prefHeight="450.0" prefWidth="749.0" />
                      </content>
                   </ScrollPane>
-                  <Button alignment="TOP_CENTER" layoutX="980.0" layoutY="500.0" mnemonicParsing="false" onAction="#addNewThread" prefHeight="63.0" prefWidth="64.0" style="-fx-background-radius: 20em; -fx-background-color: #54b48c;" text="+" textAlignment="CENTER" textFill="WHITE">
+                  <Button alignment="TOP_CENTER" layoutX="846.0" layoutY="48.0" mnemonicParsing="false" onAction="#addNewThread" prefHeight="63.0" prefWidth="64.0" style="-fx-background-radius: 20em; -fx-background-color: #54b48c;" text="+" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="28.0" />
                      </font>
                   </Button>
-                  <ImageView fx:id="previous" fitHeight="37.0" fitWidth="36.0" layoutX="926.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="previous" fitHeight="37.0" fitWidth="36.0" layoutX="1024.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../images/home_grey.png" />
                      </image>

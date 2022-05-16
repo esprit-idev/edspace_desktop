@@ -273,6 +273,19 @@ public class ClubRubriqueResponsableController implements Initializable {
             alert.setContentText("Le champ description de la publication ne peut pas étre vide");
             alert.showAndWait();
         } else {
+             // badges
+        ClubPubService cb = new ClubPubService();
+        // badges
+        if (cb.displayHangingClubPubs(clubid).isEmpty()) {
+            badgeEnAttente.setVisible(false);
+        } else {
+            badgeEnAttente.setText(String.valueOf(cb.displayHangingClubPubs(clubid).size()));
+        }
+        if (cb.displayRefusedClubPubs(clubid).isEmpty()) {
+            badgeRefused.setVisible(false);
+        } else {
+            badgeRefused.setText(String.valueOf(cb.displayRefusedClubPubs(clubid).size()));
+        }
             //add file
             String fileName = null;
             String fileSelceted = "";
@@ -299,7 +312,6 @@ public class ClubRubriqueResponsableController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("La publication est envoyée, attendez l'approbation de l'administrateur");
             alert.showAndWait();
-            ClubPubService cb = new ClubPubService();
             int index = pubimgSelected.getText().lastIndexOf('.');
             if (index > 0) {
 
@@ -334,6 +346,7 @@ public class ClubRubriqueResponsableController implements Initializable {
     }
 
     public void setClubPic(Image clubPic) {
+        System.out.println(clubPic);
         this.clubPic.setImage(clubPic);
     }
 

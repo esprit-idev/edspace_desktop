@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -32,7 +33,7 @@
       <Hyperlink fx:id="previous" layoutX="41.0" layoutY="27.0" text="Previous" />
       <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.4" prefWidth="1060.8" style="-fx-background-color: #02030A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox alignment="TOP_CENTER" prefHeight="586.0" prefWidth="256.0" style="-fx-background-color: #1C2424;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fx:id="logo_iv" fitHeight="64.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -182,9 +183,9 @@
                   </Button>
                </children>
             </VBox>
-            <VBox layoutX="256.0" prefHeight="576.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox layoutX="256.0" prefHeight="586.0" prefWidth="805.0" style="-fx-background-color: #F4F6F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Pane fx:id="pnlOverview" prefHeight="694.0" prefWidth="793.0" style="-fx-background-color: #F4F6F9;">
+                  <Pane fx:id="pnlOverview" style="-fx-background-color: #F4F6F9;">
                      <children>
                         <Label layoutX="57.0" layoutY="39.0" text="Topics" textFill="#54b48c">
                            <font>
@@ -195,21 +196,28 @@
                            <content>
                               <VBox fx:id="vmain" prefHeight="358.0" prefWidth="557.0">
                                  <children>
-                                    <TableView fx:id="table" prefHeight="422.0" prefWidth="546.0" style="-fx-background-color: gray; -fx-border-color: #1b893a; -fx-border-insets: -1 -1 0 0; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 10px; -fx-font-family: &quot;Courier New&quot;;">
+                                    <TableView fx:id="table" prefHeight="422.0" prefWidth="546.0" style="-fx-background-color: white; -fx-border-color: #1b893a; -fx-border-insets: -1 -1 0 0; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 10px; -fx-font-family: Arial;">
                                       <columns>
-                                        <TableColumn fx:id="content" prefWidth="104.0" sortType="DESCENDING" style="-fx-background-color: transparent; -fx-text-color: green; -fx-font-size: 15px; -fx-font-family: &quot;Courier New&quot;;" text="Content" />
+                                        <TableColumn fx:id="content" prefWidth="104.0" sortType="DESCENDING" style="-fx-background-color: transparent; -fx-text-color: green; -fx-font-size: 15px; -fx-font-family: Arial;" text="Contenu" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </VBox>
                            </content>
                         </ScrollPane>
-                        <Button alignment="TOP_CENTER" layoutX="715.0" layoutY="51.0" mnemonicParsing="false" onAction="#addNewThread" prefHeight="49.0" prefWidth="47.0" style="-fx-background-radius: 20em; -fx-background-color: #54b48c;" text="+" textAlignment="CENTER" textFill="WHITE">
+                        <Button alignment="TOP_CENTER" layoutX="655.0" layoutY="53.0" mnemonicParsing="false" onAction="#addTopic" prefHeight="49.0" prefWidth="47.0" style="-fx-background-radius: 20em; -fx-background-color: #54b48c;" text="+" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="21.0" />
                            </font>
                         </Button>
                         <Button fx:id="topics" layoutX="619.0" layoutY="56.0" mnemonicParsing="false" onAction="#listTopics" prefHeight="40.0" prefWidth="71.0" style="-fx-background-color: #54b48c;" text="Topics" textFill="WHITE" visible="false" />
+                        <TextField fx:id="topicField" layoutX="276.0" layoutY="77.0" prefHeight="25.0" prefWidth="343.0" promptText="Ajouter un nouveau topic" />
+                        <Text fx:id="error" fill="RED" layoutX="276.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez remplir le champ" visible="false" />
+                        <ImageView fx:id="del" fitHeight="42.0" fitWidth="40.0" layoutX="724.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/delete.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </Pane>
                </children>

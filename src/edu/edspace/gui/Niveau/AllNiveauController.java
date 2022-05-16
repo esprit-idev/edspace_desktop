@@ -388,6 +388,17 @@ public class AllNiveauController implements Initializable {
 
     
     public void refresh(){
+        
+        nbc1.setDisable(true);
+         nbc2.setDisable(true);
+          nbc3.setDisable(true);
+           nbc4.setDisable(true);
+            nbc5.setDisable(true);
+             nbc6.setDisable(true);
+        quatreN.setDisable(true);
+        cinqN.setDisable(true);
+        sixN.setDisable(true);
+        
         updatepane.setVisible(false);
          setnbNiveau();
         connection = MyConnection.getInstance().getCnx();
@@ -452,7 +463,7 @@ alert.showAndWait();
 		          else {
                               Alert alert = new Alert(AlertType.ERROR);
 
-alert.setTitle("Error niveau");
+alert.setTitle("Erreur niveau");
 alert.setHeaderText("Niveau must start with a number ,'"+ Nniveau.getText().charAt(0)+"' is a letter");
 
 alert.showAndWait();
@@ -486,45 +497,106 @@ return true;
 
     @FXML
     private void autofill(ActionEvent event) {
+        int i = 0;
+        int j = 0;
         String[] ln = new String[7];
         int[] lc=new int[7];
         lc[0]=0;
          ln[0]="";
         if(un.isSelected()){
-            ln[1]="1";
-           lc[1]=Integer.parseInt(nbc1.getText());
+            i++;
+            
+           if(!nbc1.getText().equals("")){
+               ln[1]="1";
+                   lc[1]=Integer.parseInt(nbc1.getText());
+               j++;
+           }
+           un.setSelected(false);
+           nbc1.setText("");
         //System.out.println(un.getText());
         }else
             ln[1]="";
           if(deux.isSelected()){
-               ln[2]="1";
-               lc[2]=Integer.parseInt(nbc2.getText());
+               i++;
+               
+            
+                          if(!nbc2.getText().equals("")){
+                              ln[2]="1";
+                                 lc[2]=Integer.parseInt(nbc2.getText());
+               j++;
+           }
+                          deux.setSelected(false);
+           nbc2.setText("");
         }else
               ln[2]="";
           if(trois.isSelected()){
-               ln[3]="1";
-               lc[3]=Integer.parseInt(nbc3.getText());
+               i++;
+               
+              
+                          if(!nbc3.getText().equals("")){
+                              ln[3]="1";
+                               lc[3]=Integer.parseInt(nbc3.getText());
+               j++;
+           }
+                          trois.setSelected(false);
+           nbc3.setText("");
         }else
               ln[3]="";
           if(quatre.isSelected()){
-               ln[4]="4"+quatreN.getText();
-               lc[4]=Integer.parseInt(nbc4.getText());
+               i++;
+               
+            
+                          if(!nbc4.getText().equals("")){
+                              ln[4]="4"+quatreN.getText();
+                                 lc[4]=Integer.parseInt(nbc4.getText());
+               j++;
+           }
+                          quatre.setSelected(false);
+           nbc4.setText("");
+           quatreN.setText("");
         }else
               ln[4]="";
           if(cinq.isSelected()){
-              lc[5]=Integer.parseInt(nbc5.getText());
+               i++;
+           
+                          if(!nbc5.getText().equals("")){
+                                 lc[5]=Integer.parseInt(nbc5.getText());
                ln[5]="5"+cinqN.getText();
+               j++;
+           }
+                          cinq.setSelected(false);
+           nbc5.setText("");
+           cinqN.setText("");
         }else
               ln[5]="";
           if(six.isSelected()){
-              lc[6]=Integer.parseInt(nbc6.getText());
+               i++;
+            
+                          if(!nbc6.getText().equals("")){
+                                lc[6]=Integer.parseInt(nbc6.getText());
                ln[6]="6"+sixN.getText();
+               j++;
+           }
+                          six.setSelected(false);
+           nbc6.setText("");
+           sixN.setText("");
         }else
               ln[6]="";
-          
+          System.out.print(j);
+           System.out.print(i);
+          if(i==j){
           
           NiveauService ns=new NiveauService();
          ns.autofillA(ln, lc);
+          }
+          else{
+                                                                Alert alert = new Alert(AlertType.ERROR);
+
+alert.setTitle("Erreur");
+alert.setHeaderText("il faut remplir tous les champs!");
+
+alert.showAndWait();
+          }
           refresh();
      
          
@@ -578,6 +650,67 @@ NiveauService ns=new NiveauService();
             }
         }
         return false;
+    }
+    
+    
+        @FXML
+    void active1(MouseEvent event) {
+        if(!un.isSelected()){
+        nbc1.setDisable(true);}
+          else
+         nbc1.setDisable(false);
+         
+          
+           
+            
+             
+
+    }
+
+    @FXML
+    void active2(MouseEvent event) {
+           if(!deux.isSelected()){
+               nbc2.setDisable(true);
+           }
+          else
+nbc2.setDisable(false);
+    }
+
+    @FXML
+    void active3(MouseEvent event) {
+       if(!trois.isSelected()){nbc3.setDisable(true);}
+          else
+nbc3.setDisable(false);
+    }
+
+    @FXML
+    void active4(MouseEvent event) {
+        if(!quatre.isSelected()){nbc4.setDisable(true);
+quatreN.setDisable(true);}
+        else{
+nbc4.setDisable(false);
+quatreN.setDisable(false);}
+    }
+
+    @FXML
+    void active5(MouseEvent event) {
+        if(!cinq.isSelected()){
+        nbc5.setDisable(true);
+cinqN.setDisable(true);}
+        else{
+nbc5.setDisable(false);
+cinqN.setDisable(false);}
+    }
+
+    @FXML
+    void active6(MouseEvent event) {
+        if(!six.isSelected()){
+        nbc6.setDisable(true);
+sixN.setDisable(true);}
+        else{
+nbc6.setDisable(false);
+sixN.setDisable(false);
+        }
     }
     
     

@@ -161,6 +161,8 @@ public class ClubListAdminController implements Initializable {
     @FXML
     private ComboBox<String> filter_cat_combo;
     private int pubNB;
+    @FXML
+    private Button btnCatClubs;
 
     /**
      * Initializes the controller class.
@@ -222,21 +224,7 @@ public class ClubListAdminController implements Initializable {
             students.add(user.getEmail());
         }
         c_respo.setItems(students);
-        categories.add("Ajouter des categories");
-        c_cat.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent arg0) {
-                if (c_cat.getValue().equals("Ajouter des categories")) {
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubCategoriesList.fxml"));
-                        Parent root = loader.load();
-                        btn_Club.getScene().setRoot(root);
-                    } catch (IOException ex) {
-                        Logger.getLogger(ClubListAdminController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        });
+       
         search_tf.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals("")) {
                 showClubs();
@@ -820,7 +808,7 @@ public class ClubListAdminController implements Initializable {
                 alert.setContentText("Veuillez remplir tous les champs du formulaire");
                 alert.showAndWait();
             } else {
-                if (cb.clubExists(c_name_tf.getText())) {
+                if (cb.clubExistsEdit(c_name_tf.getText(),selectedClub.getClubId())) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.initStyle(StageStyle.UTILITY);
                     alert.setTitle("Error");
@@ -961,7 +949,6 @@ public class ClubListAdminController implements Initializable {
         }
     };
 
-    @FXML
     private void getNewsView(MouseEvent event) {
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
@@ -1119,5 +1106,16 @@ public class ClubListAdminController implements Initializable {
             ex.printStackTrace();
 
         }
+    }
+
+    @FXML
+    private void getCatClubs(MouseEvent event) {
+        try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubCategoriesList.fxml"));
+                        Parent root = loader.load();
+                        btn_Club.getScene().setRoot(root);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ClubListAdminController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
     }
 }
