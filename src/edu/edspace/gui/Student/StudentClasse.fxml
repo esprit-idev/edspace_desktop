@@ -6,21 +6,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.StudentClasseController">
    <children>
-      <TableView fx:id="tablestu" layoutX="229.0" layoutY="131.0" prefHeight="239.0" prefWidth="438.0">
-        <columns>
-          <TableColumn fx:id="nom" prefWidth="116.0" text="Nom" />
-          <TableColumn fx:id="prenom" prefWidth="141.0" text="Prenom" />
-            <TableColumn fx:id="email" prefWidth="179.0" text="Email" />
-        </columns>
-      </TableView>
-      <Text fill="#20947e" layoutX="307.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des etudiants de ma classe">
+      <Text fill="#20947e" layoutX="333.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des etudiants de ma classe">
          <font>
-            <Font name="Comic Sans MS" size="22.0" />
+            <Font name="Comic Sans MS Bold" size="24.0" />
          </font>
       </Text>
       <Button fx:id="btn" layoutX="975.0" layoutY="30.0" mnemonicParsing="false" onAction="#home" style="-fx-background-color: #1C2424;" textFill="#1c2424">
@@ -32,5 +26,16 @@
             </ImageView>
          </graphic>
       </Button>
+      <Pane cache="true" layoutX="267.0" layoutY="109.0" prefHeight="357.0" prefWidth="506.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <TableView fx:id="tablestu" layoutX="41.0" layoutY="49.0" prefHeight="239.0" prefWidth="438.0">
+              <columns>
+                <TableColumn fx:id="nom" prefWidth="116.0" text="Nom" />
+                <TableColumn fx:id="prenom" prefWidth="141.0" text="Prenom" />
+                  <TableColumn fx:id="email" prefWidth="179.0" text="Email" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

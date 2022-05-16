@@ -83,8 +83,10 @@ public class StudentService {
     public ObservableList<User> listStudent() {
         ObservableList<User> listStudent = FXCollections.observableArrayList();
         try {
-            String req = "select * from user where roles='[\"ROLE_STUDENT\"]'"  ; //requete select from db
-            Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
+          String req = "select * from user where roles LIKE '%[\"ROLE_STUDENT\"]%'" ; //requete select from db
+          //String req = "select * from user where roles='[\"ROLE_STUDENT\"]' OR roles='[\"ROLE_RESPONSABLEC\"]'" ;         
+// String req = "select * from user where roles CONTAINS ('[\"ROLE_STUDENT\"]')";  
+          Statement st = MyConnection.getInstance().getCnx().createStatement(); //instance of myConnection pour etablir la cnx
             ResultSet rs=st.executeQuery(req); //resultat de la requete
             
             //tant que rs has next get personne and add it to the list
