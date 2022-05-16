@@ -228,7 +228,10 @@ List<User> list=new ArrayList<>();
                         c.setPrenom(rs.getString("prenom"));
                         c.setEmail(rs.getString("email"));
                         c.setRoles(rs.getString("roles"));
+                        System.out.println(c.getRoles());
+                        if(c.getRoles().contains("STUDENT")){
 	            	list.add(c);
+                        }
 	            }
 			}catch (SQLException ex) {
 	            System.out.println(ex.getMessage());
