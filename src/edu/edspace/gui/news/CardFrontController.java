@@ -37,6 +37,7 @@ public class CardFrontController implements Initializable{
         category.setText(news.getCategoryName());
         File f = new File(Statics.myPubImages + nw.getImage());
         Image i = new Image(f.toURI().toString());
+        System.out.println(f.toURI().toString());
         image.setImage(i);
         image.setPreserveRatio(true);
         image.fitWidthProperty().bind(rootPane.widthProperty());
@@ -48,6 +49,7 @@ public class CardFrontController implements Initializable{
         category.setText(emps.getCategoryName());
         File f = new File(Statics.myPubImages + emp.getImage());
         Image i = new Image(f.toURI().toString());
+        System.out.println(f.toURI().toString());
         image.setImage(i);
         image.setPreserveRatio(true);
         image.fitWidthProperty().bind(rootPane.widthProperty());

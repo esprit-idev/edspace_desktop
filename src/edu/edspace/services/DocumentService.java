@@ -141,7 +141,7 @@ public class DocumentService {
             }
         } else {
             try {
-                File ficConverti = new File("C:/Users/MeriamBI/Desktop/testpdfhtml/" + doc.getNom() + ".pdf");
+                File ficConverti = new File("C:/Users/21656/Desktop/testpdfhtml/" + doc.getNom() + ".pdf");
                 if (!ficConverti.exists()) {
                     convertUrlToPdf(doc.getNom(), doc.getUrl());
                 }
@@ -154,7 +154,7 @@ public class DocumentService {
 
     public void convertUrlToPdf(String filename, String url) throws InterruptedException, IOException {
         Process wkhtml; // Create uninitialized process
-        String command = "wkhtmltopdf " + url + " C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename + ".pdf"; // Desired command
+        String command = "wkhtmltopdf " + url + " C:/Users/21656/Desktop/testpdfhtml/" + filename + ".pdf"; // Desired command
         //to_change
         wkhtml = Runtime.getRuntime().exec(command); // Start process
         IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
@@ -277,7 +277,7 @@ public class DocumentService {
             filepath = Statics.myDocs + filename;
         } else {
             filename=filename+".pdf";
-            filepath = "C:/Users/MeriamBI/Desktop/testpdfhtml/" + filename;
+            filepath = "C:/Users/21656/Desktop/testpdfhtml/" + filename;
             try {
                 File ficConverti = new File(filepath);
                 if (!ficConverti.exists()) {
