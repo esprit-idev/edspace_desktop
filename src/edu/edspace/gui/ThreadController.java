@@ -67,7 +67,7 @@ public class ThreadController implements Initializable {
     @FXML
     private Button addBtn;
     @FXML
-    private Hyperlink previous;
+    private ImageView previous;
     private int admin =0 ;
     final List<Reponse> re = new ArrayList();
     @FXML
@@ -137,7 +137,7 @@ public class ThreadController implements Initializable {
                }
         }});
 
-        previous.setOnAction(e->{
+        previous.setOnMouseClicked(e->{
             if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
@@ -175,7 +175,7 @@ public class ThreadController implements Initializable {
        
        //tquestion.setText(thread.getQuestion());
        if(reps.size() == 0){
-           sp.setContent(new Text("Empty"));
+           sp.setContent(new Text("Il n'y a aucune Thread"));
            
        }
        addBtn.setOnAction(e->{
@@ -185,6 +185,7 @@ public class ThreadController implements Initializable {
                    error.setVisible(true);
                }
                else{
+                   error.setVisible(false);
                     if(checkForBadWords(tfReponse.getText())==true){
                        bad.setVisible(true);
                        tfReponse.setText(null);
@@ -308,7 +309,7 @@ public class ThreadController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initImages();
-        previous.setOnAction(e->{
+        previous.setOnMouseClicked(e->{
             if(this.admin==1){
            FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
@@ -382,6 +383,10 @@ public class ThreadController implements Initializable {
         File fUser = new File("images/account.png");
         Image fu = new Image(fUser.toURI().toString());
         
+        File bacj = new File("images/back_grey.png");
+        Image back = new Image(bacj.toURI().toString());
+        
+        previous.setImage(back);
         logo_iv.setImage(logoI);
         pdf.setImage(pdfl);
         google.setImage(gl);

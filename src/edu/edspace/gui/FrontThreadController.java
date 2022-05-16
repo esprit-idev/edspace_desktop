@@ -145,7 +145,7 @@ public Thread clientThread;
        Threads.addAll(threadService.listThreads());
        vmain.setSpacing(10);
        if(ts.size()==0){
-           vmain.getChildren().add(new Text("Empty"));
+           vmain.getChildren().add(new Text("Il n'y a aucune Thread"));
        }
        for (int i = 0;i<ts.size();i++)
        {
@@ -178,12 +178,12 @@ public Thread clientThread;
                }
            });
            HBox ha= new HBox();
-           if(t.getUser()==this.user){
+           if(t.getUser()==Session.getId()){
                ha.getChildren().add(up);
            }
            Text tx= new Text();
            tx.setText("Added by "+t.getUser());
-           if(this.user == t.getUser() || this.admin == 1){
+           if(Session.getId() == t.getUser() || Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
            ha.getChildren().add(del);
             del.setOnAction(e->{
                Alert a = new Alert(Alert.AlertType.CONFIRMATION);
@@ -194,7 +194,8 @@ public Thread clientThread;
                Optional<ButtonType> action = a.showAndWait();
                if(action.get() == ButtonType.OK){
                    threadService.deleteThread(th.get(q));
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
+                    if(Session.getRoles().equals("[\"ROLE_ADMIN\"]")){
+                                  FXMLLoader loader = new FXMLLoader(getClass().getResource("ThreadList.fxml"));
         try {
             Parent root = loader.load();
             del.getScene().setRoot(root);
@@ -202,6 +203,16 @@ public Thread clientThread;
         } catch (IOException ex) {
             Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+                   }else{
+                       FXMLLoader loader = new FXMLLoader(getClass().getResource("FrontThread.fxml"));
+        try {
+            Parent root = loader.load();
+            del.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ListTopicsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                   }
                     }
           
            });
