@@ -7,7 +7,7 @@ package edu.edspace.utils;
 //import org.apache.poi.hssf.usermodel.HSSFSheet;
 
 public class Statics {
-    /*
+    
     //meriam's pc 
      public static final String FileSheet="C:\\Users\\MeriamBI\\Desktop\\abonnementDetails.Xls";
      public static final String myDocs="C:/Users/MeriamBI/Desktop/pidev/EdSpace_Symfony/public/documents/";
@@ -20,7 +20,7 @@ public class Statics {
      public static final String myPubImages="C:/Users/MeriamBI/Desktop/pidev/EdSpace_Symfony/public/images/";
      public static final String initDir="C:/Users/MeriamBI/Desktop";
      public static final String convertedDir="C:/Users/MeriamBI/Desktop/testpdfhtml/";
-   // public static HSSFSheet Docs;*/
+   // public static HSSFSheet Docs;
      
      
 

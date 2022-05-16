@@ -3,44 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/services/ExcelFileService.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Clubs/ClubRubriqueResponsableController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Clubs/Client.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/services/PDFService.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/utils/Statics.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/news/CardFrontController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Clubs/ClubRubriqueAdminController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/services/MessageService.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/emploi/AddEmploiController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Admin/AllAdminsController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Clubs/ClubHangingPubsInterfaceController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/emploi/AllEmploiController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Clubs/ClubItemController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/Client.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/news/AllNewsController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Clubs/style.css</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/news/FrontNewsController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/css/styles.css</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Clubs/ClubListAdminController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/FaveDocsController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/User/LoginController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Clubs/ClubPubItemAdminAcceptRefuseController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/news/CardController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/css/clubsCss.css</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Clubs/ClubListStudentController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/css/style_table.css</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/services/DocumentFavorisService.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Message/TestController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/css/style.css</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/tests/MainClass.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Message/JsonReader.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Client.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Clubs/ClubPubHangRefItemController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/css/fullpackstyling.css</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/news/AddNewsController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/ListDocFrontController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/Clubs/ClubPubItemController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/FrontHomeController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/UserService.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/Student/AllStudentsController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/User/LoginController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/entities/Session.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/Admin/AllAdminsController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ThreadController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/StudentService.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ListTopicsController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/tests/MainClass.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/User/MdpController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/NewThreadController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/AdminService.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ThreadListController.java</file>
+            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/User/ResetController.java</file>
         </group>
     </open-files>
 </project-private>

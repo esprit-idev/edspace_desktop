@@ -57,7 +57,9 @@ public class UserService {
                 System.out.println("login ");
             }*/
             
-            if (BCrypt.checkpw(Pwd, rs.getString("password"))) {
+          String myPwd="$2a"+rs.getString("password").substring(3);
+           System.out.println(myPwd);
+            if (BCrypt.checkpw(Pwd, myPwd)) {
                 Session.setId(rs.getInt("id"));
                 Session.setUsername(rs.getString("username"));
                 Session.setPrenom(rs.getString("prenom"));

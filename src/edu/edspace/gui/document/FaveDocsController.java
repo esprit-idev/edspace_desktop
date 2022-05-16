@@ -37,6 +37,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 
 /**
  * FXML Controller class
@@ -58,7 +59,7 @@ public class FaveDocsController implements Initializable {
     @FXML
     private ScrollPane scroll;
     @FXML
-    private GridPane grid;
+    private TilePane grid;
     @FXML
     private ImageView back_iv;
     @FXML
@@ -149,14 +150,15 @@ public class FaveDocsController implements Initializable {
                 AnchorPane anchorPane = fXMLLoader.load();
                 DocRPinUnpinController docRPinUnpinController = fXMLLoader.getController();
                 docRPinUnpinController.setData(myFaves.get(i));
-                if (column == 4) {
+                /*if (column == 4) {
                     column = 0;
                     row++;
                 }
                 grid.add(anchorPane, column++, row);
                 //grid.getRowConstraints().add(new RowConstraints(30));
 
-                GridPane.setMargin(anchorPane, new Insets(9));
+                GridPane.setMargin(anchorPane, new Insets(9));*/
+                grid.getChildren().addAll(anchorPane);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
