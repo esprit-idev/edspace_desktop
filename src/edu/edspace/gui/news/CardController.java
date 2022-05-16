@@ -43,6 +43,7 @@ public class CardController implements Initializable{
         title.setText(news.getTitle());
         category.setText(news.getCategoryName());
         File f = new File(Statics.myPubImages + nw.getImage());
+        System.out.println(Statics.myPubImages);
         Image i = new Image(f.toURI().toString());
         image.setImage(i);
         image.setPreserveRatio(true);
@@ -55,6 +56,7 @@ public class CardController implements Initializable{
         category.setText(emp.getCategoryName());
         System.out.println(category);
         File f = new File(Statics.myPubImages + emp.getImage());
+        System.out.println(Statics.myPubImages + emp.getImage());
         Image i = new Image(f.toURI().toString());
         image.setImage(i);
         image.setPreserveRatio(true);

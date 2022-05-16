@@ -631,7 +631,7 @@ public class ClubRubriqueResponsableController implements Initializable {
     private String getmicTExt(String duree) {
         String s = "";
         try {
-            String command = "py C:\\Users\\anash\\Desktop\\speechScript.py " + duree;
+            String command = "python C:\\Users\\MeriamBI\\Desktop\\speechScript.py " + duree;
             Process p = Runtime.getRuntime().exec(command);
             try {
                 // Start a new java process 
@@ -652,7 +652,7 @@ public class ClubRubriqueResponsableController implements Initializable {
         return s;
     }
 
-    @FXML
+    /*@FXML
     private void rec(ActionEvent event) {
         new Thread(new Runnable() {
             public void run() {
@@ -689,5 +689,43 @@ public class ClubRubriqueResponsableController implements Initializable {
 
         }, 0, 1000);
 
+    }*/
+
+    @FXML
+    private void rec(MouseEvent event) {new Thread(new Runnable() {
+            public void run() {
+                if (pubdesc_et.getText().length() != 0) {
+                    pubdesc_et.setText(pubdesc_et.getText() + " " + getmicTExt(timer.getText()));
+
+                } else {
+                    pubdesc_et.setText(getmicTExt(timer.getText()));
+                }
+            }
+        }).start();
+
+        Timer timers = new Timer();
+
+        timers.scheduleAtFixedRate(new TimerTask() {
+            int i = Integer.parseInt(timer.getText().split(" S")[0]);
+
+            public void run() {
+                new Thread(new Runnable() {
+                    public void run() {
+                        Platform.runLater(() -> {
+                            timer.setText(i + " S restantes");
+                            i--;
+
+                            if (i < 0) {
+                                timers.cancel();
+                                timer.setText(String.valueOf(Math.round(slider.getValue())) + " S restantes");
+                            }
+                        });
+                    }
+                }).start();
+
+            }
+
+        }, 0, 1000);
+        
     }
 }

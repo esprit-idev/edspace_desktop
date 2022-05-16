@@ -37,6 +37,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 
 /**
  * FXML Controller class
@@ -96,7 +97,7 @@ public class DocsListController implements Initializable {
     @FXML
     private ScrollPane scroll;
     @FXML
-    private GridPane grid;
+    private TilePane grid;
 
     @FXML
     private ComboBox<String> niveau_cb;
@@ -187,14 +188,15 @@ public class DocsListController implements Initializable {
 
                 DocRController docRController = fXMLLoader.getController();
                 docRController.setData(docs.get(i));
-
+/*
                 if (column == 3) {
                     column = 0;
                     row++;
                 }
                 grid.add(anchorPane, column++, row);
 
-                GridPane.setMargin(anchorPane, new Insets(10));
+                GridPane.setMargin(anchorPane, new Insets(10));*/
+                grid.getChildren().addAll(anchorPane);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

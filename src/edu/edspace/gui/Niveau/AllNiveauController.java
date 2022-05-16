@@ -5,21 +5,30 @@
 package edu.edspace.gui.Niveau;
 
 import edu.edspace.entities.Niveau;
+import edu.edspace.gui.news.AllNewsController;
+import edu.edspace.gui.news.allCategoryNewsController;
 import edu.edspace.services.ClasseService;
 import edu.edspace.services.ClubService;
 import edu.edspace.services.MessageService;
 import edu.edspace.services.NiveauService;
+import edu.edspace.services.UserService;
 import edu.edspace.utils.MyConnection;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -218,16 +227,127 @@ public class AllNiveauController implements Initializable {
     private void handleClicks(ActionEvent event) {
     }
 
+@FXML
+    private void getNewsView(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allNews.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(AllNewsController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+    }    
     @FXML
-    private void getNewsView(MouseEvent event) {
+    private void getEmploiView(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/emploi/allEmploi.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(AllNewsController.class.getName()).log(Level.SEVERE, null, ex);
+		}
     }
-
     @FXML
-    private void getAllMatieresView(MouseEvent event) {
+    private void getCatNewsView(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/news/allCategoryNews.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(AllNewsController.class.getName()).log(Level.SEVERE, null, ex);
+		}
     }
-
     @FXML
     private void getAllDocsView(MouseEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/document/DocsList.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(allCategoryNewsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML
+    private void getDashboardView(MouseEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/edu/edspace/gui/HomeBack.fxml"));
+			rootPane.getChildren().setAll(pane);
+		} catch (IOException ex) {
+			Logger.getLogger(allCategoryNewsController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+    }
+    @FXML
+    private void getNiveauView(MouseEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Niveau/AllNiveau.fxml")); 
+            Parent root = loader.load(); 
+            rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {
+			ex.printStackTrace(); 
+		}
+    }
+    @FXML
+    private void getClassesView(MouseEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Classe/AllClasses.fxml")); 
+            Parent root = loader.load(); 
+            rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {
+			ex.printStackTrace(); 
+		}
+    }           
+    @FXML
+    private void getAllMatieresView(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/matiere/MatieresList.fxml"));
+            Parent root = loader.load();
+            rootPane.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AllNewsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML
+    private void displayClubs(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Clubs/ClubListAdmin.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    @FXML
+    private void getForum(MouseEvent event) {
+        try {
+            //instance mtaa el crud
+            //redirection
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
+            Parent root = loader.load();
+            forum_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    @FXML
+    private void getUsers(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Admin/AllAdmins.fxml"));
+            Parent root = loader.load();
+            club_iv.getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } 
+    }
+    @FXML
+    private void logout(MouseEvent event){
+        UserService US = new UserService();
+        US.logout();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/User/Login.fxml"));
+        try {
+        Parent root = loader.load();
+        rootPane.getScene().setRoot(root); 
+		} catch (IOException ex) {		
+		}
     }
 
     public void setnbNiveau(){
@@ -310,9 +430,19 @@ public class AllNiveauController implements Initializable {
      Nniveau.setText("");
              }
             if(valider.getText().equals("Ajouter")){
+                if(ns.getOneById(Nniveau.getText()).getId().equals("-1")){
                 Niveau temp=new Niveau(Nniveau.getText());
                 ns.ajouterNiveau(temp);
+                }else{
+                                                  Alert alert = new Alert(AlertType.ERROR);
+
+alert.setTitle("Error niveau");
+alert.setHeaderText("Niveau already exist!");
+
+alert.showAndWait();
+                }
                  Nniveau.setText("");
+                
             }
              
                          refresh();
@@ -326,7 +456,7 @@ alert.setTitle("Error niveau");
 alert.setHeaderText("Niveau must start with a number ,'"+ Nniveau.getText().charAt(0)+"' is a letter");
 
 alert.showAndWait();
-		            System.out.println("'"+ Nniveau.getText().charAt(0)+"' is a letter");
+		          //  System.out.println("'"+ Nniveau.getText().charAt(0)+"' is a letter");
 		         }
     }
             Nniveau.setText("");
@@ -416,19 +546,42 @@ return true;
     
     @FXML
     private void find(KeyEvent event) {
-       // System.out.println("test");
-        String s=search.getText();
-        MessageService ms=new MessageService();
         
-        niveauTable.getItems().stream()
-    .filter(item -> ms.mots1(item.getId(),s ))
-    .findAny()
-    .ifPresent(item -> {
-        niveauTable.getSelectionModel().select(item);
-        niveauTable.scrollTo(item);
-    });
+        
+        
+                String s = search.getText();
+NiveauService ns=new NiveauService();
+        niveauTable.getItems().clear();
+        
+        List<Niveau> c =ns.listeNiveaux() ;
+        for (int i = 0; i < c.size(); i++) {
+            if (kelma(c.get(i).getId(), s)) {
+                n.addAll(c.get(i));
+            }
+        }
+                
+        niveau.setCellValueFactory(new PropertyValueFactory<Niveau,String>("id"));
+        nbclasse.setCellValueFactory(new PropertyValueFactory<Niveau,Integer>("nbClasse"));
+        niveauTable.setItems(n);
+
     }
     
+    
+    public boolean kelma(String s1, String s2) {
+        String[] l1 = null;
+
+        l1 = s1.split(" ");
+        String[] l2 = s2.split("(?!^)");
+        for (int i = 0; i < l1.length; i++) {
+            if (l1[i].toUpperCase().contains(s2.toUpperCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+  
     
              public void initImages() {
         File fileLogo = new File("images/logo1.png");

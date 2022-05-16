@@ -10,17 +10,12 @@ import edu.edspace.services.MessageService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -29,7 +24,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -49,66 +43,64 @@ import javafx.scene.text.TextFlow;
  *
  * @author aa
  */
-public class AllMessagesController extends Thread implements Runnable,Initializable {
+public class TestController implements Initializable {
 
-    @FXML
-    private AnchorPane rootPane;
-    @FXML
-    private ImageView out_iv;
-    @FXML
-    private ImageView home_iv;
-    @FXML
-    private ImageView logo_iv;
-    @FXML
-    private TextField url_tf;
-    @FXML
-    private ImageView back_iv;
     @FXML
     private Pane pane1;
     @FXML
     private TextField text;
     @FXML
-    private Button send;
-    @FXML
-    public VBox vbox;
-
-    @FXML
     private Button location;
+    @FXML
+    private Button send;
     @FXML
     private ScrollPane sp_main;
     @FXML
     private AnchorPane anchor1;
-    
-    
-        @FXML
+    @FXML
+    public VBox vbox;
+    @FXML
     private Button translate;
- @FXML
+    @FXML
     private ImageView logo_chat;
-   @FXML
+    @FXML
     private Button chatgroupe;
- 
-    
-        MessageService ms=new MessageService();
-    int uid=2;
-    Socket socket;
-    OutputStream out;
-    PrintWriter ostream;
-     BufferedReader in;
-     String serverAddr;
-     int port;
+
+    public    MessageService ms=new MessageService();
+    public int uid=1;
+   public Socket socket;
+   public OutputStream out;
+   public PrintWriter ostream;
+  public   BufferedReader in;
+     public String serverAddr;
+    public int port;
 public Client client;
 public Thread clientThread;
- ClasseService cs=new ClasseService();
+
+  ClasseService cs=new ClasseService();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
             refreshchat();
-      port=2018;
+  
+        // TODO
+    }    
+    
+     
+    public void refreshchat(){
+            port=2018;
             
-           try{
+             pane1.setVisible(false);
+        ClasseService cs =new ClasseService();
+        String niveau=cs.getOneById(cs.getStudent(uid).getClasse_id()).getNiveau().getId();
+        String classe=cs.getOneById(cs.getStudent(uid).getClasse_id()).getClasse();
+         chatgroupe.setText("CLASSE : "+niveau+" "+classe);
+        initImages();
+       setmes();
+            
+         /*      try{
     
     
                 client = new Client(this);
@@ -120,21 +112,9 @@ public Thread clientThread;
                 System.out.println(ex);
             }
        
- 
+ */
 
        
-    
-      
-    }    
-    
-    
-    public void refreshchat(){
-        pane1.setVisible(false);
-        ClasseService cs =new ClasseService();
-        String niveau=cs.getOneById(cs.getStudent(uid).getClasse_id()).getNiveau().getId();
-        String classe=cs.getOneById(cs.getStudent(uid).getClasse_id()).getClasse();
-         chatgroupe.setText("CLASSE : "+niveau+" "+classe);
-        initImages();
        setmes();
       //  setOthermes(); 
     }
@@ -153,7 +133,7 @@ public Thread clientThread;
                          System.out.println(temp);
                            Text text=new Text(temp.getContent());
                            text.setFill(Color.LIGHTGREEN);
-                            text.setFont(Font.font("SANS_SERIF", 13));
+                              text.setFont(Font.font("SANS_SERIF", 13));
                            TextFlow textFlow=new TextFlow(text);
                            textFlow.setStyle("-fx-background-color: rgb(233,233,235)"+ " -fx-background-radius: 20px");
                            textFlow.setPadding(new Insets(5,0,5,100));
@@ -168,7 +148,7 @@ public Thread clientThread;
               hBox.setPadding(new Insets(5,5,5,0));
                          System.out.println(temp);
                            Text text=new Text(temp.getContent());
-                           text.setFont(Font.font("SANS_SERIF", 13));
+                              text.setFont(Font.font("SANS_SERIF", 13));
                            text.setFill(Color.VIOLET);
                            TextFlow textFlow=new TextFlow(text);
                            textFlow.setStyle("-fx-background-color: rgb(233,233,235)"+ " -fx-background-radius: 20px");
@@ -222,18 +202,19 @@ public Thread clientThread;
     }
     
     
+     public void initImages() {
+         File filechat = new File("images/chat1.png");
+        Image chat = new Image(filechat.toURI().toString());
 
-    @FXML
-    private void getHome(MouseEvent event) {
-    }
+       
+        logo_chat.setImage(chat);
 
-    @FXML
-    private void getCentre(MouseEvent event) {
     }
+     
 
     @FXML
     private void sendMessage(ActionEvent event) {
-        
+           
         
         if(!text.getText().isEmpty()){
        
@@ -241,7 +222,7 @@ public Thread clientThread;
         
         
         
-        ClasseService cs=new ClasseService();
+        
         
         
         
@@ -260,44 +241,14 @@ public Thread clientThread;
         
         }
         text.setText("");
-        //addmes();
-        
     }
     
     
     
-    
-    public void initImages() {
-        File fileLogo = new File("images/logo1.png");
-        Image logoI = new Image(fileLogo.toURI().toString());
-
-        File fileHome = new File("images/home_grey.png");
-        Image homeI = new Image(fileHome.toURI().toString());
-
-        File fileOut = new File("images/logout_grey.png");
-        Image outI = new Image(fileOut.toURI().toString());
-
-        File fileBack = new File("images/back_grey.png");
-        Image backI = new Image(fileBack.toURI().toString());
-
-        File fileWarning = new File("images/warning_red.png");
-        Image warningI = new Image(fileWarning.toURI().toString());
-        
-         File filechat = new File("images/chat1.png");
-        Image chat = new Image(filechat.toURI().toString());
-
-        logo_iv.setImage(logoI);
-        home_iv.setImage(homeI);
-        out_iv.setImage(outI);
-        back_iv.setImage(backI);
-        logo_chat.setImage(chat);
-
-    }
 
     @FXML
     private void location(ActionEvent event) {
-        
-              String mylocation=JsonReader.show("102.156.219.112");
+             String mylocation=JsonReader.show("102.156.219.112");
               
               ClasseService cs=new ClasseService();
         
@@ -305,18 +256,28 @@ public Thread clientThread;
         
         Message m = new Message();
         
-        m.setClasse(cs.getOneById(cs.getStudent(uid).getClasse_id()));
+        m.setClasse(cs.getOneById(cs.getOneById(cs.getStudent(uid).getClasse_id()).getId()));
         m.setUser(ms.getuser(1));
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         m.setPostDate(date);
-        m.setContent("MY LOCATION : "+mylocation.toUpperCase() +"      weather description :"+JsonReader.weather(mylocation));
+        m.setContent("MY LOCATION RIGHT NOW IS AT AT : "+mylocation.toUpperCase() +" weather description :"+JsonReader.weather(mylocation));
         
         //addmes("I'M AT : "+mylocation);
          client.send(m);
         ms.ajouterMessage(m);
-              
     }
     
+      @FXML
+    void open(MouseEvent event) {
+        
+        pane1.setVisible(true);
+
+    }
+    
+        @FXML
+    void closechat(ActionEvent event) {
+ pane1.setVisible(false);
+    }
     
        @FXML
     void translatem(ActionEvent event) {
@@ -329,17 +290,5 @@ public Thread clientThread;
 
     }
     
-    
-    @FXML
-    void open(MouseEvent event) {
-        
-        pane1.setVisible(true);
-
-    }
-    
-        @FXML
-    void closechat(ActionEvent event) {
- pane1.setVisible(false);
-    }
     
 }

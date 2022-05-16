@@ -165,6 +165,7 @@ public class ClubRubriqueAdminController implements Initializable {
         });
         //setting actual pubs
         String clubPic = cp.getClubImage(clubid);
+        System.out.println(clubPic);
         pubsList = cb.displayPostedClubPubs(clubid);
         int colu = 0;
         int row = 0;

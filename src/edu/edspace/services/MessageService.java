@@ -59,7 +59,6 @@ public class MessageService {
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
             	m.setUser(us.getuser(rs.getInt("classe_id")));
-            	System.out.println(m);
             	
             	list.add(m);
             }
@@ -77,7 +76,7 @@ public class MessageService {
 		List<Message> list=new ArrayList<>();
 		
 		try {
-			String req = "select * from Message where classe_id=?"; 
+			String req = "select * from message where classe_id=?"; 
 			PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, c);
             ClasseService ns=new ClasseService();
@@ -92,10 +91,9 @@ public class MessageService {
             	Date d1 = new Date(rs.getDate("post_date").getTime());
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
-            	m.setUser(us.getuser(rs.getInt("classe_id")));
-            	System.out.println(m);
-            	list.add(m);
-            }
+            	m.setUser(us.getuser(rs.getInt("user_id")));
+            	list.add(switcher(m));
+            }      
 		}catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -123,9 +121,8 @@ public class MessageService {
             	Date d1 = new Date(rs.getDate("post_date").getTime());
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
-            	m.setUser(us.getuser(rs.getInt("classe_id")));
-            	System.out.println(m);
-            	list.add(m);
+            	m.setUser(us.getuser(rs.getInt("user_id")));
+            	list.add(switcher(m));
             }
 		}catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -156,7 +153,6 @@ public class MessageService {
             	m.setPostDate(d1);
             	m.setClasse(ns.getOneById(rs.getInt("classe_id")));
             	m.setUser(us.getuser(rs.getInt("classe_id")));
-            	System.out.println(m);
             	list.add(m);
             }
 		}catch (SQLException ex) {
@@ -215,9 +211,7 @@ public class MessageService {
 		try {
 			
 			pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-			 pst.setInt(1,41);
-			 
-			 
+			 pst.setInt(1,124);
 				String str;
 	           ResultSet rs = pst.executeQuery();
 	           while (rs.next()) {
@@ -254,7 +248,6 @@ public class MessageService {
 			String test=s;
 			for(String ss:mot) {
 			if(detector(s,ss)) {
-				
 				test="****";
 			}
 			}
@@ -262,7 +255,6 @@ public class MessageService {
 		}
 		
 		m.setContent(text);
-		System.out.println(text);
 		return m;
 	}
 	///////////////////////////////////////////

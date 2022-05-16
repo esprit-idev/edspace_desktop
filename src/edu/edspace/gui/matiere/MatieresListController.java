@@ -159,8 +159,16 @@ public class MatieresListController implements Initializable {
     @FXML
     private void addMatiere(MouseEvent event) {
         String nomMat = matiere_tf.getText();
+        boolean valid=true;
+        if (!nomMat.matches("[a-zA-Z0-9 ]*")) {
+            valid=false;
+            String title = "Erreur survenue lors de l'ajout";
+            String header = "Nom invalide";
+            String content = "Veuillez choisir un nom contenant que des chiffres et des lettres";
+            showAlert(Alert.AlertType.ERROR, title, header, content);
+        }
         String niveau = niveau_cb.getValue();
-        if (nomMat != null && nomMat.length() != 0 && niveau != null && niveau.length() != 0) {
+        if (nomMat != null && nomMat.length() != 0 && valid==true && niveau != null && niveau.length() != 0) {
             MatiereService ms = new MatiereService();
             if (ms.findMatiereById(nomMat)) {
                 error_l.setText("Veuillez choisir un autre nom pour la matière!");
