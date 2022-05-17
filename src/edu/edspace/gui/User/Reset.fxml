@@ -19,7 +19,7 @@
          <children>
             <PasswordField fx:id="mdp" layoutX="172.0" layoutY="130.0" />
             <Label layoutX="185.0" layoutY="71.0" text="Nouveau mot de passe" />
-            <Button fx:id="btnreset" layoutX="220.0" layoutY="199.0" mnemonicParsing="false" onAction="#reset" text="Button" />
+            <Button fx:id="btnreset" layoutX="220.0" layoutY="199.0" mnemonicParsing="false" onAction="#reset" text="Modifier" />
          </children>
       </Pane>
    </children>

@@ -17,7 +17,7 @@
    <children>
       <Pane fx:id="paneId" layoutX="256.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="213.0" prefWidth="838.0" style="-fx-background-color: #F4F6F9;" stylesheets="@../../css/styles.css">
          <children>
-            <Label layoutX="26.0" layoutY="44.0" text="Liste des publications" textFill="#1c2424">
+            <Label layoutX="39.0" layoutY="35.0" text="Liste des publications" textFill="#1c2424">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

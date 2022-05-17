@@ -28,13 +28,13 @@
             <Pane fx:id="pnlMenus" prefHeight="200.0" prefWidth="200.0" />
             <Pane fx:id="pnlOverview" prefHeight="649.0" prefWidth="822.0" style="-fx-background-color: #F4F6F9;">
                <children>
-                  <TextField fx:id="search1" layoutX="590.0" layoutY="47.0" onKeyReleased="#search" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #F4F6F9; -fx-border-color: #1C2424; -fx-border-radius: 2em;" />
-                  <Label layoutX="57.0" layoutY="25.0" text="Classes :" textFill="#54b48c">
+                  <TextField fx:id="search1" layoutX="590.0" layoutY="47.0" onKeyReleased="#search" prefHeight="27.0" prefWidth="183.0" promptText="Chjercher une classe..." style="-fx-background-color: #F4F6F9; -fx-border-color: #1C2424; -fx-border-radius: 2em;" />
+                  <Label layoutX="39" layoutY="35" prefHeight="50.0" prefWidth="292.0" text="Classes " textFill="#54b48c">
                      <font>
-                        <Font name="System Bold" size="34.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" layoutX="98.0" layoutY="72.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="222.0" layoutY="72.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="92.0" prefWidth="115.0">
                            <children>
@@ -56,16 +56,6 @@
                               <Label text="Nombre de classes" textFill="#1c2424" />
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="92.0" prefWidth="113.0">
-                           <children>
-                              <Label text="10" textFill="#fa5f7e">
-                                 <font>
-                                    <Font name="System Bold" size="26.0" />
-                                 </font>
-                              </Label>
-                              <Label prefHeight="18.0" prefWidth="118.0" text="Nombre d'etudiants" textFill="#1c2424" />
-                           </children>
-                        </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <Label fx:id="nbclub" text="780" textFill="#de0000">
@@ -78,7 +68,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <ScrollPane layoutX="116.0" layoutY="229.0" prefHeight="308.0" prefWidth="597.0" stylesheets="@../../css/style.css">
+                  <ScrollPane layoutX="128.0" layoutY="229.0" prefHeight="308.0" prefWidth="597.0" stylesheets="@../../css/style.css">
                      <content>
                         <TableView fx:id="table" prefHeight="303.0" prefWidth="594.0">
                           <columns>
@@ -95,9 +85,9 @@
                         <Image url="@../../../../images/icons8_Search_52px.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="ajouter" layoutX="145.0" layoutY="179.0" mnemonicParsing="false" onAction="#AddClasse" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #54b48c;" text="Ajouter une classe" textFill="WHITE" />
-                  <Button fx:id="update" layoutX="348.0" layoutY="179.0" mnemonicParsing="false" onAction="#UpdateClasse" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #2a73ff;" text="Mise a jour" textFill="WHITE" />
-                  <Button fx:id="supprimer" layoutX="553.0" layoutY="179.0" mnemonicParsing="false" onAction="#DeleteClasse" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #de0000;" text="Supprimer" textFill="WHITE" />
+                  <Button fx:id="ajouter" layoutX="136.0" layoutY="165.0" mnemonicParsing="false" onAction="#AddClasse" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #54b48c;" text="Ajouter une classe" textFill="WHITE" />
+                  <Button fx:id="update" layoutX="358.0" layoutY="165.0" mnemonicParsing="false" onAction="#UpdateClasse" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #2a73ff;" text="Mise a jour" textFill="WHITE" />
+                  <Button fx:id="supprimer" layoutX="570.0" layoutY="165.0" mnemonicParsing="false" onAction="#DeleteClasse" prefHeight="32.0" prefWidth="149.0" style="-fx-background-color: #de0000;" text="Supprimer" textFill="WHITE" />
                   <Button fx:id="btnaddET" layoutX="346.0" layoutY="554.0" mnemonicParsing="false" onAction="#showAddet" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: #2a73ff;" text="Ajouter un etudiant" textFill="WHITE">
                      <font>
                         <Font name="SansSerif Regular" size="14.0" />
@@ -143,18 +133,18 @@
             <ComboBox fx:id="combo2" layoutX="206.0" layoutY="196.0" onAction="#selectNiveau" prefWidth="150.0" />
          </children>
       </Pane>
-      <Pane fx:id="panel2" layoutX="394.0" layoutY="153.0" prefHeight="322.0" prefWidth="562.0" style="-fx-background-color: #1C2424;">
+      <Pane fx:id="panel2" layoutX="394.0" layoutY="153.0" prefHeight="286.0" prefWidth="562.0" style="-fx-background-color: #1C2424;">
          <children>
-            <Button fx:id="valideret" layoutX="197.0" layoutY="232.0" mnemonicParsing="false" onAction="#validerEt" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #54b48c;" text="valider" textFill="WHITE" />
-            <Button fx:id="annuler2" layoutX="198.0" layoutY="277.0" mnemonicParsing="false" onAction="#annulerr" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #de0000;" text="Annuler" textFill="WHITE" />
+            <Button fx:id="valideret" layoutX="200.0" layoutY="172.0" mnemonicParsing="false" onAction="#validerEt" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #54b48c;" text="valider" textFill="WHITE" />
+            <Button fx:id="annuler2" layoutX="200.0" layoutY="224.0" mnemonicParsing="false" onAction="#annulerr" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #de0000;" text="Annuler" textFill="WHITE" />
             <Label layoutX="81.0" layoutY="101.0" prefHeight="38.0" prefWidth="91.0" text="Email" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="146.0" layoutY="29.0" prefHeight="38.0" prefWidth="278.0" text="AJOUTER UN ETUDIANT" textFill="#54b48c">
+            <Label layoutX="146.0" layoutY="29.0" prefHeight="38.0" prefWidth="320.0" text="AJOUTER UN ETUDIANT" textFill="#54b48c">
                <font>
-                  <Font size="24.0" />
+                  <Font name="SansSerif Bold" size="24.0" />
                </font>
             </Label>
             <ComboBox fx:id="combo" layoutX="188.0" layoutY="105.0" onAction="#selectEmail" prefHeight="25.0" prefWidth="244.0" />
