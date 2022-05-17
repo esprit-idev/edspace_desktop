@@ -141,7 +141,7 @@ public class DocumentService {
             }
         } else {
             try {
-                File ficConverti = new File("C:/Users/MeriamBI/Desktop/testpdfhtml/" + doc.getNom() + ".pdf");
+                File ficConverti = new File(Statics.convertedDir + doc.getNom() + ".pdf");
                 if (!ficConverti.exists()) {
                     convertUrlToPdf(doc.getNom(), doc.getUrl());
                 }
