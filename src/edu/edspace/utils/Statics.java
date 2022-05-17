@@ -12,11 +12,11 @@ public class Statics {
 
     //  public static final String FileSheet="C:\\Users\\MeriamBI\\Desktop\\abonnementDetails.Xls";
     //  public static final String myDocs="C:/Users/MeriamBI/Desktop/pidev/EdSpace_Symfony/public/documents/";
-    //  public static final String ClubPic = "E:/Webprojects/PIDEV/edspace_symfony/public/ClubPictures/";
+   
     //  public static final String ClubPic = "C:/Users/MeriamBI/Desktop/pidev/EdSpace_Symfony/public/ClubPictures/";
-    // public static final String ClubPubsPic = "E:/Webprojects/PIDEV/edspace_symfony/public/PubPictures/";
+   
     //  public static final String ClubPubsPic = "C:/Users/MeriamBI/Desktop/pidev/EdSpace_Symfony/public/PubPictures/";
-    // public static final String ClubPubsFile = "E:/Webprojects/PIDEV/edspace_symfony/public/PubFiles/";
+   
     //  public static final String ClubPubsFile = "C:/Users/MeriamBI/Desktop/pidev/EdSpace_Symfony/public/PubFiles/";
     //  public static final String myPubImages="C:/Users/MeriamBI/Desktop/pidev/EdSpace_Symfony/public/images/";
     //  public static final String initDir="C:/Users/MeriamBI/Desktop";
@@ -27,11 +27,10 @@ public class Statics {
      
 
    //eslem's pc 
-   //public static final String FileSheet="C:\\Users\\MeriamBI\\Desktop\\abonnementDetails.Xls";
+  
    //public static final String myDocs="C:/Users/eslem/Desktop/edspace_symfony/public/documents/";
    //public static final String ClubPic = "C:/Users/eslem/Desktop/edspace_symfony/public/ClubPictures/";
-       // public static final String ClubPic = "E:/Webprojects/PIDEV/edspace_symfony/public/ClubPictures/";
-
+     
   // public static final String ClubPubsPic = "C:/Users/eslem/Desktop/edspace_symfony/public/PubPictures/";
    //public static final String ClubPubsFile = "C:/Users/eslem/Desktop/edspace_symfony/public/PubFiles/";
    //public static final String myPubImages="C:/Users/eslem/Desktop/edspace_symfony/public/images/";
@@ -49,6 +48,9 @@ public class Statics {
      public static final String convertedDir="C:/Users/21656/Desktop/testpdfhtml/";
 
   
+
+
+   
 
 }
 

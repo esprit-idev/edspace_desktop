@@ -155,7 +155,8 @@ public class DocumentService {
     public void convertUrlToPdf(String filename, String url) throws InterruptedException, IOException {
         Process wkhtml; // Create uninitialized process
 
-        String command = "wkhtmltopdf " + url + " "+Statics.convertedDir +filename + ".pdf"; // Desired command 
+        String command = "wkhtmltopdf " + url + " "+Statics.convertedDir+filename + ".pdf"; // Desired command
+
 
         wkhtml = Runtime.getRuntime().exec(command); // Start process
         IOUtils.copy(wkhtml.getErrorStream(), System.err); // Print output to console
