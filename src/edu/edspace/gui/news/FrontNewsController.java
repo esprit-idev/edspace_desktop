@@ -148,6 +148,7 @@ public class FrontNewsController implements Initializable {
                 fXMLLoader.setLocation(getClass().getResource("/edu/edspace/gui/news/cardFront.fxml"));
                 AnchorPane pane = fXMLLoader.load();
                 CardFrontController cd = fXMLLoader.getController();
+                System.out.println(nw.getImage().toString());
                 cd.setData(nw);
                 pane.setOnMouseClicked(new EventHandler<Event>() {
                     @Override
@@ -243,9 +244,6 @@ public class FrontNewsController implements Initializable {
     catch(Exception ex){
         System.out.println(ex);
     }
-
-
-    setmes();
 //  setOthermes(); 
 }
 

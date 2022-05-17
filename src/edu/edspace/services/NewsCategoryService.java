@@ -96,5 +96,19 @@ public class NewsCategoryService {
             }
             return listCats;
         }
-    
+     // list all cat news
+     public boolean findByCatName(String cat){
+        boolean exist = false;
+        try {
+            // String query all publications 
+            query = "SELECT category_name FROM `categorie_news` where category_name like '"+cat+"'";
+            resultSet = connection.createStatement().executeQuery(query);
+            if(resultSet.next()) {
+                exist = true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return exist;
+    }
 }

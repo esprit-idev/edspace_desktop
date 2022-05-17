@@ -26,7 +26,7 @@
 
          <children>
             <TextField fx:id="emailLogin" layoutX="114.0" layoutY="23.0" prefHeight="25.0" prefWidth="221.0" />
-            <Label layoutX="114.0" layoutY="81.0" text="Mot de pasee" />
+            <Label layoutX="114.0" layoutY="81.0" text="Mot de passe" />
             <Label layoutX="114.0" layoutY="6.0" text="Email" />
             <Text fx:id="nullErr" disable="true" fill="RED" layoutX="153.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="veuillez entrer votre email !" visible="false" />
             <Text fx:id="nullmdp" fill="RED" layoutX="132.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="veuillez entrer votre mot de passe !" visible="false" />

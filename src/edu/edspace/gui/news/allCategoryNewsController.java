@@ -121,8 +121,15 @@ public class allCategoryNewsController implements Initializable{
         if (nomCat != null && nomCat.length() != 0) {
             CategoryNews m = new CategoryNews(nomCat);
             NewsCategoryService ms = new NewsCategoryService();
-            ms.addCat(m);
-            refreshTable();
+            if(ms.findByCatName(nomCat)){
+                Alert al = new Alert(Alert.AlertType.ERROR);
+                al.setContentText("Choisir un autre nom pour la categorie");
+                al.showAndWait();
+            }else{
+                ms.addCat(m);
+                refreshTable();
+            }
+
         } else {
             Alert al = new Alert(Alert.AlertType.ERROR);
             al.setContentText("selectionner une categorie svp");
@@ -158,8 +165,14 @@ public class allCategoryNewsController implements Initializable{
                 //controle de saisie
                 if (tf.getText() != null && tf.getText().length() != 0) {
                     NewsCategoryService ds = new NewsCategoryService();
+                    if(ds.findByCatName(tf.getText())){
+                        Alert al = new Alert(Alert.AlertType.ERROR);
+                        al.setContentText("Choisir un autre nom pour la categorie");
+                        al.showAndWait();
+                    }else{
                         ds.updateCat(category.getId(),tf.getText());
                         refreshTable();
+                    }  
                 } else {
                     Alert al = new Alert(Alert.AlertType.ERROR);
                     al.setContentText("selectionner une categorie svp");

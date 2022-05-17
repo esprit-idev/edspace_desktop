@@ -272,7 +272,7 @@ public class FrontHomeController implements Initializable {
     @FXML
     private void getListeStudent(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/StudentClasse.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Student/StudentClasse.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {

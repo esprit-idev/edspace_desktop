@@ -28,9 +28,9 @@
          <content>
             <Pane fx:id="pnlOverview" prefHeight="1400.0" prefWidth="821.0" style="-fx-background-color: #F4F6F9;">
                <children>
-                  <Label layoutX="57.0" layoutY="25.0" text="Dashboard" textFill="#54b48c">
+                  <Label layoutX="39.0" layoutY="35.0" text="Dashboard" textFill="#54b48c">
                      <font>
-                        <Font name="System Bold" size="34.0" />
+                        <Font name="System Bold" size="30.0" />
                      </font>
                   </Label>
                   <ImageView fx:id="search_iv" fitHeight="17.0" fitWidth="16.0" layoutX="749.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">

@@ -188,31 +188,38 @@ public class AllNewsController implements Initializable{
                 AnchorPane pane = fXMLLoader.load();
                 CardController cd = fXMLLoader.getController();
                 cd.setData(nw);
+                
                 Button delButton;
                 Button modifButton;
                 modifButton = cd.modifBtn;
                 delButton = cd.getDeleteButton();
                 delButton.setOnMouseClicked((MouseEvent event)->{
-                    ButtonType saveButtonType = new ButtonType("Supprimer", ButtonData.OK_DONE);
-                    Alert alert = new Alert(AlertType.WARNING,"",saveButtonType);
-                    alert.setContentText("Vous voulez vraiment supprime cette article?");
-                    newsService.deleteNews(nw.getId());
-                    /* notification */ 
-                    SystemTray tray = SystemTray.getSystemTray();
-                    //If the icon is a file
-                    java.awt.Image imagess = Toolkit.getDefaultToolkit().createImage("icon.png");
-                    TrayIcon trayIcon = new TrayIcon(imagess, "ADD");
-                    //Let the system resize the image if needed
-                    trayIcon.setImageAutoSize(true);
-                    //Set tooltip text for the tray icon
-                    trayIcon.setToolTip("System tray icon demo");
-                    try {
-                        tray.add(trayIcon);
-                    } catch (AWTException e) {
-                        System.out.println(e.getMessage());
+                    //alert
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Supprimer la catégorie");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Etes vous sur de vouloir supprimer la publication " + nw.getTitle()+ " ?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if(result.get()== ButtonType.OK){
+                        newsService.deleteNews(nw.getId());
+                        /* notification */ 
+                        SystemTray tray = SystemTray.getSystemTray();
+                        //If the icon is a file
+                        java.awt.Image imagess = Toolkit.getDefaultToolkit().createImage("icon.png");
+                        TrayIcon trayIcon = new TrayIcon(imagess, "ADD");
+                        //Let the system resize the image if needed
+                        trayIcon.setImageAutoSize(true);
+                        //Set tooltip text for the tray icon
+                        trayIcon.setToolTip("System tray icon demo");
+                        try {
+                            tray.add(trayIcon);
+                        } catch (AWTException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        trayIcon.displayMessage("Suppression", "La publication " + nw.getTitle() + "  a ete bien supprimer", TrayIcon.MessageType.INFO);
+                        getNewsView(event);
                     }
-                    trayIcon.displayMessage("Suppression", "La publication " + nw.getTitle() + "  a ete bien supprimer", TrayIcon.MessageType.INFO);
-                    getNewsView(event);
+                    
                 });
                 modifButton.setOnMouseClicked((MouseEvent event)->{
                     try {

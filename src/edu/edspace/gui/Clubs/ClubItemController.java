@@ -64,8 +64,8 @@ public class ClubItemController implements Initializable {
         club_desc_label.setText(club.getClubDesc());
         club_name_label.setText(club.getClubName());
         File file = new File(Statics.ClubPic + club.getClubPic());
-        Image image = new Image(file.toURI().toString());
-        club_img.setImage(image);
+       Image image = new Image(file.toURI().toString());
+       club_img.setImage(image);
         club_respo_label.setText(club.getClubRespo());
         clubId.setText(club.getClubId());
     }
@@ -84,9 +84,9 @@ public class ClubItemController implements Initializable {
                 ClubRubriqueResponsableController pc = loader.getController();
                 pc.setClubName_l("Rubrique club " + club_name_label.getText());
                 pc.setClubid(Integer.parseInt(club.getClubId()));
-                File file = new File(Statics.ClubPic + club.getClubPic());
-                Image image = new Image(file.toURI().toString());
-                pc.setClubPic(image);
+               File file = new File(Statics.ClubPic + club.getClubPic());
+               Image image = new Image(file.toURI().toString());
+               pc.setClubPic(image);
                 pc.setClubDesc(club.getClubDesc());
                 pc.initData(Integer.parseInt(club.getClubId()));
                 club_desc_label.getScene().setRoot(root);
@@ -97,9 +97,9 @@ public class ClubItemController implements Initializable {
                 ClubRubriqueStudentController pc = loader.getController();
                 pc.setClubName_l("Rubrique club " + club_name_label.getText());
                 pc.setClubid(Integer.parseInt(club.getClubId()));
-                File file = new File(Statics.ClubPic + club.getClubPic());
-                Image image = new Image(file.toURI().toString());
-                pc.setClubPic(image);
+               File file = new File(Statics.ClubPic + club.getClubPic());
+               Image image = new Image(file.toURI().toString());
+               pc.setClubPic(image);
                 pc.setClubDesc(club.getClubDesc());
                 pc.initData(Integer.parseInt(club.getClubId()));
                 club_desc_label.getScene().setRoot(root);
