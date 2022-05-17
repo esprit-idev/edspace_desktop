@@ -194,9 +194,7 @@ public class FrontHomeController implements Initializable {
 
     @FXML
     private void getForum(MouseEvent event) {
-        if (this.admin == 0) {
             try {
-
                 //instance mtaa el crud
                 //redirection
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/FrontThread.fxml"));
@@ -205,18 +203,6 @@ public class FrontHomeController implements Initializable {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-        } else if (this.admin == 1) {
-            try {
-
-                //instance mtaa el crud
-                //redirection
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/ThreadList.fxml"));
-                Parent root = loader.load();
-                forum_iv.getScene().setRoot(root);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
 
     }
 
@@ -272,7 +258,7 @@ public class FrontHomeController implements Initializable {
     @FXML
     private void getListeStudent(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/StudentClasse.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/edspace/gui/Student/StudentClasse.fxml"));
             Parent root = loader.load();
             rootPane.getScene().setRoot(root);
         } catch (IOException ex) {

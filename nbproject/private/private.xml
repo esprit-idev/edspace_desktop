@@ -3,31 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/DocRController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/DocsReportedController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/utils/Statics.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/FaveDocsController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/AddDocController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/matiere/MatieresListController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/ListDocFrontController.java</file>
-            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/gui/document/ListDocFront.fxml</file>
-=======
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/UserService.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/Student/AllStudentsController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/User/LoginController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/entities/Session.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/Admin/AllAdminsController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ThreadController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/StudentService.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ListTopicsController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/tests/MainClass.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/User/MdpController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/NewThreadController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/services/AdminService.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/ThreadListController.java</file>
-            <file>file:/C:/Users/21656/Desktop/edspace/edspace_desktop/src/edu/edspace/gui/User/ResetController.java</file>
->>>>>>> c81dde68c568f83e591193287781cbb734a3d1af
+            <file>file:/C:/Users/MeriamBI/Documents/NetBeansProjects/edspace_javafx/src/edu/edspace/services/DocumentService.java</file>
         </group>
     </open-files>
 </project-private>

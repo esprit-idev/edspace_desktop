@@ -289,7 +289,6 @@ public class ListDocFrontController implements Initializable {
 
     public void refreshchat() {
         port = 2018;
-
         pane1.setVisible(false);
         ClasseService cs = new ClasseService();
         String niveau = cs.getOneById(cs.getStudent(uid).getClasse_id()).getNiveau().getId();
