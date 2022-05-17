@@ -48,6 +48,7 @@ public class CardFrontController implements Initializable{
         category.setText(emps.getCategoryName());
         File f = new File(Statics.myPubImages + emp.getImage());
         Image i = new Image(f.toURI().toString());
+       
         image.setImage(i);
         image.setPreserveRatio(true);
         image.fitWidthProperty().bind(rootPane.widthProperty());

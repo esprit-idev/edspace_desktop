@@ -188,6 +188,7 @@ public class AllNewsController implements Initializable{
                 AnchorPane pane = fXMLLoader.load();
                 CardController cd = fXMLLoader.getController();
                 cd.setData(nw);
+                
                 Button delButton;
                 Button modifButton;
                 modifButton = cd.modifBtn;

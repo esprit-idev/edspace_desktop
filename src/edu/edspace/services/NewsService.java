@@ -37,11 +37,11 @@ public class NewsService {
 				News pub = new News();
 				pub.setId(resultSet.getInt(1));
                 pub.setCategoryName(resultSet.getString("catName"));
-                pub.setDate(resultSet.getString(3));
-                pub.setTitle(resultSet.getString(4));
-                pub.setOwner(resultSet.getString(5));
-                pub.setImage(resultSet.getString(6));
-                pub.setContent(resultSet.getString(10));
+                pub.setDate(resultSet.getString("date"));
+                pub.setTitle(resultSet.getString("title"));
+                pub.setOwner(resultSet.getString("owner"));
+                pub.setImage(resultSet.getString("image"));
+                pub.setContent(resultSet.getString("content"));
 				listNews.add(pub);
 			}
 		} catch (SQLException ex) {
@@ -117,11 +117,11 @@ public class NewsService {
 				News pub = new News();
 				pub.setId(resultSet.getInt(1));
                 pub.setCategoryName(resultSet.getString("catName"));
-                pub.setDate(resultSet.getString(3));
-                pub.setTitle(resultSet.getString(4));
-                pub.setOwner(resultSet.getString(5));
-                pub.setImage(resultSet.getString(6));
-                pub.setContent(resultSet.getString(10));
+                pub.setDate(resultSet.getString("date"));
+                pub.setTitle(resultSet.getString("title"));
+                pub.setOwner(resultSet.getString("owner"));
+                pub.setImage(resultSet.getString("image"));
+                pub.setContent(resultSet.getString("content"));
 				listNews.add(pub);
 			}
 		} catch (SQLException ex) {
@@ -202,11 +202,11 @@ public List<News> LimitAllNews(){
             News pub = new News();
             pub.setId(resultSet.getInt(1));
             pub.setCategoryName(resultSet.getString("catName"));
-            pub.setDate(resultSet.getString(3));
-            pub.setTitle(resultSet.getString(4));
-            pub.setOwner(resultSet.getString(5));
-            pub.setImage(resultSet.getString(6));
-            pub.setContent(resultSet.getString(10));
+                pub.setDate(resultSet.getString("date"));
+                pub.setTitle(resultSet.getString("title"));
+                pub.setOwner(resultSet.getString("owner"));
+                pub.setImage(resultSet.getString("image"));
+                pub.setContent(resultSet.getString("content"));
             listNews.add(pub);
         }
     } catch (SQLException ex) {

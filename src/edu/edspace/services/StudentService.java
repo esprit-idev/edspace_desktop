@@ -112,8 +112,9 @@ public class StudentService {
             pst.setString(1, stu.getUsername());
             pst.setString(2 ,stu.getPrenom());
             pst.setString(3, stu.getEmail());
-            pst.setString(4, BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)));
             //pst.setString(4, stu.getPassword());
+            String myPwd = "$2y"+BCrypt.hashpw(stu.getPassword(), BCrypt.gensalt(13)).substring(3);
+            pst.setString(4, myPwd);
             pst.setBoolean(5, stu.getIsBanned());
             pst.setString(6, id);
             pst.executeUpdate();

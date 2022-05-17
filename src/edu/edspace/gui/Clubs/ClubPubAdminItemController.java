@@ -73,15 +73,15 @@ public class ClubPubAdminItemController implements Initializable {
         clubName_l.setText(clubName.toUpperCase().split("RUBRIQUE CLUB")[1].toUpperCase());
         pubDate.setText("Publie le " + clubPub.getPubDate());
         pubDesc.setText(Jsoup.parse(clubPub.getPubDesc()).text());
-      //  File file = new File(Statics.ClubPic + clubPicture);
-       // Image imageClub = new Image(file.toURI().toString());
-     //   clubimg.setFill(new ImagePattern(imageClub));
+      File file = new File(Statics.ClubPic + clubPicture);
+        Image imageClub = new Image(file.toURI().toString());
+      clubimg.setFill(new ImagePattern(imageClub));
         setPubid(Integer.parseInt(clubPub.getId()));
-       // File file2 = new File(Statics.ClubPubsPic + clubPub.getPubImage());
-      //  Image imagePub = new Image(file2.toURI().toString());
-      //  pubImg.setImage(imagePub);
+      File file2 = new File(Statics.ClubPubsPic + clubPub.getPubImage());
+      Image imagePub = new Image(file2.toURI().toString());
+      pubImg.setImage(imagePub);
 
-        //  centerImage();
+       //centerImage();
     }
 
     @FXML

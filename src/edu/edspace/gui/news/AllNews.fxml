@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.news.AllNewsController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #1C2424;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.edspace.gui.news.AllNewsController">
    <children>
       <Pane fx:id="paneId" layoutX="256.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="213.0" prefWidth="838.0" style="-fx-background-color: #F4F6F9;" stylesheets="@../../css/styles.css">
          <children>
-            <Label layoutX="39.0" layoutY="35.0" text="Liste des publications" textFill="#1c2424">
+            <Label layoutX="39.0" layoutY="35.0" text="Liste des publications" textFill="#54b48c">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

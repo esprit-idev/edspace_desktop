@@ -32,6 +32,7 @@ public class AccordianNewsController implements Initializable{
         date.setText(news.getDate());
         File f = new File(Statics.myPubImages + nw.getImage());
         Image i = new Image(f.toURI().toString());
+        System.out.println(nw.getImage());
         imageView.setImage(i);
         
         imageView.setPreserveRatio(true);

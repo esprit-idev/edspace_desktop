@@ -66,12 +66,12 @@ public class ExcelFileService {
                 //row.createCell(5).setCellValue(rs.getString("prix"));
                 index++;
             }
-            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\MeriamBI\\Desktop\\Liste_des_etudiants.Xls");
+            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\21656\\Desktop\\Liste_des_etudiants.Xls");
             wb.write(fileOut);
             fileOut.close();
            ste.close();
            rs.close();
-          Desktop.getDesktop().open(new File("C:\\Users\\MeriamBI\\Desktop\\Liste_des_etudiants.Xls"));
+          Desktop.getDesktop().open(new File("C:\\Users\\21656\\Desktop\\Liste_des_etudiants.Xls"));
 
         } catch (SQLException e) {
         } catch (IOException ex) {
@@ -111,12 +111,12 @@ public class ExcelFileService {
                 //row.createCell(5).setCellValue(rs.getString("prix"));
                 index++;
             }
-            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\MeriamBI\\Desktop\\liste_des_administrateurs.Xls");
+            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\21656\\Desktop\\liste_des_administrateurs.Xls");
             wb.write(fileOut);
             fileOut.close();
            ste.close();
            rs.close();
-          Desktop.getDesktop().open(new File("C:\\Users\\MeriamBI\\Desktop\\liste_des_administrateurs.Xls"));
+          Desktop.getDesktop().open(new File("C:\\Users\\21656\\Desktop\\liste_des_administrateurs.Xls"));
 
         } catch (SQLException e) {
         } catch (IOException ex) {
