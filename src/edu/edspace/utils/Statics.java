@@ -41,11 +41,8 @@ public class Statics {
      //Oussema's pc
      public static final String FileSheet="C:\\Users\\21656\\Desktop\\abonnementDetails.Xls";
      public static final String myDocs="C:/Users/21656/Desktop/edspace/edspace_symfony/public/documents/";
-   
      public static final String ClubPic = "C:/Users/21656/Desktop/edspace/edspace_symfony/public/ClubPictures/";
-    
      public static final String ClubPubsPic = "C:/Users/21656/Desktop/edspace/edspace_symfony/public/PubPictures/";
-   
      public static final String ClubPubsFile = "C:/Users/21656/Desktop/edspace/edspace_symfony/public/PubFiles/";
      public static final String myPubImages="C:/Users/21656/Desktop/edspace/edspace_symfony/public/images/";
      public static final String initDir="C:/Users/21656/Desktop";
